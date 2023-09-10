@@ -1,3 +1,1 @@
-<?php
-
-// Reserved for util only
+<!-- Reserved for utils -->

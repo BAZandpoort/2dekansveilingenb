@@ -7,8 +7,6 @@ try {
     DB_USERNAME,
     DB_PASSWORD,
   );
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $exception) {
-  echo 'Connection failed: ' . $exception->getMessage();
-}
-?>
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); } catch
+(PDOException $exception) { echo 'Connection failed: ' .
+$exception->getMessage(); } ?>
