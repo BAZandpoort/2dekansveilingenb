@@ -18,13 +18,13 @@ $route = $routes[$_SERVER['REQUEST_URI']];
 
 <body>
   <div class="h-screen">
-    <?php ($route['nav']) ? include COMPONENTS . '/nav.php' : null; ?>
+    <?php $route['nav'] ? include COMPONENTS . '/nav.php' : null; ?>
 
     <div class="container mx-auto">
       <?php include PUBLIC_S . '/' . $route['view']; ?>
     </div>
 
-    <?php ($route['footer']) ? include COMPONENTS . '/footer.php' : null; ?>
+    <?php $route['footer'] ? include COMPONENTS . '/footer.php' : null; ?>
   </div>
 </body>
 </html>
