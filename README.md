@@ -32,12 +32,22 @@ Deze structuur zal doorheen het project veranderen, hou dit zeker in de gaten!
 ```
 2dekans-veilingen/
 │
-├── public/     # Public files zoals afbeeldingen
+├── public/         # Public files zoals afbeeldingen
 │
-├── src/        # Folder voor alle php files
+├── src/            # Folder voor alle php files
+├──── components/   # Individuele 'components' die hergebruikt kunnen worden
+├──── database/     # Files gerelateerd met het beheren van de database
+├──── lib/          # Files dat gebruikt worden voor verschillende delen van de website
+├──── public/       # Individuele paginas of 'view' dat de gebruiker ziet
 │
-├── .gitignore  # Git ignore file
-└── README.md   # Deze README
+├── config.php      # Config file voor database credentials & import aliases
+│
+├── index.php       # Entry point dat alle routes beheert
+│
+├── routes.php      # Elke route van de website
+│
+├── .gitignore      # Git ignore file
+└── README.md       # Deze README
 ```
 
 ## Groep
