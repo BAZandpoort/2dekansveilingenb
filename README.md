@@ -52,11 +52,11 @@ Deze structuur zal doorheen het project veranderen, hou dit zeker in de gaten!
 
 ## Groep
 
-* **Ilias**
-* **Cédric**
-* Imad
-* Samir
-* Abdullah
-* Valentina
-* Xander
-* Alperen
+* [**Ilias**](https://github.com/DisECtRy)
+* [**Cédric**](https://github.com/CedricVerlinden)
+* [Imad](https://github.com/Imad4747)
+* [Samir](https://github.com/samirelma)
+* [Abdullah](https://github.com/AbdullahafloefZP)
+* [Valentina](https://github.com/ValenRemZP)
+* [Xander](https://github.com/xandanman)
+* [Alperen](https://github.com/alperenZP)
