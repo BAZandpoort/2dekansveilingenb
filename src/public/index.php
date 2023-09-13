@@ -1,3 +1,3 @@
-<body>
+<div>
   HELLO FROM INDEX
-</body>
+</div>
