@@ -1,3 +1,3 @@
-<body class="bg-rose">
+<div class="bg-rose">
   HELLO FROM ABOUT
-</body>
+</div>
