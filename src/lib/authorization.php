@@ -1,0 +1,11 @@
+<?php
+
+require_once "../../config.php";
+require_once DATABASE . "/connect.php";
+
+
+
+
+
+
+?>

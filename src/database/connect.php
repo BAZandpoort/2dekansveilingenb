@@ -1,14 +1,14 @@
 <?php
 require_once __DIR__ . '/../../config.php';
 
-try {
-  $conn = new PDO(
-    'mysql:host=' . DB_SERVER . ';dbname=' . DB_NAME,
-    DB_USERNAME,
-    DB_PASSWORD,
-  );
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $exception) {
-  echo 'Connection failed: ' . $exception->getMessage();
+$servername = DB_SERVER;
+$dbname = DB_NAME;
+$username = DB_USERNAME;
+$password = DB_PASSWORD;
+
+$connection = new mysqli($servername, $username, $password, $dbname);
+
+if ($connection->connect_error) {
+  die("Connection failed: " . $connection->connect_error);
 }
 ?>

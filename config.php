@@ -14,4 +14,8 @@ define('COMPONENTS', SRC . '/components');
 define('DATABASE', SRC . '/database');
 define('LIB', SRC . '/lib');
 define('PUBLIC_S', SRC . '/public');
+
+define('ADMIN', 'admin');
+define('MEMBER', 'member');
+define('GUEST', 'guest');
 ?>
