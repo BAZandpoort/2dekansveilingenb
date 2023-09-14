@@ -20,8 +20,7 @@ if data isnot set of toUpdate is true: refetch user date
 
 */
 
-
-$_SESSION["token"] = 2;
+$_SESSION['token'] = 2;
 
 $token = $_SESSION['token'];
 
@@ -34,7 +33,7 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 if (mysqli_num_rows($result) == 0) {
-  echo "unauthorized";
+  echo 'unauthorized';
   return;
 }
 

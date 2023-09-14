@@ -15,21 +15,24 @@ $routes = [
     'nav' => true,
     'footer' => true,
   ],
+  '/register' => [
+    'view' => 'register.php',
+    'title' => 'Register',
+    'auth_roles' => ['guest'],
+    'nav' => true,
+    'footer' => true,
+  ],
   '/about' => [
     'view' => 'about.php',
     'title' => 'About',
-    'auth_roles' => [
-      "member",
-    ],
+    'auth_roles' => ['member'],
     'nav' => true,
     'footer' => true,
   ],
   '/admin' => [
     'view' => 'about.php',
     'title' => 'About',
-    'auth_roles' => [
-      "admin",
-    ],
+    'auth_roles' => ['admin'],
     'nav' => true,
     'footer' => true,
   ],

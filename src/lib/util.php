@@ -25,13 +25,13 @@ function fetch($query, ...$params) {
     $connection->close();
     return false;
   }
-  
+
   $result = $stmt->get_result();
   $data = $result->fetch_all(MYSQLI_ASSOC);
 
   $stmt->close();
 
-  return ($result->num_rows > 1) ? $data : $data[0];
+  return $result->num_rows > 1 ? $data : $data[0];
 }
 
 function insert($query, ...$params) {
@@ -56,7 +56,7 @@ function insert($query, ...$params) {
     $connection->close();
     return false;
   }
-  
+
   $stmt->close();
   return true;
 }
