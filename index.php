@@ -3,6 +3,8 @@ require_once 'config.php';
 require_once DATABASE . '/connect.php';
 require_once ROUTES;
 
+session_start();
+
 $uri = explode('?', $_SERVER['REQUEST_URI'])[0];
 
 $route = array_key_exists($uri, $routes) ? $routes[$uri] : $routes['/404'];

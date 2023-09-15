@@ -29,6 +29,13 @@ $routes = [
     'nav' => true,
     'footer' => true,
   ],
+  '/logout' => [
+    'view' => 'logout.php',
+    'title' => 'Logout',
+    'auth_roles' => ['member', 'admin'],
+    'nav' => false,
+    'footer' => false,
+  ],
   '/about' => [
     'view' => 'about.php',
     'title' => 'About',

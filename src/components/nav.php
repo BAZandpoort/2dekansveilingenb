@@ -33,7 +33,9 @@
       <li><a>Item 3</a></li>
     </ul>
   </div>
+  
   <div class="navbar-end">
-    <a class="btn">Button</a>
+    <a href="<?php echo isset($_SESSION['user']) ? '/logout' : '/login' ?>" class="btn"><?php echo isset($_SESSION['user']) ? 'Logout' : 'Login' ?></a>
   </div>
+
 </div>

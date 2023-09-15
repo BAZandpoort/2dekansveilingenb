@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 if (!isset($_POST["login"])) {
     header("Location: /login");
@@ -22,7 +23,16 @@ if (empty($email) || empty($password)) {
     exit();
 }
 
-if (login($email, $password)) { 
+$login = login($email, $password);
+
+if ($login) {
+
+    $_SESSION['user'] = USER_STRUCTURE;
+
+    $_SESSION['user']['id'] = $login['id'];
+    $_SESSION['user']['email'] = $login['email'];
+    $_SESSION['user']['username'] = $login['username'];
+
     header("Location: /");
     exit();
 } else {

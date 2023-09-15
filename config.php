@@ -25,4 +25,13 @@ define('ERROR_MAPPING', [
     'invalid' => 'Invalid email or password',
 ]);
 
+
+define ('USER_STRUCTURE', [
+    'id' => null,
+    'username' => null,
+    'email' => null,
+    'password' => null,
+    'role' => null
+]);
+
 ?>
