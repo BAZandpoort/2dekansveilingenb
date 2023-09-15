@@ -1,4 +1,4 @@
-<div class="navbar bg-base-100 shadow-sm">
+<div class="navbar bg-base-100 shadow-sm mb-24">
   <div class="navbar-start">
     <div class="dropdown">
       <label tabindex="0" class="btn btn-ghost lg:hidden">
@@ -8,7 +8,7 @@
         <li><a href="/about">About</a></li>
         <li>
           <a>Parent</a>
-          <ul class="p-2">
+          <ul class="p-2 shadow-sm">
             <li><a>Submenu 1</a></li>
             <li><a>Submenu 2</a></li>
           </ul>
@@ -24,7 +24,7 @@
       <li tabindex="0">
         <details>
           <summary>Parent</summary>
-          <ul class="p-2">
+          <ul class="p-2 shadow-sm">
             <li><a>Submenu 1</a></li>
             <li><a>Submenu 2</a></li>
           </ul>
@@ -33,7 +33,13 @@
       <li><a>Item 3</a></li>
     </ul>
   </div>
+  
   <div class="navbar-end">
-    <a class="btn">Button</a>
+    <a href="<?php echo isset($_SESSION['user'])
+      ? '/logout'
+      : '/login'; ?>" class="btn"><?php echo isset($_SESSION['user'])
+  ? 'Logout'
+  : 'Login'; ?></a>
   </div>
+
 </div>
