@@ -8,8 +8,6 @@ session_start();
 $uri = explode('?', $_SERVER['REQUEST_URI'])[0];
 
 $route = array_key_exists($uri, $routes) ? $routes[$uri] : $routes['/404'];
-
-$_SESSION['token'] = 'whatever';
 ?>
 
 <!DOCTYPE html>

@@ -20,18 +20,17 @@ define('MEMBER', 'member');
 define('GUEST', 'guest');
 
 define('ERROR_MAPPING', [
-    'missing' => 'Missing email or password',
-    'empty' => 'Empty email or password',
-    'invalid' => 'Invalid email or password',
+  'missing' => 'Missing email or password',
+  'empty' => 'Empty email or password',
+  'invalid' => 'Invalid email or password',
 ]);
 
-
-define ('USER_STRUCTURE', [
-    'id' => null,
-    'username' => null,
-    'email' => null,
-    'password' => null,
-    'role' => null
+define('USER_STRUCTURE', [
+  'id' => null,
+  'username' => null,
+  'email' => null,
+  'password' => null,
+  'role' => null,
 ]);
 
 ?>

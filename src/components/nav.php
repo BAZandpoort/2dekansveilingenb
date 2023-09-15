@@ -35,7 +35,11 @@
   </div>
   
   <div class="navbar-end">
-    <a href="<?php echo isset($_SESSION['user']) ? '/logout' : '/login' ?>" class="btn"><?php echo isset($_SESSION['user']) ? 'Logout' : 'Login' ?></a>
+    <a href="<?php echo isset($_SESSION['user'])
+      ? '/logout'
+      : '/login'; ?>" class="btn"><?php echo isset($_SESSION['user'])
+  ? 'Logout'
+  : 'Login'; ?></a>
   </div>
 
 </div>
