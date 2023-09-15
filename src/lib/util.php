@@ -31,7 +31,7 @@ function fetch($query, ...$params) {
 
   $stmt->close();
 
-  return $result->num_rows > 1 ? $data : $data[0];
+  return $result->num_rows > 1 || empty($data) ? $data : $data[0];
 }
 
 function insert($query, ...$params) {
