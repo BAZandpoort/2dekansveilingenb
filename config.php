@@ -14,4 +14,23 @@ define('COMPONENTS', SRC . '/components');
 define('DATABASE', SRC . '/database');
 define('LIB', SRC . '/lib');
 define('PUBLIC_S', SRC . '/public');
+
+define('ADMIN', 'admin');
+define('MEMBER', 'member');
+define('GUEST', 'guest');
+
+define('ERROR_MAPPING', [
+  'missing' => 'Missing email or password',
+  'empty' => 'Empty email or password',
+  'invalid' => 'Invalid email or password',
+]);
+
+define('USER_STRUCTURE', [
+  'id' => null,
+  'username' => null,
+  'email' => null,
+  'password' => null,
+  'role' => null,
+]);
+
 ?>
