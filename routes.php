@@ -22,6 +22,13 @@ $routes = [
     'nav' => true,
     'footer' => true,
   ],
+  '/login' => [
+    'view' => 'login.php',
+    'title' => 'Login',
+    'auth_roles' => ['guest'],
+    'nav' => true,
+    'footer' => true,
+  ],
   '/about' => [
     'view' => 'about.php',
     'title' => 'About',

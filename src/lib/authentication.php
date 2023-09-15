@@ -46,13 +46,11 @@ function login($email, $password) {
     'value' => $email,
   ]);
   if (!$data) {
-    echo 'Email not registered';
-    return;
+    return false;
   }
 
   if (!password_verify($password, $data['password'])) {
-    echo 'Incorrect password';
-    return;
+    return false;
   }
 
   echo 'successfully logged in, ' . $data['username'] . '!';
