@@ -3,8 +3,10 @@ require_once 'config.php';
 require_once DATABASE . '/connect.php';
 require_once ROUTES;
 
-$route = array_key_exists($_SERVER['REQUEST_URI'], $routes)
-  ? $routes[$_SERVER['REQUEST_URI']]
+$uri = explode('?', $_SERVER['REQUEST_URI'])[0];
+
+$route = array_key_exists($uri, $routes)
+  ? $routes[$uri]
   : $routes['/404'];
 
 $_SESSION['token'] = 'whatever';
