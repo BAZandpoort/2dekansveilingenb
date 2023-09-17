@@ -1,8 +1,8 @@
 <?php
 
-require_once '../../config.php';
+require_once '../../../config.php';
 require_once DATABASE . '/connect.php';
-require_once LIB . '/util.php';
+require_once LIB . '/util/util.php';
 
 function register($email, $username, $password) {
   $data = insert(
@@ -20,6 +20,7 @@ function login($email, $password) {
     'type' => 's',
     'value' => $email,
   ]);
+
   if (!$data) {
     return false;
   }
@@ -28,6 +29,5 @@ function login($email, $password) {
     return false;
   }
 
-  echo 'successfully logged in, ' . $data['username'] . '!';
   return $data;
 }

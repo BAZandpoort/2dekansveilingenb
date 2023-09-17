@@ -2,11 +2,18 @@
   "name": "2dekans-veilingen",
   "version": "0.0.1",
   "scripts": {
-    "prettier": "prettier \"./**/*.php\" --write"
+    "prettier": "prettier \"./**/*.php\" --write",
+    "db:seed": "ts-node ./src/database/seed/seed.ts"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.0.2",
     "@prettier/plugin-php": "^0.20.1",
     "lint-staged": "^14.0.1",
-    "prettier": "3.0.3"
+    "prettier": "3.0.3",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "argon2": "^0.31.1",
+    "mysql2": "^3.6.1"
   }
 }
