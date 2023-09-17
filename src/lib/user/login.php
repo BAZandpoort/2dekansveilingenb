@@ -6,9 +6,9 @@ if (!isset($_POST['login'])) {
   exit();
 }
 
-require_once '../../config.php';
+require_once '../../../config.php';
 require_once DATABASE . '/connect.php';
-require_once LIB . '/authentication.php';
+require_once LIB . '/authentication/authentication.php';
 
 if (!isset($_POST['email']) || !isset($_POST['password'])) {
   header('Location: /login?error=missing');
@@ -25,7 +25,7 @@ if (empty($email) || empty($password)) {
 
 $login = login($email, $password);
 
-if (!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!$login) {
+if (!$login) {
   header('Location: /login?error=invalid');
   return;
 }

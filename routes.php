@@ -1,24 +1,10 @@
 <?php
 
 $routes = [
-  '/404' => [
-    'view' => '404.php',
-    'title' => 'Not Found',
-    'auth_roles' => [],
-    'nav' => false,
-    'footer' => false,
-  ],
   '/' => [
     'view' => 'index.php',
     'title' => 'Home',
     'auth_roles' => [],
-    'nav' => true,
-    'footer' => true,
-  ],
-  '/register' => [
-    'view' => 'register.php',
-    'title' => 'Register',
-    'auth_roles' => ['guest'],
     'nav' => true,
     'footer' => true,
   ],
@@ -36,10 +22,10 @@ $routes = [
     'nav' => false,
     'footer' => false,
   ],
-  '/about' => [
-    'view' => 'about.php',
-    'title' => 'About',
-    'auth_roles' => ['member'],
+  '/register' => [
+    'view' => 'register.php',
+    'title' => 'Register',
+    'auth_roles' => ['guest'],
     'nav' => true,
     'footer' => true,
   ],
@@ -49,5 +35,12 @@ $routes = [
     'auth_roles' => ['admin'],
     'nav' => true,
     'footer' => true,
+  ],
+  '/404' => [
+    'view' => '/errors/404.php',
+    'title' => 'Not Found',
+    'auth_roles' => [],
+    'nav' => false,
+    'footer' => false,
   ],
 ];

@@ -5,9 +5,9 @@ if (!isset($_POST['register'])) {
   exit();
 }
 
-require_once '../../config.php';
-require_once LIB . '/util.php';
-require_once LIB . '/authentication.php';
+require_once '../../../config.php';
+require_once LIB . '/util/util.php';
+require_once LIB . '/authentication/authentication.php';
 
 $email = $_POST['email'];
 $username = $_POST['username'];
@@ -27,6 +27,7 @@ $data = fetch('SELECT * FROM users WHERE username = ?', [
   'type' => 's',
   'value' => $username,
 ]);
+
 if ($data) {
   header('Location: /register?error=username');
   exit();
@@ -37,7 +38,7 @@ if ($password !== $passwordConfirm) {
   exit();
 }
 
-$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-register($email, $username, $hashedPassword);
+$password = password_hash($password, PASSWORD_DEFAULT);
+register($email, $username, $password);
 
 header('Location: /login');

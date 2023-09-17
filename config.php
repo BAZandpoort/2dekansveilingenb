@@ -23,6 +23,7 @@ define('ERROR_MAPPING', [
   'missing' => 'Missing email or password',
   'empty' => 'Empty email or password',
   'invalid' => 'Invalid email or password',
+  'password' => 'Passwords do not match',
 ]);
 
 define('USER_STRUCTURE', [
