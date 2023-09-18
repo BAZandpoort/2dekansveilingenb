@@ -1,5 +1,6 @@
 <div>
   SFJKLSFJKLDSFJKLDSFDJKLFDFJKL
+  <a href="language_select.php">🌐</a>
 
   <?php if (isset($_SESSION['user'])) {
     $hello_from_index = array("HELLO FROM INDEX", "HALLO VANUIT INDEX", "BONJOUR DEPUIS INDICE");
