@@ -14,6 +14,7 @@
           </ul>
         </li>
         <li><a>Profile</a></li>
+        <li><a href='/product'>Add Product</a></li>
       </ul>
     </div>
     <a href="/" class="btn btn-ghost normal-case text-xl">2dekans veilingen</a>
@@ -31,6 +32,7 @@
         </details>
       </li>
       <li><a>Profile</a></li>
+      <li><a href='/product'>Add Product</a></li>
     </ul>
   </div>
   
