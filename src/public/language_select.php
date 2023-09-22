@@ -6,6 +6,7 @@
         // Each number corresponds to a language. 0 = English, 1 = Nederlands, 2 = Français.
 
         $_SESSION["lang"] = $_POST["radio-lang"];
+        $lng = $_SESSION["lang"];
 
         $txt_success = array("You have successfully switched the website's language to English.", "U hebt succesvol de taal van de website veranderd.", "Vous avez changé le langue de site web avec succès.");
         echo '
