@@ -17,7 +17,8 @@
 
         $return_msg = array("Return", "Terug", "Retour");
         echo '
-            <a href="index"><button class="btn btn-neutral">'.$return_msg[$_SESSION["lang"]].'</button></a>
+            <br><br>
+            <a href="/"><button class="btn btn-neutral">'.$return_msg[$_SESSION["lang"]].'</button></a>
         ';
 
     } else {
