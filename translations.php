@@ -111,7 +111,11 @@ $translate = [
     1 => "WELKOM",
     2 => "BIENVENUE"
   ],
-  
+  'language' => [
+    0 => "Language: EN",
+    1 => "Taal: NL",
+    2 => "Langue: FR",
+  ],
 
   
 ];
