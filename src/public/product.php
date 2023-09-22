@@ -1,26 +1,27 @@
 <?php
 if (!isset($_SESSION['user'])) {
-    header('Location: /login');
-    exit();
-  }
-  
+  header('Location: /login');
+  exit();
+}
+
 $error = $_GET['error'] ?? false;
 
 if ($error) {
   echo '
     <div class="alert alert-warning w-full max-w-xs mx-auto mb-8">
-        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
-        <span>' .
-    (ERROR_MAPPING[$error] ?? 'Unknown error') .
-    '</span>
-    </div>';
+      <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+      <span>
+        ' . (ERROR_MAPPING[$error] ?? 'Unknown error') . '
+      </span>
+    </div>
+  ';
 }
 ?>
 
 <div>
-  <form action="/src/lib/user/producten.php" method="post" class="flex flex-col items-center gap-4">
+  <form action="/src/lib/user/product.php" method="post" class="flex flex-col items-center gap-4">
     <div class="flex flex-col gap-2 w-full max-w-xs">
-      <label for="userid">userid</label>
+      <label for="userid">User ID</label>
       <input
       name="userid"
       id="userid"
@@ -31,7 +32,7 @@ if ($error) {
     </div>
   
     <div class="flex flex-col gap-2 w-full max-w-xs">
-      <label for="name">name</label>
+      <label for="name">Product name</label>
       <input
       name="name"
       id="name"
@@ -42,7 +43,7 @@ if ($error) {
     </div>
 
     <div class="flex flex-col gap-2 w-full max-w-xs">
-      <label for="description">description</label>
+      <label for="description">Description</label>
       <input
       name="description"
       id="description"
@@ -53,7 +54,7 @@ if ($error) {
     </div>
   
     <div class="flex flex-col gap-2 w-full max-w-xs">
-      <label for="price">price</label>
+      <label for="price">Price</label>
       <input
       name="price"
       id="price"
@@ -64,7 +65,7 @@ if ($error) {
     </div>
 
     <div class="flex flex-col gap-2 w-full max-w-xs">
-      <label for="imageUrl">imageUrl</label>
+      <label for="imageUrl">Image URL</label>
       <input
       name="imageUrl"
       id="imageUrl"
@@ -74,7 +75,7 @@ if ($error) {
       required />
     </div>
 
-    <input type="submit" name="add" value="Add" class="btn btn-wide place-self-center">
+    <input type="submit" name="add" value="Add product" class="btn btn-wide place-self-center">
   </form>
   
   <div class="w-full text-center mt-8">
