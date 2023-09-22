@@ -3,8 +3,6 @@
 ?>
 
 <div>
-  <a href="language-select">🌐</a>
-
   <?php
     echo $translate["hello from index"][$lng];
   ?>

@@ -144,7 +144,7 @@ $translate = [
   'I already have an account' => [
     0 => "I already have an account",
     1 => "Ik heb al een rekening",
-    2 => "J'ai un compte",
+    2 => "J'ai déja un compte",
   ],
   'register' => [
     0 => "Register",
