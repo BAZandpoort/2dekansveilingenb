@@ -60,7 +60,6 @@
     </div>
   </div>
 
-  <div class="">
     <?php echo isset($_SESSION['user'])
       ? '<div class="dropdown dropdown-end">
       <label tabindex="0" class="btn btn-ghost btn-circle avatar">
@@ -81,7 +80,6 @@
       </ul>
     </div>'
       : '<a href="/login" class="btn"> Login</a>'; ?>
-  </div>
 
 
 </div>
