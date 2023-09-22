@@ -76,6 +76,32 @@ $translate = [
     1 => 'Betrouwbare technologie sinds 2023',
     2 => 'Technologie fiable depuis 2023',
   ],
+  'products' => [
+    0 => 'Products',
+    1 => 'Producten',
+    2 => 'Produits',
+  ],
+  'categories' => [
+    0 => 'Categories',
+    1 => 'Categorieën',
+    2 => 'Catégories',
+  ],
+  'profile' => [
+    0 => 'Profile',
+    1 => 'Profiel',
+    2 => 'Profil',
+  ],
+  'login' => [
+    0 => 'Login',
+    1 => 'Inloggen',
+    2 => 'Login',
+  ],
+  'logout' => [
+    0 => 'Logout',
+    1 => 'Uitloggen',
+    2 => 'Logout',
+  ]  
   
+
   
 ];
