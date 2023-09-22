@@ -1,3 +1,9 @@
+<?php
+  if (!isset($_SESSION["lang"])){
+    $_SESSION["lang"] = 0;
+  }
+?>
+
 <div class="navbar bg-base-100 shadow-sm mb-24">
   <div class="navbar-start">
     <div class="dropdown">

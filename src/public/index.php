@@ -2,9 +2,6 @@
   <a href="language-select">🌐</a>
 
   <?php
-    if (!isset($_SESSION["lang"])){
-      $_SESSION["lang"] = 0;
-    }
     $hello_msg = array("HELLO FROM INDEX", "HALLO VANUIT INDEX", "BONJOUR DEPUIS INDICE");
     echo $hello_msg[$_SESSION["lang"]];
   ?>
