@@ -1,19 +1,5 @@
 <?php
   require 'translations.php';
-  //$txt_services = array("Services", "Diensten", "Service");
-  //$txt_design = array("Design", "Ontwerp", "Désign");
-  //$txt_marketing = array("Marketing", "Marketing", "Mercatique");
-  //$txt_advertisement = array("Advertisement", "Advertentie", "Publicité");
-  //$txt_business = array("Business", "Bedrijf", "Entreprise");
-  //$txt_about_us = array("About us", "Over ons", "À propos de nous");
-  //$txt_vacancies = array("Vacancies", "Vacatures", "Postes vacants");
-  //$txt_press_kit = array("Press kit", "Perskit", "Dossier de presse");
-  //$txt_legal = array("Legal", "Juridisch", "Juridique");
-  //$txt_terms_of_use = array("Terms of Use", "Gebruiksvoorwaarden", "Conditions d'utilisation");
-  //$txt_privacy_policy = array("Privacy Policy", "Privacybeleid", "Politique de confidentialité");
-  //$txt_cookie_policy = array("Cookie Policy", "Cookiebeleid", "Politique de cookies");
-  //$txt_title = array("2nd-chance auctions", "2dekans veilingen", "2ème-chance enchères");
-  //$txt_reliable_tech = array("Reliable technology since 2023", "Betrouwbare technologie sinds 2023", "Technologie fiable depuis 2023");
 
   echo '
     <div class="mt-32">
