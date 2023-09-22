@@ -1,10 +1,5 @@
 <?php 
-  $txt_title = array("2nd-chance auctions", "2dekans veilingen", "2ème-chance enchères");
-  $txt_products = array("Products", "Producten", "Produits");
-  $txt_categories = array("Categories", "Categorieën", "Catégories");
-  $txt_profile = array("Profile", "Profiel", "Profil");
-  $txt_login = array("Login", "Inloggen", "Login");
-  $txt_logout = array("Logout", "Uitloggen", "Logout");
+  require "translations.php";
 ?>
 
 <div class="navbar bg-base-100 shadow-sm mb-24">
@@ -16,15 +11,15 @@
       <?php
         echo '
           <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-            <li><a href="/">'.$txt_products[$lng].'</a></li>
+            <li><a href="/">'.$translate["products"][$lng].'</a></li>
               <li>
-                <a>'.$txt_categories[$lng].'</a>
+                <a>'.$translate["categories"][$lng].'</a>
                 <ul class="p-2 shadow-sm">
                   <li><a>Category 1</a></li>
                   <li><a>Category 2</a></li>
                 </ul>
               </li>
-            <li><a>'.$txt_profile[$lng].'</a></li>
+            <li><a>'.$translate["profile"][$lng].'</a></li>
           </ul>
         ';
       ?>
@@ -32,7 +27,7 @@
     </div>
     <?php
       echo '
-        <a href="/" class="btn btn-ghost normal-case text-xl">'.$txt_title[$lng].'</a>
+        <a href="/" class="btn btn-ghost normal-case text-xl">'.$translate["2nd-chance auctions"][$lng].'</a>
       ';
     ?>
   </div>
@@ -40,17 +35,17 @@
     <?php
       echo '
         <ul class="menu menu-horizontal px-1">
-          <li><a href="/">'.$txt_products[$lng].'</a></li>
+          <li><a href="/">'.$translate["products"][$lng].'</a></li>
           <li tabindex="0">
             <details>
-              <summary>'.$txt_categories[$lng].'</summary>
+              <summary>'.$translate["categories"][$lng].'</summary>
               <ul class="p-2 shadow-sm">
                 <li><a>Category 1</a></li>
                 <li><a>Category 2</a></li>
               </ul>
             </details>
           </li>
-          <li><a>'.$txt_profile[$lng].'</a></li>
+          <li><a>'.$translate["profile"][$lng].'</a></li>
         </ul>
       ';
     ?>
@@ -61,8 +56,8 @@
     <a href="<?php echo isset($_SESSION['user'])
       ? '/logout'
       : '/login'; ?>" class="btn"><?php echo isset($_SESSION['user'])
-  ? $txt_logout[$lng]
-  : $txt_login[$lng]; ?></a>
+  ? $translate["logout"][$lng]
+  : $translate["login"][$lng]; ?></a>
   </div>
 
 </div>
