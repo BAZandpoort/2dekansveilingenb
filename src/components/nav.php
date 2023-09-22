@@ -4,7 +4,9 @@
   }
 
   $txt_title = array("2nd-chance auctions", "2dekans veilingen", "2ème-chance enchères");
-  $txt_products = array();
+  $txt_products = array("Products", "Producten", "Produits");
+  $txt_categories = array("Categories", "Categorieën", "Catégories");
+  $txt_profile = array("Profile", "Profiel", "Profil")
 ?>
 
 <div class="navbar bg-base-100 shadow-sm mb-24">
@@ -32,19 +34,24 @@
     ?>
   </div>
   <div class="navbar-center hidden lg:flex">
-    <ul class="menu menu-horizontal px-1">
-      <li><a href="/">Products</a></li>
-      <li tabindex="0">
-        <details>
-          <summary>Categories</summary>
-          <ul class="p-2 shadow-sm">
-            <li><a>Category 1</a></li>
-            <li><a>Category 2</a></li>
-          </ul>
-        </details>
-      </li>
-      <li><a>Profile</a></li>
-    </ul>
+    <?php
+      echo '
+        <ul class="menu menu-horizontal px-1">
+          <li><a href="/">'.$txt_products[$_SESSION["lang"]].'</a></li>
+          <li tabindex="0">
+            <details>
+              <summary>'.$txt_categories[$_SESSION["lang"]].'</summary>
+              <ul class="p-2 shadow-sm">
+                <li><a>Category 1</a></li>
+                <li><a>Category 2</a></li>
+              </ul>
+            </details>
+          </li>
+          <li><a>'.$txt_profile[$_SESSION["lang"]].'</a></li>
+        </ul>
+      ';
+    ?>
+    
   </div>
   
   <div class="navbar-end">
