@@ -49,7 +49,7 @@ echo '
     </form>
 
     <div class="w-full text-center mt-8">
-      <a class="link" href="/register">I dont have an account yet</a>
+      <a class="link" href="/register">'.$translate["I dont have an account yet"][$lng].'</a>
     </div>
   </div>
   ';
