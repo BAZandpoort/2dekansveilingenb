@@ -116,6 +116,19 @@ $translate = [
     1 => "🌐 NL",
     2 => "🌐 FR",
   ],
-
-  
+  'email' => [
+    0 => "Email",
+    1 => "E-mail",
+    2 => "Courrier électronique",
+  ],
+  'password' => [
+    0 => "Password",
+    1 => "Wachtwoord",
+    2 => "Mot de passe",
+  ],
+  'I dont have an account yet' => [
+    0 => "I don't have an account yet",
+    1 => "Ik heb nog geen rekening",
+    2 => "Je n'ai pas encore de compte",
+  ],
 ];
