@@ -2,17 +2,30 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once DATABASE . '/connect.php';
 require_once ROUTES;
+require_once LIB . '/util/util.php';
 
 session_start();
 
 $uri = explode('?', $_SERVER['REQUEST_URI'])[0];
 
 $route = array_key_exists($uri, $routes) ? $routes[$uri] : $routes['/404'];
+
+$userid = $_SESSION["user"]["id"];
+
+global $connection;
+
+$sql = 'Select * From user_profile Where userid = ?';
+
+$data = fetch($sql, ['type' => 'i', 'value' => $userid]);
 ?>
 
 <!DOCTYPE html>
 <!-- Dark: dark  Light: garden -->
-<html lang="en" data-theme="garden">
+<html lang="en" data-theme="<?php
+  $data["mode"] == "dark"
+  ?"garden"
+  :"dark";
+?>">
 
 <head>
   <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.3/dist/full.css" rel="stylesheet" type="text/css" />
