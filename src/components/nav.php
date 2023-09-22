@@ -2,6 +2,7 @@
   if (!isset($_SESSION["lang"])){
     $_SESSION["lang"] = 0;
   }
+  $lng = $_SESSION["lang"];
 
   $txt_title = array("2nd-chance auctions", "2dekans veilingen", "2ème-chance enchères");
   $txt_products = array("Products", "Producten", "Produits");
@@ -15,21 +16,26 @@
       <label tabindex="0" class="btn btn-ghost lg:hidden">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
       </label>
-      <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-        <li><a href="/">Products</a></li>
-        <li>
-          <a>Categories</a>
-          <ul class="p-2 shadow-sm">
-            <li><a>Category 1</a></li>
-            <li><a>Category 2</a></li>
+      <?php
+        echo '
+          <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+            <li><a href="/">'.$txt_products[$lng].'</a></li>
+              <li>
+                <a>'.$txt_categories[$lng].'</a>
+                <ul class="p-2 shadow-sm">
+                  <li><a>Category 1</a></li>
+                  <li><a>Category 2</a></li>
+                </ul>
+              </li>
+            <li><a>'.$txt_profile[$lng].'</a></li>
           </ul>
-        </li>
-        <li><a>Profile</a></li>
-      </ul>
+        ';
+      ?>
+      
     </div>
     <?php
       echo '
-        <a href="/" class="btn btn-ghost normal-case text-xl">'.$txt_title[$_SESSION["lang"]].'</a>
+        <a href="/" class="btn btn-ghost normal-case text-xl">'.$txt_title[$lng].'</a>
       ';
     ?>
   </div>
@@ -37,17 +43,17 @@
     <?php
       echo '
         <ul class="menu menu-horizontal px-1">
-          <li><a href="/">'.$txt_products[$_SESSION["lang"]].'</a></li>
+          <li><a href="/">'.$txt_products[$lng].'</a></li>
           <li tabindex="0">
             <details>
-              <summary>'.$txt_categories[$_SESSION["lang"]].'</summary>
+              <summary>'.$txt_categories[$lng].'</summary>
               <ul class="p-2 shadow-sm">
                 <li><a>Category 1</a></li>
                 <li><a>Category 2</a></li>
               </ul>
             </details>
           </li>
-          <li><a>'.$txt_profile[$_SESSION["lang"]].'</a></li>
+          <li><a>'.$txt_profile[$lng].'</a></li>
         </ul>
       ';
     ?>
