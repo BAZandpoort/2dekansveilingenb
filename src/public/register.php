@@ -69,7 +69,7 @@
       </form>
 
       <div class="w-full text-center mt-8">
-        <a class="link" href="/login">I already have an account</a>
+        <a class="link" href="/login">'.$translate["I already have an account"][$lng].'</a>
       </div>
     </div>
   ';
