@@ -15,11 +15,7 @@
             </div>
         ';
 
-        $txt_return = array("Return", "Terug", "Retour");
-        echo '
-            <br><br>
-            <a href="/"><button class="btn btn-neutral">'.$txt_return[$_SESSION["lang"]].'</button></a>
-        ';
+        header("Location: /");
 
     } else {
         echo '

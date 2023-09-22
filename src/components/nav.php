@@ -66,8 +66,8 @@
     <a href="<?php echo isset($_SESSION['user'])
       ? '/logout'
       : '/login'; ?>" class="btn"><?php echo isset($_SESSION['user'])
-  ? "'.$txt_logout[$lng].'"
-  : "'.$txt_login[$lng].'"; ?></a>
+  ? $txt_logout[$lng]
+  : $txt_login[$lng]; ?></a>
   </div>
 
 </div>
