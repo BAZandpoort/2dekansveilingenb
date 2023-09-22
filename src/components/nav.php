@@ -1,9 +1,4 @@
-<?php
-  if (!isset($_SESSION["lang"])){
-    $_SESSION["lang"] = 0;
-  }
-  $lng = $_SESSION["lang"];
-
+<?php 
   $txt_title = array("2nd-chance auctions", "2dekans veilingen", "2ème-chance enchères");
   $txt_products = array("Products", "Producten", "Produits");
   $txt_categories = array("Categories", "Categorieën", "Catégories");

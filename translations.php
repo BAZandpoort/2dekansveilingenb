@@ -1,5 +1,10 @@
 <?php
 
+if (!isset($_SESSION["lang"])){
+  $_SESSION["lang"] = 0;
+}
+$lng = $_SESSION["lang"];
+
 $translate = [
   'services' => [
     0 => 'Services',
