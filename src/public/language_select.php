@@ -39,7 +39,7 @@
                     <input type="radio" name="radio-lang" value=2 class="radio checked:bg-blue-500" unchecked />
                     </label>
                 </div>
-                <input type="submit" name="knop" value="✔️" class="btn btn-active btn-neutral">
+                <input type="submit" name="knop" value="✔️" class="btn btn-active btn-primary">
             </form>
         ';
     }

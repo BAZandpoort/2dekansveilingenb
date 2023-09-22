@@ -112,9 +112,9 @@ $translate = [
     2 => "BIENVENUE"
   ],
   'language' => [
-    0 => "Language: EN",
-    1 => "Taal: NL",
-    2 => "Langue: FR",
+    0 => "🌐 EN",
+    1 => "🌐 NL",
+    2 => "🌐 FR",
   ],
 
   
