@@ -15,6 +15,11 @@
             </div>
         ';
 
+        $return_msg = array("Return", "Terug", "Retour");
+        echo '
+            <a href="index"><button class="btn btn-neutral">'.$return_msg[$_SESSION["lang"]].'</button></a>
+        ';
+
     } else {
         echo '
             <form method="post" action="language-select">
