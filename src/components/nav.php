@@ -3,7 +3,8 @@
     $_SESSION["lang"] = 0;
   }
 
-  $title_msg = array("2nd-chance auctions", "2dekans veilingen", "2ème-chance enchères");
+  $txt_title = array("2nd-chance auctions", "2dekans veilingen", "2ème-chance enchères");
+  $txt_products = array();
 ?>
 
 <div class="navbar bg-base-100 shadow-sm mb-24">
@@ -26,7 +27,7 @@
     </div>
     <?php
       echo '
-        <a href="/" class="btn btn-ghost normal-case text-xl">'.$title_msg[$_SESSION["lang"]].'</a>
+        <a href="/" class="btn btn-ghost normal-case text-xl">'.$txt_title[$_SESSION["lang"]].'</a>
       ';
     ?>
   </div>
