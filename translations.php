@@ -56,6 +56,11 @@ $translate = [
     1 => 'Privacybeleid',
     2 => 'Politique de confidentialité',
   ],
+  'cookie policy' => [
+    0 => 'Cookie Policy',
+    1 => 'Cookiebeleid',
+    2 => 'Politique de cookies',
+  ],
   '2nd-chance auctions' => [
     0 => '2nd-chance auctions',
     1 => '2dekans veilingen',
