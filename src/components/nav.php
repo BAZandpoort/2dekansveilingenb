@@ -7,7 +7,9 @@
   $txt_title = array("2nd-chance auctions", "2dekans veilingen", "2ème-chance enchères");
   $txt_products = array("Products", "Producten", "Produits");
   $txt_categories = array("Categories", "Categorieën", "Catégories");
-  $txt_profile = array("Profile", "Profiel", "Profil")
+  $txt_profile = array("Profile", "Profiel", "Profil");
+  $txt_login = array("Login", "Inloggen", "Login");
+  $txt_logout = array("Logout", "Uitloggen", "Logout");
 ?>
 
 <div class="navbar bg-base-100 shadow-sm mb-24">
@@ -59,13 +61,13 @@
     ?>
     
   </div>
-  
+
   <div class="navbar-end">
     <a href="<?php echo isset($_SESSION['user'])
       ? '/logout'
       : '/login'; ?>" class="btn"><?php echo isset($_SESSION['user'])
-  ? 'Logout'
-  : 'Login'; ?></a>
+  ? "'.$txt_logout[$lng].'"
+  : "'.$txt_login[$lng].'"; ?></a>
   </div>
 
 </div>
