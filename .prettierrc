@@ -6,5 +6,6 @@
   "singleQuote": true,
   "braceStyle": "1tbs",
   "trailingCommaPHP": true,
+  "endOfLine": "crlf",
   "plugins": ["@prettier/plugin-php"]
 }
