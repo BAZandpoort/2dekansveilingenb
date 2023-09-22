@@ -46,7 +46,7 @@
             </details>
           </li>
           <li><a>'.$translate["profile"][$lng].'</a></li>
-          <li><a>'.$translate["language"][$lng].'</a></li>
+          <li><a href="language-select">'.$translate["language"][$lng].'</a></li>
         </ul>
       ';
     ?>
