@@ -6,10 +6,10 @@ define('DB_PASSWORD', '');
 define('DB_NAME', '2dekans-veilingen');
 
 // Import aliases
-define('ROOT', __DIR__);
-define('ROUTES', __DIR__ . '/routes.php');
-define('PUBLIC_R', __DIR__ . '/public');
-define('SRC', __DIR__ . '/src');
+define('ROOT', $_SERVER['DOCUMENT_ROOT']);
+define('ROUTES', ROOT . '/routes.php');
+define('PUBLIC_R', ROOT . '/public');
+define('SRC', ROOT . '/src');
 define('COMPONENTS', SRC . '/components');
 define('DATABASE', SRC . '/database');
 define('LIB', SRC . '/lib');

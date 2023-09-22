@@ -6,7 +6,7 @@ if (!isset($_POST['login'])) {
   exit();
 }
 
-require_once '../../../config.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once DATABASE . '/connect.php';
 require_once LIB . '/authentication/authentication.php';
 
