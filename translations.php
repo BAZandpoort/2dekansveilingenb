@@ -100,7 +100,17 @@ $translate = [
     0 => 'Logout',
     1 => 'Uitloggen',
     2 => 'Logout',
-  ]  
+  ],
+  'hello from index' => [
+    0 => 'HELLO FROM INDEX',
+    1 => 'HALLO VANUIT INDEX',
+    2 => 'BONJOUR DEPUIS INDICE',
+  ],
+  'welcome' => [
+    0 => "WELCOME",
+    1 => "WELKOM",
+    2 => "BIENVENUE"
+  ],
   
 
   
