@@ -6,11 +6,7 @@
     echo $txt_hello[$lng];
   ?>
   <?php if (isset($_SESSION['user'])) {
-    
-
-    
     $txt_welcome = array("WELCOME,", "WELKOM,", "BIENVENUE,");
-
     echo '<br> '.$txt_welcome[$lng].', ' . $_SESSION['user']['username'];
   } ?>
 
