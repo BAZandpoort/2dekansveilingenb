@@ -2,6 +2,8 @@
   if (!isset($_SESSION["lang"])){
     $_SESSION["lang"] = 0;
   }
+
+  $title_msg = array("2nd-chance auctions", "2dekans veilingen", "2ème-chance enchères");
 ?>
 
 <div class="navbar bg-base-100 shadow-sm mb-24">
@@ -22,7 +24,11 @@
         <li><a>Profile</a></li>
       </ul>
     </div>
-    <a href="/" class="btn btn-ghost normal-case text-xl">2dekans veilingen</a>
+    <?php
+      echo '
+        <a href="/" class="btn btn-ghost normal-case text-xl">'.$title_msg[$_SESSION["lang"]].'</a>
+      ';
+    ?>
   </div>
   <div class="navbar-center hidden lg:flex">
     <ul class="menu menu-horizontal px-1">
