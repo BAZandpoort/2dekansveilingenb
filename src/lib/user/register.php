@@ -38,7 +38,7 @@ if ($password !== $passwordConfirm) {
   exit();
 }
 
-$password = password_hash($password, PASSWORD_DEFAULT);
+$password = password_hash($password, PASSWORD_ARGON2ID);
 register($email, $username, $password);
 
 header('Location: /login');
