@@ -126,9 +126,31 @@ $translate = [
     1 => "Wachtwoord",
     2 => "Mot de passe",
   ],
+  'confirm password' => [
+    0 => "Confirm password",
+    1 => "Bevestig wachtwoord",
+    2 => "Confirmez le mot de passe",
+  ],
+  'username' => [
+    0 => "Username",
+    1 => "Gebruikersnaam",
+    2 => "Nom d'utilisateur",
+  ],
   'I dont have an account yet' => [
     0 => "I don't have an account yet",
     1 => "Ik heb nog geen rekening",
     2 => "Je n'ai pas encore de compte",
   ],
+  'I already have an account' => [
+    0 => "I already have an account",
+    1 => "Ik heb al een rekening",
+    2 => "Je ai un compte",
+  ],
+  'register' => [
+    0 => "Register",
+    1 => "Schrijf in",
+    2 => "S'inscrire",
+  ],
+  
+
 ];
