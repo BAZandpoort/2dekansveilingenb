@@ -32,4 +32,9 @@ $route = array_key_exists($uri, $routes) ? $routes[$uri] : $routes['/404'];
     <?php $route['footer'] ? include COMPONENTS . '/footer.php' : null; ?>
   </div>
 </body>
+<style type="text/css">
+  ::-webkit-scrollbar {
+    display: none;
+    }
+</style>
 </html>

@@ -21,6 +21,8 @@ if (isset($_POST['add'])) {
   );
 
   return $insertData;
+  
 }
+header('Location: /');
+return;
 
-header('Location: /producten');
