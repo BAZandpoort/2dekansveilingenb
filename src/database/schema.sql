@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 16, 2023 at 03:00 PM
+-- Generation Time: Sep 23, 2023 at 07:31 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
+  `categoryid` int(11) DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `price` decimal(10,2) NOT NULL,
@@ -38,12 +39,16 @@ CREATE TABLE `products` (
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `products`
+-- Table structure for table `product_categories`
 --
 
-INSERT INTO `products` (`id`, `userid`, `name`, `description`, `price`, `imageUrl`, `updatedAt`, `createdAt`) VALUES
-(1, 1, 'Product', 'Cats v2!', 30.00, 'https://http.cat/404.png', '2023-09-16 12:47:41', '2023-09-16 12:47:41');
+CREATE TABLE `product_categories` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -62,13 +67,6 @@ CREATE TABLE `users` (
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `username`, `email`, `password`, `firstname`, `lastname`, `updatedAt`, `createdAt`) VALUES
-(1, 'Username', 'email@email.email', '$argon2id$v=19$m=16,t=2,p=1$ckg3aWhxdUFOTEEydHVVUw$kAyjahR5deo9So58dcIjew', 'Firstname', 'Lastname', '2023-09-16 12:42:10', '2023-09-16 12:42:10');
-
 -- --------------------------------------------------------
 
 --
@@ -82,13 +80,6 @@ CREATE TABLE `user_profile` (
   `about` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `user_profile`
---
-
-INSERT INTO `user_profile` (`id`, `userid`, `profilePictureUrl`, `about`) VALUES
-(1, 1, 'https://http.cat/404.png', 'Cats!');
-
 -- --------------------------------------------------------
 
 --
@@ -99,15 +90,6 @@ CREATE TABLE `user_roles` (
   `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `user_roles`
---
-
-INSERT INTO `user_roles` (`id`, `name`) VALUES
-(1, 'admin'),
-(3, 'guest'),
-(2, 'member');
 
 -- --------------------------------------------------------
 
@@ -122,13 +104,6 @@ CREATE TABLE `user_role_mapping` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `user_role_mapping`
---
-
-INSERT INTO `user_role_mapping` (`id`, `userid`, `roleid`) VALUES
-(1, 1, 1);
-
---
 -- Indexes for dumped tables
 --
 
@@ -137,7 +112,15 @@ INSERT INTO `user_role_mapping` (`id`, `userid`, `roleid`) VALUES
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `products_userid` (`userid`);
+  ADD KEY `products_userid` (`userid`),
+  ADD KEY `products_categoryid` (`categoryid`);
+
+--
+-- Indexes for table `product_categories`
+--
+ALTER TABLE `product_categories`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `product_category_name` (`name`);
 
 --
 -- Indexes for table `users`
@@ -177,31 +160,37 @@ ALTER TABLE `user_role_mapping`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `product_categories`
+--
+ALTER TABLE `product_categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user_profile`
 --
 ALTER TABLE `user_profile`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user_roles`
 --
 ALTER TABLE `user_roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user_role_mapping`
 --
 ALTER TABLE `user_role_mapping`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -211,6 +200,7 @@ ALTER TABLE `user_role_mapping`
 -- Constraints for table `products`
 --
 ALTER TABLE `products`
+  ADD CONSTRAINT `products_categoryid` FOREIGN KEY (`categoryid`) REFERENCES `product_categories` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `products_userid` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
