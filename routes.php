@@ -50,4 +50,11 @@ $routes = [
     'nav' => true,
     'footer' => false,
   ],
+  '/searchbar' => [
+    'view' => 'zoekbalk.php',
+    'title' => 'Search',
+    'auth_roles' => ['member', 'guest', 'admin'],
+    'nav' => true,
+    'footer' => true,
+  ],
 ];

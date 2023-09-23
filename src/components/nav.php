@@ -1,4 +1,4 @@
-<div class="navbar bg-base-100 shadow-sm mb-24">
+<div class="navbar bg-base-100 shadow-sm mb-10">
   <div class="navbar-start flex-1">
     <div class="dropdown">
       <label tabindex="0" class="btn btn-ghost lg:hidden lg:flex">
@@ -21,7 +21,6 @@
     </div>
     <a href="/" class="btn btn-ghost normal-case text-xl">2dekans veilingen</a>
   </div>
-
   <div class="navbar-center hidden lg:flex">
     <ul class="menu menu-horizontal px-1">
       <li><a href="/">Products</a></li>
