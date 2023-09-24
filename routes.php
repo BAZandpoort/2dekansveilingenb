@@ -43,4 +43,18 @@ $routes = [
     'nav' => false,
     'footer' => false,
   ],
+  '/edit' => [
+    'view' => 'account_edit.php',
+    'title' => 'Not Found',
+    'auth_roles' => [],
+    'nav' => true,
+    'footer' => true,
+  ],
+  '/update' => [
+    'view' => 'update_profile.php',
+    'title' => 'Not Found',
+    'auth_roles' => [],
+    'nav' => true,
+    'footer' => true,
+  ]
 ];

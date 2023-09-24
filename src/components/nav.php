@@ -13,7 +13,13 @@
             <li><a>Category 2</a></li>
           </ul>
         </li>
-        <li><a>Profile</a></li>
+        <li>
+          <a>Profile</a>
+          <ul class="p-2 shadow-sm">
+            <li><a href="/edit">Edit</a></li>
+            <li><a>Settings</a></li>
+          </ul>
+        </li>
       </ul>
     </div>
     <a href="/" class="btn btn-ghost normal-case text-xl">2dekans veilingen</a>
@@ -30,7 +36,15 @@
           </ul>
         </details>
       </li>
-      <li><a>Profile</a></li>
+      <li tabindex="0">
+        <details>
+          <summary>Profile</summary>
+          <ul class="p-2 shadow-sm">
+            <li><a href="/edit">Edit</a></li>
+            <li><a>Settings</a></li>
+          </ul>
+        </details>
+      </li>
     </ul>
   </div>
   
