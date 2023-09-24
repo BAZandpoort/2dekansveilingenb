@@ -33,8 +33,5 @@ $route = array_key_exists($uri, $routes) ? $routes[$uri] : $routes['/404'];
   </div>
 </body>
 <style type="text/css">
-  ::-webkit-scrollbar {
-    display: none;
-    }
 </style>
 </html>

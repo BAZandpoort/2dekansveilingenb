@@ -10,7 +10,7 @@
         <li><a href="/">Products</a></li>
         <li>
           <a>Categories</a>
-          <ul class="p-2 shadow-sm">
+          <ul class="p-2 shadow-sm ">
             <li><a>Category 1</a></li>
             <li><a>Category 2</a></li>
           </ul>
@@ -27,7 +27,7 @@
       <li tabindex="0">
         <details>
           <summary>Categories</summary>
-          <ul class="p-2 shadow-sm">
+          <ul class="p-2 shadow-sm absolute">
             <li><a>Category 1</a></li>
             <li><a>Category 2</a></li>
           </ul>

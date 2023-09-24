@@ -29,21 +29,24 @@ if (isset($_POST['submit'])) {
     if ($result->num_rows > 0) {
         while ($row = mysqli_fetch_array($result)) {
             echo '
-                <div class="card card-compact w-96 inline-flex mx-14 my-16 bg-white ">
-                    <form method="post" action="index.php?id=' .$row["id"]. '">
-                        <img src="' .$row["imageUrl"]. '" class="rounded-xl max-h-52 w-full ">
-                        <div class="card-body items-center text-center pb-16">
-                          <h2 class="card-title mt-10">' .$row["name"]. '</h2>
-                          <p>' .$row["description"]. '</p>
-                          <div class="text-2xl "><p>€' .$row["price"]. '</p></div>
-                            <input type="hidden"name="image"value="' .$row["imageUrl"]. '">
-                            <input type="hidden"name="name"value="' .$row["name"]. '">
-                            <input type="hidden"name="price"value="' .$row["price"]. '">
-                            <button type="submit" class="btn btn-warning my-3 mb-10" name="buy">Buy now<i class="fa fa-shopping-cart"></i></button>
-                        </div>
-                    </form>
+        <div class=" card card-compact w-60 inline-flex ml-2 my-6 bg-white hover:bg-gray-100">
+            <form method="post" action="index.php?id=' .$row["id"]. '">
+                <img src="' .$row["imageUrl"]. '" class=" max-h-44 w-64 m-auto object-cover">
+                <div class="card-body">
+                <h2 class="card-title text-base">
+                  ';
+                  if(strlen($row["name"]) > 20) {
+                  echo substr_replace($row["name"], "...", 21);} else { echo $row["name"];}
+                  echo '</h2>
+                  <div class="text-base"><p>€' .$row["price"]. '</p></div>
+                    <input type="hidden"name="image"value="' .$row["imageUrl"]. '">
+                    <input type="hidden"name="name"value="' .$row["name"]. '">
+                    <input type="hidden"name="price"value="' .$row["price"]. '">
+                    <button type="submit" class="btn btn-warning" name="buy">Buy now</button>
                 </div>
-            ' ;
+            </form>
+        </div>
+        ' ;
         }
     } else {
         echo "Geen overeenkomende producten gevonden.";
