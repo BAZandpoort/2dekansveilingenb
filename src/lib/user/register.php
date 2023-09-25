@@ -8,7 +8,8 @@ if (!isset($_POST['register'])) {
 require_once '../../../config.php';
 require_once LIB . '/util/util.php';
 require_once LIB . '/authentication/authentication.php';
-
+$firstname = $_POST['firstname'];
+$lastname = $_POST['lastname'];
 $email = $_POST['email'];
 $username = $_POST['username'];
 $password = $_POST['password'];
@@ -39,6 +40,11 @@ if ($password !== $passwordConfirm) {
 }
 
 $password = password_hash($password, PASSWORD_DEFAULT);
-register($email, $username, $password);
 
-header('Location: /login');
+if(register($firstname, $lastname, $email, $username, $password)){
+  echo '<script language="javascript">';
+echo 'window.alert("Je bent succesvol geregistreerd")';
+
+echo '</script>';
+//header('Location: /login');
+}

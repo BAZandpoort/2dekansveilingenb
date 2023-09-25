@@ -20,7 +20,28 @@ if ($error) {
 
 <div>
   <form action="/src/lib/user/register.php" method="post" class="flex flex-col items-center gap-4">
+  <div class="flex flex-col gap-2 w-full max-w-xs">
+      <label for="firstname">First Name</label>
+      <input
+      name="firstname"
+      id="firstname"
+      type="firstname"
+      placeholder="Jan"
+      class="input input-bordered w-full placeholder:opacity-30"
+      required/>
+    </div>
     <div class="flex flex-col gap-2 w-full max-w-xs">
+      <label for="lastname">Last name</label>
+      <input
+      name="lastname"
+      id="lastname"
+      type="lastname"
+      placeholder="Van Bergen"
+      class="input input-bordered w-full placeholder:opacity-30"
+      required/>
+    </div>
+
+  <div class="flex flex-col gap-2 w-full max-w-xs">
       <label for="email">Email</label>
       <input
       name="email"

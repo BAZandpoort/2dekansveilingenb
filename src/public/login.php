@@ -1,8 +1,15 @@
+
 <?php
 if (isset($_SESSION['user'])) {
+  
   header('Location: /');
-  exit();
+ 
+  print("succes");
+  
 }
+
+
+
 
 $error = $_GET['error'] ?? false;
 
