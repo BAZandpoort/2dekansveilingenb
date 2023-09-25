@@ -30,8 +30,13 @@ define('USER_STRUCTURE', [
   'id' => null,
   'username' => null,
   'email' => null,
-  'password' => null,
-  'role' => null,
+  'mode' => null,
+]);
+
+define('THEME_MAPPING', [
+  'default' => 'dark',
+  'dark' => 'dark',
+  'light' => 'garden',
 ]);
 
 ?>

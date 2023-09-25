@@ -38,7 +38,4 @@ if (mysqli_num_rows($result) == 0) {
 }
 
 $result = $result->fetch_assoc();
-
-var_dump($result);
-
 ?>
