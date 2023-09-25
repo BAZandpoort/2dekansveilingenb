@@ -34,4 +34,11 @@ define('USER_STRUCTURE', [
   'role' => null,
 ]);
 
+define ('THEME_MAPPING', [
+  'default' => "dark",
+  'dark' => "dark",
+  'light' => "garden",
+
+])
+
 ?>

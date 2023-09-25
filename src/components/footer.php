@@ -3,22 +3,16 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/util/util.php';
 
 
-$userid = $_SESSION["user"]["id"];
+$userid = $_SESSION["user"] ? $_SESSION["user"]["id"] : null;
 
 
+if ($userid) {
+  global $connection;
+  $sql = 'Select * From user_profile Where userid = ?';
+  $data = fetch($sql, ['type' => 'i', 'value' => $userid]);
 
-global $connection;
-$sql = 'Select * From user_profile Where userid = ?';
+}
 
-$data = fetch($sql, ['type' => 'i', 'value' => $userid]);
-var_dump($data);
-
-
-if (isset($_POST["submit"])){ 
-  unset( $_POST["submit"]);
-$data["mode"] == "dark"
-  ?  insert('UPDATE user_profile SET mode = "light" WHERE userid = ?', ['type' => 'i', 'value' => $userid])
-  :  insert('UPDATE user_profile SET mode = "dark" WHERE userid = ?', ['type' => 'i', 'value' => $userid]);
 
 ?>
 
@@ -46,18 +40,19 @@ $data["mode"] == "dark"
     </nav>
     
 
-    <div class="navbar-end">
-    <?php
-    
-    
-   
-    }
+  <?php
+  if ($userid) {
     ?>
-    <form action="./footer.php" method="post">
-      <input type="submit" value="<?php echo $data["mode"] == "dark" ? 'Light mode' : 'Dark mode'; ?>" class="btn" id="submit" name="submit">
+        <div class="navbar-end">
+    <form action="src\lib\user\change-theme.php" method="post">
+      <input type="submit" value="<?php echo $data["mode"] == "dark" 
+      ? 'Light mode' 
+      : 'Dark mode'; ?>" class="btn" id="submit" name="submit">
     </form>
-
     </div>
+    <?php
+  }
+  ?>
   </footer>
   <footer class="footer px-10 py-4 border-t bg-base-200 text-base-content border-base-300">
     <aside class="items-center grid-flow-col">
