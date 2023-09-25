@@ -57,4 +57,11 @@ $routes = [
     'nav' => true,
     'footer' => true,
   ],
+  '/productsPage' => [
+  'view' => 'productsPage.php',
+  'title' => 'Products',
+  'auth_roles' => ['member', 'guest', 'admin'],
+  'nav' => true,
+  'footer' => true,
+  ]
 ];

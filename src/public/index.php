@@ -22,7 +22,9 @@
 <?php 
 
 
-include_once LIB . '/user/productToIndex.php';
+include_once LIB . '/user/sortByCategory.php';
 
-getProductGuest();
+getCategoryWeapon();
+
+byCategory();
 ?>
