@@ -2,18 +2,13 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/util/util.php';
 
-
-$userid = $_SESSION["user"] ? $_SESSION["user"]["id"] : null;
-
+$userid = isset($_SESSION['user']) ? $_SESSION['user']['id'] : null;
 
 if ($userid) {
   global $connection;
   $sql = 'Select * From user_profile Where userid = ?';
   $data = fetch($sql, ['type' => 'i', 'value' => $userid]);
-
 }
-
-
 ?>
 
 <div class="mt-32">
@@ -40,19 +35,15 @@ if ($userid) {
     </nav>
     
 
-  <?php
-  if ($userid) {
-    ?>
+  <?php if ($userid) { ?>
         <div class="navbar-end">
     <form action="src\lib\user\change-theme.php" method="post">
-      <input type="submit" value="<?php echo $data["mode"] == "dark" 
-      ? 'Light mode' 
-      : 'Dark mode'; ?>" class="btn" id="submit" name="submit">
+      <input type="submit" value="<?php echo $data['mode'] == 'dark'
+        ? 'Light mode'
+        : 'Dark mode'; ?>" class="btn" id="submit" name="submit">
     </form>
     </div>
-    <?php
-  }
-  ?>
+    <?php } ?>
   </footer>
   <footer class="footer px-10 py-4 border-t bg-base-200 text-base-content border-base-300">
     <aside class="items-center grid-flow-col">

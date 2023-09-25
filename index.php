@@ -10,23 +10,19 @@ $uri = explode('?', $_SERVER['REQUEST_URI'])[0];
 
 $route = array_key_exists($uri, $routes) ? $routes[$uri] : $routes['/404'];
 
-$userid = $_SESSION["user"] ? $_SESSION["user"]["id"] : null;
-global $connection;
+$userid = isset($_SESSION['user']) ? $_SESSION['user']['id'] : null;
 
-$sql = 'Select * From user_profile Where userid = ?';
-
-
-$data = fetch($sql, ['type' => 'i', 'value' => $userid]);
-
+$data = fetch('SELECT * FROM user_profile WHERE userid = ?', [
+  'type' => 'i',
+  'value' => $userid,
+]);
+$mode = $data ? THEME_MAPPING[$data['mode']] : THEME_MAPPING['default'];
 ?>
+
 
 <!DOCTYPE html>
 <!-- Dark: dark  Light: garden -->
-<html lang="en" data-theme="<?php
-
-  echo $data ? THEME_MAPPING[$data["mode"]] : THEME_MAPPING["default"];
-
-  ?>">
+<html lang="en" data-theme='<?php echo $mode ?>'
 
 <head>
   <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.3/dist/full.css" rel="stylesheet" type="text/css" />
