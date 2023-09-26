@@ -5,9 +5,15 @@ require_once LIB . '/util/util.php';
 
 function byCategory () {
     global $connection;
-    $query = "SELECT * FROM products WHERE categoryid IN ('5', '2') GROUP BY id ";
+    $query = "SELECT *FROM products WHERE categoryid IN ('5', '2', '4') ORDER BY categoryid ";
+    $query2 = "SELECT name AS catname FROM product_categories WHERE id IN ('5', '2', '4') ORDER BY id ";
     $result = mysqli_query($connection, $query);
-        
+    $result2 = mysqli_query($connection, $query2);
+    
+    while($row2 = mysqli_fetch_array($result2)) {
+        echo '<a href="?category='.$row2["catname"].'">'.$row2["catname"].'</a>' ;
+       
+    ?><section class="inline-block ml-60 mt-24 "><?php
     while($row = mysqli_fetch_array($result)) {
         echo '
         <a class="card card-compact w-60 inline-block ml-2 my-6 bg-white hover:bg-gray-100 relative">
@@ -30,18 +36,25 @@ function byCategory () {
             </form>
         </a>
         ' ;
+    } 
+    ?></section><?php
     }
-    
-?></section><?php
 }
 
 
-function getCategoryWeapon () {
-    global $connection;
-    $query2 = "SELECT * FROM product_categories WHERE id = 4 ";
-    $result = mysqli_query($connection, $query2);
+// function getCategory () {
+//     global $connection;
+//     $query2 = "SELECT * FROM product_categories WHERE id = 4 ";
+//     $result = mysqli_query($connection, $query2);
     
-    while($row = mysqli_fetch_array($result)) {
-    echo '<a href="?category='.$row["name"].'">'.$row["name"].'</a>' ;
-    }
-}
+//     while($row = mysqli_fetch_array($result)) {
+//     echo '<a href="?category='.$row["name"].'">'.$row["name"].'</a>' ;
+//     }
+// }
+//     $query = "SELECT *FROM products WHERE categoryid IN ('5', '2') ORDER BY categoryid ";
+//     $query2 = "SELECT name AS catname FROM product_categories WHERE id IN ('5', '2') ORDER BY id ";
+//     $result = mysqli_query($connection, $query);
+//     $result2 = mysqli_query($connection, $query2);
+//     while($row2 = mysqli_fetch_array($result2)) {
+//              echo '<a href="?category='.$row2["catname"].'">'.$row2["catname"].'</a>' ;
+//              }

@@ -24,7 +24,5 @@
 
 include_once LIB . '/user/sortByCategory.php';
 
-getCategoryWeapon();
-
 byCategory();
 ?>
