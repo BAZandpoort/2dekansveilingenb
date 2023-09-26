@@ -4,12 +4,14 @@ require_once '../../../config.php';
 require_once DATABASE . '/connect.php';
 require_once LIB . '/util/util.php';
 
-function register($email, $username, $password) {
+function register($username, $password, $email, $firstname, $lastname) {
   $data = insert(
-    'INSERT INTO users (username, password, email) VALUES (?, ?, ?)',
+    'INSERT INTO users (username, password, email, firstname, lastname) VALUES (?, ?, ?, ?, ?)',
     ['type' => 's', 'value' => $username],
     ['type' => 's', 'value' => $password],
     ['type' => 's', 'value' => $email],
+    ['type' => 's', 'value' => $firstname],
+    ['type' => 's', 'value' => $lastname],
   );
 
   return $data;

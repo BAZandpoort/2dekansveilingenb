@@ -41,10 +41,7 @@ if ($password !== $passwordConfirm) {
 
 $password = password_hash($password, PASSWORD_DEFAULT);
 
-if(register($firstname, $lastname, $email, $username, $password)){
-  echo '<script language="javascript">';
-echo 'window.alert("Je bent succesvol geregistreerd")';
+register($username, $password, $email, $firstname, $lastname);
+ 
+header('Location: /login?error=success');
 
-echo '</script>';
-//header('Location: /login');
-}
