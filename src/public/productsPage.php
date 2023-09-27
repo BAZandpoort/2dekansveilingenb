@@ -17,7 +17,5 @@ if ($error) {
 }
 
 include_once LIB . '/user/productToIndex.php';
-
 getProductGuest();
-
 ?>
