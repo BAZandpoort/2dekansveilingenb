@@ -30,6 +30,17 @@ if ($error) {
       class="input input-bordered w-full placeholder:opacity-30"
       required/>
     </div>
+
+    <div class="flex flex-col gap-2 w-full max-w-xs">
+      <label for="categoryid">Category ID</label>
+      <input
+      name="categoryid"
+      id="categoryid"
+      type="categoryid"
+      placeholder="1"
+      class="input input-bordered w-full placeholder:opacity-30"
+      required/>
+    </div>
   
     <div class="flex flex-col gap-2 w-full max-w-xs">
       <label for="name">Product name</label>
