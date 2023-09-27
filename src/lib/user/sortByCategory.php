@@ -10,7 +10,7 @@ function byCategory() {
 
     while ($row2 = mysqli_fetch_array($result2)) {
         echo '<section class="mt-24 ml-48">';
-        echo '<p>' . $row2["catname"] . '</p>';
+        echo '<p class="text-2xl font-bold	">' . $row2["catname"] . '</p>';
 
         $query = "SELECT * FROM products WHERE categoryid = '" . $row2["id"] . "' ORDER BY categoryid LIMIT 5";
         $result = mysqli_query($connection, $query);
