@@ -16,10 +16,15 @@ function register($email, $username, $password) {
 }
 
 function login($email, $password) {
-  $data = fetch('SELECT * FROM users WHERE email = ?', [
-    'type' => 's',
-    'value' => $email,
-  ]);
+  $data = fetch(
+    'SELECT * FROM users
+    JOIN user_profile ON users.id = user_profile.userid
+    WHERE users.email = ?',
+    [
+      'type' => 's',
+      'value' => $email,
+    ],
+  );
 
   if (!$data) {
     return false;
