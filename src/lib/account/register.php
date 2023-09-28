@@ -1,7 +1,7 @@
 <?php
 
 if (!isset($_POST['register'])) {
-  header('Location: /register');
+  header('Location: /account/register');
   exit();
 }
 
@@ -19,7 +19,7 @@ $data = fetch('SELECT * FROM users WHERE email = ?', [
   'value' => $email,
 ]);
 if ($data) {
-  header('Location: /register?error=email');
+  header('Location: /account/register?error=email');
   exit();
 }
 
@@ -29,16 +29,16 @@ $data = fetch('SELECT * FROM users WHERE username = ?', [
 ]);
 
 if ($data) {
-  header('Location: /register?error=username');
+  header('Location: /account/register?error=username');
   exit();
 }
 
 if ($password !== $passwordConfirm) {
-  header('Location: /register?error=password');
+  header('Location: /account/register?error=password');
   exit();
 }
 
 $password = password_hash($password, PASSWORD_ARGON2ID);
 register($email, $username, $password);
 
-header('Location: /login');
+header('Location: /account/login');

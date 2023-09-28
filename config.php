@@ -30,7 +30,7 @@ define('USER_STRUCTURE', [
   'id' => null,
   'username' => null,
   'email' => null,
-  'mode' => null,
+  'theme' => null,
 ]);
 
 define('THEME_MAPPING', [
