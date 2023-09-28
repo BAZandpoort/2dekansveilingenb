@@ -34,7 +34,7 @@ $_SESSION['user'] = USER_STRUCTURE;
 $_SESSION['user']['id'] = $login['id'];
 $_SESSION['user']['email'] = $login['email'];
 $_SESSION['user']['username'] = $login['username'];
-$_SESSION['user']['mode'] = $login['mode'];
+$_SESSION['user']['theme'] = $login['theme'];
 
 header('Location: /');
 return;

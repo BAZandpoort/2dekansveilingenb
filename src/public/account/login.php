@@ -16,7 +16,7 @@ if ($error) {
 ?>
 
 <div>
-  <form action="/src/lib/user/login.php" method="post" class="flex flex-col items-center gap-4">
+  <form action="/src/lib/account/login.php" method="post" class="flex flex-col items-center gap-4">
     <div class="flex flex-col gap-2 w-full max-w-xs">
       <label for="email">Email</label>
       <input name="email" id="email" type="email" placeholder="cats.are@best.com" class="input input-bordered w-full placeholder:opacity-30" required />
