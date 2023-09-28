@@ -14,7 +14,7 @@ export default async function userProfiles(): Promise<UserProfile[]> {
     const userid = faker.helpers.arrayElement(userids);
     const profilePictureUrl = faker.image.avatar();
     const about = faker.lorem.paragraph();
-    const theme = faker.helpers.randomize(['light', 'dark']);
+    const theme = faker.helpers.arrayElement(['light', 'dark']);
 
     userids.splice(userids.indexOf(userid), 1);
     result.push({
