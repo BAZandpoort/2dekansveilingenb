@@ -36,7 +36,6 @@ function products() {
 function myProducts(){
     
     $userid = isset($_SESSION['user']) ? $_SESSION['user']['id'] : null;
-        print $userid;
     $query = "SELECT * FROM products WHERE userid = ?";
     $products = fetch($query, ['type' => 'i', 'value' => $userid]);
 
@@ -56,7 +55,6 @@ function myProducts(){
                     <input type="hidden"name="image"value="' .$product["imageUrl"]. '">
                     <input type="hidden"name="name"value="' .$product["name"]. '">
                     <input type="hidden"name="price"value="' .$product["price"]. '">
-                    <button type="submit" class="btn btn-warning mr-0 mx-32 -mt-11" name="bied">Bid</button>
                     <p class="text-base text-center"><span id="timer">00:00:00</span></p>
                     <p class="text-base text-center -mt-3">Status: <span id="status">Open</span></p>
                 </div>
