@@ -2,6 +2,7 @@
   <div class="navbar-start flex-1">
     <div class="dropdown">
       <label tabindex="0" class="btn btn-ghost lg:flex">
+      <label tabindex="0" class="btn btn-ghost lg:flex">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
         </svg>
@@ -10,8 +11,8 @@
     <a href="/" class="btn btn-ghost normal-case text-xl">2dekans veilingen</a>
   </div>
 
-  <div class="flex-none gap-2">
-    <div class="form-control w-[420px]">
+  <div class="flex-1">
+    <div class="form-control w-full">
       <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
     </div>
     <div class="dropdown dropdown-end">
@@ -36,11 +37,11 @@
           </a>
         </li>
         <li><a>Settings</a></li>
-        <li><a href="/logout"> logout</a></li>
+        <li><a href="/account/logout"> logout</a></li>
         
       </ul>
     </div>'
-      : '<a href="/login" class="btn"> Login</a>'; ?>
+      : '<a href="/account/login" class="btn"> Login</a>'; ?>
   </div>
 </div>
 
@@ -49,32 +50,32 @@
   </div>
   <div class="navbar-center hidden lg:flex">
     <ul class="menu menu-horizontal px-1 gap-16">
-      <a href="/catalog/products?category=veilingen" class="flex flex-col gap-4 items-center">
-        <i class="fa-solid fa-gavel fa-2xl"></i><br>
+      <a href="/catalog/products?category=veilingen" class="group flex flex-col gap-4 items-center">
+        <i class="fa-solid fa-gavel fa-2xl group-hover:-translate-y-1 transition"></i>
         <span class="label-text">Veilingen</span>
       </a>
-      <a href="/catalog/products?category=locatie" class="flex flex-col gap-4 items-center">
-        <i class="fa-solid fa-location-dot fa-2xl"></i><br>
+      <a href="/catalog/products?category=locatie" class="group flex flex-col gap-4 items-center">
+        <i class="fa-solid fa-location-dot fa-2xl group-hover:-translate-y-1 transition"></i>
         <span class="label-text">Locatie</span>
       </a>
-      <a href="/catalog/products?category=products" class="flex flex-col gap-4 items-center">
-        <i class="fa-solid fa-box-open fa-2xl"></i><br>
+      <a href="/catalog/products?category=products" class="group flex flex-col gap-4 items-center">
+        <i class="fa-solid fa-box-open fa-2xl group-hover:-translate-y-1 transition"></i>
         <span class="label-text">Producten</span>
       </a>
-      <a href="/catalog/products?category=autos" class="flex flex-col gap-4 items-center">
-        <i class="fa-solid fa-car-side fa-2xl"></i><br>
+      <a href="/catalog/products?category=autos" class="group flex flex-col gap-4 items-center">
+        <i class="fa-solid fa-car-side fa-2xl group-hover:-translate-y-1 transition"></i>
         <span class="label-text">Auto's</span>
       </a>
-      <a href="/catalog/products?category=kledij" class="flex flex-col gap-4 items-center">
-        <i class="fa-solid fa-shirt fa-2xl"></i><br>
+      <a href="/catalog/products?category=kledij" class="group flex flex-col gap-4 items-center">
+        <i class="fa-solid fa-shirt fa-2xl group-hover:-translate-y-1 transition"></i>
         <span class="label-text">Kledij</span>
       </a>
-      <a href="/catalog/products?category=elektronica" class="flex flex-col gap-4 items-center">
-        <i class="fa-solid fa-mobile fa-2xl"></i><br>
+      <a href="/catalog/products?category=elektronica" class="group flex flex-col gap-4 items-center">
+        <i class="fa-solid fa-mobile fa-2xl group-hover:-translate-y-1 transition"></i>
         <span class="label-text">Elektronica</span>
       </a>
-      <a href="/catalog/products?category=huis" class="flex flex-col gap-4 items-center">
-        <i class="fa-solid fa-house fa-2xl"></i><br>
+      <a href="/catalog/products?category=huis" class="group flex flex-col gap-4 items-center">
+        <i class="fa-solid fa-house fa-2xl group-hover:-translate-y-1 transition"></i>
         <span class="label-text">Huis en inrichting</span>
       </a>
     </ul>
