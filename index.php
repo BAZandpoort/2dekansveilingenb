@@ -16,13 +16,13 @@ $data = fetch('SELECT * FROM user_profile WHERE userid = ?', [
   'type' => 'i',
   'value' => $userid,
 ]);
-$mode = $data ? THEME_MAPPING[$data['mode']] : THEME_MAPPING['default'];
+$theme = $data ? THEME_MAPPING[$data['theme']] : THEME_MAPPING['default'];
 ?>
 
 
 <!DOCTYPE html>
 <!-- Dark: dark  Light: garden -->
-<html lang="en" data-theme='<?php echo $mode ?>'
+<html lang="en" data-theme='<?php echo $theme ?>'
 
 <head>
   <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.3/dist/full.css" rel="stylesheet" type="text/css" />

@@ -6,13 +6,13 @@ session_start();
 
 $user = $_SESSION['user'];
 
-$mode = $user['mode'] === 'dark' ? 'light' : 'dark';
+$theme = $user['theme'] === 'dark' ? 'light' : 'dark';
 insert(
-  'UPDATE user_profile SET mode = ? WHERE userid = ?',
-  ['type' => 's', 'value' => $mode],
+  'UPDATE user_profile SET theme = ? WHERE userid = ?',
+  ['type' => 's', 'value' => $theme],
   ['type' => 'i', 'value' => $user['id']],
 );
 
-$_SESSION['user']['mode'] = $mode;
+$_SESSION['user']['theme'] = $theme;
 
 header('Location: /');
