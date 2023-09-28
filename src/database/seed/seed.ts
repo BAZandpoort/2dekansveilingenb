@@ -2,6 +2,7 @@ import * as mysql from 'mysql2/promise';
 import users from './data/user';
 import userProfiles from './data/user_profile';
 import userRoleMapping from './data/user_role_mapping';
+import productCategories from './data/product_categories';
 import products from './data/products';
 
 
@@ -15,6 +16,7 @@ const dbConfig = {
 
 
 async function seedDatabase() {
+    const productCategoriesData = await productCategories();
     const productData = await products();
     const userData = await users();
     const userProfilesData = await userProfiles();
@@ -26,11 +28,12 @@ async function seedDatabase() {
         await connection.beginTransaction();
 
         await connection.execute('SET FOREIGN_KEY_CHECKS=0');
-        await connection.execute('TRUNCATE TABLE users');
         await connection.execute('TRUNCATE TABLE user_profile');
         await connection.execute('TRUNCATE TABLE user_roles');
         await connection.execute('TRUNCATE TABLE user_role_mapping');
         await connection.execute('TRUNCATE TABLE products');
+        await connection.execute('TRUNCATE TABLE product_categories');
+        await connection.execute('TRUNCATE TABLE users');
         await connection.execute('SET FOREIGN_KEY_CHECKS=1');
 
         await connection.execute(
@@ -59,9 +62,16 @@ async function seedDatabase() {
             );
         });
 
+        productCategoriesData.forEach(async (productCategory) => {
+            await connection.execute(
+              'INSERT INTO product_categories (name) VALUES (?)',
+              Object.values(productCategory),
+            );
+        });
+
         productData.forEach(async (product) => {
             await connection.execute(
-              'INSERT INTO products (userid, name, description, price, imageUrl) VALUES (?, ?, ?, ?, ?)',
+              'INSERT INTO products (userid, categoryid, name, description, price, imageUrl) VALUES (?, ?, ?, ?, ?, ?)',
               Object.values(product),
             );
         });

@@ -2,7 +2,7 @@
 
 session_start();
 
-require_once '../../config.php';
+require_once $_SERVER['DOCUMENT_R00T'] . '/config.php';
 require_once DATABASE . '/connect.php';
 
 // if (!isset($_SESSION['token'])) {
@@ -38,7 +38,4 @@ if (mysqli_num_rows($result) == 0) {
 }
 
 $result = $result->fetch_assoc();
-
-var_dump($result);
-
 ?>
