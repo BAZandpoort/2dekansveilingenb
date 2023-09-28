@@ -1,3 +1,15 @@
+<style>
+  .text {
+  text-align: center;
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  margin: 0 10px;
+  }
+
+
+</style>
+
 <div class="navbar bg-base-100 shadow-sm">
   <div class="navbar-start flex-1">
     <div class="dropdown">
@@ -64,24 +76,37 @@
     </div>
   </div>
   <div class="navbar-center hidden lg:flex">
-    <ul class="menu menu-horizontal px-1">
-      <label class="text">
-    <a href="/veilingen" class="fa-solid fa-gavel fa-2xl" ></a><span style="padding-left: 50px;"></span>
-    <span class="label-text">Veilingen</span>
-    <a href="/locatie" class="fa-solid fa-location-dot fa-2xl"></a><span style="padding-left: 50px;"></span>
-    <span class="label-text">Locatie</span>
-    <a href="/products" class="fa-solid fa-box-open fa-2xl"></a><span style="padding-left: 50px;"></span>
-    <span class="label-text">Producten</span>
-    <a href="/auto's" class="fa-solid fa-car-side fa-2xl"></a><span style="padding-left: 50px;"></span>
-    <span class="label-text">Auto's</span>
-    <a href="/kledij" class="fa-solid fa-shirt fa-2xl"></a><span style="padding-left: 50px;"></span>
-    <span class="label-text">Kledij</span>
-    <a href="/elektronica" class="fa-solid fa-mobile fa-2xl"></a><span style="padding-left: 50px;"></span>
-    <span class="label-text">Elektronica</span>
-    <a href="/huis" class="fa-solid fa-house fa-2xl"></a><span style="padding-left: 50px;"></span>
-    <span class="label-text">Huis en inrichting</span>
-      </label>  
-  </div>
+  <ul class="menu menu-horizontal px-1">
+    <div class="text">
+      <a href="/veilingen" class="fa-solid fa-gavel fa-2xl" style="display: block;"></a><br>
+      <span class="label-text" style="display: block;">Veilingen</span>
+    </div>
+    <div class="text">
+      <a href="/locatie" class="fa-solid fa-location-dot fa-2xl" style="display: block;"></a><br>
+      <span class="label-text" style="display: block;">Locatie</span>
+    </div>
+    <div class="text">
+      <a href="/products" class="fa-solid fa-box-open fa-2xl" style="display: block;"></a><br>
+      <span class="label-text" style="display: block;">Producten</span>
+    </div>
+    <div class="text">
+      <a href="/auto's" class="fa-solid fa-car-side fa-2xl" style="display: block;"></a><br>
+      <span class="label-text" style="display: block;">Auto's</span>
+    </div>
+    <div class="text">
+      <a href="/kledij" class="fa-solid fa-shirt fa-2xl" style="display: block;"></a><br>
+      <span class="label-text" style="display: block;">Kledij</span>
+    </div>
+    <div class="text">
+      <a href="/elektronica" class="fa-solid fa-mobile fa-2xl" style="display: block;"></a><br>
+      <span class="label-text" style="display: block;">Elektronica</span>
+    </div>
+    <div class="text">
+      <a href="/huis" class="fa-solid fa-house fa-2xl" style="display: block;"></a><br>
+      <span class="label-text" style="display: block;">Huis en inrichting</span>
+    </div>  
+  </ul>
+</div>
 
 
 <div class="flex-1 justify-end">
