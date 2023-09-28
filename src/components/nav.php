@@ -49,6 +49,7 @@ if ($userid) {
       </li>
       <li><a>Profile</a></li>
       <li><a href='/dashboard/products/add'>Add Product</a></li>
+      <li><a href='/dashboard/products/mine'>My Products</a></li>
     </ul>
   </div>
 
