@@ -1,16 +1,4 @@
-<?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
-require_once LIB . '/util/util.php';
 
-$userid = isset($_SESSION['user']) ? $_SESSION['user']['id'] : null;
-
-if ($userid) {
-  $query = 'SELECT * FROM user_profile WHERE userid = ?';
-  $data = fetch($query, ['type' => 'i', 'value' => $userid]);
-
-  $theme = $data['theme'] === 'dark' ? 'light' : 'dark';
-}
-?>
 
 <div class="mt-32">
   <footer class="footer p-10 bg-base-200 text-base-content">
@@ -34,18 +22,8 @@ if ($userid) {
       <a class="link link-hover">Privacybeleid</a>
       <a class="link link-hover">Cookiebeleid</a>
     </nav>
+        
 
-    <?php
-    if ($userid) {
-      echo '
-      <div class="navbar-end">
-        <form action="src/lib/account/change-theme.php" method="post">
-        <input type="submit" value="' . $theme . '" class="btn" id="submit" name="submit">
-        </form>
-      </div>
-    ';
-    }
-    ?>
   </footer>
   <footer class="footer px-10 py-4 border-t bg-base-200 text-base-content border-base-300">
     <aside class="items-center grid-flow-col">
