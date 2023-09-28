@@ -30,7 +30,7 @@ if (isset($_POST['submit'])) {
         while ($row = mysqli_fetch_array($result)) {
           echo '
           <a class="card card-compact w-60 inline-block ml-2 my-6 bg-white hover:bg-gray-100 relative">
-              <form method="post" action="index.php?id=' .$row["id"]. '">
+              <form method="post" action="/catalog/product?id=' .$row["id"]. '">
                   <img src="' .$row["imageUrl"]. '" class=" max-h-44 w-64 m-auto object-cover">
                   <div class="card-body">
                   <h2 class="card-title text-base">

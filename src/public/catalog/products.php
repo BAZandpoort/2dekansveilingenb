@@ -1,7 +1,6 @@
 <?php
  
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
-require_once LIB . '/util/util.php';
 
 $error = $_GET['error'] ?? false;
 
@@ -16,6 +15,6 @@ if ($error) {
   ';
 }
 
-include_once LIB . '/user/productToIndex.php';
-getProductGuest();
+include_once LIB . '/catalog/products.php';
+products();
 ?>

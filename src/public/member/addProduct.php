@@ -1,6 +1,6 @@
 <?php
 if (!isset($_SESSION['user'])) {
-  header('Location: /login');
+  header('Location: /account/login');
   exit();
 }
 
@@ -19,7 +19,7 @@ if ($error) {
 ?>
 
 <div>
-  <form action="/src/lib/user/product.php" method="post" class="flex flex-col items-center gap-4">
+  <form action="/src/lib/member/addProduct.php" method="post" class="flex flex-col items-center gap-4">
     <div class="flex flex-col gap-2 w-full max-w-xs">
       <label for="userid">User ID</label>
       <input

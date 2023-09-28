@@ -19,7 +19,7 @@ if ($error) {
 ?>
 
 <div>
-  <form action="/src/lib/user/register.php" method="post" class="flex flex-col items-center gap-4">
+  <form action="/src/lib/account/register.php" method="post" class="flex flex-col items-center gap-4">
     <div class="flex flex-col gap-2 w-full max-w-xs">
       <label for="email">Email</label>
       <input
@@ -68,6 +68,6 @@ if ($error) {
   </form>
   
   <div class="w-full text-center mt-8">
-    <a class="link" href="/login">I already have an account</a>
+    <a class="link" href="/account/login">I already have an account</a>
   </div>
 </div>
