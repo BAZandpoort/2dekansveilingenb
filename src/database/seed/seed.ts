@@ -50,7 +50,7 @@ async function seedDatabase() {
 
         userProfilesData.forEach(async (userProfile) => {
             await connection.execute(
-              'INSERT INTO user_profile (userid, profilePictureUrl, about) VALUES (?, ?, ?)',
+              'INSERT INTO user_profile (userid, profilePictureUrl, about, theme) VALUES (?, ?, ?, ?)',
               Object.values(userProfile),
             );
         });
