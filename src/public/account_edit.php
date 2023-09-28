@@ -26,6 +26,23 @@ if (!isset($_SESSION['user'])) {
 
 
 <div>
+<?php
+    if (isset($_SESSION['update_success'])) {
+        echo '<div class="alert alert-success">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  <span>' . $_SESSION['update_success'] . '</span>
+              </div><br><br><br>';
+        unset($_SESSION['update_success']);
+        
+    } else if (isset($_SESSION['no_changes'])) {
+      echo '<div class="alert alert-info">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <span>' . $_SESSION['no_changes'] . '</span>
+            </div><br><br><br>';
+      unset($_SESSION['no_changes']);
+      
+  } 
+    ?>
     <form action="/update" method="post" class="flex flex-col items-center gap-4">
     <div class="flex flex-col gap-2 w-full max-w-xs">
         <label for="username">Username</label>
