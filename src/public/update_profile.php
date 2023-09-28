@@ -2,7 +2,7 @@
 
 
 if (!isset($_SESSION['user'])) {
-    header('Location: /');
+   
     exit();
 } else {
     require_once($_SERVER['DOCUMENT_ROOT'] . '/config.php');
@@ -32,7 +32,7 @@ if (!isset($_SESSION['user'])) {
         }
 
         ob_start();
-        header('Location: /edit');
+        header('Location: /edit ');
         ob_end_flush();
         exit();
     }
