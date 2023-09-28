@@ -1,4 +1,18 @@
-<div class="navbar bg-base-100 shadow-sm">
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
+require_once LIB . '/util/util.php';
+
+$userid = isset($_SESSION['user']) ? $_SESSION['user']['id'] : null;
+
+if ($userid) {
+  $query = 'SELECT * FROM user_profile WHERE userid = ?';
+  $data = fetch($query, ['type' => 'i', 'value' => $userid]);
+
+  $theme = $data['theme'] === 'dark' ? 'light' : 'dark';
+}
+?>
+
+<div class="navbar bg-base-100">
   <div class="navbar-start flex-1">
     <div class="dropdown">
       <label tabindex="0" class="btn btn-ghost lg:flex">
@@ -23,29 +37,32 @@
     <div class="dropdown dropdown-end mr-4">
     </div>
     <?php echo isset($_SESSION['user'])
-      ? '<div class="dropdown dropdown-end">
-      <label tabindex="0" class="btn btn-ghost btn-circle avatar">
-        <div class="w-10 rounded-full">
-          <img src="https://avatars.githubusercontent.com/u/64209400?v=4" />
+      ? '
+        <div class="dropdown dropdown-end">
+          <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+            <div class="w-10 rounded-full">
+              <img src="https://avatars.githubusercontent.com/u/64209400?v=4" />
+            </div>
+          </label>
+          <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+            <li>
+              <a class="justify-between">
+                Profile
+                <span class="badge">New</span>
+              </a>
+            </li>
+            <li><a href="src/lib/account/change-theme.php" >Switch to ' . $theme . '</a></li>
+            <li><a>Settings</a></li>
+            <li><a href="/account/logout"> logout</a></li>
+            
+          </ul>
         </div>
-      </label>
-      <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-        <li>
-          <a class="justify-between">
-            Profile
-            <span class="badge">New</span>
-          </a>
-        </li>
-        <li><a>Settings</a></li>
-        <li><a href="/account/logout"> logout</a></li>
-        
-      </ul>
-    </div>'
+        '
       : '<a href="/account/login" class="btn"> Login</a>'; ?>
   </div>
 </div>
 
-<div class="navbar bg-base-100 shadow-sm mb-32 pt-8">
+<div class="navbar bg-base-100 shadow-sm pt-8">
   <div class="navbar-start flex-1">
   </div>
   <div class="navbar-center hidden lg:flex">

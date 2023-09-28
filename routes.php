@@ -55,7 +55,7 @@ $routes = [
   ],
   // Error routes
   '/404' => [
-    'view' => '/error/404.php',
+    'view' => 'errors/404.php',
     'title' => 'Not Found',
     'auth_roles' => [],
     'nav' => false,
