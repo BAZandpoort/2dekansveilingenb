@@ -1,7 +1,7 @@
 <?php
 
 if (!isset($_POST['register'])) {
-  header('Location: /account/register');
+  header('Location: /register');
   exit();
 }
 
@@ -9,6 +9,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/util/util.php';
 require_once LIB . '/authentication/authentication.php';
 
+$firstname = $_POST['firstname'];
+$lastname = $_POST['lastname'];
 $email = $_POST['email'];
 $username = $_POST['username'];
 $password = $_POST['password'];
@@ -39,6 +41,6 @@ if ($password !== $passwordConfirm) {
 }
 
 $password = password_hash($password, PASSWORD_ARGON2ID);
-register($email, $username, $password);
+register($username, $password, $email, $firstname, $lastname);
 
-header('Location: /account/login');
+header('Location: /account/login?error=success');
