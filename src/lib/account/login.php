@@ -30,6 +30,8 @@ if (!$login) {
   return;
 }
 
+var_dump('login:', $login);
+
 $_SESSION['user'] = USER_STRUCTURE;
 $_SESSION['user']['id'] = $login['id'];
 $_SESSION['user']['email'] = $login['email'];
