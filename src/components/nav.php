@@ -37,8 +37,6 @@
 
 <div class="flex-1 justify-end">
   <div class="dropdown dropdown-end mr-4">
-    <label tabindex="0" class="btn btn-ghost btn-circle">
-    </label>
   </div>
 
     <?php echo isset($_SESSION['user'])
