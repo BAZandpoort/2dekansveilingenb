@@ -30,7 +30,7 @@ function products() {
             $timestamp = time();
             $current_date = date("F d, Y h:i:s A", $timestamp);
             echo '
-                    <p class="text-base text-center"><span id="timer"> '.$timestamp.' | 00:00:00</span></p>
+                    <p class="text-base text-center"><span id="timer"> '.$current_date.' | 00:00:00</span></p>
             ';
         }
         echo '
