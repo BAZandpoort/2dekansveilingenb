@@ -60,13 +60,6 @@ $routes = [
     'nav' => true,
     'footer' => false,
   ],
-  '/theme/change' => [
-    'view' => 'src\lib\account\change-theme.php',
-    'title' => 'change theme',
-    'auth_roles' => ['member','admin'],
-    'nav' => true,
-    'footer' => false,
-  ],
   // Error routes
   '/404' => [
     'view' => 'errors/404.php',
