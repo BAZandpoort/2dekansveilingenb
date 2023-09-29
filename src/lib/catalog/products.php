@@ -24,7 +24,16 @@ function products() {
                     <input type="hidden"name="name"value="' .$product["name"]. '">
                     <input type="hidden"name="price"value="' .$product["price"]. '">
                     <button type="submit" class="btn btn-warning mr-0 mx-32 -mt-11" name="bied">Bid</button>
-                    <p class="text-base text-center"><span id="timer">00:00:00</span></p>
+        ';
+
+        if ($product["isAuction"]){
+            $timestamp = time();
+            echo '
+                    <p class="text-base text-center"><span id="timer">"'.$timestamp.'" | 00:00:00</span></p>
+            ';
+        }
+        echo '
+        
                     <p class="text-base text-center -mt-3">Status: <span id="status">Open</span></p>
                 </div>
             </form>
