@@ -87,7 +87,7 @@ if ($error) {
     </div>
 
     <div class="flex flex-col gap-2 w-full max-w-xs">
-      <label for="auction_duration">For auctions only</label>
+      <label for="auction_duration"><b>For auctions only</b> | Auction ending date</label>
       <input
       name="auction_duration"
       id="auction_duration"
