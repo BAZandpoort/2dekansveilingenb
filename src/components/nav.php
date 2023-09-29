@@ -9,7 +9,7 @@ if ($userid) {
   $data = fetch($query, ['type' => 'i', 'value' => $userid]);
 
   $theme = $data['theme'] === 'dark' ? 'light' : 'dark';
-  $language = $data['language'] === 'english' ? 'nederlands' : 'english';
+  $language = $data['language'];
 }
 ?>
 
