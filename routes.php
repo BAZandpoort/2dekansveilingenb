@@ -30,6 +30,13 @@ $routes = [
     'nav' => true,
     'footer' => true,
   ],
+  '/account/settings/edit' => [
+    'view' => 'account/edit.php',
+    'title' => 'Edit account settings',
+    'auth_roles' => [],
+    'nav' => true,
+    'footer' => true,
+  ],
   // Catalog routes
   '/catalog/products' => [
     'view' => 'catalog/products.php',
@@ -61,18 +68,4 @@ $routes = [
     'nav' => false,
     'footer' => false,
   ],
-  '/edit' => [
-    'view' => 'account_edit.php',
-    'title' => 'Not Found',
-    'auth_roles' => [],
-    'nav' => true,
-    'footer' => true,
-  ],
-  '/update' => [
-    'view' => 'update_profile.php',
-    'title' => 'Not Found',
-    'auth_roles' => [],
-    'nav' => true,
-    'footer' => true,
-  ]
 ];
