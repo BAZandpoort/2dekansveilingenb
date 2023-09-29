@@ -11,6 +11,13 @@ if (isset($_POST['add'])) {
   $price = $_POST['price'];
   $imageUrl = $_POST['imageUrl'];
 
+  $is_auction = isset($_POST["auction_duration"]);
+  if ($is_auction){
+    $auction_end_time = $_POST["auction_duration"];
+  } else {
+    $auction_end_time = null;
+  }
+
   $query = 'INSERT INTO products (userid, categoryid, name, description, price, imageUrl ) VALUES (?, ?, ?, ?, ?, ?)';
   $insertData = insert(
     $query,
