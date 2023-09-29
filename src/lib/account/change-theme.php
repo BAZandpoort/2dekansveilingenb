@@ -15,4 +15,4 @@ insert(
 
 $_SESSION['user']['theme'] = $theme;
 
-header('Location: /');
+header('Location: ' . $_SERVER['HTTP_REFERER']);
