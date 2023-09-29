@@ -61,8 +61,8 @@ $routes = [
     'nav' => false,
     'footer' => false,
   ],
-  '/language-select' => [
-    'view' => 'language_select.php',
+  '/account/language-select' => [
+    'view' => 'account/language_select.php',
     'title' => 'Language select',
     'auth_roles' => [],
     'nav' => true,
