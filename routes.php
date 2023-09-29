@@ -64,7 +64,7 @@ $routes = [
   '/account/language-select' => [
     'view' => 'account/language_select.php',
     'title' => 'Language select',
-    'auth_roles' => [],
+    'auth_roles' => ['guest'],
     'nav' => true,
     'footer' => true,
   ],
