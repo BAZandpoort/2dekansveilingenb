@@ -28,6 +28,7 @@ $theme = $data ? THEME_MAPPING[$data['theme']] : THEME_MAPPING['default'];
   <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.3/dist/full.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="./tailwind.config.js"></script>
+  <script src="https://kit.fontawesome.com/58a210823e.js" crossorigin="anonymous"></script>
   <title><?php echo $route['title']; ?></title>
 </head>
 
