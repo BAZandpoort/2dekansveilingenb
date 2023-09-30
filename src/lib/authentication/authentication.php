@@ -20,7 +20,10 @@ function register($username, $password, $email, $firstname, $lastname) {
   $userProfileData = insert(
     'INSERT INTO user_profile (userid, profilePictureUrl, about, theme) VALUES (?, ?, ?, ?)',
     ['type' => 'i', 'value' => $userId],
-    ['type' => 's', 'value' => 'https://avatars.githubusercontent.com/u/64209400?v=4'],
+    [
+      'type' => 's',
+      'value' => 'https://avatars.githubusercontent.com/u/64209400?v=4',
+    ],
     ['type' => 's', 'value' => 'Hello!'],
     ['type' => 's', 'value' => 'dark'],
   );

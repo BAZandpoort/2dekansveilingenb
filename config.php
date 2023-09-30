@@ -24,7 +24,7 @@ define('ERROR_MAPPING', [
   'empty' => 'Empty email or password',
   'invalid' => 'Invalid email or password',
   'password' => 'Passwords do not match',
-  
+  'email' => 'Email is already in use',
 ]);
 
 define('SUCCES_MAPPING', [
@@ -39,9 +39,9 @@ define('USER_STRUCTURE', [
 ]);
 
 define('THEME_MAPPING', [
-  'default' => 'dark',
-  'dark' => 'dark',
-  'light' => 'garden',
+  'default' => 'customLight',
+  'dark' => 'customDark',
+  'light' => 'customLight',
 ]);
 
 ?>

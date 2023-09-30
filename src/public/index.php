@@ -1,6 +1,4 @@
-<?php
-include_once LIB . '/catalog/byCategory.php';
-?>
+<?php include_once LIB . '/catalog/byCategory.php'; ?>
 <!-- <div class="container">
   <form action="/searchbar" method="post">   
       <label for="default-search" class="text-sm font-medium text-gray-900 sr-only dark:text-white ml-20 "></label>
@@ -15,6 +13,5 @@ include_once LIB . '/catalog/byCategory.php';
       </div>
   </form>
 </div>-->
-<?php 
-byCategory();
+<?php byCategory();
 ?>

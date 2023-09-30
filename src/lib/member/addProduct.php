@@ -11,7 +11,8 @@ if (isset($_POST['add'])) {
   $price = $_POST['price'];
   $imageUrl = $_POST['imageUrl'];
 
-  $query = 'INSERT INTO products (userid, categoryid, name, description, price, imageUrl ) VALUES (?, ?, ?, ?, ?, ?)';
+  $query =
+    'INSERT INTO products (userid, categoryid, name, description, price, imageUrl ) VALUES (?, ?, ?, ?, ?, ?)';
   $insertData = insert(
     $query,
     ['type' => 'i', 'value' => $userid],
@@ -23,8 +24,6 @@ if (isset($_POST['add'])) {
   );
 
   return $insertData;
-  
 }
 header('Location: /');
 return;
-

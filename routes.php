@@ -37,7 +37,7 @@ $routes = [
     'auth_roles' => ['member', 'guest', 'admin'],
     'nav' => true,
     'footer' => true,
-    ],
+  ],
   // '/searchbar' => [
   //   'view' => 'zoekbalk.php',
   //   'title' => 'Search',
