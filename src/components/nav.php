@@ -12,11 +12,14 @@ if ($userid) {
 }
 ?>
 
+<!-- Top navbar -->
 <div class="navbar bg-base-100">
+  <!-- Left - logo -->
   <div class="navbar-start flex-1">
     <a href="/" class="btn btn-ghost normal-case text-xl">2dekans veilingen</a>
   </div>
 
+  <!-- Center - search -->
   <div class="flex-1">
     <div class="form-control w-full">
       <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
@@ -25,6 +28,7 @@ if ($userid) {
     </div>
   </div>
 
+  <!-- Right - User actions -->
   <div class="flex-1 justify-end">
     <div class="dropdown dropdown-end mr-4">
     </div>
@@ -56,11 +60,10 @@ if ($userid) {
   </div>
 </div>
 
+<!-- Bottom navbar -->
 <div class="navbar bg-base-100 shadow-sm pt-8">
-  <div class="navbar-start flex-1">
-  </div>
-  <div class="navbar-center hidden lg:flex">
-    <ul class="menu menu-horizontal px-1 gap-16">
+  <div class="navbar-center flex w-full">
+    <ul class="menu menu-horizontal px-1 gap-16 w-full justify-center">
       <a href="/catalog/products?category=veilingen" class="group flex flex-col gap-4 items-center">
         <i class="fa-solid fa-gavel fa-2xl group-hover:-translate-y-1 transition"></i>
         <span class="label-text">Veilingen</span>
@@ -90,8 +93,5 @@ if ($userid) {
         <span class="label-text">Huis en inrichting</span>
       </a>
     </ul>
-  </div>
-
-  <div class="flex-1 justify-end">
   </div>
 </div>
