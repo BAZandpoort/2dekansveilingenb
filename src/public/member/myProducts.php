@@ -1,30 +1,38 @@
 <?php
-
-// TODO
-
 if (!isset($_SESSION['user'])) {
   header('Location: /account/login');
   exit();
 }
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
-require_once LIB . '/util/util.php';
-require_once LIB . '/catalog/products.php';
+include_once LIB . '/catalog/products.php';
+include_once COMPONENTS . '/product-card.php';
 
-$userid = isset($_SESSION['user']) ? $_SESSION['user']['id'] : null;
-$query = 'SELECT * FROM products WHERE userid = ?';
-$data = fetch($query, ['type' => 'i', 'value' => $userid]);
+$products = userProducts($userid);
 
-if (!isset($data['id'])) {
+echo '
+<div class="flex flex-row flex-wrap gap-8 flex-[1.7]">
+  <div class="flex flex-row flex-wrap justify-between gap-8">
+';
+
+$i = 0;
+foreach ($products as $product) {
+
   echo '
-        <div class="alert alert-info">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            <span>U Hebt nog geen items om te verkopen</span>
-        </div>
-    ';
-  return;
-}
+  <div class="flex flex-col gap-4">
+    <div class="w-96 flex flex-row flex-wrap justify-between gap-8">
+  ';
 
-userProducts($userid);
+  productCard($product);
+
+  echo '
+    </div>
+  </div>
+  ';
+
+  $i++;
+}
+echo '
+  </div>
+</div>
+';
