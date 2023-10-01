@@ -43,6 +43,8 @@ if ($succes) {
   </div>
   ';
 }
+
+$containerClasses = $route['container'] ? 'container mx-auto pt-24 pb-48' : '';
 ?>
 
 <!DOCTYPE html>
@@ -59,14 +61,20 @@ if ($succes) {
 </head>
 
 <body>
-  <div class="h-screen">
+  <div class="min-h-screen">
     <?php $route['nav'] ? include COMPONENTS . '/nav.php' : null; ?>
 
+    <?php
+    echo strlen($alert) > 0 
+    ? '
     <div class="w-96 mx-auto mt-8">
-      <?php echo $alert;?>
+      ' . $alert . '
     </div>
+    ' 
+    : null;
+    ?>
 
-    <div class="container mx-auto pt-24 pb-48">
+    <div class="<?php echo $containerClasses ?>">
       <?php include PUBLIC_S . '/' . $route['view']; ?>
     </div>
 

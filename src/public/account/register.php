@@ -2,40 +2,68 @@
 if (isset($_SESSION['user'])) {
   header('Location: /');
   exit();
-}
-?>
+} ?>
 
-<div>
-  <form action="/src/lib/account/register.php" method="post" class="flex flex-col items-center gap-4">
-    <div class="flex flex-col gap-2 w-full max-w-xs">
-      <label for="firstname">First Name</label>
-      <input name="firstname" id="firstname" type="firstname" placeholder="Jan" class="input input-bordered w-full placeholder:opacity-30" required />
-    </div>
-    <div class="flex flex-col gap-2 w-full max-w-xs">
-      <label for="lastname">Last name</label>
-      <input name="lastname" id="lastname" type="lastname" placeholder="Van Bergen" class="input input-bordered w-full placeholder:opacity-30" required />
-    </div>
-    <div class="flex flex-col gap-2 w-full max-w-xs">
-      <label for="email">Email</label>
-      <input name="email" id="email" type="email" placeholder="cats.are@best.com" class="input input-bordered w-full placeholder:opacity-30" required />
-    </div>
+<div class="pt-36">
+  <div class="text-sm breadcrumbs flex justify-center">
+    <ul>
+      <li><a href="/">Home</a></li> 
+      <li>Account</li>
+      <li><a href="/account/register">Register</a></li>
+    </ul>
+  </div>
 
-    <div class="flex flex-col gap-2 w-full max-w-xs">
-      <label for="username">Username</label>
-      <input name="username" id="username" type="text" placeholder="Cat" class="input input-bordered w-full placeholder:opacity-30" required />
-    </div>
+  <h1 class="text-center text-4xl font-bold mb-12">Create a new account</h1>
 
-    <div class="flex flex-col gap-2 w-full max-w-xs">
-      <label for="password">Password</label>
-      <input name="password" id="password" type="password" placeholder="Secret..." class="input input-bordered w-full placeholder:opacity-30" required />
-    </div>
-
-    <div class="flex flex-col gap-2 w-full max-w-xs">
-      <label for="passwordConfirm">Confirm password</label>
-      <input name="passwordConfirm" id="passwordConfirm" type="password" placeholder="Secret... 2.0" class="input input-bordered w-full placeholder:opacity-30" required />
+  <form action="/src/lib/account/register.php" method="post" class="flex flex-col items-center gap-6 max-w-2xl mx-auto">
+    <div class="flex flex-row gap-4 w-full">
+      <div class="form-control w-full max-w-xs flex-1">
+        <label class="label">
+          <span class="label-text">Firstname</span>
+        </label>
+        <input type="text" name="firstname" placeholder="John" class="input input-bordered w-full max-w-xs" required />
+      </div>
+      <div class="form-control w-full max-w-xs flex-1">
+        <label class="label">
+          <span class="label-text">Lastname</span>
+        </label>
+        <input type="text" name="lastname" placeholder="Doe" class="input input-bordered w-full max-w-xs" required />
+      </div>
     </div>
 
-    <input type="submit" name="register" value="register" class="btn btn-wide place-self-center">
+    <div class="flex flex-row gap-4 w-full">
+      <div class="form-control w-full max-w-xs flex-1">
+        <label class="label">
+          <span class="label-text">Email</span>
+        </label>
+        <input type="email" name="email" placeholder="john.doe@gmail.com" class="input input-bordered w-full max-w-xs" required />
+      </div>
+      <div class="form-control w-full max-w-xs flex-1">
+        <label class="label">
+          <span class="label-text">Username</span>
+        </label>
+        <input type="text" name="username" placeholder="john.doe" class="input input-bordered w-full max-w-xs" required />
+      </div>
+    </div>
+
+    <div class="flex flex-row gap-4 w-full">
+      <div class="form-control w-full max-w-xs flex-1">
+        <label class="label">
+          <span class="label-text">Password</span>
+        </label>
+        <input type="password" name="password" placeholder="Make it a good one!" class="input input-bordered w-full max-w-xs" required />
+      </div>
+      <div class="form-control w-full max-w-xs flex-1">
+        <label class="label">
+          <span class="label-text">Confirm password</span>
+        </label>
+        <input type="password" name="passwordConfirm" placeholder="Repeat..." class="input input-bordered w-full max-w-xs" required />
+      </div>
+    </div>
+
+    <div class="form-control w-full max-w-xs">
+      <button name="register" class="btn btn-primary">Register</button>
+    </div>
   </form>
 
   <div class="w-full text-center mt-8">

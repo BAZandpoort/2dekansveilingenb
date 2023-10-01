@@ -25,7 +25,7 @@ function register($username, $password, $email, $firstname, $lastname) {
       'value' => 'https://avatars.githubusercontent.com/u/64209400?v=4',
     ],
     ['type' => 's', 'value' => 'Hello!'],
-    ['type' => 's', 'value' => 'dark'],
+    ['type' => 's', 'value' => 'light'],
   );
 
   return $userData && $userProfileData;

@@ -34,7 +34,7 @@ define('ERROR_MAPPING', [
 
 // Success mapping
 define('SUCCES_MAPPING', [
-  'success' => 'You have been succesfully registered',
+  'register' => 'You have been succesfully registered',
 ]);
 
 // Theme mapping
