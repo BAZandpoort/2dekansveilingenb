@@ -1,7 +1,34 @@
+
 <?php
-
-// TODO
-
 include_once LIB . '/catalog/products.php';
-byCategory();
+include_once COMPONENTS . '/product-card.php';
+
+$categories = popularCategories(2);
+
+echo '
+<p class="text-4xl font-bold mb-24 text-center">🔥 Hottest categories</p>
+<div class="flex flex-col gap-24">
+';
+
+$i = 0;
+foreach($categories as $category) {
+  $categoryName = array_keys($categories)[$i];
+
+  echo '
+  <div class="flex flex-col gap-4">
+    <p class="text-3xl font-bold">' . $categoryName . '</p>
+    <div class="w-full flex flex-row flex-wrap justify-between gap-8">
+  ';
+  foreach($category as $product) {
+    productCard($product);
+  }
+  echo '
+    </div>
+  </div>
+  ';
+
+  $i++;
+}
+
+echo '</div>';
 ?>

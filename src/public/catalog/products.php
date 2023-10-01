@@ -18,5 +18,5 @@ if ($error) {
 }
 
 include_once LIB . '/catalog/products.php';
-products();
+getAllProducts();
 ?>

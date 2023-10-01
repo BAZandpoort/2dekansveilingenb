@@ -28,6 +28,7 @@ $theme = $data ? THEME_MAPPING[$data['theme']] : THEME_MAPPING['default'];
   <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.3/dist/full.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.tailwindcss.com"></script>
 
+  <script src="/public/js/countdown.js"></script>
   <link rel="stylesheet" href="/public/css/theme.css">
   <title><?php echo $route['title']; ?></title>
 </head>
@@ -36,7 +37,7 @@ $theme = $data ? THEME_MAPPING[$data['theme']] : THEME_MAPPING['default'];
   <div class="h-screen">
     <?php $route['nav'] ? include COMPONENTS . '/nav.php' : null; ?>
 
-    <div class="container mx-auto">
+    <div class="container mx-auto pt-24 pb-48">
       <?php include PUBLIC_S . '/' . $route['view']; ?>
     </div>
 
