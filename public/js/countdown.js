@@ -4,9 +4,10 @@ function countdown(productId) {
   const hoursElement = productCard.querySelector('#hours');
   const minutesElement = productCard.querySelector('#minutes');
   const secondsElement = productCard.querySelector('#seconds');
+  const countdownWrapper = productCard.querySelector('#countdown-wrapper');
 
-  const startDate = new Date('2023-10-01T19:00:00.000Z');
-  const endDate = new Date('2023-10-01T20:00:00.000Z');
+  const startDate = new Date('2023-10-01T23:00:00.000Z');
+  const endDate = new Date('2023-10-02T23:00:00.000Z');
 
   const timeDiff = endDate.getTime() - startDate.getTime();
   const randomTime = Math.random() * timeDiff;
@@ -25,13 +26,8 @@ function countdown(productId) {
     seconds %= 60;
 
     if (timeDiff <= 0) {
-      hoursElement.style = '--value:00';
-      minutesElement.style = '--value:00';
-      secondsElement.style = '--value:00';
-
-      hoursElement.className = 'opacity-60'
-      minutesElement.className = 'opacity-60'
-      secondsElement.className = 'opacity-60'
+      countdownWrapper.innerHTML = 'Auction ended';
+      countdownWrapper.className = 'text-base font-semibold';
     } else {
       hoursElement.style = '--value:' + hours;
       minutesElement.style = '--value:' + minutes;
