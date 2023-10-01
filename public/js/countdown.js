@@ -5,8 +5,8 @@ function countdown(productId) {
   const minutesElement = productCard.querySelector('#minutes');
   const secondsElement = productCard.querySelector('#seconds');
 
-  const startDate = new Date('2023-10-01T16:00:00.000Z');
-  const endDate = new Date('2023-10-02T16:00:00.000Z');
+  const startDate = new Date('2023-10-01T19:00:00.000Z');
+  const endDate = new Date('2023-10-01T20:00:00.000Z');
 
   const timeDiff = endDate.getTime() - startDate.getTime();
   const randomTime = Math.random() * timeDiff;
@@ -28,6 +28,10 @@ function countdown(productId) {
       hoursElement.style = '--value:00';
       minutesElement.style = '--value:00';
       secondsElement.style = '--value:00';
+
+      hoursElement.className = 'opacity-60'
+      minutesElement.className = 'opacity-60'
+      secondsElement.className = 'opacity-60'
     } else {
       hoursElement.style = '--value:' + hours;
       minutesElement.style = '--value:' + minutes;

@@ -10,9 +10,11 @@ function getAllProducts() {
     if (strlen($product['name']) > 20) {
       $product['name'] = substr_replace($product['name'], '...', 21);
     }
+
+    if (strlen($product['description']) > 100) {
+      $product['description'] = substr_replace($product['description'], '...', 101);
+    }
   }
-
-
 
   return $products;
 
@@ -65,6 +67,10 @@ function popularCategories($categoryLimit) {
             ORDER BY count DESC
             LIMIT $categoryLimit";
   $categories = fetch($query);
+
+  if ($categoryLimit === 1) {
+    $categories = [$categories];
+  }
 
   $products = [];
   foreach ($categories as $category) {
