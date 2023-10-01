@@ -64,6 +64,10 @@ if ($userid) {
 <div class="navbar bg-base-100 shadow-sm pt-8">
   <div class="navbar-center flex w-full">
     <ul class="menu menu-horizontal px-1 gap-16 w-full justify-center">
+      <a href="/catalog/products" class="group flex flex-col gap-4 items-center">
+        <i class="fa-solid fa-cubes-stacked fa-2xl group-hover:-translate-y-1 transition"></i>
+        <span class="label-text">Alle producten</span>
+      </a>
       <a href="/catalog/products?category=veilingen" class="group flex flex-col gap-4 items-center">
         <i class="fa-solid fa-gavel fa-2xl group-hover:-translate-y-1 transition"></i>
         <span class="label-text">Veilingen</span>
@@ -71,10 +75,6 @@ if ($userid) {
       <a href="/catalog/products?category=locatie" class="group flex flex-col gap-4 items-center">
         <i class="fa-solid fa-location-dot fa-2xl group-hover:-translate-y-1 transition"></i>
         <span class="label-text">Locatie</span>
-      </a>
-      <a href="/catalog/products?category=products" class="group flex flex-col gap-4 items-center">
-        <i class="fa-solid fa-box-open fa-2xl group-hover:-translate-y-1 transition"></i>
-        <span class="label-text">Producten</span>
       </a>
       <a href="/catalog/products?category=autos" class="group flex flex-col gap-4 items-center">
         <i class="fa-solid fa-car-side fa-2xl group-hover:-translate-y-1 transition"></i>

@@ -15,10 +15,15 @@ define('DATABASE', SRC . '/database');
 define('LIB', SRC . '/lib');
 define('PUBLIC_S', SRC . '/public');
 
-define('ADMIN', 'admin');
-define('MEMBER', 'member');
-define('GUEST', 'guest');
+// User structure
+define('USER_STRUCTURE', [
+  'id' => null,
+  'username' => null,
+  'email' => null,
+  'theme' => null,
+]);
 
+// Error mapping
 define('ERROR_MAPPING', [
   'missing' => 'Missing email or password',
   'empty' => 'Empty email or password',
@@ -27,17 +32,12 @@ define('ERROR_MAPPING', [
   'email' => 'Email is already in use',
 ]);
 
+// Success mapping
 define('SUCCES_MAPPING', [
   'success' => 'You have been succesfully registered',
 ]);
 
-define('USER_STRUCTURE', [
-  'id' => null,
-  'username' => null,
-  'email' => null,
-  'theme' => null,
-]);
-
+// Theme mapping
 define('THEME_MAPPING', [
   'default' => 'customLight',
   'dark' => 'customDark',
