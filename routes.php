@@ -60,6 +60,13 @@ $routes = [
     'nav' => true,
     'footer' => false,
   ],
+  '/dashboard/products/mine' => [
+    'view' => 'member/myProducts.php',
+    'title' => 'My Products',
+    'auth_roles' => ['member'],
+    'nav' => true,
+    'footer' => false,
+  ],
   // Error routes
   '/404' => [
     'view' => 'errors/404.php',
