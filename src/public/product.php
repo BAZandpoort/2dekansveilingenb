@@ -24,7 +24,7 @@
     </div>
     <div class="flex-[1] flex items-stretch">
         <div></div>
-        <div class="radial-progress mx-[200px]" style="--value:70;">70%</div>
+        <div class="radial-progress mx-auto mt-8" style="--value:70;">70%</div>
         <div></div>
     </div>
    
