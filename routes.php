@@ -30,6 +30,13 @@ $routes = [
     'nav' => true,
     'footer' => true,
   ],
+  '/account/settings/edit' => [
+    'view' => 'account/edit.php',
+    'title' => 'Edit account settings',
+    'auth_roles' => [],
+    'nav' => true,
+    'footer' => true,
+  ],
   // Catalog routes
   '/catalog/products' => [
     'view' => 'catalog/products.php',
@@ -56,6 +63,13 @@ $routes = [
   '/dashboard/products/add' => [
     'view' => 'member/addProduct.php',
     'title' => 'Add Products',
+    'auth_roles' => ['member'],
+    'nav' => true,
+    'footer' => false,
+  ],
+  '/dashboard/products/mine' => [
+    'view' => 'member/myProducts.php',
+    'title' => 'My Products',
     'auth_roles' => ['member'],
     'nav' => true,
     'footer' => false,

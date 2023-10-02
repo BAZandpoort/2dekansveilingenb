@@ -22,7 +22,11 @@
             <?php echo $products["description"] ?>
         </div>
     </div>
-    <div class="flex-[1]">
+    <div class="flex-[1] flex items-stretch">
+        <div></div>
+        <div class="radial-progress mx-[200px]" style="--value:70;">70%</div>
+        <div></div>
     </div>
    
 </div>
+
