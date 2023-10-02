@@ -35,20 +35,21 @@
     </div>
     <div class="flex-[1] flex items-stretch">
         <div class="card w-full bg-base-96 shadow-xl">
-            <div class="radial-progress mx-auto mt-8" style="--value:70;">time</div>
-                <div class="card-body items-center text-center">
-                   <table class="table-auto"> 
-                        <tr>
-                                <td class="text-xl ">bidprice</td>
-                                <td class = "text-xl" >buyprice</td>
-                        </tr>
-                        <tr>
-                                <td>(current bid price)</td>
-                                <td><?php echo $products["price"]?></td>
-                        </tr>
-                    </table>
-                    <a href="Bidden.php" class="btn btn-primary">bit Now</a>
-                </div>
+            <div class="radial-progress mx-auto mt-8" style="--value:70;">
+                time
+            </div>
+            <div class="card-body items-center text-center">
+                <table class="table-auto"> 
+                    <tr>
+                            <td class="text-xl ">bidprice</td>
+                            <td class = "text-xl" >buyprice</td>
+                    </tr>
+                    <tr>
+                            <td>(current bid price)</td>
+                            <td><?php echo $products["price"]?></td>
+                    </tr>
+                </table>
+                <a href="Bidden.php" class="btn btn-primary">bit Now</a>
             </div>
         </div>
     </div>
