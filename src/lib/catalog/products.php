@@ -46,6 +46,10 @@ function userProducts($userid) {
   $query = 'SELECT * FROM products WHERE userid = ?';
   $products = fetch($query, ['type' => 'i', 'value' => $userid]);
 
+  if (empty($products)) {
+    return false;
+  }
+
   if (isset($products['id'])) {
     $products = [$products];
   }

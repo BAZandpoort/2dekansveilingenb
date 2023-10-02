@@ -10,6 +10,16 @@ include_once COMPONENTS . '/product-card.php';
 
 $products = userProducts($userid);
 
+if (!$products) {
+  echo '
+  <div class="flex flex-col items-center justify-center gap-4">
+    <h1 class="text-4xl font-bold">You have no products</h1>
+    <a href="/dashboard/products/add" class="btn btn-primary">Add Product</a>
+  </div>
+  ';
+  exit();
+}
+
 echo '
 <div class="flex flex-row flex-wrap gap-8 flex-[1.7]">
   <div class="flex flex-row flex-wrap justify-between gap-8">
