@@ -42,7 +42,7 @@ if ($userid) {
           </label>
           <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
             <li><a class="justify-between">Profile</a></li>
-            <li><a href="src/lib/account/change-theme.php" >Switch to ' . $theme . '</a></li>
+            <li><a href="/src/lib/account/change-theme.php" >Switch to ' . $theme . '</a></li>
             <li><a href="/account/settings/edit">Settings</a></li>
             <li><a href="/account/logout">Logout</a></li>
             

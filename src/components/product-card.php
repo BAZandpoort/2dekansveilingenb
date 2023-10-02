@@ -2,7 +2,7 @@
 
 function productCard($product) {
   echo '
-  <a id="product-' . $product['id'] . '" href="/" class="card card-compact flex-1 bg-base-100 shadow-xl">
+  <a id="product-' . $product['id'] . '" href="/" class="card card-compact flex-1 bg-base-100 shadow-md">
     <figure>
       <img class="w-full" src="' . $product["imageUrl"] . '" alt="Shoes" />
     </figure>
