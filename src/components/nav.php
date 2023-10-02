@@ -13,7 +13,7 @@ if ($userid) {
 ?>
 
 <!-- Top navbar -->
-<div class="navbar bg-base-100">
+<div class="navbar bg-base-100 px-8">
   <!-- Left - logo -->
   <div class="navbar-start flex-1">
     <a href="/" class="btn btn-ghost normal-case text-xl">2dekans veilingen</a>
@@ -41,26 +41,22 @@ if ($userid) {
             </div>
           </label>
           <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-            <li>
-              <a class="justify-between">
-                Profile
-                <span class="badge">New</span>
-              </a>
-            </li>
+            <li><a class="justify-between">Profile</a></li>
             <li><a href="src/lib/account/change-theme.php" >Switch to ' . $theme . '</a></li>
             <li><a href="/account/settings/edit">Settings</a></li>
-            <li><a href="/account/logout"> logout</a></li>
+            <li><a href="/account/logout">Logout</a></li>
             
           </ul>
         </div>
         '
-      : '<a href="/account/login" class="btn"> Login</a>'; ?>
+      : '<a href="/account/login" class="btn">Login</a>'; ?>
   </div>
 </div>
 
 <!-- Bottom navbar -->
 <div class="navbar bg-base-100 shadow-sm pt-8">
   <div class="navbar-center flex w-full">
+    <!-- TODO: Pull categories from database -->
     <ul class="menu menu-horizontal px-1 gap-16 w-full justify-center">
       <a href="/catalog/products" class="group flex flex-col gap-4 items-center">
         <i class="fa-solid fa-cubes-stacked fa-2xl group-hover:-translate-y-1 transition"></i>
