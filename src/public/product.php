@@ -22,8 +22,8 @@
     <div class="flex-[1] rounded-3xl h-1/2">
         <img class="w-full h-full rounded-3xl" src="<?php echo $products["imageUrl"];?>"  />
         <div>
-        <h2 class="card-title mt-8"><?php echo $products["name"] ?></h2>
-            <?php echo $products["description"] ?>
+        <h2 class="card-title mt-8 mx-8"><?php echo $products["name"] ?></h2>
+          <div class="mx-8">  <?php echo $products["description"] ?></div>
         </div>
         <div>
         <h2 class="card-title mt-8 mx-8"> about seller:</h2>
