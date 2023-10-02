@@ -30,11 +30,14 @@ define('ERROR_MAPPING', [
   'invalid' => 'Invalid email or password',
   'password' => 'Passwords do not match',
   'email' => 'Email is already in use',
+  'noChanges' => 'No changes were made',
+  'accountUpdate' => 'Something went wrong while updating your account',
 ]);
 
 // Success mapping
 define('SUCCES_MAPPING', [
   'register' => 'You have been succesfully registered',
+  'accountUpdate' => 'Your account has been updated',
 ]);
 
 // Theme mapping
