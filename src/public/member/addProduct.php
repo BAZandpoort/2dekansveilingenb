@@ -58,6 +58,7 @@ if (!isset($_SESSION['user'])) {
       id="price"
       type="number"
       placeholder="21.99"
+      step="0.01"
       class="input input-bordered w-full placeholder:opacity-30"
       required />
     </div>
@@ -69,8 +70,7 @@ if (!isset($_SESSION['user'])) {
       id="imageUrl"
       type="url"
       placeholder="https://example.com/image.png"
-      class="input input-bordered w-full placeholder:opacity-30"
-      required />
+      class="input input-bordered w-full placeholder:opacity-30" />
     </div>
 
     <input type="submit" name="add" value="Add product" class="btn btn-wide place-self-center">

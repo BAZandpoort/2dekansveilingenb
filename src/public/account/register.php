@@ -4,7 +4,7 @@ if (isset($_SESSION['user'])) {
   exit();
 } ?>
 
-<div class="pt-36">
+<div class="pt-36 md:pt-16">
   <div class="text-sm breadcrumbs flex justify-center">
     <ul>
       <li><a href="/">Home</a></li> 

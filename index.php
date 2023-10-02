@@ -44,7 +44,7 @@ if ($succes) {
   ';
 }
 
-$containerClasses = $route['container'] ? 'container mx-auto pt-24 pb-48' : '';
+$containerClasses = $route['container'] ? 'container mx-auto pt-24 pb-48 md:px-16' : '';
 ?>
 
 <!DOCTYPE html>
