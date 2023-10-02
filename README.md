@@ -23,7 +23,7 @@ Het project maakt voornamelijk gebruik van de volgende technologieën:
 2. Daarna zoek je naar de folder waar je één van de twee hebt gedownload, in deze folder zoek je naar een folder genaamd "php", ga in de folder en kopieer het path.
 3. In windows zoek je op NL: "Omgeving" || EN: "Environment" en dan klik je op de eerste die tevoorschijn komt.
 4. Hierna klik je onderaan op NL: "Omgevingsvariabelen" || EN: "Environment Variables"
-5. In de bovenste tabel wil je "Path" bewerken, hierin maak je een nieuwe entry en plak je daar het locatie van stap 2 in.
+5. In de bovenste tabel wil je "Path" bewerken, hierin maak je een nieuwe entry en plak je daar de locatie van stap 2 in.
 6. Om te kijken of alles werkt, run je `php --version`.
 
 ### Alles starten

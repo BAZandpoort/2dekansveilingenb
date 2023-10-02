@@ -6,8 +6,10 @@ function countdown(productId) {
   const secondsElement = productCard.querySelector('#seconds');
   const countdownWrapper = productCard.querySelector('#countdown-wrapper');
 
-  const startDate = new Date('2023-10-01T23:00:00.000Z');
-  const endDate = new Date('2023-10-02T23:00:00.000Z');
+  // For testing purposes
+  const startDate = new Date();
+  const endDate = new Date();
+  endDate.setDate(endDate.getDate() + 1);
 
   const timeDiff = endDate.getTime() - startDate.getTime();
   const randomTime = Math.random() * timeDiff;
