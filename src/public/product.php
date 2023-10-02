@@ -15,14 +15,14 @@
 
 ?>
 <div class = "flex">
-    <div class="flex-[1.3] rounded-3xl h-1/2">
+    <div class="flex-[1] rounded-3xl h-1/2">
         <img class="w-full h-full rounded-3xl" src="<?php echo $products["imageUrl"];?>"  />
+        <div>
+        <h2 class="card-title"><?php echo $products["name"] ?></h2>
+            <?php echo $products["description"] ?>
+        </div>
     </div>
-
-    <div class="flex-[0.7]">
-
+    <div class="flex-[1]">
     </div>
-</div>
-<div>
-    <?php echo $products["uitleg"] ?>
+   
 </div>
