@@ -21,17 +21,15 @@ if ($userid) {
 
   <!-- Center - search -->
   <div class="flex-1">
-    <div class="form-control w-full">
-      <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
-    </div>
-    <div class="dropdown dropdown-end">
+    <div class="form-control w-full relative">
+      <input type="text" placeholder="Search" class="input input-bordered w-auto">
+        <i class="fa-solid fa-magnifying-glass fa-lg absolute right-4 top-1/2 opacity-60"></i>
+      </input>
     </div>
   </div>
 
   <!-- Right - User actions -->
   <div class="flex-1 justify-end">
-    <div class="dropdown dropdown-end mr-4">
-    </div>
     <?php echo isset($_SESSION['user'])
       ? '
         <div class="dropdown dropdown-end">
