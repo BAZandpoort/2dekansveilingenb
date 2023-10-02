@@ -2,11 +2,11 @@
 
 function productCard($product) {
   echo '
-  <a id="product-' . $product['id'] . '" href="/" class="card card-compact flex-1 bg-base-100 shadow-xl">
+  <a id="product-' . $product['id'] . '" href="/" class="card card-compact transition hover:opacity-90 flex-1 bg-base-100 shadow-xl">
     <figure>
       <img class="w-full" src="' . $product["imageUrl"] . '" alt="Shoes" />
     </figure>
-    <div class="card-body">
+    <div class="card-body transition">
       <h2 class="card-title">' . $product["name"] . '</h2>
       <p>' . $product["description"] . '</p>
       <div class="card-actions justify-between items-center">

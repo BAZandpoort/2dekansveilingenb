@@ -21,28 +21,32 @@ if (!$products) {
 }
 
 echo '
-<div class="flex flex-row flex-wrap gap-8 flex-[1.7]">
-  <div class="flex flex-row flex-wrap justify-between gap-8">
+<div class="flex flex-col gap-8">
 ';
 
-$i = 0;
 foreach ($products as $product) {
-
   echo '
-  <div class="flex flex-col gap-4">
-    <div class="w-96 flex flex-row flex-wrap justify-between gap-8">
-  ';
-
-  productCard($product);
-
-  echo '
+  <div class="card card-side bg-base-100 shadow-sm max-h-48">
+    <figure class="max-w-sm">
+      <img src="' . $product['imageUrl'] . '" alt="Movie"/>
+    </figure>
+    <div class="card-body">
+      <h2 class="card-title">' . $product['name'] . '</h2>
+      <p>' . $product['description'] . '</p>
+      <div class="card-actions justify-between items-center">
+        <p class="text-xl text-left font-bold">€' . $product["price"] . '</p>
+        <div>
+          <a href="/catalog/product?id=' . $product['id'] . '" class="btn btn-primary">View product page</a>
+          <button class="btn btn-error btn-square">
+            <i class="fa-regular fa-trash-can fa-xl text-white"></i>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
   ';
-
-  $i++;
 }
+
 echo '
-  </div>
 </div>
 ';
