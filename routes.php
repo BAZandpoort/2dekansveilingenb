@@ -16,6 +16,13 @@ $routes = [
     'nav' => true,
     'footer' => true,
   ],
+  '/account/favorite' => [
+    'view' => 'account/favorite.php',
+    'title' => 'Favorite',
+    'auth_roles' => ['guest'],
+    'nav' => true,
+    'footer' => true,
+  ],
   '/account/logout' => [
     'view' => 'account/logout.php',
     'title' => 'Logout',

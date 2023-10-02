@@ -53,6 +53,7 @@ if ($userid) {
             </li>
             <li><a href="src/lib/account/change-theme.php" >Switch to ' . $theme . '</a></li>
             <li><a>Settings</a></li>
+            <li><a href="/account/favorite">Favorites</a></li>
             <li><a href="/account/logout"> logout</a></li>
             
           </ul>
