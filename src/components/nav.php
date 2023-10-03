@@ -41,7 +41,7 @@ $query = 'SELECT id, '.$language.' FROM translation' ;
         </svg>
       </label>
     </div>
-    <a href="/" class="btn btn-ghost normal-case text-xl"><?php echo $data[0][$language];?></a>
+    <a href="/" class="btn btn-ghost normal-case text-xl"><?php echo $data[1][$language];?></a>
   </div>
 
   <div class="flex-1">
@@ -81,7 +81,7 @@ $query = 'SELECT id, '.$language.' FROM translation' ;
             </li>
             <li><a href="src/lib/account/change-theme.php" >Switch to ' . $theme . '</a></li>
             <li><a>Settings</a></li>
-            <li><a href="/account/logout"> '.$data[1][$language].' </a></li>
+            <li><a href="/account/logout"> '.$data[2][$language].' </a></li>
             
           </ul>
         </div>
