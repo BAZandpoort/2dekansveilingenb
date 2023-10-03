@@ -10,6 +10,16 @@ if ($userid) {
 
   $theme = $data['theme'] === 'dark' ? 'light' : 'dark';
   $language = $data['language'];
+
+  $query = 'SELECT id, '.$language.' FROM translation' ;
+  $data = fetch($query);
+
+  var_dump($data);
+
+}
+
+if (!isset($language)){
+  $language = "english";
 }
 ?>
 
@@ -23,7 +33,7 @@ if ($userid) {
         </svg>
       </label>
     </div>
-    <a href="/" class="btn btn-ghost normal-case text-xl">2dekans veilingen</a>
+    <a href="/" class="btn btn-ghost normal-case text-xl"><?php echo $data[0][$language];?></a>
   </div>
 
   <div class="flex-1">
@@ -35,10 +45,19 @@ if ($userid) {
   </div>
 
   <div class="flex-1 justify-end">
+      <div class="dropdown dropdown-end">
+          <label tabindex="0" class="btn m-1">🌎</label>
+          <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+            <li><a href="src/lib/account/language-select.php?language=english">English</a></li>
+            <li><a href="src/lib/account/language-select.php?language=nederlands">Nederlands</a></li>
+            <li><a href="src/lib/account/language-select.php?language=français">Français</a></li>
+          </ul>
+      </div>  
     <div class="dropdown dropdown-end mr-4">
     </div>
     <?php echo isset($_SESSION['user'])
       ? '
+        
         <div class="dropdown dropdown-end">
           <label tabindex="0" class="btn btn-ghost btn-circle avatar">
             <div class="w-10 rounded-full">
@@ -54,10 +73,11 @@ if ($userid) {
             </li>
             <li><a href="src/lib/account/change-theme.php" >Switch to ' . $theme . '</a></li>
             <li><a>Settings</a></li>
-            <li><a href="/account/logout"> logout</a></li>
+            <li><a href="/account/logout"> logout </a></li>
             
           </ul>
         </div>
+        
         '
       : '<a href="/account/login" class="btn"> Login</a>'; ?>
   </div>
