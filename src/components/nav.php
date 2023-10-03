@@ -11,7 +11,7 @@ if ($userid) {
   $theme = $data['theme'] === 'dark' ? 'light' : 'dark';
   $language = $data['language'];
 
-  $query = 'SELECT * FROM translation';
+  $query = 'SELECT id, '.$language.' FROM translation' ;
   $data = fetch($query);
 
   var_dump($data);
