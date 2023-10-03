@@ -5,78 +5,52 @@ if (!isset($_SESSION['user'])) {
 }
 ?>
 
-<div>
-  <form action="/src/lib/member/addProduct.php" method="post" class="flex flex-col items-center gap-4">
-    <div class="flex flex-col gap-2 w-full max-w-xs">
-      <label for="userid">User ID</label>
-      <input
-      name="userid"
-      id="userid"
-      type="number"
-      placeholder="52"
-      class="input input-bordered w-full placeholder:opacity-30"
-      required/>
+<h1 class="text-center text-4xl font-bold mb-12">Add a new product</h1>
+
+<form action="/src/lib/member/addProduct.php" method="post" class="flex flex-col items-center justify-center gap-4 max-w-2xl mx-auto" enctype="multipart/form-data">
+  <div class="flex flex-row justify-center gap-4 w-full">
+    <div class="form-control flex-1 w-full">
+      <label class="label">
+        <span class="label-text">Category</span>
+      </label>
+      <select name="category" class="select select-bordered w-full">
+        <option disabled selected>Product category</option>
+        <option value=1>Test</option>
+      </select>
     </div>
 
-    <div class="flex flex-col gap-2 w-full max-w-xs">
-      <label for="categoryid">Category ID</label>
-      <input
-      name="categoryid"
-      id="categoryid"
-      type="categoryid"
-      placeholder="21"
-      class="input input-bordered w-full placeholder:opacity-30"
-      required/>
+    <div class="form-control flex-1 w-full">
+      <label class="label">
+        <span class="label-text">Title</span>
+      </label>
+      <input type="text" name="title" placeholder="Big Mac" class="input input-bordered w-full" required />
     </div>
-  
-    <div class="flex flex-col gap-2 w-full max-w-xs">
-      <label for="name">Product name</label>
-      <input
-      name="name"
-      id="name"
-      type="text"
-      placeholder="Big Mac"
-      class="input input-bordered w-full placeholder:opacity-30"
-      required />
-    </div>
-
-    <div class="flex flex-col gap-2 w-full max-w-xs">
-      <label for="description">Description</label>
-      <input
-      name="description"
-      id="description"
-      type="text"
-      placeholder="Healthy food"
-      class="input input-bordered w-full placeholder:opacity-30"
-      required />
-    </div>
-  
-    <div class="flex flex-col gap-2 w-full max-w-xs">
-      <label for="price">Price</label>
-      <input
-      name="price"
-      id="price"
-      type="number"
-      placeholder="21.99"
-      step="0.01"
-      class="input input-bordered w-full placeholder:opacity-30"
-      required />
-    </div>
-
-    <div class="flex flex-col gap-2 w-full max-w-xs">
-      <label for="imageUrl">Image URL</label>
-      <input
-      name="imageUrl"
-      id="imageUrl"
-      type="url"
-      placeholder="https://example.com/image.png"
-      class="input input-bordered w-full placeholder:opacity-30" />
-    </div>
-
-    <input type="submit" name="add" value="Add product" class="btn btn-wide place-self-center">
-  </form>
-  
-  <div class="w-full text-center mt-8">
-    <a class="link" href="/">Go back</a>
   </div>
-</div>
+  
+  <div class="form-control w-full">
+    <label class="label">
+      <span class="label-text">Description</span>
+    </label>
+    <textarea name="description" class="textarea textarea-bordered" placeholder="Very healthy food" required></textarea>
+  </div>
+
+  <div class="flex flex-row justify-center gap-4 w-full">
+    <div class="form-control flex-1 w-full">
+      <label class="label">
+        <span class="label-text">Price</span>
+      </label>
+      <input type="number" step="0.01" min="0.00" name="price" placeholder="20.00" class="input input-bordered w-full" required />
+    </div>
+
+    <div class="form-control flex-1 w-full">
+      <label class="label">
+        <span class="label-text">Image</span>
+      </label>
+      <input name="image" type="file" class="file-input file-input-bordered w-full" required />
+    </div>
+  </div>
+
+  <div class="form-control w-full max-w-xs mt-4">
+    <button name="create" class="btn btn-primary">Create</button>
+  </div>
+</form>

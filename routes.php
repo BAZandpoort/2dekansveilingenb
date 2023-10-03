@@ -45,12 +45,6 @@ $routes = [
     'footer' => true,
     'container' => true,
   ],
-  // '/searchbar' => [
-  //   'view' => 'zoekbalk.php',
-  //   'title' => 'Search',
-  //   'nav' => true,
-  //   'footer' => true,
-  // ],
   // Member routes
   '/dashboard/products/add' => [
     'view' => 'member/addProduct.php',
