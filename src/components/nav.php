@@ -10,6 +10,12 @@ if ($userid) {
 
   $theme = $data['theme'] === 'dark' ? 'light' : 'dark';
   $language = $data['language'];
+
+  $query = 'SELECT * FROM translation';
+  $data = fetch($query);
+
+  var_dump($data);
+
 }
 
 if (!isset($language)){
@@ -27,7 +33,7 @@ if (!isset($language)){
         </svg>
       </label>
     </div>
-    <a href="/" class="btn btn-ghost normal-case text-xl">2dekans veilingen</a>
+    <a href="/" class="btn btn-ghost normal-case text-xl"><?php echo $data[0][$language];?></a>
   </div>
 
   <div class="flex-1">
