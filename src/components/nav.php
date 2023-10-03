@@ -1,13 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/util/util.php';
-$current_file_name = basename($_SERVER['PHP_SELF']);
-
-if (!str_ends_with($current_file_name, ".php")){
-  $current_file_name = $current_file_name . ".php";
-}
-
-echo  '<a href="/dashboard/edit-translation?location='.$current_file_name.'">Edit translations of '.$current_file_name.'</a>';
 
 $userid = isset($_SESSION['user']) ? $_SESSION['user']['id'] : null;
 
