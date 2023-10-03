@@ -8,7 +8,7 @@ require_once DATABASE . '/connect.php';
 $userid = $_SESSION['user']['id'] ;
  $proid = $_GET["id"];
 
-$sql = insert("INSERT INTO favorieten (userid, productsid) VALUES ($userid, $proid)");
+$sql = insert("INSERT INTO favorieten (userid, id) VALUES ($userid, $proid)");
 $sql2 = "SELECT * FROM tblproducten"
 
 
