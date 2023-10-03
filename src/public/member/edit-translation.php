@@ -17,15 +17,28 @@ if ($error) {
   ';
 }
 
-echo '<h1>Edit translations of ' . $_GET["location"] . ' </h1>';
+if (!isset($_GET["location"])){
+    $end_of_query = "";
+} else {
+    $end_of_query = 'WHERE location = "'.$_GET["location"].'"';
+}
 ?>
 
 <div>
     <div class="dropdown">
     <label tabindex="0" class="btn m-1">Select page to edit</label>
         <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-            <li><a>Item 1</a></li>
-            <li><a>Item 2</a></li>
+            <li><a href="/dashboard/edit-translation">See all</a></li>
+            <?php
+                $query = 'SELECT location FROM translation WHERE location <> "none" GROUP BY location';
+                $locations = fetch($query);
+
+                foreach($locations as $row){
+                    echo '
+                        <li><a href="/dashboard/edit-translation?location='.$row["location"].'">'.$row["location"].'</a></li>
+                    ';
+                }
+            ?>            
         </ul>
     </div>
     <div class="overflow-x-auto">
@@ -41,8 +54,10 @@ echo '<h1>Edit translations of ' . $_GET["location"] . ' </h1>';
         <tbody>
 
         <?php
-            $query = 'SELECT * FROM translation WHERE location = "'.$_GET["location"].'"';
-            echo $query;
+            $query = 'SELECT * FROM translation ' . $end_of_query;
+            if (isset($_GET["location"])){
+                echo 'Edit translations of '.$_GET["location"];
+            }
             $translations = fetch($query);
 
             foreach($translations as $row){
