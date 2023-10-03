@@ -40,7 +40,7 @@ $categories = fetch("SELECT * FROM product_categories");
     <label class="label">
       <span class="label-text">Description</span>
     </label>
-    <textarea name="description" class="textarea textarea-bordered" placeholder="Very healthy food" required></textarea>
+    <textarea name="description" class="textarea textarea-bordered min-h-[8em]" placeholder="Very healthy food" required></textarea>
   </div>
 
   <div class="flex flex-row justify-center gap-4 w-full">
