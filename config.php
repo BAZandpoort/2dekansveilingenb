@@ -25,6 +25,7 @@ define('USER_STRUCTURE', [
 
 // Error mapping
 define('ERROR_MAPPING', [
+  'server' => 'Something went wrong on our end, please try again later',
   'missing' => 'Missing email or password',
   'empty' => 'Empty email or password',
   'invalid' => 'Invalid email or password',

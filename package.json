@@ -1,6 +1,6 @@
 {
   "name": "2dekans-veilingen",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "scripts": {
     "prettier": "prettier \"./**/*.php\" --write",
     "db:seed": "ts-node ./src/database/seed/seed.ts"

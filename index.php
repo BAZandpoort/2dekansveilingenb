@@ -57,7 +57,7 @@ $containerClasses = $route['container'] ? 'container mx-auto pt-24 pb-48 md:px-1
 
   <script src="/public/js/countdown.js"></script>
   <link rel="stylesheet" href="/public/css/theme.css">
-  <title><?php echo $route['title']; ?></title>
+  <title>2dekans veilingen - <?php echo $route['title']; ?></title>
 </head>
 
 <body>

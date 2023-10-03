@@ -1,19 +1,16 @@
 <?php
-
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once DATABASE . '/connect.php';
-require_once LIB . '/authentication/authentication.php';
-
-session_start();
+require_once LIB . '/util/util.php';
 
 if (isset($_POST['login'])) {
+  session_start();
   login($_POST);
+  return;
 }
 
-if (!isset($_POST['login'])) {
-  header('Location: /account/login');
-  exit();
-}
+header('Location: /');
+exit();
 
 function login($formData) {
   if (!isset($formData['email']) || !isset($formData['password'])) {
@@ -43,5 +40,28 @@ function login($formData) {
   $_SESSION['user']['theme'] = $auth['theme'];
   
   header('Location: /');
+  exit();
 }
-return;
+
+function authenticate($email, $password) {
+  var_dump($email, $password);
+  $data = fetch(
+    'SELECT * FROM user_profile
+    JOIN users ON users.id = user_profile.userid 
+    WHERE users.email = ?',
+    [
+      'type' => 's',
+      'value' => $email,
+    ],
+  );
+
+  if (!$data) {
+    return false;
+  }
+
+  if (!password_verify($password, $data['password'])) {
+    return false;
+  }
+
+  return $data;
+}
