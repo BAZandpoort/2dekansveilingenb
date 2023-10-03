@@ -1,5 +1,3 @@
-
-
 <div class="mt-32">
   <footer class="footer p-10 bg-base-200 text-base-content">
     <nav>
