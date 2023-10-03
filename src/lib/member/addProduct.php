@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
@@ -22,6 +21,9 @@ if (isset($_POST['create'])) {
     $file,
   );
 }
+
+header('Location: /');
+exit();
 
 function addProduct(
   $userid,
@@ -54,6 +56,3 @@ function addProduct(
 
   return $insertData;
 }
-
-header('Location: /');
-return;

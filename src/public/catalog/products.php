@@ -13,6 +13,7 @@ echo '
   <div class="flex flex-row flex-wrap gap-8 flex-[1.7]">
     <div class="flex flex-row flex-wrap justify-between gap-8">
 ';
+
 foreach ($products as $index => $product) {
   if ($index > 0 && $index % 4 === 0) {
     echo '
@@ -23,6 +24,7 @@ foreach ($products as $index => $product) {
 
   productCard($product);
 }
+
 echo '
     </div>
   </div>

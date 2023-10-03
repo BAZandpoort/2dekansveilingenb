@@ -66,6 +66,6 @@ $routes = [
     'title' => 'Not Found',
     'nav' => false,
     'footer' => false,
-    'container' => true,
+    'container' => false,
   ],
 ];
