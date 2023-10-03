@@ -1,51 +1,54 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['user'])) {
-  header('Location: /');
-  exit();
-}
-
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once DATABASE . '/connect.php';
 require_once LIB . '/util/util.php';
 
-$userId = $_SESSION['user']['id'];
-
-$newUsername = $_POST['username'];
-$newEmail = $_POST['email'];
-$newFirstname = $_POST['firstname'];
-$newLastname = $_POST['lastname'];
-
-$query = 'SELECT * FROM users WHERE id = ?';
-$data = fetch($query, ['type' => 'i', 'value' => $userId]);
-
-if (
-  $data['username'] === $newUsername &&
-  $data['email'] === $newEmail &&
-  $data['firstname'] === $newFirstname &&
-  $data['lastname'] === $newLastname
-) {
-  header('Location: /account/settings/edit?error=noChanges');
-  exit();
+if (isset($_SESSION['user']) && isset($_POST['update'])) {
+  updateProfile($_SESSION['user']['id'], $_POST);
+  return;
 }
 
-$query =
-  'UPDATE users SET username = ?, email = ?, firstname = ?, lastname = ? WHERE id = ?';
-$update = insert(
-  $query,
-  ['type' => 's', 'value' => $newUsername],
-  ['type' => 's', 'value' => $newEmail],
-  ['type' => 's', 'value' => $newFirstname],
-  ['type' => 's', 'value' => $newLastname],
-  ['type' => 's', 'value' => $userId],
-);
-
-if ($update) {
-  header('Location: /account/settings/edit?success=accountUpdate');
-  exit();
-}
-
-header('Location: /account/settings/edit?error=accountUpdate');
+header('Location: /');
 exit();
-?>
+
+function updateProfile($userId, $formData) {
+  // TODO: Check if the username is already taken when updating
+  $newUsername = $formData['username'];
+  $newEmail = $formData['email'];
+  $newFirstname = $formData['firstname'];
+  $newLastname = $formData['lastname'];
+  
+  $query = 'SELECT * FROM users WHERE id = ?';
+  $data = fetch($query, ['type' => 'i', 'value' => $userId]);
+  
+  if (
+    $data['username'] === $newUsername &&
+    $data['email'] === $newEmail &&
+    $data['firstname'] === $newFirstname &&
+    $data['lastname'] === $newLastname
+  ) {
+    header('Location: /account/settings/edit?error=noChanges');
+    exit();
+  }
+  
+  $query =
+    'UPDATE users SET username = ?, email = ?, firstname = ?, lastname = ? WHERE id = ?';
+  $update = insert(
+    $query,
+    ['type' => 's', 'value' => $newUsername],
+    ['type' => 's', 'value' => $newEmail],
+    ['type' => 's', 'value' => $newFirstname],
+    ['type' => 's', 'value' => $newLastname],
+    ['type' => 's', 'value' => $userId],
+  );
+  
+  if ($update) {
+    header('Location: /account/settings/edit?success=accountUpdate');
+    exit();
+  }
+  
+  header('Location: /account/settings/edit?error=accountUpdate');
+  exit();
+}
