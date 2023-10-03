@@ -18,9 +18,9 @@ if ($userid) {
   $theme = $data['theme'] === 'dark' ? 'light' : 'dark';
   $language = $data['language'];
 
-  $english_link = "src/lib/account/language-select.php?language=english";
-  $nederlands_link = "src/lib/account/language-select.php?language=nederlands";
-  $français_link = "src/lib/account/language-select.php?language=français";
+  $english_link = "../src/lib/account/language-select.php?language=english";
+  $nederlands_link = "../src/lib/account/language-select.php?language=nederlands";
+  $français_link = "../src/lib/account/language-select.php?language=français";
 } else {
   $english_link = "src/public/account/language-select.php?language=english";
   $nederlands_link = "src/public/account/language-select.php?language=nederlands";
