@@ -4,7 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once DATABASE . '/connect.php';
 require_once LIB . '/util/util.php';
 
-function register($username, $password, $email, $firstname, $lastname) {
+function createAccount($username, $password, $email, $firstname, $lastname) {
   global $connection;
   $userData = insert(
     'INSERT INTO users (username, password, email, firstname, lastname) VALUES (?, ?, ?, ?, ?)',
@@ -31,7 +31,7 @@ function register($username, $password, $email, $firstname, $lastname) {
   return $userData && $userProfileData;
 }
 
-function login($email, $password) {
+function authenticate($email, $password) {
   var_dump($email, $password);
   $data = fetch(
     'SELECT * FROM user_profile

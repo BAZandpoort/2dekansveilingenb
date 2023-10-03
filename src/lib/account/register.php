@@ -41,6 +41,6 @@ if ($password !== $passwordConfirm) {
 }
 
 $password = password_hash($password, PASSWORD_ARGON2ID);
-register($username, $password, $email, $firstname, $lastname);
+createAccount($username, $password, $email, $firstname, $lastname);
 
 header('Location: /account/login?success=register');
