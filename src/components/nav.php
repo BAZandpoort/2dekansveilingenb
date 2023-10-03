@@ -7,7 +7,7 @@ if (!str_ends_with($current_file_name, ".php")){
   $current_file_name = $current_file_name . ".php";
 }
 
-echo  '<a href="about:blank">Edit translations of '.$current_file_name.'</a>';
+echo  '<a href="/dashboard/edit-translation">Edit translations of '.$current_file_name.'</a>';
 
 $userid = isset($_SESSION['user']) ? $_SESSION['user']['id'] : null;
 
