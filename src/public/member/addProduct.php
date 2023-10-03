@@ -3,6 +3,11 @@ if (!isset($_SESSION['user'])) {
   header('Location: /account/login');
   exit();
 }
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
+require_once LIB . '/util/util.php';
+
+$categories = fetch("SELECT * FROM product_categories");
 ?>
 
 <h1 class="text-center text-4xl font-bold mb-12">Add a new product</h1>
@@ -15,7 +20,11 @@ if (!isset($_SESSION['user'])) {
       </label>
       <select name="category" class="select select-bordered w-full">
         <option disabled selected>Product category</option>
-        <option value=1>Test</option>
+        <?php
+        foreach ($categories as $category) {
+          echo '<option value="' . $category['id'] . '">' . $category['name'] . '</option>';
+        }
+        ?>
       </select>
     </div>
 
@@ -37,7 +46,7 @@ if (!isset($_SESSION['user'])) {
   <div class="flex flex-row justify-center gap-4 w-full">
     <div class="form-control flex-1 w-full">
       <label class="label">
-        <span class="label-text">Price</span>
+        <span class="label-text tooltip" data-tip="Prices in euro">Price</span>
       </label>
       <input type="number" step="0.01" min="0.00" name="price" placeholder="20.00" class="input input-bordered w-full" required />
     </div>
