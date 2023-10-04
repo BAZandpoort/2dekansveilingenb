@@ -1,6 +1,6 @@
 <?php
-include_once LIB . '/catalog/products.php';
-include_once COMPONENTS . '/product-card.php';
+require_once LIB . '/catalog/products.php';
+require_once COMPONENTS . '/product-card.php';
 
 $categories = popularCategories(3);
 

@@ -5,8 +5,8 @@ if (!isset($_SESSION['user'])) {
 }
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
-include_once LIB . '/catalog/products.php';
-include_once COMPONENTS . '/product-card.php';
+require_once LIB . '/catalog/products.php';
+require_once COMPONENTS . '/product-card.php';
 
 $products = userProducts($userid);
 
