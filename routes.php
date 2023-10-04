@@ -53,6 +53,13 @@ $routes = [
     'nav' => true,
     'footer' => false,
   ],
+  '/dashboard/see-translations' => [
+    'view' => 'member/see-translations.php',
+    'title' => 'Edit translations',
+    'auth_roles' => ['member'],
+    'nav' => true,
+    'footer' => false,
+  ],
   '/dashboard/edit-translation' => [
     'view' => 'member/edit-translation.php',
     'title' => 'Edit translations',

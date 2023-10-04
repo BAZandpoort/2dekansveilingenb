@@ -28,14 +28,14 @@ if (!isset($_GET["location"])){
     <div class="dropdown">
     <label tabindex="0" class="btn m-1">Select page to edit</label>
         <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-            <li><a href="/dashboard/edit-translation">See all</a></li>
+            <li><a href="/dashboard/see-translations">See all</a></li>
             <?php
                 $query = 'SELECT location FROM translation WHERE location <> "none" GROUP BY location';
                 $locations = fetch($query);
 
                 foreach($locations as $row){
                     echo '
-                        <li><a href="/dashboard/edit-translation?location='.$row["location"].'">'.$row["location"].'</a></li>
+                        <li><a href="/dashboard/see-translations?location='.$row["location"].'">'.$row["location"].'</a></li>
                     ';
                 }
             ?>            
@@ -49,6 +49,7 @@ if (!isset($_GET["location"])){
             <th>English</th> 
             <th>Nederlands</th> 
             <th>Français</th>
+            <th></th>
         </tr>
         </thead> 
         <tbody>
@@ -56,7 +57,7 @@ if (!isset($_GET["location"])){
         <?php
             $query = 'SELECT * FROM translation ' . $end_of_query;
             if (isset($_GET["location"])){
-                echo 'Edit translations of '.$_GET["location"];
+                echo 'See translations of '.$_GET["location"];
             }
             $translations = fetch($query);
 
@@ -79,6 +80,7 @@ if (!isset($_GET["location"])){
                         <td>'.$text_english.'</td> 
                         <td>'.$text_nederlands.'</td> 
                         <td>'.$text_français.'</td> 
+                        <td>f</td>
                     </tr>
                 ';
             }
