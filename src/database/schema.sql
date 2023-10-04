@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 04, 2023 at 07:48 PM
+-- Generation Time: Oct 04, 2023 at 08:33 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -142,7 +142,7 @@ INSERT INTO `product_categories` (`id`, `name`) VALUES
 
 CREATE TABLE `translation` (
   `id` int(11) NOT NULL,
-  `location` text DEFAULT '\'\\\'index.php\\\'\'',
+  `location` text DEFAULT NULL,
   `text_en` text NOT NULL DEFAULT '\'\\\'N/A\\\'\'',
   `text_nl` text NOT NULL DEFAULT '\'N/A\'',
   `text_fr` text NOT NULL DEFAULT '\'N/A\''
@@ -153,10 +153,10 @@ CREATE TABLE `translation` (
 --
 
 INSERT INTO `translation` (`id`, `location`, `text_en`, `text_nl`, `text_fr`) VALUES
-(0, 'none', 'N/A', 'N/A', 'N/A'),
+(0, '***DISCLAIMER***', 'DO NOT DELETE ANY RECORDS IN THIS TABLE', 'DONT DELETE ANY', 'AT ALL'),
 (1, 'nav.php', '2nd-chance auctions', '2dekans veilingen', '2ème-chance enchères'),
 (2, 'nav.php', 'Log out', 'Log uit', 'Se déconnecter'),
-(3, 'footer.php', 'N/A', 'Diensten', 'N/A'),
+(3, 'footer.php', 'Services', 'Diensten', 'Service'),
 (4, 'footer.php', 'N/A', 'Branding', 'N/A'),
 (5, 'footer.php', 'N/A', 'Ontwerp', 'N/A'),
 (6, 'footer.php', 'N/A', 'Marketing', 'N/A'),
@@ -315,7 +315,7 @@ INSERT INTO `user_profile` (`id`, `userid`, `profilePictureUrl`, `about`, `theme
 (48, 43, 'https://avatars.githubusercontent.com/u/46480378', 'Alter tametsi quis bardus sum corona basium casso trucido voco. Correptius deporto auctus sponte sophismata astrum iure. Votum fugiat corrumpo thalassinus testimonium textilis sonitus stultus.', 'light', 'english'),
 (49, 34, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1051.jpg', 'Succedo canonicus strenuus sono delicate nisi vulgivagus earum. Delibero ceno caelum creta. Defleo cupio anser laborum voluntarius copia consuasor.', 'light', 'english'),
 (50, 8, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/256.jpg', 'Nobis sulum territo. Doloremque alienus expedita tenetur astrum quo venia deprecator modi vicinus. Sursum thymum spes custodia alveus spiritus termes.', 'light', 'english'),
-(51, 51, 'https://avatars.githubusercontent.com/u/64209400?v=4', 'Hello!', 'dark', 'english');
+(51, 51, 'https://avatars.githubusercontent.com/u/64209400?v=4', 'Hello!', 'dark', 'text_fr');
 
 -- --------------------------------------------------------
 
