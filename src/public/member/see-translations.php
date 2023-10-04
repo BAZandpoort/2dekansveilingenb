@@ -62,24 +62,24 @@ if (!isset($_GET["location"])){
             $translations = fetch($query);
 
             foreach($translations as $row){
-                $text_english = (strlen($row["english"]) > 20)
-				? substr_replace($row["english"], "...", 21)
-				: $row["english"];
+                $text_english = (strlen($row["text_en"]) > 20)
+				? substr_replace($row["text_en"], "...", 21)
+				: $row["text_en"];
 
-                $text_nederlands = (strlen($row["nederlands"]) > 20)
-				? substr_replace($row["nederlands"], "...", 21)
-				: $row["nederlands"];
+                $text_nederlands = (strlen($row["text_nl"]) > 20)
+				? substr_replace($row["text_nl"], "...", 21)
+				: $row["text_nl"];
 
-                $text_français = (strlen($row["français"]) > 20)
-				? substr_replace($row["français"], "...", 21)
-				: $row["français"];
+                $text_francais = (strlen($row["text_fr"]) > 20)
+				? substr_replace($row["text_fr"], "...", 21)
+				: $row["text_fr"];
 
                 echo '
                     <tr>
                         <th>'.$row["id"].'</th> 
                         <td>'.$text_english.'</td> 
                         <td>'.$text_nederlands.'</td> 
-                        <td>'.$text_français.'</td>
+                        <td>'.$text_francais.'</td>
                         <td><a href="/dashboard/edit-translation?translation='.$row["id"].'"><button class="btn btn-xs">✏</button></a></td>
                     </tr>
                 ';

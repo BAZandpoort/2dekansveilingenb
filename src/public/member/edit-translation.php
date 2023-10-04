@@ -28,10 +28,10 @@ $translation_text = fetch($query);
     <div class="flex flex-col gap-2 w-full max-w-xs">
       <label for="description">English</label>
       <input
-      name="english"
-      id="english"
+      name="text_en"
+      id="text_en"
       type="text"
-      value=<?php echo $translation_text["english"];?>
+      value=<?php echo $translation_text["text_en"];?>
       class="input input-bordered w-full placeholder:opacity-30"
       required />
     </div>
@@ -39,10 +39,10 @@ $translation_text = fetch($query);
     <div class="flex flex-col gap-2 w-full max-w-xs">
       <label for="description">Nederlands</label>
       <input
-      name="nederlands"
-      id="nederlands"
+      name="text_nl"
+      id="text_nl"
       type="text"
-      value=<?php echo $translation_text["nederlands"];?>
+      value=<?php echo $translation_text["text_nl"];?>
       class="input input-bordered w-full placeholder:opacity-30"
       required />
     </div>
@@ -50,10 +50,10 @@ $translation_text = fetch($query);
     <div class="flex flex-col gap-2 w-full max-w-xs">
       <label for="description">Français</label>
       <input
-      name="français"
-      id="français"
+      name="text_fr"
+      id="text_fr"
       type="text"
-      value=<?php echo $translation_text["français"];?>
+      value=<?php echo $translation_text["text_fr"];?>
       class="input input-bordered w-full placeholder:opacity-30"
       required />
     </div>

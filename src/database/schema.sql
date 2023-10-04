@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 04, 2023 at 06:59 PM
+-- Generation Time: Oct 04, 2023 at 07:48 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -142,17 +142,17 @@ INSERT INTO `product_categories` (`id`, `name`) VALUES
 
 CREATE TABLE `translation` (
   `id` int(11) NOT NULL,
-  `location` text DEFAULT '\'index.php\'',
-  `english` text NOT NULL DEFAULT 'N/A',
-  `nederlands` text NOT NULL DEFAULT 'N/A',
-  `français` text NOT NULL DEFAULT 'N/A'
+  `location` text DEFAULT '\'\\\'index.php\\\'\'',
+  `text_en` text NOT NULL DEFAULT '\'\\\'N/A\\\'\'',
+  `text_nl` text NOT NULL DEFAULT '\'N/A\'',
+  `text_fr` text NOT NULL DEFAULT '\'N/A\''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `translation`
 --
 
-INSERT INTO `translation` (`id`, `location`, `english`, `nederlands`, `français`) VALUES
+INSERT INTO `translation` (`id`, `location`, `text_en`, `text_nl`, `text_fr`) VALUES
 (0, 'none', 'N/A', 'N/A', 'N/A'),
 (1, 'nav.php', '2nd-chance auctions', '2dekans veilingen', '2ème-chance enchères'),
 (2, 'nav.php', 'Log out', 'Log uit', 'Se déconnecter'),
@@ -161,13 +161,13 @@ INSERT INTO `translation` (`id`, `location`, `english`, `nederlands`, `français
 (5, 'footer.php', 'N/A', 'Ontwerp', 'N/A'),
 (6, 'footer.php', 'N/A', 'Marketing', 'N/A'),
 (7, 'footer.php', 'N/A', 'Advertentie', 'N/A'),
-(8, 'footer.php', 'N/A', 'Bedrijf', 'N/A'),
+(8, 'footer.php', 'Business', 'Bedrijf', 'Enterprise'),
 (9, 'footer.php', 'N/A', 'Over ons', 'N/A'),
 (10, 'footer.php', 'Contact', 'Contact', 'N/A'),
 (11, 'footer.php', 'N/A', 'Vacatures', 'N/A'),
 (12, 'footer.php', 'N/A', 'Perskit', 'N/A'),
 (13, 'footer.php', 'N/A', 'Juridisch', 'N/A'),
-(14, 'footer.php', 'N/A', 'Gebruiksvoorwaarden', 'N/A'),
+(14, 'footer.php', 'Terms', 'Gebruiksvoorwaarden', 'N/A'),
 (15, 'footer.php', 'N/A', 'Privacybeleid', 'N/A'),
 (16, 'footer.php', 'N/A', 'Cookiebeleid', 'N/A');
 

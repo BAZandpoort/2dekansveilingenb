@@ -11,16 +11,16 @@ if ($userid) {
   $theme = $data['theme'] === 'dark' ? 'light' : 'dark';
   $language = $data['language'];
 
-  $english_link = "../src/lib/account/language-select.php?language=english";
-  $nederlands_link = "../src/lib/account/language-select.php?language=nederlands";
-  $français_link = "../src/lib/account/language-select.php?language=français";
+  $english_link = "../src/lib/account/language-select.php?language=text_en";
+  $nederlands_link = "../src/lib/account/language-select.php?language=text_nl";
+  $francais_link = "../src/lib/account/language-select.php?language=text_fr";
 } else {
-  $english_link = "src/public/account/language-select.php?language=english";
-  $nederlands_link = "src/public/account/language-select.php?language=nederlands";
-  $français_link = "src/public/account/language-select.php?language=français";
+  $english_link = "src/public/account/language-select.php?language=text_en";
+  $nederlands_link = "src/public/account/language-select.php?language=text_nl";
+  $francais_link = "src/public/account/language-select.php?language=text_fr";
 
   if (!isset($_SESSION["guest_language"])){
-    $_SESSION["guest_language"] = "english";
+    $_SESSION["guest_language"] = "text_en";
   }
 
   $language = $_SESSION["guest_language"];
@@ -58,7 +58,7 @@ $query = 'SELECT id, '.$language.' FROM translation' ;
           <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
             <li><a href=<?php echo $english_link?>>English</a></li>
             <li><a href=<?php echo $nederlands_link?>>Nederlands</a></li>
-            <li><a href=<?php echo $français_link?>>Français</a></li>
+            <li><a href=<?php echo $francais_link?>>Français</a></li>
           </ul>
       </div>  
     <div class="dropdown dropdown-end mr-4">
