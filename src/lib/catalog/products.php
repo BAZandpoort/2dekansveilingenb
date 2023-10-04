@@ -14,12 +14,12 @@ function products() {
         $productName = (strlen($product["name"]) > 20)
 				? substr_replace($product["name"], "...", 21)
 				: $product["name"];
+                
               
-               // $_SESSION['prodid'] = $product["id"];
 
         echo '
         <a class="card card-compact w-60 inline-block ml-2 my-6 bg-white hover:bg-gray-100 relative">
-            <form method="post" action="/account/favorite?id=' . $product['id'] . '">
+            <form method="post" action="?id=' . $product['id'] . '">
                 <img src="' .$product["imageUrl"]. '" class=" max-h-44 w-64 m-auto object-cover">
                 <div class="card-body">
                 <h2 class="card-title text-base">' . $productName .'</h2>
@@ -37,6 +37,13 @@ function products() {
         ' ;
         
     }
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["bied"])) {
+
+        include_once PUBLIC_S . '/account/favorite.php';
+        
+    }
+    
+    
    
     echo '</section>';
    
