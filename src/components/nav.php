@@ -45,6 +45,7 @@ if ($userid) {
             </li>
             <li><a href="src/lib/account/change-theme.php" >Switch to ' . $theme . '</a></li>
             <li><a href="/account/settings/edit">Settings</a></li>
+            <li><a href="/verkoper-dashboard">Dashboard (Products)</a></li>
             <li><a href="/account/logout"> logout</a></li>
             
           </ul>

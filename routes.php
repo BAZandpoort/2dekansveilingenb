@@ -67,6 +67,13 @@ $routes = [
     'nav' => true,
     'footer' => false,
   ],
+  '/verkoper-dashboard' => [
+    'view' => 'member/verkoperDashboard.php',
+    'title' => 'Dashboard',
+    'auth_roles' => ['member'],
+    'nav' => true,
+    'footer' => false,
+  ],
   // Error routes
   '/404' => [
     'view' => 'errors/404.php',

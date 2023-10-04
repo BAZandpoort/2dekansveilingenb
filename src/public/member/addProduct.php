@@ -87,9 +87,16 @@ if ($error) {
     </div>
 
     <input type="submit" name="add" value="Add product" class="btn btn-wide place-self-center">
+   
   </form>
   
   <div class="w-full text-center mt-8">
     <a class="link" href="/">Go back</a>
+    <br>
+    <br>
+    <a class="link" href="/verkoper-dashboard">Dashboard</a>
+    <br>
+    <br>
+
   </div>
 </div>
