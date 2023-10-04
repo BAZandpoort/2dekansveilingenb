@@ -79,8 +79,8 @@ if (!isset($_GET["location"])){
                         <th>'.$row["id"].'</th> 
                         <td>'.$text_english.'</td> 
                         <td>'.$text_nederlands.'</td> 
-                        <td>'.$text_français.'</td> 
-                        <td><a href="/dashboard/edit-translations?translation='.$row["id"].'"><button class="btn btn-xs">✏</button></a></td>
+                        <td>'.$text_français.'</td>
+                        <td><a href="/dashboard/edit-translation?translation='.$row["id"].'"><button class="btn btn-xs">✏</button></a></td>
                     </tr>
                 ';
             }
