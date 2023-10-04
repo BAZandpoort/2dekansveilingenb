@@ -9,20 +9,17 @@ if (isset($_POST['edit'])) {
   $nederlands = $_POST['nederlands'];
   $français = $_POST['français'];
 
-  $query = 'UPDATE translations (english = ?, nederlands = ?, français = ?) WHERE id = ' . $id;
-  echo $query . "<br>";
+  $query = 'UPDATE translations SET (english = ?, nederlands = ?, français = ?) WHERE id = ?';
 
-  $insertData = insert(
-    $query,
-    ['type' => 's', 'value' => $english],
-    ['type' => 's', 'value' => $nederlands],
-    ['type' => 's', 'value' => $français],
+  $update = insert(
+    $query, 
+    ['type' => 's', 'value' => $english], 
+    ['type' => 's', 'value' => $nederlands], 
+    ['type' => 's', 'value' => $français], 
+    ['type' => 'i', 'value' => $id]
   );
 
-  echo $insertData . "<br>";
-
-  return $insertData;
-  
+  return $update;
 }
 header('Location: /');
 return;
