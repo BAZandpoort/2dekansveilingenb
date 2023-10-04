@@ -80,7 +80,7 @@ if (!isset($_GET["location"])){
                         <td>'.$text_english.'</td> 
                         <td>'.$text_nederlands.'</td> 
                         <td>'.$text_français.'</td> 
-                        <td>f</td>
+                        <td><a href="/dashboard/edit-translations?translation='.$row["id"].'"><button class="btn btn-xs">✏</button></a></td>
                     </tr>
                 ';
             }
