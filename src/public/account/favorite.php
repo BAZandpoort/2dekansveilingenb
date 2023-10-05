@@ -10,12 +10,6 @@ require_once LIB . '/util/util.php';
 
     
 
-    $userid = $_SESSION['user']['id'] ;
-    $proid = $_GET["id"];
- 
-    
- 
-    $sql = insert("INSERT INTO favorieten (userid, id) VALUES ($userid, $proid)");
     
 
 

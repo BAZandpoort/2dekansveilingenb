@@ -39,8 +39,14 @@ function products() {
     }
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["bied"])) {
 
-        include_once PUBLIC_S . '/account/favorite.php';
-        
+        //include_once PUBLIC_S . '/account/favorite.php';
+        $userid = $_SESSION['user']['id'] ;
+    $proid = $_GET["id"];
+ 
+    
+ 
+    $sql = insert("INSERT INTO favorieten (userid, id) VALUES ($userid, $proid)");
+    
     }
     
     

@@ -53,8 +53,8 @@ if ($userid) {
             </li>
             <li><a href="src/lib/account/change-theme.php" >Switch to ' . $theme . '</a></li>
             <li><a>Settings</a></li>
-            <form method="post" action="account/favorite">
-            <li><button type="submit" name="runButton">Favorites</button></li>
+            <form method="post" action="/account/favorite">
+            <li><button type="submit" name="favo">Favorites</button></li>
             </form>
             <li><a href="/account/logout"> logout</a></li>
             
