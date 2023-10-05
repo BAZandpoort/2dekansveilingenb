@@ -5,13 +5,11 @@ import userRoleMapping from './data/user_role_mapping';
 import productCategories from './data/product_categories';
 import products from './data/products';
 
-
-
 const dbConfig = {
     host: 'localhost',
     user: 'root',
     password: '',
-    database: '2dekans-veilingen',
+    database: '2dekansveilingen',
 };
 
 
