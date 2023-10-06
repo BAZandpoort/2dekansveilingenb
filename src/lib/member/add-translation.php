@@ -18,5 +18,5 @@ if (isset($_POST['add'])) {
     ['type' => 's', 'value' => ''.$text_fr.''],
   );  
 }
-header('Location: /');
+header('Location: /dashboard/see-translations');
 return;
