@@ -7,7 +7,7 @@ interface ProductCategories {
 export default async function productCategories(): Promise<ProductCategories[]> {
   const result: ProductCategories[] = [];
   const checkList: string[] = [];
-  for (let i = 0; i < 22; i++) {
+  for (let i = 0; i < 10; i++) {
     let name;
     do {
       name = faker.commerce.department();
