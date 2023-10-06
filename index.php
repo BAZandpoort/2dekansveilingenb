@@ -56,6 +56,7 @@ $containerClasses = $route['container'] ? 'container mx-auto pt-24 pb-48 md:px-1
   <script src="https://cdn.tailwindcss.com"></script>
 
   <script src="/public/js/countdown.js"></script>
+  <script src="/public/js/share.js"></script>
   <link rel="stylesheet" href="/public/css/theme.css">
   <title>2dekans veilingen - <?php echo $route['title']; ?></title>
 </head>
