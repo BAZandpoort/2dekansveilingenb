@@ -59,34 +59,21 @@ if ($userid) {
   </div>
   <div class="navbar-center hidden lg:flex">
     <ul class="menu menu-horizontal px-1 gap-16">
-      <a href="/catalog/products?category=veilingen" class="group flex flex-col gap-4 items-center">
-        <i class="fa-solid fa-gavel fa-2xl group-hover:-translate-y-1 transition"></i>
-        <span class="label-text">Veilingen</span>
-      </a>
-      <a href="/catalog/products?category=locatie" class="group flex flex-col gap-4 items-center">
-        <i class="fa-solid fa-location-dot fa-2xl group-hover:-translate-y-1 transition"></i>
-        <span class="label-text">Locatie</span>
-      </a>
-      <a href="/catalog/products?category=products" class="group flex flex-col gap-4 items-center">
-        <i class="fa-solid fa-box-open fa-2xl group-hover:-translate-y-1 transition"></i>
-        <span class="label-text">Producten</span>
-      </a>
-      <a href="/catalog/products?category=autos" class="group flex flex-col gap-4 items-center">
-        <i class="fa-solid fa-car-side fa-2xl group-hover:-translate-y-1 transition"></i>
-        <span class="label-text">Auto's</span>
-      </a>
-      <a href="/catalog/products?category=kledij" class="group flex flex-col gap-4 items-center">
-        <i class="fa-solid fa-shirt fa-2xl group-hover:-translate-y-1 transition"></i>
-        <span class="label-text">Kledij</span>
-      </a>
-      <a href="/catalog/products?category=elektronica" class="group flex flex-col gap-4 items-center">
-        <i class="fa-solid fa-mobile fa-2xl group-hover:-translate-y-1 transition"></i>
-        <span class="label-text">Elektronica</span>
-      </a>
-      <a href="/catalog/products?category=huis" class="group flex flex-col gap-4 items-center">
-        <i class="fa-solid fa-house fa-2xl group-hover:-translate-y-1 transition"></i>
-        <span class="label-text">Huis en inrichting</span>
-      </a>
+    <?php
+        $categories = fetch('SELECT * FROM product_categories LIMIT 10');
+
+        if ($categories) {
+          
+          foreach ($categories as $category) {
+            echo '<a href="/catalog/products?category=' . $category['name'] . '" class="group flex flex-col gap-4 items-center">
+              <i class="fa-solid ' . $category['icons'] . ' fa-2xl group-hover:-translate-y-1 transition"></i>
+              <span class="label-text">' . $category['name'] . '</span>
+            </a>';
+          }
+        }
+
+      ?>
+
     </ul>
   </div>
 
