@@ -11,7 +11,7 @@ const dbConfig = {
     host: 'localhost',
     user: 'root',
     password: '',
-    database: '2dekans-veilingen-testing',
+    database: '2dekans-veilingen',
 };
 
 
