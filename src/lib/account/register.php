@@ -5,10 +5,12 @@ if (!isset($_POST['register'])) {
   exit();
 }
 
-require_once '../../../config.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/util/util.php';
 require_once LIB . '/authentication/authentication.php';
 
+$firstname = $_POST['firstname'];
+$lastname = $_POST['lastname'];
 $email = $_POST['email'];
 $username = $_POST['username'];
 $password = $_POST['password'];
@@ -19,7 +21,7 @@ $data = fetch('SELECT * FROM users WHERE email = ?', [
   'value' => $email,
 ]);
 if ($data) {
-  header('Location: /register?error=email');
+  header('Location: /account/register?error=email');
   exit();
 }
 
@@ -29,16 +31,16 @@ $data = fetch('SELECT * FROM users WHERE username = ?', [
 ]);
 
 if ($data) {
-  header('Location: /register?error=username');
+  header('Location: /account/register?error=username');
   exit();
 }
 
 if ($password !== $passwordConfirm) {
-  header('Location: /register?error=password');
+  header('Location: /account/register?error=password');
   exit();
 }
 
-$password = password_hash($password, PASSWORD_DEFAULT);
-register($email, $username, $password);
+$password = password_hash($password, PASSWORD_ARGON2ID);
+register($username, $password, $email, $firstname, $lastname);
 
-header('Location: /login');
+header('Location: /account/login?error=success');

@@ -2,6 +2,7 @@ import { faker } from '@faker-js/faker';
 
 interface Products {
   userid: number;
+  categoryid: number;
   name: string;
   description: string;
   price: string;
@@ -13,6 +14,7 @@ export default async function products(): Promise<Products[]> {
   const userids = Array.from(Array(50).keys()).map((i) => i + 1);
   for (let i = 0; i < 50; i++) {
     const userid = faker.helpers.arrayElement(userids);
+    const categoryid = faker.helpers.arrayElement(Array.from(Array(22).keys()).map((i) => i + 1));
     const name = faker.commerce.productName();
     const description = faker.commerce.productDescription();
     const price = faker.commerce.price();
@@ -21,6 +23,7 @@ export default async function products(): Promise<Products[]> {
     userids.splice(userids.indexOf(userid), 1);
     result.push({
       userid,
+      categoryid,
       name,
       description,
       price,
