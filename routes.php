@@ -74,6 +74,13 @@ $routes = [
     'nav' => true,
     'footer' => false,
   ],
+  '/dashboard' => [
+    'view' => 'dashboard/admin.php',
+    'title' => 'My Products',
+    'auth_roles' => ['member'],
+    'nav' => false,
+    'footer' => false,
+  ],
   // Error routes
   '/404' => [
     'view' => 'errors/404.php',
