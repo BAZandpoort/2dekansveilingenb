@@ -55,7 +55,7 @@ $routes = [
   ],
   '/dashboard/see-translations' => [
     'view' => 'member/see-translations.php',
-    'title' => 'Edit translations',
+    'title' => 'See translations',
     'auth_roles' => ['member'],
     'nav' => true,
     'footer' => false,
@@ -63,6 +63,13 @@ $routes = [
   '/dashboard/edit-translation' => [
     'view' => 'member/edit-translation.php',
     'title' => 'Edit translations',
+    'auth_roles' => ['member'],
+    'nav' => true,
+    'footer' => false,
+  ],
+  '/dashboard/add-translation' => [
+    'view' => 'member/add-translation.php',
+    'title' => 'Add translations',
     'auth_roles' => ['member'],
     'nav' => true,
     'footer' => false,
