@@ -92,7 +92,6 @@ if ($error) {
       name="auction_duration"
       id="auction_duration"
       type="date"
-      placeholder="..."
       class="input input-bordered w-full placeholder:opacity-30"
       required />
     </div>
