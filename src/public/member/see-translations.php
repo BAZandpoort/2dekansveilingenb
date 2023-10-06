@@ -4,6 +4,9 @@ if (!isset($_SESSION['user'])) {
   exit();
 }
 
+include "routes.php";
+$translation_routes = array_keys($routes);
+
 $error = $_GET['error'] ?? false;
 
 if ($error) {
@@ -30,12 +33,15 @@ if (!isset($_GET["location"])){
         <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
             <li><a href="/dashboard/see-translations">See all</a></li>
             <?php
-                $query = 'SELECT location FROM translation WHERE location <> "none" GROUP BY location';
-                $locations = fetch($query);
+            
+                echo '
+                    <li><a href="/dashboard/see-translations?location=nav">nav</a></li>
+                    <li><a href="/dashboard/see-translations?location=footer">footer</a></li>
+                ';
 
-                foreach($locations as $row){
+                foreach ($translation_routes as $translation_route) {
                     echo '
-                        <li><a href="/dashboard/see-translations?location='.$row["location"].'">'.$row["location"].'</a></li>
+                        <li><a href="/dashboard/see-translations?location='.$translation_route.'">'.$translation_route.'</a></li>
                     ';
                 }
             ?>            
