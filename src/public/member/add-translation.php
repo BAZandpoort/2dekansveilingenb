@@ -5,7 +5,8 @@ if (!isset($_SESSION['user'])) {
 }
 
 $error = $_GET['error'] ?? false;
-include "see-translations.php";
+include "routes.php";
+$translation_routes = array_keys($routes);
 
 if ($error) {
   echo '
@@ -20,12 +21,14 @@ if ($error) {
 ?>
 
 <div>
-  <form action="/src/lib/member/add-translation.php" method="post" class="flex flex-col items-center gap-4">
+  <form action="/src/lib/member/add-translation" method="post" class="flex flex-col items-center gap-4">
     <div class="form-control w-full max-w-xs">
         <label class="label">
             <span class="label-text">Route</span>
         </label>
         <select name="route" id="route" class="select select-bordered">
+            <option value="nav">nav</option>
+            <option value="footer">footer</option>
             <?php
                 foreach ($translation_routes as $translation_route) {
                     echo '
