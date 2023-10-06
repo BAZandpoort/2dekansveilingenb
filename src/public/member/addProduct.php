@@ -93,7 +93,7 @@ if ($error) {
       id="auction_duration"
       type="date"
       class="input input-bordered w-full placeholder:opacity-30"
-      required />
+      />
     </div>
 
     <input type="submit" name="add" value="Add product" class="btn btn-wide place-self-center">
