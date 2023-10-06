@@ -38,13 +38,13 @@ $routes = [
     'nav' => true,
     'footer' => true,
     ],
-    '/catalog/product' => [
+    '/products/share' => [
       'view' => 'catalog/product.php',
       'title' => 'Products',
       'auth_roles' => ['member', 'guest', 'admin'],
       'nav' => false,
       'footer' => false,
-      ],
+    ],
   // '/searchbar' => [
   //   'view' => 'zoekbalk.php',
   //   'title' => 'Search',
