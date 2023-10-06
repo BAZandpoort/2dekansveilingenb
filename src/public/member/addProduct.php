@@ -57,7 +57,27 @@ $categories = fetch("SELECT * FROM product_categories");
       </label>
       <input name="image" type="file" class="file-input file-input-bordered w-full" required />
     </div>
-  </div>
+
+    <div class="flex flex-col gap-2 w-full max-w-xs">
+      <label for="imageUrl">Image URL</label>
+      <input
+      name="imageUrl"
+      id="imageUrl"
+      type="url"
+      placeholder="..."
+      class="input input-bordered w-full placeholder:opacity-30"
+      required />
+    </div>
+
+    <div class="flex flex-col gap-2 w-full max-w-xs">
+      <label for="auction_duration">Auction end date | <b>For auctions only</b></label>
+      <input
+      name="auction_duration"
+      id="auction_duration"
+      type="date"
+      class="input input-bordered w-full placeholder:opacity-30"
+      />
+    </div>
 
   <div class="form-control w-full max-w-xs mt-4">
     <button name="create" class="btn btn-primary">Create</button>

@@ -7,23 +7,23 @@
 
   <!-- Right - links -->
   <nav>
-    <header class="footer-title">Services</header> 
-    <a class="link link-hover">Branding</a> 
-    <a class="link link-hover">Design</a> 
-    <a class="link link-hover">Marketing</a> 
-    <a class="link link-hover">Advertisement</a>
-  </nav> 
+    <header class="footer-title"><?php echo $data[3][$language];?></header>
+    <a class="link link-hover"><?php echo $data[4][$language];?></a>
+    <a class="link link-hover"><?php echo $data[5][$language];?></a>
+    <a class="link link-hover"><?php echo $data[6][$language];?></a>
+    <a class="link link-hover"><?php echo $data[7][$language];?></a>
+  </nav>
   <nav>
-    <header class="footer-title">Company</header> 
-    <a class="link link-hover">About us</a> 
-    <a class="link link-hover">Contact</a> 
-    <a class="link link-hover">Jobs</a> 
-    <a class="link link-hover">Press kit</a>
-  </nav> 
+    <header class="footer-title"><?php echo $data[8][$language];?></header>
+    <a class="link link-hover"><?php echo $data[9][$language];?></a>
+    <a class="link link-hover"><?php echo $data[10][$language];?></a>
+    <a class="link link-hover"><?php echo $data[11][$language];?></a>
+    <a class="link link-hover"><?php echo $data[12][$language];?></a>
+  </nav>
   <nav>
-    <header class="footer-title">Legal</header> 
-    <a class="link link-hover">Terms of use</a> 
-    <a class="link link-hover">Privacy policy</a> 
-    <a class="link link-hover">Cookie policy</a>
+    <header class="footer-title"><?php echo $data[13][$language];?></header>
+    <a class="link link-hover"><?php echo $data[14][$language];?></a>
+    <a class="link link-hover"><?php echo $data[15][$language];?></a>
+    <a class="link link-hover"><?php echo $data[16][$language];?></a>
   </nav>
 </footer>

@@ -37,6 +37,14 @@ $routes = [
     'footer' => true,
     'container' => true,
   ],
+  '/account/language-select' => [
+    'view' => 'account/language_select.php',
+    'title' => 'Language select',
+    'auth_roles' => ['guest'],
+    'nav' => true,
+    'footer' => true,
+    'container' => true,
+  ],
   // Catalog routes
   '/catalog/products' => [
     'view' => 'catalog/products.php',
@@ -45,7 +53,22 @@ $routes = [
     'footer' => true,
     'container' => true,
   ],
-  // Member routes
+  '/catalog/product' => [
+    'view' => 'product.php',
+    'title' => 'Product',
+    'nav' => true,
+    'footer' => true,
+    'container' => true,
+  ],
+  '/catalog/bied' => [
+    'view' => '/catalog/bied.php',
+    'title' => 'bieden',
+    'auth_roles' => ['member'],
+    'nav' => true,
+    'footer' => true,
+    'container' => true,
+  ],
+  // Dashboard routes
   '/dashboard/products/add' => [
     'view' => 'member/addProduct.php',
     'title' => 'Add Products',
@@ -57,6 +80,44 @@ $routes = [
     'view' => 'member/myProducts.php',
     'title' => 'My Products',
     'nav' => true,
+    'footer' => false,
+    'container' => true,
+  ],
+  '/dashboard/see-translations' => [
+    'view' => 'member/see-translations.php',
+    'title' => 'See translations',
+    'auth_roles' => ['member'],
+    'nav' => true,
+    'footer' => false,
+  ],
+  '/dashboard/edit-translation' => [
+    'view' => 'member/edit-translation.php',
+    'title' => 'Edit translations',
+    'auth_roles' => ['member'],
+    'nav' => true,
+    'footer' => false,
+  ],
+  '/dashboard/add-translation' => [
+    'view' => 'member/add-translation.php',
+    'title' => 'Add translations',
+    'auth_roles' => ['member'],
+    'nav' => true,
+    'footer' => false,
+    'container' => true,
+  ],
+  '/dashboard/see-translations' => [
+    'view' => 'member/see-translations.php',
+    'title' => 'See translations',
+    'auth_roles' => ['member'],
+    'nav' => true,
+    'footer' => false,
+  ],
+  // Other
+  '/products/share' => [
+    'view' => 'catalog/product.php',
+    'title' => 'Products',
+    'auth_roles' => ['member', 'guest', 'admin'],
+    'nav' => false,
     'footer' => false,
     'container' => true,
   ],

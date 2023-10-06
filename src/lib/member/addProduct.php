@@ -25,6 +25,7 @@ if (isset($_POST['create'])) {
 header('Location: /');
 exit();
 
+// Add auction time
 function addProduct(
   $userid,
   $categoryid,
