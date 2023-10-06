@@ -82,4 +82,11 @@ $routes = [
     'nav' => false,
     'footer' => false,
   ],
+  '/catalog/bied' => [
+    'view' => '/catalog/bied.php',
+    'title' => 'bieden',
+    'auth_roles' => ['member'],
+    'nav' => true,
+    'footer' => true,
+  ],
 ];

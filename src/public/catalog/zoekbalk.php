@@ -42,7 +42,7 @@ if (isset($_POST['submit'])) {
                       <input type="hidden"name="image"value="' .$row["imageUrl"]. '">
                       <input type="hidden"name="name"value="' .$row["name"]. '">
                       <input type="hidden"name="price"value="' .$row["price"]. '">
-                      <button type="submit" class="btn btn-warning mr-0 mx-32 -mt-11" name="bied">Bid</button>
+                      <button type="submit" class="btn btn-warning mr-0 mx-32 -mt-11" name="bied" >Bid</button>
                       <p class="text-base text-center"><span id="timer">00:00:00</span></p>
                       <p class="text-base text-center -mt-3">Status: <span id="status">Open</span></p>
                   </div>
