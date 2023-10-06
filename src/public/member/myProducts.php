@@ -12,7 +12,7 @@ $userid = isset($_SESSION['user']) ? $_SESSION['user']['id'] : null;
 $query = "SELECT * FROM products WHERE userid = ?";
 $data = fetch($query, ['type' => 'i', 'value' => $userid]);
 
-if (!isset($data["id"])) {
+if (!isset($userid)) {
     echo '
         <div class="alert alert-info">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6">

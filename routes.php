@@ -45,6 +45,13 @@ $routes = [
     'nav' => true,
     'footer' => true,
     ],
+    '/catalog/product' => [
+      'view' => 'product.php',
+      'title' => 'Product',
+      'auth_roles' => ['member', 'guest', 'admin'],
+      'nav' => true,
+      'footer' => true,
+      ],
   // '/searchbar' => [
   //   'view' => 'zoekbalk.php',
   //   'title' => 'Search',
