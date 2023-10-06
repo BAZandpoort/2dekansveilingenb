@@ -29,18 +29,28 @@
                     time
                 </div>
                 <div class="card-body items-center text-center space-x-10 ">
-                    <table class="table-auto flex space-x-10 "> 
+                    <table class="table-auto flex space-x-10"> 
                         <tr>
-                            <td class="text-xl ">current price</td>
-                            <td class = "text-xl" >suggested price</td>
+                            <td class="text-xl">Your bid</td>
+                            <td class="text-xl pl-4">Highest bid</td>
                         </tr>
                         <tr>
-                            <td>(current bid price)</td>
-                            <td><?php echo $products["price"]?></td>
+                            <td id="currentBid">€0</td>
+                            <td id="suggestedBid">€<?php echo $products["price"]?></td>
                         </tr>
                     </table>
-                    <a href="Bidden.php" class="btn btn-primary">bid Now</a>
-                </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Enter amount</span>
+                        </label>
+                        <label class="input-group">
+                            <span>Price</span>
+                            <input id="bidInput" type="number" placeholder="0,00" class="input input-bordered"/>
+                            <button onClick="bid();"type="submit" class="btn btn-primary" name="bied">Bid</button>
+
+                        </label>
+                        </div>
+                    </div>
         </div>
     </div>
 </div>
@@ -58,4 +68,38 @@
     </div>
 </div>
 
+<script>
 
+
+// Whenever the button to bid is clicked, this function will be called and update the current bid price
+function bid() {
+    // Get the current bid price
+    let currentBid = Number(document.getElementById("currentBid").innerHTML.split("€")[1]);
+    // Get the suggested bid price
+    let suggestedBid = Number(document.getElementById("suggestedBid").innerHTML.split("€")[1]);
+    // Get the input field
+    let input = document.getElementById("bidInput").value;
+
+
+    // Check if the input is a number
+    if (isNaN(input)) {
+        alert("Please enter a number");
+    } else {
+        // Check if the input is higher than the current bid price
+        if (input > currentBid) {
+            // Check if the input is higher than the suggested bid price
+            if (input > suggestedBid) {
+                // Update the suggested bid price
+                document.getElementById("suggestedBid").innerHTML = "€" + input;
+            }
+            // Update the current bid price
+            document.getElementById("currentBid").innerHTML = "€" + input;
+        } else {
+            alert("Please enter a higher bid");
+        }
+
+    }
+}
+
+
+</script>
