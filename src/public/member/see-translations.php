@@ -62,7 +62,7 @@ if (!isset($_GET["location"])){
         <tbody>
 
         <?php
-            $query = 'SELECT * FROM translation ' . $end_of_query;
+            $query = 'SELECT * FROM translations ' . $end_of_query;
             if (isset($_GET["location"])){
                 echo 'See translations of '.$_GET["location"];
             }

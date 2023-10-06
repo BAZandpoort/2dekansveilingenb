@@ -17,7 +17,7 @@ if ($error) {
   ';
 }
 
-$query = 'SELECT * FROM translation WHERE id = ' . $_GET["translation"];
+$query = 'SELECT * FROM translations WHERE id = ' . $_GET["translation"];
 $translation_text = fetch($query);
 ?>
 

@@ -3,7 +3,7 @@
 define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
-define('DB_NAME', '2dekans-veilingen');
+define('DB_NAME', '2dekans-veilingen-testing');
 
 // Import aliases
 define('ROOT', $_SERVER['DOCUMENT_ROOT']);

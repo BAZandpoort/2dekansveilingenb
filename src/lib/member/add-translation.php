@@ -9,7 +9,7 @@ if (isset($_POST['add'])) {
   $text_fr = $_POST['text_fr'];
   $location = $_POST['route'];
 
-  $query = 'INSERT INTO translation (location, text_en, text_nl, text_fr) VALUES (?, ?, ?, ?)';
+  $query = 'INSERT INTO translations (location, text_en, text_nl, text_fr) VALUES (?, ?, ?, ?)';
   insert(
     $query,
     ['type' => 's', 'value' => ''.$location.''],

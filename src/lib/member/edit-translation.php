@@ -9,7 +9,7 @@ if (isset($_POST['edit'])) {
   $text_nl = $_POST['text_nl'];
   $text_fr = $_POST['text_fr'];
 
-  $query = 'UPDATE translation SET text_en = ?, text_nl = ?, text_fr = ? WHERE id = ?';
+  $query = 'UPDATE translations SET text_en = ?, text_nl = ?, text_fr = ? WHERE id = ?';
 
   insert(
     $query, 
