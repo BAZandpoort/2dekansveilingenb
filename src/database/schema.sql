@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 04, 2023 at 08:33 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Gegenereerd op: 06 okt 2023 om 15:25
+-- Serverversie: 10.4.28-MariaDB
+-- PHP-versie: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `products`
+-- Tabelstructuur voor tabel `products`
 --
 
 CREATE TABLE `products` (
@@ -40,7 +40,7 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `products`
+-- Gegevens worden geëxporteerd voor tabel `products`
 --
 
 INSERT INTO `products` (`id`, `userid`, `categoryid`, `name`, `description`, `price`, `imageUrl`, `updatedAt`, `createdAt`) VALUES
@@ -98,7 +98,7 @@ INSERT INTO `products` (`id`, `userid`, `categoryid`, `name`, `description`, `pr
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_categories`
+-- Tabelstructuur voor tabel `product_categories`
 --
 
 CREATE TABLE `product_categories` (
@@ -107,7 +107,7 @@ CREATE TABLE `product_categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `product_categories`
+-- Gegevens worden geëxporteerd voor tabel `product_categories`
 --
 
 INSERT INTO `product_categories` (`id`, `name`) VALUES
@@ -137,44 +137,47 @@ INSERT INTO `product_categories` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `translation`
+-- Tabelstructuur voor tabel `translation`
 --
 
 CREATE TABLE `translation` (
   `id` int(11) NOT NULL,
   `location` text DEFAULT NULL,
-  `text_en` text NOT NULL DEFAULT '\'\\\'N/A\\\'\'',
-  `text_nl` text NOT NULL DEFAULT '\'N/A\'',
-  `text_fr` text NOT NULL DEFAULT '\'N/A\''
+  `text_en` text NOT NULL DEFAULT 'UNAVAILABLE',
+  `text_nl` text NOT NULL DEFAULT 'ONBESCHIKBAAR',
+  `text_fr` text NOT NULL DEFAULT 'INDISPONIBLE'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `translation`
+-- Gegevens worden geëxporteerd voor tabel `translation`
 --
 
 INSERT INTO `translation` (`id`, `location`, `text_en`, `text_nl`, `text_fr`) VALUES
 (0, '***DISCLAIMER***', 'DO NOT DELETE ANY RECORDS IN THIS TABLE', 'DONT DELETE ANY', 'AT ALL'),
-(1, 'nav.php', '2nd-chance auctions', '2dekans veilingen', '2ème-chance enchères'),
-(2, 'nav.php', 'Log out', 'Log uit', 'Se déconnecter'),
-(3, 'footer.php', 'Services', 'Diensten', 'Service'),
-(4, 'footer.php', 'N/A', 'Branding', 'N/A'),
-(5, 'footer.php', 'N/A', 'Ontwerp', 'N/A'),
-(6, 'footer.php', 'N/A', 'Marketing', 'N/A'),
-(7, 'footer.php', 'N/A', 'Advertentie', 'N/A'),
-(8, 'footer.php', 'Business', 'Bedrijf', 'Enterprise'),
-(9, 'footer.php', 'N/A', 'Over ons', 'N/A'),
-(10, 'footer.php', 'Contact', 'Contact', 'N/A'),
-(11, 'footer.php', 'N/A', 'Vacatures', 'N/A'),
-(12, 'footer.php', 'N/A', 'Perskit', 'N/A'),
-(13, 'footer.php', 'N/A', 'Juridisch', 'N/A'),
-(14, 'footer.php', 'Terms', 'Gebruiksvoorwaarden', 'N/A'),
-(15, 'footer.php', 'N/A', 'Privacybeleid', 'N/A'),
-(16, 'footer.php', 'N/A', 'Cookiebeleid', 'N/A');
+(1, 'nav', '2nd-chance auctions', '2dekans veilingen', '2ème-chance enchères'),
+(2, 'nav', 'Log out', 'Log uit', 'Se déconnecter'),
+(3, 'footer', 'Services', 'Diensten', 'Service'),
+(4, 'footer', 'UNAVAILABLE', 'Branding', 'INDISPONIBLE'),
+(5, 'footer', 'UNAVAILABLE', 'Ontwerp', 'INDISPONIBLE'),
+(6, 'footer', 'UNAVAILABLE', 'Marketing', 'INDISPONIBLE'),
+(7, 'footer', 'UNAVAILABLE', 'Advertentie', 'INDISPONIBLE'),
+(8, 'footer', 'Business', 'Bedrijf', 'Enterprise'),
+(9, 'footer', 'UNAVAILABLE', 'Over ons', 'INDISPONIBLE'),
+(10, 'footer', 'Contact', 'Contact', 'INDISPONIBLE'),
+(11, 'footer', 'UNAVAILABLE', 'Vacatures', 'INDISPONIBLE'),
+(12, 'footer', 'UNAVAILABLE', 'Perskit', 'INDISPONIBLE'),
+(13, 'footer', 'UNAVAILABLE', 'Juridisch', 'INDISPONIBLE'),
+(14, 'footer', 'Terms', 'Gebruiksvoorwaarden', 'INDISPONIBLE'),
+(15, 'footer', 'UNAVAILABLE', 'Privacybeleid', 'Politique de confidentialité'),
+(16, 'footer', 'UNAVAILABLE', 'Cookiebeleid', 'INDISPONIBLE'),
+(17, 'nav', 'Auctions', 'Veilingen', 'Enchères'),
+(22, 'nav', 'Location', 'Locatie', 'Emplacement'),
+(23, 'nav', 'Products', 'Producten', 'Produits');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Tabelstructuur voor tabel `users`
 --
 
 CREATE TABLE `users` (
@@ -189,7 +192,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `users`
+-- Gegevens worden geëxporteerd voor tabel `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `firstname`, `lastname`, `updatedAt`, `createdAt`) VALUES
@@ -243,12 +246,13 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `firstname`, `lastna
 (48, 'Jannie.Konopelski', 'Ewald.Upton84@yahoo.com', '$argon2id$v=19$m=65536,t=3,p=4$XW3f/uaOmMha3QWbVUCgcQ$nHdjFdR0b/g1BiqThw1bcWwFRVBfQgEP0GbA3U0NZto', 'Era', 'D\'Amore', '2023-10-02 20:31:41', '2023-10-02 20:31:41'),
 (49, 'Rashawn56', 'Deangelo.Fadel-Daniel89@hotmail.com', '$argon2id$v=19$m=65536,t=3,p=4$Zn5zWIV89SjAWayEMi5WoA$FhzDiGcMrlWyiTOJfd7rEw8cjecO6QNbdAk4dcMvDY4', 'Darryl', 'Ferry', '2023-10-02 20:31:41', '2023-10-02 20:31:41'),
 (50, 'Donato_Kilback86', 'Bobby_Roberts64@hotmail.com', '$argon2id$v=19$m=65536,t=3,p=4$iXx58okK6BlfJxDPrmaMsw$FC1TyEF6aw96k0CMoH7Y75PT3AjhFBYsHRMabi9DIHQ', 'Onie', 'Boyer', '2023-10-02 20:31:41', '2023-10-02 20:31:41'),
-(51, 'gorge', 'gorge@blimely.com', '$argon2id$v=19$m=65536,t=4,p=1$d1p1eS9QQTN6ekViME85ag$nGDQynpdeCN/xj8xwnsP6/OVbtjbpWaKFB6MXCObvnE', 'gorge', 'blimley', '2023-10-03 17:08:51', '2023-10-03 17:08:51');
+(51, 'gorge', 'gorge@blimely.com', '$argon2id$v=19$m=65536,t=4,p=1$d1p1eS9QQTN6ekViME85ag$nGDQynpdeCN/xj8xwnsP6/OVbtjbpWaKFB6MXCObvnE', 'gorge', 'blimley', '2023-10-03 17:08:51', '2023-10-03 17:08:51'),
+(52, 'jojohnson', 'john@johnson.com', '$argon2id$v=19$m=65536,t=4,p=1$czRFWS9UWWJjbTZxRkNMcw$7h3E0xTdEAJ9LohaVDLvGNiL3II3BxMMJeevCm5Od7s', 'John', 'Johnson', '2023-10-06 11:47:17', '2023-10-06 11:47:17');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_profile`
+-- Tabelstructuur voor tabel `user_profile`
 --
 
 CREATE TABLE `user_profile` (
@@ -257,70 +261,71 @@ CREATE TABLE `user_profile` (
   `profilePictureUrl` varchar(255) NOT NULL,
   `about` text NOT NULL,
   `theme` text NOT NULL,
-  `language` text NOT NULL DEFAULT 'english'
+  `language` text NOT NULL DEFAULT 'text_en'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `user_profile`
+-- Gegevens worden geëxporteerd voor tabel `user_profile`
 --
 
 INSERT INTO `user_profile` (`id`, `userid`, `profilePictureUrl`, `about`, `theme`, `language`) VALUES
-(1, 37, 'https://avatars.githubusercontent.com/u/76832611', 'Ago arma expedita reiciendis carcer sed sub. Suasoria cubo necessitatibus cinis. Atqui placeat qui officiis cunctatio tricesimus calco alias audio argentum.', 'dark', 'english'),
-(2, 39, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/175.jpg', 'Ullus avarus censura sufficio cui coniuratio aufero victus. Tepesco copia decerno deludo adnuo. Ullus defero solio cura demoror.', 'dark', 'english'),
-(3, 13, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1177.jpg', 'Summa volaticus somniculosus repellendus. Ulciscor denego cohibeo desino. Decerno conatus dens nisi aperiam crux provident artificiose.', 'dark', 'english'),
-(4, 48, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/802.jpg', 'Adamo antepono ut maxime decimus strenuus conculco acervus caritas. Sursum libero video velit apparatus tyrannus blandior. Decumbo aggredior distinctio tantillus omnis cimentarius amitto demergo ago.', 'light', 'english'),
-(5, 5, 'https://avatars.githubusercontent.com/u/46731538', 'Inflammatio ocer vestigium velit suppono. Harum alioqui tondeo consuasor pecus sufficio reiciendis. Theca vinco comis reiciendis cruciamentum subnecto barba contigo.', 'light', 'english'),
-(6, 27, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/330.jpg', 'Viduo ulciscor aliquam utpote vito demitto cursus eius. Deinde confido curatio tener utor copia civitas cultura. Corrupti possimus delectatio inventore concido.', 'dark', 'english'),
-(7, 4, 'https://avatars.githubusercontent.com/u/43715701', 'Aro creo deprimo amo conculco supellex vomito curto clibanus. Tantillus tego corporis neque cuppedia spectaculum. Id dolor rem adicio cuius stips tabgo vicissitudo vix tergeo.', 'dark', 'english'),
-(8, 42, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/380.jpg', 'Ultio ad attonbitus comprehendo vulnero ater cavus tactus suppono admoveo. Taceo mollitia pauper amplus id adipisci utor degenero. Claustrum strenuus creator commemoro bestia dicta volo quas iusto currus.', 'light', 'english'),
-(9, 25, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/708.jpg', 'Adfero teneo aegrotatio bonus. Attonbitus appositus aeternus cimentarius tabella absens damno vito. Soleo valeo dedecor.', 'light', 'english'),
-(10, 16, 'https://avatars.githubusercontent.com/u/15989489', 'Capio fugiat ter audax aureus alii utor. Acerbitas nihil inflammatio capio decens. Soluta arcesso ambulo tolero.', 'light', 'english'),
-(11, 28, 'https://avatars.githubusercontent.com/u/80196603', 'Tantillus defendo cetera defessus ab decerno. Aegrotatio ulciscor vereor tondeo arcesso tergum administratio. Vulgaris umerus vado volubilis verecundia trepide adipisci spargo.', 'light', 'english'),
-(12, 29, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1241.jpg', 'Hic sum turpis alienus cunabula. Ademptio tenuis chirographum communis turba cogo tabula. Solutio labore stella suscipio calculus auxilium deprimo.', 'dark', 'english'),
-(13, 19, 'https://avatars.githubusercontent.com/u/40809923', 'Cresco tepidus suffoco iure quaerat ipsum contigo vorax adiuvo arca. Curatio utilis expedita recusandae copia depereo charisma. Vivo cupiditate curtus vulticulus voluptas arcesso theca.', 'light', 'english'),
-(14, 41, 'https://avatars.githubusercontent.com/u/9089171', 'Vindico ipsa astrum vomica apparatus. Qui tabesco coaegresco totus appello videlicet. Tremo clam strenuus caelestis admitto optio iste.', 'light', 'english'),
-(15, 44, 'https://avatars.githubusercontent.com/u/94396936', 'Circumvenio cometes comptus deduco arguo crinis arbitro. Acceptus hic defleo ipsum cur coadunatio amissio sortitus adimpleo. Bibo cotidie trans consequatur aliquam tot tot termes vilicus apud.', 'dark', 'english'),
-(16, 17, 'https://avatars.githubusercontent.com/u/36819511', 'Utor doloremque adipiscor volup canonicus tonsor defessus ceno volutabrum. Suppono tener cognomen exercitationem bis angulus volup apostolus credo communis. Verus cubo canto.', 'light', 'english'),
-(17, 23, 'https://avatars.githubusercontent.com/u/61284055', 'Aeger volutabrum cedo valetudo tyrannus deprimo texo demum. Depromo confido usque subseco ultio aedificium cattus sum. Assumenda careo absque demoror aeternus congregatio vestigium.', 'dark', 'english'),
-(18, 24, 'https://avatars.githubusercontent.com/u/78828950', 'Benevolentia tabernus dedico. Animadverto spoliatio velut rerum socius una vulnus curia. Vinculum accommodo voluptas vos certe tempora vomica tum accedo cogo.', 'dark', 'english'),
-(19, 33, 'https://avatars.githubusercontent.com/u/42002681', 'Tempora theca adduco ademptio. Cado candidus corroboro custodia delectus una occaecati vicissitudo trans. Libero cernuus custodia aveho viridis demulceo.', 'dark', 'english'),
-(20, 46, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/86.jpg', 'Surculus atrox crur vitium aggero vallum commodo chirographum. Sonitus turba defetiscor commodi. Adeo omnis cunae spectaculum dignissimos agnitio thesaurus.', 'light', 'english'),
-(21, 21, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/238.jpg', 'Cuppedia quos certe textilis cervus ambulo volaticus bestia acerbitas solutio. Audacia tibi auxilium damno alo terga tutamen. Complectus statua carmen tametsi.', 'dark', 'english'),
-(22, 47, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/286.jpg', 'Creptio suadeo crepusculum. Vix aqua curiositas bos voluptatem totidem. Corona adduco arx ascit perspiciatis derelinquo vetus ducimus adipiscor.', 'light', 'english'),
-(23, 15, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/665.jpg', 'Quas capio pel tibi teres talus chirographum vicinus adnuo comburo. Patruus quam corpus succurro accommodo facere victoria advenio. Cicuta titulus bardus.', 'dark', 'english'),
-(24, 30, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1012.jpg', 'Argumentum vulticulus creator. Atrocitas comburo peccatus crur vobis quia conspergo aestus charisma conatus. Alius antepono crux allatus solutio copiose canis balbus.', 'light', 'english'),
-(25, 45, 'https://avatars.githubusercontent.com/u/67797305', 'Nesciunt placeat arbitro delinquo magnam statua sit arcesso truculenter celer. Officia nihil talis averto curriculum degero. Cimentarius angustus autem capto ventito decipio.', 'dark', 'english'),
-(26, 2, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1243.jpg', 'Tergeo contigo tendo modi beatus corroboro audacia undique. Fuga arbustum totus bestia. Vulgivagus articulus cornu non sapiente soluta carcer dignissimos.', 'light', 'english'),
-(27, 22, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/759.jpg', 'Degero tamdiu cursim avaritia vitae barba auditor celer abbas. Ultio amissio verumtamen apud utrimque censura. Testimonium vobis apostolus cernuus.', 'light', 'english'),
-(28, 26, 'https://avatars.githubusercontent.com/u/48241458', 'Ultio tego venia stabilis stipes omnis bardus colo molestias. Depereo similique ratione molestias damno dolorum ea stips volutabrum. Aranea amissio defero.', 'light', 'english'),
-(29, 40, 'https://avatars.githubusercontent.com/u/74053279', 'Aspernatur eveniet cattus verus amo currus viriliter attero deorsum. Tergo dignissimos uxor deprimo aperiam. Optio baiulus et celo.', 'dark', 'english'),
-(30, 12, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1029.jpg', 'Coaegresco aptus sit dolorem defaeco supellex argumentum talis esse. Antiquus averto curo solutio. Benevolentia dolores arbustum apto depereo tutamen balbus callide bellum.', 'dark', 'english'),
-(31, 11, 'https://avatars.githubusercontent.com/u/91136548', 'Saepe acervus coniecto vapulus sit vallum demitto sit vel tertius. Universe carus tunc creator conor dignissimos consuasor demo. Vitiosus verbum recusandae acervus altus ago adficio constans curis dolorum.', 'dark', 'english'),
-(32, 38, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/596.jpg', 'Assentator qui vae nihil patria quod. Argentum brevis vix curto suscipit stillicidium denego ago umerus ara. Suppono communis consequatur.', 'dark', 'english'),
-(33, 18, 'https://avatars.githubusercontent.com/u/52555842', 'Conforto verecundia timidus ocer tertius vomito pax casso. Angustus volo consectetur vacuus comis curso impedit. Repellat triduana vindico una volup curo abutor fuga pecco.', 'dark', 'english'),
-(34, 6, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1067.jpg', 'Currus fuga thema tibi odio decimus vorago pauci volo. Deludo aurum vallum usitas spes. Pariatur creber suppellex minus versus modi degero creptio.', 'light', 'english'),
-(35, 3, 'https://avatars.githubusercontent.com/u/58667215', 'Audentia stella arx villa. Animadverto degero campana patrocinor curvo volubilis arca numquam civis. Denuo cribro tondeo deludo.', 'light', 'english'),
-(36, 1, 'https://avatars.githubusercontent.com/u/21479848', 'Sequi canis soleo deleniti pecto conitor architecto. Curiositas tremo talis. Temperantia cuius ratione accusantium deprecator texo.', 'light', 'english'),
-(37, 32, 'https://avatars.githubusercontent.com/u/573966', 'Civis complectus blandior apparatus. Arx charisma stips. Pecto deprecator argumentum thymbra adopto.', 'light', 'english'),
-(38, 31, 'https://avatars.githubusercontent.com/u/95269003', 'Adamo carcer adfero tergeo. Aqua benigne iusto. Trans tantum tubineus bestia audacia autem.', 'light', 'english'),
-(39, 7, 'https://avatars.githubusercontent.com/u/55705137', 'Suffragium coerceo varietas vulticulus itaque molestias vis exercitationem viscus sortitus. Aspicio sed tempora delibero dapifer nemo currus aeger artificiose. Comitatus audeo vitium vigilo vaco quam.', 'dark', 'english'),
-(40, 50, 'https://avatars.githubusercontent.com/u/1876960', 'Paulatim bonus tardus conscendo sonitus astrum calamitas turba decens cibo. Usque contigo maiores curiositas vulgus deleniti constans suasoria delinquo abeo. Vinculum creo alias.', 'dark', 'english'),
-(41, 10, 'https://avatars.githubusercontent.com/u/46902389', 'Compono ubi nostrum decet natus pauci tibi. Canto ago tamquam patrocinor ante. Acervus terga sub collum viridis desino depono sol.', 'dark', 'english'),
-(42, 49, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/551.jpg', 'Textus aufero provident cilicium uredo distinctio occaecati. Patria cicuta sumo ars terra ager spiritus. Ultio cohors copiose vilicus asper suggero adnuo.', 'light', 'english'),
-(43, 36, 'https://avatars.githubusercontent.com/u/86040489', 'Catena capillus studio quia. Aestas arbor substantia. Varius deripio studio spoliatio adsidue tum.', 'light', 'english'),
-(44, 20, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/12.jpg', 'Administratio cimentarius caecus depono. Contra deputo sursum acer volubilis vitiosus ver doloremque armarium adstringo. Amiculum tempore admoveo.', 'light', 'english'),
-(45, 9, 'https://avatars.githubusercontent.com/u/9243017', 'Sit campana nostrum. Aer acies combibo tutamen atrox comedo sit. Celebrer celo adamo angelus pel aliqua aetas delibero.', 'dark', 'english'),
-(46, 14, 'https://avatars.githubusercontent.com/u/92252783', 'Thema nesciunt concedo dicta vorax totidem cribro voluptates adopto cresco. Ut nisi cariosus spero vetus. Arceo error sophismata convoco dolorum tracto sequi tempore.', 'light', 'english'),
-(47, 35, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/132.jpg', 'Campana aliquid corrumpo cibus cotidie advoco sumo surculus turbo alter. Spero eligendi arceo. Cognomen bene creber adulatio.', 'light', 'english'),
-(48, 43, 'https://avatars.githubusercontent.com/u/46480378', 'Alter tametsi quis bardus sum corona basium casso trucido voco. Correptius deporto auctus sponte sophismata astrum iure. Votum fugiat corrumpo thalassinus testimonium textilis sonitus stultus.', 'light', 'english'),
-(49, 34, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1051.jpg', 'Succedo canonicus strenuus sono delicate nisi vulgivagus earum. Delibero ceno caelum creta. Defleo cupio anser laborum voluntarius copia consuasor.', 'light', 'english'),
-(50, 8, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/256.jpg', 'Nobis sulum territo. Doloremque alienus expedita tenetur astrum quo venia deprecator modi vicinus. Sursum thymum spes custodia alveus spiritus termes.', 'light', 'english'),
-(51, 51, 'https://avatars.githubusercontent.com/u/64209400?v=4', 'Hello!', 'dark', 'text_fr');
+(1, 37, 'https://avatars.githubusercontent.com/u/76832611', 'Ago arma expedita reiciendis carcer sed sub. Suasoria cubo necessitatibus cinis. Atqui placeat qui officiis cunctatio tricesimus calco alias audio argentum.', 'dark', 'text_en'),
+(2, 39, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/175.jpg', 'Ullus avarus censura sufficio cui coniuratio aufero victus. Tepesco copia decerno deludo adnuo. Ullus defero solio cura demoror.', 'dark', 'text_en'),
+(3, 13, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1177.jpg', 'Summa volaticus somniculosus repellendus. Ulciscor denego cohibeo desino. Decerno conatus dens nisi aperiam crux provident artificiose.', 'dark', 'text_en'),
+(4, 48, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/802.jpg', 'Adamo antepono ut maxime decimus strenuus conculco acervus caritas. Sursum libero video velit apparatus tyrannus blandior. Decumbo aggredior distinctio tantillus omnis cimentarius amitto demergo ago.', 'light', 'text_en'),
+(5, 5, 'https://avatars.githubusercontent.com/u/46731538', 'Inflammatio ocer vestigium velit suppono. Harum alioqui tondeo consuasor pecus sufficio reiciendis. Theca vinco comis reiciendis cruciamentum subnecto barba contigo.', 'light', 'text_en'),
+(6, 27, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/330.jpg', 'Viduo ulciscor aliquam utpote vito demitto cursus eius. Deinde confido curatio tener utor copia civitas cultura. Corrupti possimus delectatio inventore concido.', 'dark', 'text_en'),
+(7, 4, 'https://avatars.githubusercontent.com/u/43715701', 'Aro creo deprimo amo conculco supellex vomito curto clibanus. Tantillus tego corporis neque cuppedia spectaculum. Id dolor rem adicio cuius stips tabgo vicissitudo vix tergeo.', 'dark', 'text_en'),
+(8, 42, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/380.jpg', 'Ultio ad attonbitus comprehendo vulnero ater cavus tactus suppono admoveo. Taceo mollitia pauper amplus id adipisci utor degenero. Claustrum strenuus creator commemoro bestia dicta volo quas iusto currus.', 'light', 'text_en'),
+(9, 25, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/708.jpg', 'Adfero teneo aegrotatio bonus. Attonbitus appositus aeternus cimentarius tabella absens damno vito. Soleo valeo dedecor.', 'light', 'text_en'),
+(10, 16, 'https://avatars.githubusercontent.com/u/15989489', 'Capio fugiat ter audax aureus alii utor. Acerbitas nihil inflammatio capio decens. Soluta arcesso ambulo tolero.', 'light', 'text_en'),
+(11, 28, 'https://avatars.githubusercontent.com/u/80196603', 'Tantillus defendo cetera defessus ab decerno. Aegrotatio ulciscor vereor tondeo arcesso tergum administratio. Vulgaris umerus vado volubilis verecundia trepide adipisci spargo.', 'light', 'text_en'),
+(12, 29, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1241.jpg', 'Hic sum turpis alienus cunabula. Ademptio tenuis chirographum communis turba cogo tabula. Solutio labore stella suscipio calculus auxilium deprimo.', 'dark', 'text_en'),
+(13, 19, 'https://avatars.githubusercontent.com/u/40809923', 'Cresco tepidus suffoco iure quaerat ipsum contigo vorax adiuvo arca. Curatio utilis expedita recusandae copia depereo charisma. Vivo cupiditate curtus vulticulus voluptas arcesso theca.', 'light', 'text_en'),
+(14, 41, 'https://avatars.githubusercontent.com/u/9089171', 'Vindico ipsa astrum vomica apparatus. Qui tabesco coaegresco totus appello videlicet. Tremo clam strenuus caelestis admitto optio iste.', 'light', 'text_en'),
+(15, 44, 'https://avatars.githubusercontent.com/u/94396936', 'Circumvenio cometes comptus deduco arguo crinis arbitro. Acceptus hic defleo ipsum cur coadunatio amissio sortitus adimpleo. Bibo cotidie trans consequatur aliquam tot tot termes vilicus apud.', 'dark', 'text_en'),
+(16, 17, 'https://avatars.githubusercontent.com/u/36819511', 'Utor doloremque adipiscor volup canonicus tonsor defessus ceno volutabrum. Suppono tener cognomen exercitationem bis angulus volup apostolus credo communis. Verus cubo canto.', 'light', 'text_en'),
+(17, 23, 'https://avatars.githubusercontent.com/u/61284055', 'Aeger volutabrum cedo valetudo tyrannus deprimo texo demum. Depromo confido usque subseco ultio aedificium cattus sum. Assumenda careo absque demoror aeternus congregatio vestigium.', 'dark', 'text_en'),
+(18, 24, 'https://avatars.githubusercontent.com/u/78828950', 'Benevolentia tabernus dedico. Animadverto spoliatio velut rerum socius una vulnus curia. Vinculum accommodo voluptas vos certe tempora vomica tum accedo cogo.', 'dark', 'text_en'),
+(19, 33, 'https://avatars.githubusercontent.com/u/42002681', 'Tempora theca adduco ademptio. Cado candidus corroboro custodia delectus una occaecati vicissitudo trans. Libero cernuus custodia aveho viridis demulceo.', 'dark', 'text_en'),
+(20, 46, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/86.jpg', 'Surculus atrox crur vitium aggero vallum commodo chirographum. Sonitus turba defetiscor commodi. Adeo omnis cunae spectaculum dignissimos agnitio thesaurus.', 'light', 'text_en'),
+(21, 21, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/238.jpg', 'Cuppedia quos certe textilis cervus ambulo volaticus bestia acerbitas solutio. Audacia tibi auxilium damno alo terga tutamen. Complectus statua carmen tametsi.', 'dark', 'text_en'),
+(22, 47, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/286.jpg', 'Creptio suadeo crepusculum. Vix aqua curiositas bos voluptatem totidem. Corona adduco arx ascit perspiciatis derelinquo vetus ducimus adipiscor.', 'light', 'text_en'),
+(23, 15, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/665.jpg', 'Quas capio pel tibi teres talus chirographum vicinus adnuo comburo. Patruus quam corpus succurro accommodo facere victoria advenio. Cicuta titulus bardus.', 'dark', 'text_en'),
+(24, 30, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1012.jpg', 'Argumentum vulticulus creator. Atrocitas comburo peccatus crur vobis quia conspergo aestus charisma conatus. Alius antepono crux allatus solutio copiose canis balbus.', 'light', 'text_en'),
+(25, 45, 'https://avatars.githubusercontent.com/u/67797305', 'Nesciunt placeat arbitro delinquo magnam statua sit arcesso truculenter celer. Officia nihil talis averto curriculum degero. Cimentarius angustus autem capto ventito decipio.', 'dark', 'text_en'),
+(26, 2, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1243.jpg', 'Tergeo contigo tendo modi beatus corroboro audacia undique. Fuga arbustum totus bestia. Vulgivagus articulus cornu non sapiente soluta carcer dignissimos.', 'light', 'text_en'),
+(27, 22, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/759.jpg', 'Degero tamdiu cursim avaritia vitae barba auditor celer abbas. Ultio amissio verumtamen apud utrimque censura. Testimonium vobis apostolus cernuus.', 'light', 'text_en'),
+(28, 26, 'https://avatars.githubusercontent.com/u/48241458', 'Ultio tego venia stabilis stipes omnis bardus colo molestias. Depereo similique ratione molestias damno dolorum ea stips volutabrum. Aranea amissio defero.', 'light', 'text_en'),
+(29, 40, 'https://avatars.githubusercontent.com/u/74053279', 'Aspernatur eveniet cattus verus amo currus viriliter attero deorsum. Tergo dignissimos uxor deprimo aperiam. Optio baiulus et celo.', 'dark', 'text_en'),
+(30, 12, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1029.jpg', 'Coaegresco aptus sit dolorem defaeco supellex argumentum talis esse. Antiquus averto curo solutio. Benevolentia dolores arbustum apto depereo tutamen balbus callide bellum.', 'dark', 'text_en'),
+(31, 11, 'https://avatars.githubusercontent.com/u/91136548', 'Saepe acervus coniecto vapulus sit vallum demitto sit vel tertius. Universe carus tunc creator conor dignissimos consuasor demo. Vitiosus verbum recusandae acervus altus ago adficio constans curis dolorum.', 'dark', 'text_en'),
+(32, 38, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/596.jpg', 'Assentator qui vae nihil patria quod. Argentum brevis vix curto suscipit stillicidium denego ago umerus ara. Suppono communis consequatur.', 'dark', 'text_en'),
+(33, 18, 'https://avatars.githubusercontent.com/u/52555842', 'Conforto verecundia timidus ocer tertius vomito pax casso. Angustus volo consectetur vacuus comis curso impedit. Repellat triduana vindico una volup curo abutor fuga pecco.', 'dark', 'text_en'),
+(34, 6, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1067.jpg', 'Currus fuga thema tibi odio decimus vorago pauci volo. Deludo aurum vallum usitas spes. Pariatur creber suppellex minus versus modi degero creptio.', 'light', 'text_en'),
+(35, 3, 'https://avatars.githubusercontent.com/u/58667215', 'Audentia stella arx villa. Animadverto degero campana patrocinor curvo volubilis arca numquam civis. Denuo cribro tondeo deludo.', 'light', 'text_en'),
+(36, 1, 'https://avatars.githubusercontent.com/u/21479848', 'Sequi canis soleo deleniti pecto conitor architecto. Curiositas tremo talis. Temperantia cuius ratione accusantium deprecator texo.', 'light', 'text_en'),
+(37, 32, 'https://avatars.githubusercontent.com/u/573966', 'Civis complectus blandior apparatus. Arx charisma stips. Pecto deprecator argumentum thymbra adopto.', 'light', 'text_en'),
+(38, 31, 'https://avatars.githubusercontent.com/u/95269003', 'Adamo carcer adfero tergeo. Aqua benigne iusto. Trans tantum tubineus bestia audacia autem.', 'light', 'text_en'),
+(39, 7, 'https://avatars.githubusercontent.com/u/55705137', 'Suffragium coerceo varietas vulticulus itaque molestias vis exercitationem viscus sortitus. Aspicio sed tempora delibero dapifer nemo currus aeger artificiose. Comitatus audeo vitium vigilo vaco quam.', 'dark', 'text_en'),
+(40, 50, 'https://avatars.githubusercontent.com/u/1876960', 'Paulatim bonus tardus conscendo sonitus astrum calamitas turba decens cibo. Usque contigo maiores curiositas vulgus deleniti constans suasoria delinquo abeo. Vinculum creo alias.', 'dark', 'text_en'),
+(41, 10, 'https://avatars.githubusercontent.com/u/46902389', 'Compono ubi nostrum decet natus pauci tibi. Canto ago tamquam patrocinor ante. Acervus terga sub collum viridis desino depono sol.', 'dark', 'text_en'),
+(42, 49, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/551.jpg', 'Textus aufero provident cilicium uredo distinctio occaecati. Patria cicuta sumo ars terra ager spiritus. Ultio cohors copiose vilicus asper suggero adnuo.', 'light', 'text_en'),
+(43, 36, 'https://avatars.githubusercontent.com/u/86040489', 'Catena capillus studio quia. Aestas arbor substantia. Varius deripio studio spoliatio adsidue tum.', 'light', 'text_en'),
+(44, 20, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/12.jpg', 'Administratio cimentarius caecus depono. Contra deputo sursum acer volubilis vitiosus ver doloremque armarium adstringo. Amiculum tempore admoveo.', 'light', 'text_en'),
+(45, 9, 'https://avatars.githubusercontent.com/u/9243017', 'Sit campana nostrum. Aer acies combibo tutamen atrox comedo sit. Celebrer celo adamo angelus pel aliqua aetas delibero.', 'dark', 'text_en'),
+(46, 14, 'https://avatars.githubusercontent.com/u/92252783', 'Thema nesciunt concedo dicta vorax totidem cribro voluptates adopto cresco. Ut nisi cariosus spero vetus. Arceo error sophismata convoco dolorum tracto sequi tempore.', 'light', 'text_en'),
+(47, 35, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/132.jpg', 'Campana aliquid corrumpo cibus cotidie advoco sumo surculus turbo alter. Spero eligendi arceo. Cognomen bene creber adulatio.', 'light', 'text_en'),
+(48, 43, 'https://avatars.githubusercontent.com/u/46480378', 'Alter tametsi quis bardus sum corona basium casso trucido voco. Correptius deporto auctus sponte sophismata astrum iure. Votum fugiat corrumpo thalassinus testimonium textilis sonitus stultus.', 'light', 'text_en'),
+(49, 34, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1051.jpg', 'Succedo canonicus strenuus sono delicate nisi vulgivagus earum. Delibero ceno caelum creta. Defleo cupio anser laborum voluntarius copia consuasor.', 'light', 'text_en'),
+(50, 8, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/256.jpg', 'Nobis sulum territo. Doloremque alienus expedita tenetur astrum quo venia deprecator modi vicinus. Sursum thymum spes custodia alveus spiritus termes.', 'light', 'text_en'),
+(51, 51, 'https://avatars.githubusercontent.com/u/64209400?v=4', 'Hello!', 'dark', 'text_en'),
+(52, 52, 'https://avatars.githubusercontent.com/u/64209400?v=4', 'Hello!', 'dark', 'text_en');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_roles`
+-- Tabelstructuur voor tabel `user_roles`
 --
 
 CREATE TABLE `user_roles` (
@@ -329,7 +334,7 @@ CREATE TABLE `user_roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `user_roles`
+-- Gegevens worden geëxporteerd voor tabel `user_roles`
 --
 
 INSERT INTO `user_roles` (`id`, `name`) VALUES
@@ -340,7 +345,7 @@ INSERT INTO `user_roles` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_role_mapping`
+-- Tabelstructuur voor tabel `user_role_mapping`
 --
 
 CREATE TABLE `user_role_mapping` (
@@ -350,7 +355,7 @@ CREATE TABLE `user_role_mapping` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `user_role_mapping`
+-- Gegevens worden geëxporteerd voor tabel `user_role_mapping`
 --
 
 INSERT INTO `user_role_mapping` (`id`, `userid`, `roleid`) VALUES
@@ -406,11 +411,11 @@ INSERT INTO `user_role_mapping` (`id`, `userid`, `roleid`) VALUES
 (50, 43, 2);
 
 --
--- Indexes for dumped tables
+-- Indexen voor geëxporteerde tabellen
 --
 
 --
--- Indexes for table `products`
+-- Indexen voor tabel `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
@@ -418,20 +423,20 @@ ALTER TABLE `products`
   ADD KEY `products_categoryid` (`categoryid`);
 
 --
--- Indexes for table `product_categories`
+-- Indexen voor tabel `product_categories`
 --
 ALTER TABLE `product_categories`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `product_category_name` (`name`);
 
 --
--- Indexes for table `translation`
+-- Indexen voor tabel `translation`
 --
 ALTER TABLE `translation`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Indexen voor tabel `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
@@ -439,21 +444,21 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- Indexes for table `user_profile`
+-- Indexen voor tabel `user_profile`
 --
 ALTER TABLE `user_profile`
   ADD PRIMARY KEY (`id`),
   ADD KEY `profile_userid` (`userid`);
 
 --
--- Indexes for table `user_roles`
+-- Indexen voor tabel `user_roles`
 --
 ALTER TABLE `user_roles`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `name` (`name`);
 
 --
--- Indexes for table `user_role_mapping`
+-- Indexen voor tabel `user_role_mapping`
 --
 ALTER TABLE `user_role_mapping`
   ADD PRIMARY KEY (`id`),
@@ -461,70 +466,70 @@ ALTER TABLE `user_role_mapping`
   ADD KEY `role_mapping_userid` (`userid`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT voor geëxporteerde tabellen
 --
 
 --
--- AUTO_INCREMENT for table `products`
+-- AUTO_INCREMENT voor een tabel `products`
 --
 ALTER TABLE `products`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
--- AUTO_INCREMENT for table `product_categories`
+-- AUTO_INCREMENT voor een tabel `product_categories`
 --
 ALTER TABLE `product_categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
--- AUTO_INCREMENT for table `translation`
+-- AUTO_INCREMENT voor een tabel `translation`
 --
 ALTER TABLE `translation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT voor een tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
--- AUTO_INCREMENT for table `user_profile`
+-- AUTO_INCREMENT voor een tabel `user_profile`
 --
 ALTER TABLE `user_profile`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
--- AUTO_INCREMENT for table `user_roles`
+-- AUTO_INCREMENT voor een tabel `user_roles`
 --
 ALTER TABLE `user_roles`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `user_role_mapping`
+-- AUTO_INCREMENT voor een tabel `user_role_mapping`
 --
 ALTER TABLE `user_role_mapping`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
--- Constraints for dumped tables
+-- Beperkingen voor geëxporteerde tabellen
 --
 
 --
--- Constraints for table `products`
+-- Beperkingen voor tabel `products`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `products_categoryid` FOREIGN KEY (`categoryid`) REFERENCES `product_categories` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `products_userid` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `user_profile`
+-- Beperkingen voor tabel `user_profile`
 --
 ALTER TABLE `user_profile`
   ADD CONSTRAINT `profile_userid` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `user_role_mapping`
+-- Beperkingen voor tabel `user_role_mapping`
 --
 ALTER TABLE `user_role_mapping`
   ADD CONSTRAINT `role_mapping_roleid` FOREIGN KEY (`roleid`) REFERENCES `user_roles` (`id`) ON DELETE CASCADE,
