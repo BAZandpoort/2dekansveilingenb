@@ -26,6 +26,7 @@ if (isset($_POST['add'])) {
     ['type' => 's', 'value' => $name],
     ['type' => 's', 'value' => $description],
     ['type' => 'd', 'value' => $price],
+    ['type' => 's', 'value' => $imageUrl],
     ['type' => 'i', 'value' => $is_auction],
     ['type' => 's', 'value' => $auction_end_time],
   );
