@@ -21,7 +21,7 @@ if ($error) {
 ?>
 
 <div>
-  <form action="/src/lib/member/add-translation" method="post" class="flex flex-col items-center gap-4">
+  <form action="/src/lib/member/add-translation.php" method="post" class="flex flex-col items-center gap-4">
     <div class="form-control w-full max-w-xs">
         <label class="label">
             <span class="label-text">Route</span>

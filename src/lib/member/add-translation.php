@@ -7,19 +7,15 @@ if (isset($_POST['add'])) {
   $text_en = $_POST['text_en'];
   $text_nl = $_POST['text_nl'];
   $text_fr = $_POST['text_fr'];
-  $description = $_POST['description'];
-  $price = $_POST['price'];
-  $imageUrl = $_POST['imageUrl'];
+  $location = $_POST['route'];
 
-  $query = 'INSERT INTO products (userid, categoryid, name, description, price, imageUrl ) VALUES (?, ?, ?, ?, ?, ?)';
+  $query = 'INSERT INTO translation (location, text_en, text_nl, text_fr) VALUES (?, ?, ?, ?)';
   $insertData = insert(
     $query,
-    ['type' => 'i', 'value' => $userid],
-    ['type' => 'i', 'value' => $categoryid],
-    ['type' => 's', 'value' => $name],
-    ['type' => 's', 'value' => $description],
-    ['type' => 'd', 'value' => $price],
-    ['type' => 's', 'value' => $imageUrl],
+    ['type' => 's', 'value' => ''.$location.''],
+    ['type' => 's', 'value' => ''.$text_en.''],
+    ['type' => 's', 'value' => ''.$text_nl.''],
+    ['type' => 's', 'value' => ''.$text_fr.''],
   );
 
   return $insertData;
