@@ -1,9 +1,9 @@
 <?php
 
-    // if(!isset($_GET["id"])){
-    //     header("location: /");
-    //     exit();
-    // }
+    if(!isset($_GET["id"])){
+        header("location: /");
+        exit();
+    }
 
     require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
     require_once LIB . '/util/util.php';
@@ -16,6 +16,7 @@
     WHERE users.id=user_profile.userid
     AND users.id = ?";
     $seller = fetch($query2,['type' => 'i', 'value' => $id]);
+   
 
 ?>
 <div class = "flex">
@@ -27,18 +28,18 @@
                 <div class="radial-progress mx-auto" style="--value:70;">
                     time
                 </div>
-                <div class="card-body items-center text-center">
-                    <table class="table-auto"> 
+                <div class="card-body items-center text-center space-x-10 ">
+                    <table class="table-auto flex space-x-10 "> 
                         <tr>
-                            <td class="text-xl ">bidprice</td>
-                            <td class = "text-xl" >buyprice</td>
+                            <td class="text-xl ">current price</td>
+                            <td class = "text-xl" >suggested price</td>
                         </tr>
                         <tr>
                             <td>(current bid price)</td>
                             <td><?php echo $products["price"]?></td>
                         </tr>
                     </table>
-                    <a href="Bidden.php" class="btn btn-primary">bit Now</a>
+                    <a href="Bidden.php" class="btn btn-primary">bid Now</a>
                 </div>
         </div>
     </div>
@@ -51,7 +52,7 @@
     <div>
         <h2 class="card-title mt-8 mx-8"> about seller:</h2>
     <div>
-        <div class="mt-4 mx-8"><?php echo $seller["firstname"]," ", $seller["lastname"] ?></div>
+        <div class="mt-4 mx-8"><?php echo $seller["username"] ?></div>
         <div class="mt-4 mx-8"><?php echo $seller["about"]?></div>
     </div>
     </div>
