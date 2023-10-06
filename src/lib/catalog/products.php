@@ -26,7 +26,7 @@ function products() {
                     <button type="submit" class="btn btn-warning mr-0 mx-32 -mt-11" name="bied">Bid</button>
         ';
 
-        if ($product["isAuction"]){
+        if (isset($product["auctionEndTime"])){
             $timestamp = time();
             $current_date = date("F d, Y h:i:s A", $timestamp);
             echo '
