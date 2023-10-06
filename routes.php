@@ -30,6 +30,13 @@ $routes = [
     'nav' => true,
     'footer' => true,
   ],
+  '/dashboard/dashboard' => [
+    'view' => 'dashboard/dashboard.php',
+    'title' => 'Dashboard',
+    'auth_roles' => ['guest', 'admin', 'member'],
+    'nav' => true,
+    'footer' => true,
+  ],
   '/account/settings/edit' => [
     'view' => 'account/edit.php',
     'title' => 'Edit account settings',

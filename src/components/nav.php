@@ -14,6 +14,14 @@ if ($userid) {
 
 <div class="navbar bg-base-100">
   <div class="navbar-start flex-1">
+    <div class="dropdown">
+      <label tabindex="0" class="btn btn-ghost lg:flex">
+      <label tabindex="0" class="btn btn-ghost lg:flex">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+        </svg>
+      </label>
+    </div>
     <a href="/" class="btn btn-ghost normal-case text-xl">2dekans veilingen</a>
   </div>
 
@@ -43,8 +51,14 @@ if ($userid) {
                 <span class="badge">New</span>
               </a>
             </li>
-            <li><a href="/src/lib/account/change-theme.php" >Switch to ' . $theme . '</a></li>
-            <li><a href="/account/settings/edit">Settings</a></li>
+            <li><a href="src/lib/account/change-theme.php" >Switch to ' . $theme . '</a></li>
+            <li><a>Settings</a></li>
+            <form method="post" action="/account/favorite">
+            <li><button type="submit" name="favo">Favorites</button></li>
+            </form>
+            <form method="post" action="/dashboard/dashboard">
+            <li><button type="submit" name="dash">Dashboard</button></li>
+            </form>
             <li><a href="/account/logout"> logout</a></li>
             
           </ul>
