@@ -1,6 +1,20 @@
 <?php
+if(!isset($_GET["id"])){
+  header("location: /");
+  exit();
+}
+
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/util/util.php';
+
+$id=$_GET["id"];
+$query = "SELECT * FROM products WHERE id = ?";
+$products = fetch($query, ['type' => 'i', 'value' => $id]);
+
+$query2 = "SELECT * FROM users,user_profile
+WHERE users.id=user_profile.userid
+AND users.id = ?";
+$seller = fetch($query2,['type' => 'i', 'value' => $id]);
 ?>
 
 <!DOCTYPE html>
