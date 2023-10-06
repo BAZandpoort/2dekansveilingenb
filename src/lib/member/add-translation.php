@@ -10,16 +10,13 @@ if (isset($_POST['add'])) {
   $location = $_POST['route'];
 
   $query = 'INSERT INTO translation (location, text_en, text_nl, text_fr) VALUES (?, ?, ?, ?)';
-  $insertData = insert(
+  insert(
     $query,
     ['type' => 's', 'value' => ''.$location.''],
     ['type' => 's', 'value' => ''.$text_en.''],
     ['type' => 's', 'value' => ''.$text_nl.''],
     ['type' => 's', 'value' => ''.$text_fr.''],
-  );
-
-  return $insertData;
-  
+  );  
 }
 header('Location: /');
 return;
