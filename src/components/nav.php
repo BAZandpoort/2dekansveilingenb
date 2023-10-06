@@ -3,6 +3,13 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/util/util.php';
 
 $userid = isset($_SESSION['user']) ? $_SESSION['user']['id'] : null;
+$languageDisplay = '';
+
+$languageMap = [
+  'text_en' => 'English',
+  'text_nl' => 'Nederlands',
+  'text_fr' => 'Français'
+];
 
 if ($userid) {
   $query = 'SELECT * FROM user_profile WHERE userid = ?';
@@ -10,12 +17,6 @@ if ($userid) {
 
   $theme = $data['theme'] === 'dark' ? 'light' : 'dark';
   $language = $data['language'];
-
-  $languageMap = [
-    'text_en' => 'English',
-    'text_nl' => 'Nederlands',
-    'text_fr' => 'Français'
-  ];
   $languageDisplay = $languageMap[$language];
 
   $english_link = "/src/lib/account/language-select.php?language=text_en";
@@ -31,7 +32,7 @@ if ($userid) {
   }
 
   $language = $_SESSION["guest_language"];
-  
+  $languageDisplay = $languageMap[$language];
 }
 
 $query = 'SELECT id, '.$language.' FROM translations' ;
@@ -80,10 +81,8 @@ $query = 'SELECT id, '.$language.' FROM translations' ;
             <li><a href="/src/lib/account/change-theme.php" >Switch to ' . $theme . '</a></li>
             <li><a href="/account/settings/edit">Settings</a></li>
             <li><a href="/account/logout"> ' . $data[2][$language] . ' </a></li>
-            
           </ul>
         </div>
-        
         '
       : '<a href="/account/login" class="btn">Login</a>'; ?>
   </div>

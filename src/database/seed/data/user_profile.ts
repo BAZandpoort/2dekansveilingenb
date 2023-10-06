@@ -5,6 +5,7 @@ interface UserProfile {
   profilePictureUrl: string;
   about: string;
   theme: string;
+  language: string;
 }
 
 export default async function userProfiles(): Promise<UserProfile[]> {
@@ -15,6 +16,7 @@ export default async function userProfiles(): Promise<UserProfile[]> {
     const profilePictureUrl = faker.image.avatar();
     const about = faker.lorem.paragraph();
     const theme = faker.helpers.arrayElement(['light', 'dark']);
+    const language = faker.helpers.arrayElement(['text_en', 'text_nl', 'text_fr']);
 
     userids.splice(userids.indexOf(userid), 1);
     result.push({
@@ -22,6 +24,7 @@ export default async function userProfiles(): Promise<UserProfile[]> {
       profilePictureUrl,
       about,
       theme,
+      language,
     });
   }
 
