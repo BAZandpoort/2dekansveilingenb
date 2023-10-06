@@ -28,7 +28,7 @@ if (!isset($_GET["location"])){
 ?>
 
 <div>
-    <a><button class="btn btn-active">Add new translation</button></a>
+    <a href="/dashboard/add-translation"><button class="btn btn-active">Add new translation</button></a>
     <div class="dropdown">
     <label tabindex="0" class="btn m-1">Sort by route</label>
         <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
