@@ -62,16 +62,16 @@ if (!isset($_GET["location"])){
             $translations = fetch($query);
 
             foreach($translations as $row){
-                $text_english = (strlen($row["text_en"]) > 20)
-				? substr_replace($row["text_en"], "...", 21)
+                $text_english = (strlen($row["text_en"]) > 40)
+				? substr_replace($row["text_en"], "...", 41)
 				: $row["text_en"];
 
-                $text_nederlands = (strlen($row["text_nl"]) > 20)
-				? substr_replace($row["text_nl"], "...", 21)
+                $text_nederlands = (strlen($row["text_nl"]) > 40)
+				? substr_replace($row["text_nl"], "...", 41)
 				: $row["text_nl"];
 
-                $text_francais = (strlen($row["text_fr"]) > 20)
-				? substr_replace($row["text_fr"], "...", 21)
+                $text_francais = (strlen($row["text_fr"]) > 40)
+				? substr_replace($row["text_fr"], "...", 41)
 				: $row["text_fr"];
 
                 echo '
