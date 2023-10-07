@@ -2,7 +2,7 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/util/util.php';
 
-$userid = isset($_SESSION['user']) ? $_SESSION['user']['id'] : null;
+$user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
 
 $languageDisplay = '';
 $languageMap = [
@@ -11,12 +11,10 @@ $languageMap = [
   'text_fr' => 'Français'
 ];
 
-if ($userid) {
-  $query = 'SELECT * FROM user_profile WHERE userid = ?';
-  $data = fetch($query, ['type' => 'i', 'value' => $userid]);
-
-  $theme = $data['theme'] === 'dark' ? 'light' : 'dark';
-  $language = $data['language'];
+if ($user) {
+  $theme = $user["theme"];
+  
+  $language = $user['language'];
   $languageDisplay = $languageMap[$language];
 } else {
   if (!isset($_SESSION["guest"]["language"])){
