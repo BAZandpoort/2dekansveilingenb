@@ -14,7 +14,14 @@ header('Location: /');
 exit();
 
 function updateProfile($userId, $formData) {
-  // TODO: Check if the username is already taken when updating
+  $query = 'SELECT * FROM users WHERE username = ?';
+  $data = fetch($query, ['type' => 's', 'value' => $formData['username']]);
+
+  if ($data && $data['id'] !== $userId) {
+    header('Location: /account/settings/edit?error=usernameTaken');
+    exit();
+  }
+
   $newUsername = $formData['username'];
   $newEmail = $formData['email'];
   $newFirstname = $formData['firstname'];

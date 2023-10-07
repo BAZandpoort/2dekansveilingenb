@@ -1,105 +1,75 @@
 <?php
+if (!isset($_GET['id'])) {
+  header('location: /');
+  exit();
+}
 
-    if(!isset($_GET["id"])){
-        header("location: /");
-        exit();
-    }
+require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
+require_once LIB . '/util/util.php';
 
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
-    require_once LIB . '/util/util.php';
-    
-    $id=$_GET["id"];
-    $query = "SELECT * FROM products WHERE id = ?";
-    $products = fetch($query, ['type' => 'i', 'value' => $id]);
+$productId = $_GET['id'];
+$query = 'SELECT * FROM products WHERE id = ?';
+$productData = fetch($query, ['type' => 'i', 'value' => $productId]);
 
-    $query2 = "SELECT * FROM users,user_profile
-    WHERE users.id=user_profile.userid
-    AND users.id = ?";
-    $seller = fetch($query2,['type' => 'i', 'value' => $id]);
-   
+$time = substr($productData['endDate'], 11, 5);
 
+$query = 'SELECT * FROM users,user_profile
+          WHERE users.id=user_profile.userid
+          AND users.id = ?';
+$sellerData = fetch($query, ['type' => 'i', 'value' => $productId]);
 ?>
-<div class = "flex">
-    <div class="flex-[1.1] rounded-3xl h-1/2">
-        <img class="w-full h-full rounded-3xl" src="<?php echo $products["imageUrl"];?>"  /> 
-    </div>
-    <div class="flex-[0.9] flex items-stretch card w-full shadow-xl ">
-        <div class="card w-full my-auto">
-                <div class="radial-progress mx-auto" style="--value:70;">
-                    time
-                </div>
-                <div class="card-body items-center text-center space-x-10 ">
-                    <table class="table-auto flex space-x-10"> 
-                        <tr>
-                            <td class="text-xl">Your bid</td>
-                            <td class="text-xl pl-4">Highest bid</td>
-                        </tr>
-                        <tr>
-                            <td id="currentBid">€0</td>
-                            <td id="suggestedBid">€<?php echo $products["price"]?></td>
-                        </tr>
-                    </table>
-                    <div class="form-control">
-                        <label class="label">
-                            <span class="label-text">Enter amount</span>
-                        </label>
-                        <label class="input-group">
-                            <span>Price</span>
-                            <input id="bidInput" type="number" placeholder="0,00" class="input input-bordered"/>
-                            <button onClick="bid();"type="submit" class="btn btn-primary" name="bied">Bid</button>
 
-                        </label>
-                        </div>
-                    </div>
-        </div>
+<div class="flex flex-row gap-4">
+  <div class="flex-[1.3] rounded-2xl overflow-clip">
+    <img class="w-full h-full aspect-[3/2]" src="/public/images/1.jpg" alt="">
+  </div>
+  <div id="actions" class="flex flex-[.7] bg-neutral rounded-2xl p-8 flex-col items-center justify-center">
+    <p class="opacity-70 pb-12">Veiling sluit om <?php echo $time; ?></p>
+    <div class="pb-24">
+      <span id="countdown-wrapper" class="countdown font-mono text-5xl">
+        <span id="hours" style="--value:00;"></span>:
+        <span id="minutes" style="--value:00;"></span>:
+        <span id="seconds" style="--value:00;"></span>
+      </span>
+      <div id="radial-progress" class="hidden radial-progress text-2xl" style="--value:100;">
+        60
+      </div>
     </div>
+    <div class="flex flex-row justify-center gap-24 pb-8">
+      <div class="flex flex-col items-center">
+        <p class="uppercase text-xs opacity-40 font-bold">Huidig bod</p>
+        <p class="font-semibold text-xl">€19</p>
+      </div>
+      
+      <div class="flex flex-col items-center">
+        <p class="uppercase text-xs opacity-40 font-bold">Adviesprijs</p>
+        <p class="font-semibold text-xl">€119</p>
+      </div>
+      
+      <div class="flex flex-col items-center">
+        <p class="uppercase text-xs opacity-40 font-bold">Bieders</p>
+        <p class="font-semibold text-xl">2</p>
+      </div>
+    </div>
+    <div class="join">
+      <div class="relative">
+        <input type="number" min="1" step="0.01" placeholder="Your bid" class="input input-bordered w-full max-w-xs join-item pl-5 relative">
+        <p class="absolute top-3 left-2 opacity-40">€</p>
+      </div>
+      </input>
+      <button class="btn btn-outline btn-primary join-item">Place bid</button>
+    </div>
+  </div>
 </div>
-<div class = "flex">
-    <div>
-    <h2 class="card-title mt-8 mx-8"><?php echo $products["name"] ?></h2>
-    <div class="mx-8">  <?php echo $products["description"] ?></div>
-    </div>
-    <div>
-        <h2 class="card-title mt-8 mx-8"> about seller:</h2>
-    <div>
-        <div class="mt-4 mx-8"><?php echo $seller["username"] ?></div>
-        <div class="mt-4 mx-8"><?php echo $seller["about"]?></div>
-    </div>
-    </div>
+
+<div class="flex justify-center gap-4 mt-4">
+  <div class="flex flex-col flex-[1.3] gap-4">
+    <h1 class="text-2xl font-semibold"> <?php echo $productData['name']; ?></h1>
+    <p> <?php echo $productData['description']; ?></p>
+  </div>
+  <div class="flex-[.7] p-8"></div>
 </div>
 
 <script>
-
-
-// Whenever the button to bid is clicked, this function will be called and update the current bid price
-function bid() {
-    // Get the current bid price
-    let currentBid = Number(document.getElementById("currentBid").innerHTML.split("€")[1]);
-    // Get the suggested bid price
-    let suggestedBid = Number(document.getElementById("suggestedBid").innerHTML.split("€")[1]);
-    // Get the input field
-    let input = document.getElementById("bidInput").value;
-
-
-    // Check if the input is a number
-    if (isNaN(input)) {
-        alert("Please enter a number");
-    } else {
-        // Check if the input is higher than the current bid price
-        if (input > currentBid) {
-            // Check if the input is higher than the suggested bid price
-            if (input > suggestedBid) {
-                // Update the suggested bid price
-                document.getElementById("suggestedBid").innerHTML = "€" + input;
-            }
-            // Update the current bid price
-            document.getElementById("currentBid").innerHTML = "€" + input;
-        } else {
-            alert("Please enter a higher bid");
-        }
-
-    }
-}
-
-
+  productCountdown("<?php echo $productData['endDate']; ?>")
 </script>

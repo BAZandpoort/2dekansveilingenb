@@ -46,7 +46,7 @@ function productCard($product, $shareable = false) {
   </div>
 
   <script>
-    countdown("' . $product['id'] . '");
+    productCardCountdown("' . $product['id'] . '", "' . $product['endDate'] . '");
   </script>
   ';
 }

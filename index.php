@@ -59,6 +59,7 @@ $translations = fetch('SELECT id, ' . $language . ' FROM translations');
 
   <script src="/public/js/countdown.js"></script>
   <script src="/public/js/share.js"></script>
+  <script src="/public/js/bid.js"></script>
   <link rel="stylesheet" href="/public/css/theme.css">
   <title>2dekans veilingen - <?php echo $route['title']; ?></title>
 </head>

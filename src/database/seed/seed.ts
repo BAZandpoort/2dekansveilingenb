@@ -69,7 +69,7 @@ async function seedDatabase() {
 
         productData.forEach(async (product) => {
             await connection.execute(
-              'INSERT INTO products (userid, categoryid, name, description, price, imageUrl) VALUES (?, ?, ?, ?, ?, ?)',
+              'INSERT INTO products (userid, categoryid, name, description, price, imageUrl, endDate) VALUES (?, ?, ?, ?, ?, ?, ?)',
               Object.values(product),
             );
         });

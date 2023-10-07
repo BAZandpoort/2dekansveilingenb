@@ -21,6 +21,7 @@ define('USER_STRUCTURE', [
   'username' => null,
   'email' => null,
   'theme' => null,
+  'language' => null,
 ]);
 
 // Error mapping
@@ -33,6 +34,7 @@ define('ERROR_MAPPING', [
   'email' => 'Email is already in use',
   'noChanges' => 'No changes were made',
   'accountUpdate' => 'Something went wrong while updating your account',
+  'usernameTaken' => 'Username is already taken',
 ]);
 
 // Success mapping
