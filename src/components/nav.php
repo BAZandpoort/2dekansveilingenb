@@ -3,8 +3,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/util/util.php';
 
 $userid = isset($_SESSION['user']) ? $_SESSION['user']['id'] : null;
-$languageDisplay = '';
 
+$languageDisplay = '';
 $languageMap = [
   'text_en' => 'English',
   'text_nl' => 'Nederlands',
@@ -18,25 +18,17 @@ if ($userid) {
   $theme = $data['theme'] === 'dark' ? 'light' : 'dark';
   $language = $data['language'];
   $languageDisplay = $languageMap[$language];
-
-  $english_link = "/src/lib/account/language-select.php?language=text_en";
-  $nederlands_link = "/src/lib/account/language-select.php?language=text_nl";
-  $francais_link = "/src/lib/account/language-select.php?language=text_fr";
 } else {
-  $english_link = "/src/public/account/language-select.php?language=text_en";
-  $nederlands_link = "/src/public/account/language-select.php?language=text_nl";
-  $francais_link = "/src/public/account/language-select.php?language=text_fr";
-
-  if (!isset($_SESSION["guest_language"])){
-    $_SESSION["guest_language"] = "text_en";
+  if (!isset($_SESSION["guest"]["language"])){
+    $_SESSION["guest"]["language"] = "text_en";
   }
 
-  $language = $_SESSION["guest_language"];
+  $language = $_SESSION["guest"]["language"];
   $languageDisplay = $languageMap[$language];
 }
 
 $query = 'SELECT id, '.$language.' FROM translations' ;
-  $data = fetch($query);
+$data = fetch($query);
 ?>
 
 <!-- Top navbar -->
@@ -56,20 +48,19 @@ $query = 'SELECT id, '.$language.' FROM translations' ;
   </div>
 
   <!-- Right - User actions -->
-  <div class="flex-1 justify-end">
+  <div class="flex-1 justify-end gap-4">
       <div class="dropdown dropdown-end">
           <label tabindex="0" class="btn m-1"><?php echo $languageDisplay ?></label>
           <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-            <li><a href=<?php echo $english_link?>>English</a></li>
-            <li><a href=<?php echo $nederlands_link?>>Nederlands</a></li>
-            <li><a href=<?php echo $francais_link?>>Français</a></li>
+            <form action="/src/lib/account/language-select.php" method="post">
+              <li><input type="submit" name="text_en" value='English'></li>
+              <li><input type="submit" name="text_nl" value='Nederlands'></li>
+              <li><input type="submit" name="text_fr" value='Français'></li>
+            </form>
           </ul>
-      </div>  
-    <div class="dropdown dropdown-end mr-4">
-    </div>
-    <?php echo isset($_SESSION['user'])
-      ? '
-        
+      </div>
+      <?php echo isset($_SESSION['user'])
+        ? '
         <div class="dropdown dropdown-end">
           <label tabindex="0" class="btn btn-ghost btn-circle avatar">
             <div class="w-10 rounded-full">
