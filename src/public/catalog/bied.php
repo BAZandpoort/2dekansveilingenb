@@ -7,7 +7,7 @@ if(!isset($_GET["id"])){
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/util/util.php';
 
-$id=$_GET["id"];
+$id = $_GET["id"];
 $query = "SELECT * FROM products WHERE id = ?";
 $products = fetch($query, ['type' => 'i', 'value' => $id]);
 
@@ -17,9 +17,7 @@ AND users.id = ?";
 $seller = fetch($query2,['type' => 'i', 'value' => $id]);
 ?>
 
-<!DOCTYPE html>
-<head></head>
-<body>
+
 <div class="form-control">
   <label class="label">
     <span class="label-text">Enter amount</span>
@@ -31,8 +29,3 @@ $seller = fetch($query2,['type' => 'i', 'value' => $id]);
 
   </label>
 </div>
-
-</body>
-
-
-
