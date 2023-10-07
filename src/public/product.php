@@ -38,26 +38,25 @@ $sellerData = fetch($query, ['type' => 'i', 'value' => $productId]);
     <div class="flex flex-row justify-center gap-24 pb-8">
       <div class="flex flex-col items-center">
         <p class="uppercase text-xs opacity-40 font-bold">Huidig bod</p>
-        <p class="font-semibold text-xl">€19</p>
+        <p id="currentBid" class="font-semibold text-xl">€19</p>
       </div>
       
       <div class="flex flex-col items-center">
         <p class="uppercase text-xs opacity-40 font-bold">Adviesprijs</p>
-        <p class="font-semibold text-xl">€119</p>
+        <p id="suggestedBid" class="font-semibold text-xl">€119</p>
       </div>
       
       <div class="flex flex-col items-center">
         <p class="uppercase text-xs opacity-40 font-bold">Bieders</p>
-        <p class="font-semibold text-xl">2</p>
+        <p id="bidders" class="font-semibold text-xl">0</p>
       </div>
     </div>
     <div class="join">
       <div class="relative">
-        <input type="number" min="1" step="0.01" placeholder="Your bid" class="input input-bordered w-full max-w-xs join-item pl-5 relative">
+        <input id="bidInput" type="number" min="1" step="0.01" placeholder="Your bid" class="input input-bordered w-full max-w-xs join-item pl-5 relative" />
         <p class="absolute top-3 left-2 opacity-40">€</p>
       </div>
-      </input>
-      <button class="btn btn-outline btn-primary join-item">Place bid</button>
+      <button onclick="bid()" class="btn btn-outline btn-primary join-item">Place bid</button>
     </div>
   </div>
 </div>
