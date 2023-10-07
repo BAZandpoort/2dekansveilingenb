@@ -37,14 +37,6 @@ $routes = [
     'footer' => true,
     'container' => true,
   ],
-  '/account/language-select' => [
-    'view' => 'account/language_select.php',
-    'title' => 'Language select',
-    'auth_roles' => ['guest'],
-    'nav' => true,
-    'footer' => true,
-    'container' => true,
-  ],
   // Catalog routes
   '/catalog/products' => [
     'view' => 'catalog/products.php',

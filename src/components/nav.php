@@ -47,7 +47,7 @@ if ($user) {
       <div class="dropdown dropdown-end">
           <label tabindex="0" class="btn m-1"><?php echo $languageDisplay ?></label>
           <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-            <form action="/src/lib/account/language-select.php" method="post">
+            <form action="/src/lib/account/change-language.php" method="post">
               <li><input type="submit" name="text_en" value='English'></li>
               <li><input type="submit" name="text_nl" value='Nederlands'></li>
               <li><input type="submit" name="text_fr" value='Français'></li>
