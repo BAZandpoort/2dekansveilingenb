@@ -24,7 +24,7 @@ function productCard($product, $shareable = false) {
   echo '
   <div id="product-' . $product['id'] . '" href="/" class="group card card-compact transition hover:opacity-90 flex-1 bg-base-100 shadow-xl">
     <figure>
-      <img class="w-full" src="' . $product["imageUrl"] . '" alt="Shoes" />
+      <img class="w-full" src="/public/images/' . $product["imageUrl"] . '" alt="Shoes" />
     </figure>
 
     

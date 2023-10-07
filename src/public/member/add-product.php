@@ -60,7 +60,7 @@ $categories = fetch("SELECT * FROM product_categories");
       <label class="label">
         <span class="label-text">Auction End Date</span>
       </label>
-      <input type="date" name="date" placeholder="20.00" class="input input-bordered w-full" required />
+      <input type="date" name="endDate" placeholder="20.00" class="input input-bordered w-full" required />
     </div>
   </div>
 

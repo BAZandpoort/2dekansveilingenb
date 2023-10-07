@@ -11,6 +11,7 @@ if (isset($_POST['create'])) {
   $description = $_POST['description'];
   $price = $_POST['price'];
   $file = $_FILES['image'];
+  $endDate = $_POST['endDate'];
 
   $insertData = addProduct(
     $userid,
@@ -19,6 +20,7 @@ if (isset($_POST['create'])) {
     $description,
     $price,
     $file,
+    $endDate
   );
 }
 
@@ -33,9 +35,10 @@ function addProduct(
   $description,
   $price,
   $file,
+  $endDate
 ) {
-  $query = 'INSERT INTO products (userid, categoryid, name, description, price, imageUrl)
-            VALUES (?, ?, ?, ?, ?, ?)';
+  $query = 'INSERT INTO products (userid, categoryid, name, description, price, imageUrl, endDate)
+            VALUES (?, ?, ?, ?, ?, ?, ?)';
 
   $imageName = $file['name'];
   $imageTmpName = $file['tmp_name'];
@@ -53,6 +56,7 @@ function addProduct(
     ['type' => 's', 'value' => $description],
     ['type' => 'd', 'value' => $price],
     ['type' => 's', 'value' => $baseImageName],
+    ['type' => 's', 'value' => $endDate],
   );
 
   return $insertData;
