@@ -1,6 +1,6 @@
 <?php
 if (!isset($_SESSION['user'])) {
-  header('Location: /account/login');
+  header('Location: /');
   exit();
 }
 
@@ -12,8 +12,9 @@ $categories = fetch("SELECT * FROM product_categories");
 
 <h1 class="text-center text-4xl font-bold mb-12">Add a new product</h1>
 
-<form action="/src/lib/member/addProduct.php" method="post" class="flex flex-col items-center justify-center gap-4 max-w-2xl mx-auto" enctype="multipart/form-data">
+<form action="/src/lib/member/add-product.php" method="post" enctype="multipart/form-data" class="flex flex-col items-center justify-center gap-4 max-w-2xl mx-auto">
   <div class="flex flex-row justify-center gap-4 w-full">
+    <!-- Category -->
     <div class="form-control flex-1 w-full">
       <label class="label">
         <span class="label-text">Category</span>
@@ -28,6 +29,7 @@ $categories = fetch("SELECT * FROM product_categories");
       </select>
     </div>
 
+    <!-- Title -->
     <div class="form-control flex-1 w-full">
       <label class="label">
         <span class="label-text">Title</span>
@@ -36,6 +38,7 @@ $categories = fetch("SELECT * FROM product_categories");
     </div>
   </div>
   
+  <!-- Description -->
   <div class="form-control w-full">
     <label class="label">
       <span class="label-text">Description</span>
@@ -44,6 +47,7 @@ $categories = fetch("SELECT * FROM product_categories");
   </div>
 
   <div class="flex flex-row justify-center gap-4 w-full">
+    <!-- Price -->
     <div class="form-control flex-1 w-full">
       <label class="label">
         <span class="label-text tooltip" data-tip="Prices in euro">Price</span>
@@ -51,33 +55,22 @@ $categories = fetch("SELECT * FROM product_categories");
       <input type="number" step="0.01" min="0.00" name="price" placeholder="20.00" class="input input-bordered w-full" required />
     </div>
 
+    <!-- Auction End Date -->
     <div class="form-control flex-1 w-full">
       <label class="label">
-        <span class="label-text">Image</span>
+        <span class="label-text">Auction End Date</span>
       </label>
-      <input name="image" type="file" class="file-input file-input-bordered w-full" required />
+      <input type="date" name="date" placeholder="20.00" class="input input-bordered w-full" required />
     </div>
+  </div>
 
-    <div class="flex flex-col gap-2 w-full max-w-xs">
-      <label for="imageUrl">Image URL</label>
-      <input
-      name="imageUrl"
-      id="imageUrl"
-      type="url"
-      placeholder="..."
-      class="input input-bordered w-full placeholder:opacity-30"
-      required />
-    </div>
-
-    <div class="flex flex-col gap-2 w-full max-w-xs">
-      <label for="auction_duration">Auction end date | <b>For auctions only</b></label>
-      <input
-      name="auction_duration"
-      id="auction_duration"
-      type="date"
-      class="input input-bordered w-full placeholder:opacity-30"
-      />
-    </div>
+  <!-- Image -->
+  <div class="form-control flex-1 w-full">
+    <label class="label">
+      <span class="label-text">Image</span>
+    </label>
+    <input name="image" type="file" class="file-input file-input-bordered w-full" required />
+  </div>
 
   <div class="form-control w-full max-w-xs mt-4">
     <button name="create" class="btn btn-primary">Create</button>

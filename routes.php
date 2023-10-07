@@ -43,7 +43,7 @@ $routes = [
     'title' => 'Products',
     'nav' => true,
     'footer' => true,
-    'container' => true,
+    'container' => false,
   ],
   '/catalog/product' => [
     'view' => 'product.php',
@@ -62,47 +62,43 @@ $routes = [
   ],
   // Dashboard routes
   '/dashboard/products/add' => [
-    'view' => 'member/addProduct.php',
+    'view' => 'member/add-product.php',
     'title' => 'Add Products',
     'nav' => true,
     'footer' => false,
     'container' => true,
   ],
   '/dashboard/products/mine' => [
-    'view' => 'member/myProducts.php',
+    'view' => 'member/personal-products.php',
     'title' => 'My Products',
     'nav' => true,
     'footer' => false,
     'container' => true,
   ],
-  '/dashboard/see-translations' => [
-    'view' => 'member/see-translations.php',
+  // Translation routes
+  '/dashboard/translations' => [
+    'view' => 'member/translations.php',
     'title' => 'See translations',
     'auth_roles' => ['member'],
     'nav' => true,
     'footer' => false,
+    'container' => true,
   ],
-  '/dashboard/edit-translation' => [
+  '/dashboard/translations/edit' => [
     'view' => 'member/edit-translation.php',
     'title' => 'Edit translations',
     'auth_roles' => ['member'],
     'nav' => true,
     'footer' => false,
+    'container' => true,
   ],
-  '/dashboard/add-translation' => [
+  '/dashboard/translations/add' => [
     'view' => 'member/add-translation.php',
     'title' => 'Add translations',
     'auth_roles' => ['member'],
     'nav' => true,
     'footer' => false,
     'container' => true,
-  ],
-  '/dashboard/see-translations' => [
-    'view' => 'member/see-translations.php',
-    'title' => 'See translations',
-    'auth_roles' => ['member'],
-    'nav' => true,
-    'footer' => false,
   ],
   // Other
   '/products/share' => [

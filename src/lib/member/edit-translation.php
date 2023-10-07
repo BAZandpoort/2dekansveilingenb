@@ -19,6 +19,6 @@ if (isset($_POST['edit'])) {
     ['type' => 'i', 'value' => $id]
   );  
 }
-header('Location: /dashboard/see-translations');
+header('Location: /dashboard/translations');
 return;
 ?>

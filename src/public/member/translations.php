@@ -28,21 +28,21 @@ if (!isset($_GET["location"])){
 ?>
 
 <div>
-    <a href="/dashboard/add-translation"><button class="btn btn-active">Add new translation</button></a>
+    <a href="/dashboard/translations/add"><button class="btn btn-active">Add new translation</button></a>
     <div class="dropdown">
     <label tabindex="0" class="btn m-1">Sort by route</label>
         <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-            <li><a href="/dashboard/see-translations">See all</a></li>
+            <li><a href="/dashboard/translations">See all</a></li>
             <?php
 
                 echo '
-                    <li><a href="/dashboard/see-translations?location=nav">nav</a></li>
-                    <li><a href="/dashboard/see-translations?location=footer">footer</a></li>
+                    <li><a href="/dashboard/translations?location=nav">nav</a></li>
+                    <li><a href="/dashboard/translations?location=footer">footer</a></li>
                 ';
 
                 foreach ($translation_routes as $translation_route) {
                     echo '
-                        <li><a href="/dashboard/see-translations?location='.$translation_route.'">'.$translation_route.'</a></li>
+                        <li><a href="/dashboard/translations?location='.$translation_route.'">'.$translation_route.'</a></li>
                     ';
                 }
             ?>            
@@ -87,7 +87,7 @@ if (!isset($_GET["location"])){
                         <td>'.$text_english.'</td> 
                         <td>'.$text_nederlands.'</td> 
                         <td>'.$text_francais.'</td>
-                        <td><a href="/dashboard/edit-translation?translation='.$row["id"].'"><button class="btn btn-xs">✏</button></a></td>
+                        <td><a href="/dashboard/translations/edit?translation='.$row["id"].'"><button class="btn btn-xs">✏</button></a></td>
                     </tr>
                 ';
             }
