@@ -24,16 +24,13 @@ if ($user) {
   $language = $_SESSION["guest"]["language"];
   $languageDisplay = $languageMap[$language];
 }
-
-$query = 'SELECT id, '.$language.' FROM translations' ;
-$data = fetch($query);
 ?>
 
 <!-- Top navbar -->
 <div class="navbar bg-base-100 px-8">
   <!-- Left - logo -->
   <div class="navbar-start flex-1">
-    <a href="/" class="btn btn-ghost normal-case text-xl"><?php echo $data[1][$language];?></a>
+    <a href="/" class="btn btn-ghost normal-case text-xl"><?php echo $translations[1][$language];?></a>
   </div>
 
   <!-- Center - search -->
@@ -69,7 +66,7 @@ $data = fetch($query);
             <li><a class="justify-between">Profile</a></li>
             <li><a href="/src/lib/account/change-theme.php" >Switch to ' . $theme . '</a></li>
             <li><a href="/account/settings/edit">Settings</a></li>
-            <li><a href="/account/logout"> ' . $data[2][$language] . ' </a></li>
+            <li><a href="/account/logout"> ' . $translations[2][$language] . ' </a></li>
           </ul>
         </div>
         '

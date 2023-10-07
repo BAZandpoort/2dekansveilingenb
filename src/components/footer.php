@@ -7,23 +7,23 @@
 
   <!-- Right - links -->
   <nav>
-    <header class="footer-title"><?php echo $data[3][$language];?></header>
-    <a class="link link-hover"><?php echo $data[4][$language];?></a>
-    <a class="link link-hover"><?php echo $data[5][$language];?></a>
-    <a class="link link-hover"><?php echo $data[6][$language];?></a>
-    <a class="link link-hover"><?php echo $data[7][$language];?></a>
+    <header class="footer-title"><?php echo $translations[3][$language];?></header>
+    <a class="link link-hover"><?php echo $translations[4][$language];?></a>
+    <a class="link link-hover"><?php echo $translations[5][$language];?></a>
+    <a class="link link-hover"><?php echo $translations[6][$language];?></a>
+    <a class="link link-hover"><?php echo $translations[7][$language];?></a>
   </nav>
   <nav>
-    <header class="footer-title"><?php echo $data[8][$language];?></header>
-    <a class="link link-hover"><?php echo $data[9][$language];?></a>
-    <a class="link link-hover"><?php echo $data[10][$language];?></a>
-    <a class="link link-hover"><?php echo $data[11][$language];?></a>
-    <a class="link link-hover"><?php echo $data[12][$language];?></a>
+    <header class="footer-title"><?php echo $translations[8][$language];?></header>
+    <a class="link link-hover"><?php echo $translations[9][$language];?></a>
+    <a class="link link-hover"><?php echo $translations[10][$language];?></a>
+    <a class="link link-hover"><?php echo $translations[11][$language];?></a>
+    <a class="link link-hover"><?php echo $translations[12][$language];?></a>
   </nav>
   <nav>
-    <header class="footer-title"><?php echo $data[13][$language];?></header>
-    <a class="link link-hover"><?php echo $data[14][$language];?></a>
-    <a class="link link-hover"><?php echo $data[15][$language];?></a>
-    <a class="link link-hover"><?php echo $data[16][$language];?></a>
+    <header class="footer-title"><?php echo $translations[13][$language];?></header>
+    <a class="link link-hover"><?php echo $translations[14][$language];?></a>
+    <a class="link link-hover"><?php echo $translations[15][$language];?></a>
+    <a class="link link-hover"><?php echo $translations[16][$language];?></a>
   </nav>
 </footer>
