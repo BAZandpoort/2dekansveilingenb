@@ -46,15 +46,8 @@ $routes = [
     'container' => false,
   ],
   '/catalog/product' => [
-    'view' => 'product.php',
+    'view' => 'catalog/product.php',
     'title' => 'Product',
-    'nav' => true,
-    'footer' => true,
-    'container' => true,
-  ],
-  '/catalog/bied' => [
-    'view' => '/catalog/bied.php',
-    'title' => 'bieden',
     'nav' => true,
     'footer' => true,
     'container' => true,
@@ -98,7 +91,7 @@ $routes = [
   ],
   // Other
   '/products/share' => [
-    'view' => 'catalog/product.php',
+    'view' => 'catalog/share.php',
     'title' => 'Products',
     'nav' => false,
     'footer' => false,

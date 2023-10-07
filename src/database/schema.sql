@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 07, 2023 at 12:30 AM
+-- Generation Time: Oct 08, 2023 at 01:17 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -35,6 +35,7 @@ CREATE TABLE `products` (
   `description` text NOT NULL,
   `price` decimal(10,2) NOT NULL,
   `imageUrl` varchar(255) NOT NULL,
+  `endDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updatedAt` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -119,8 +120,8 @@ CREATE TABLE `user_profile` (
   `userid` int(11) NOT NULL,
   `profilePictureUrl` varchar(255) NOT NULL,
   `about` text NOT NULL,
-  `theme` text NOT NULL,
-  `language` text NOT NULL
+  `theme` text NOT NULL DEFAULT 'light',
+  `language` text NOT NULL DEFAULT 'text_en'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
