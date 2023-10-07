@@ -21,10 +21,14 @@ $sellerData = fetch($query, ['type' => 'i', 'value' => $productId]);
 
 <div class="flex flex-row gap-4">
   <div class="flex-[1.3] rounded-2xl overflow-clip">
-    <img class="w-full h-full aspect-[3/2]" src="/public/images/1.jpg" alt="">
+    <img class="w-full h-full aspect-[3/2]" src="/public/images/<?php echo $productData["imageUrl"]  ?>" alt="">
   </div>
   <div id="actions" class="flex flex-[.7] bg-neutral rounded-2xl p-8 flex-col items-center justify-center">
-    <p class="opacity-70 pb-12">Veiling sluit om <?php echo $time; ?></p>
+    <?php
+    if (strtotime($productData['endDate']) > time()) {
+      echo '<p class="opacity-70 pb-12">Veiling sluit om ' . $time . '</p>';
+    }
+    ?>
     <div class="pb-24">
       <span id="countdown-wrapper" class="countdown font-mono text-5xl">
         <span id="hours" style="--value:00;"></span>:
