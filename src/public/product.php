@@ -44,10 +44,12 @@
                             <span class="label-text">Enter amount</span>
                         </label>
                         <label class="input-group">
-                            <span>Price</span>
-                            <input id="bidInput" type="number" placeholder="0,00" class="input input-bordered"/>
-                            <button onClick="bid();"type="submit" class="btn btn-primary" name="bied">Bid</button>
-
+                            <form action="/src/lib/catalog/bid.php" method="post">
+                                <input type="hidden" name="productid" id="productid" value=<?php echo $_GET["id"];?>>
+                                <span>Price</span>
+                                <input id="bidInput" name="bidInput" type="number" placeholder="0,00" class="input input-bordered" step="0.01"/>
+                                <button onClick="bid();"type="submit" class="btn btn-primary" name="bied">Bid</button>
+                            </form>
                         </label>
                         </div>
                     </div>
