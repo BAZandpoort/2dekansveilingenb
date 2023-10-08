@@ -38,6 +38,8 @@ if ($user) {
       </svg>
       </label>
       <ul tabindex="0" class="menu menu-sm ml-0 dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-64">
+        <!-- Account actions -->
+        <li><a href="/account/login" class="text-lg">Login</a></li>
         <!-- Language Select -->
         <li>
           <details>
@@ -49,9 +51,6 @@ if ($user) {
             </ul>
           </details>
         </li>
-        <!-- Account actions -->
-        <li><a href="#" class="text-lg">Login</a></li>
-        <li><a href="#" class="text-lg">Register</a></li>
 
         <!-- Categories -->
         <li>
