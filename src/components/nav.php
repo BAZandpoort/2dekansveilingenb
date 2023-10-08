@@ -27,7 +27,7 @@ if ($user) {
 ?>
 
 <!-- Top navbar -->
-<div class="navbar bg-base-100 px-4">
+<div class="navbar bg-base-100 px-2 gap-2 md:gap-0 md:px-4">
   <!-- Left - logo -->
   <div class="navbar-start flex-1">
     <!-- Dropdown menu on small devices -->
