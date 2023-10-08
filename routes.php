@@ -16,19 +16,19 @@ $routes = [
     'footer' => false,
     'container' => false,
   ],
-  '/account/logout' => [
-    'view' => 'account/logout.php',
-    'title' => 'Logout',
-    'nav' => false,
-    'footer' => false,
-    'container' => true,
-  ],
   '/account/register' => [
     'view' => 'account/register.php',
     'title' => 'Register',
     'nav' => false,
     'footer' => false,
     'container' => false,
+  ],
+  '/account/logout' => [
+    'view' => 'account/logout.php',
+    'title' => 'Logout',
+    'nav' => false,
+    'footer' => false,
+    'container' => true,
   ],
   '/account/settings/edit' => [
     'view' => 'account/edit.php',

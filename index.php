@@ -24,7 +24,7 @@ $alert = '';
 
 if ($error) {
   $alert = '
-    <div class="alert alert-error">
+    <div class="alert alert-error pr-6">
       <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
@@ -35,7 +35,7 @@ if ($error) {
 
 if ($succes) {
   $alert = '
-  <div class="alert alert-success">
+  <div class="alert alert-success pr-6">
     <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
     </svg>
@@ -44,7 +44,7 @@ if ($succes) {
   ';
 }
 
-$containerClasses = $route['container'] ? 'container mx-auto pt-24 pb-48 md:px-16' : '';
+$containerClasses = $route['container'] ? 'container mx-auto' : '';
 $language = isset($_SESSION["user"]) ? $_SESSION["user"]["language"] : $_SESSION["guest"]["language"] ?? 'text_en';
 $translations = fetch('SELECT id, ' . $language . ' FROM translations');
 ?>
@@ -53,6 +53,7 @@ $translations = fetch('SELECT id, ' . $language . ' FROM translations');
 <html lang="en" data-theme='<?php echo $theme; ?>'>
 
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://kit.fontawesome.com/58a210823e.js" crossorigin="anonymous"></script>
   <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.3/dist/full.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.tailwindcss.com"></script>
@@ -68,17 +69,17 @@ $translations = fetch('SELECT id, ' . $language . ' FROM translations');
   <div class="min-h-screen">
     <?php $route['nav'] ? include COMPONENTS . '/nav.php' : null; ?>
 
-    <?php
-    echo strlen($alert) > 0 
-    ? '
-    <div class="w-96 mx-auto mt-8">
-      ' . $alert . '
-    </div>
-    ' 
-    : null;
-    ?>
+    <div class="relative <?php echo $containerClasses ?>">
+      <?php
+      echo strlen($alert) > 0 
+      ? '
+      <div class="absolute left-1/2 transform -translate-x-1/2 top-8">
+        ' . $alert . '
+      </div>
+      ' 
+      : null;
+      ?>
 
-    <div class="<?php echo $containerClasses ?>">
       <?php include PUBLIC_S . '/' . $route['view']; ?>
     </div>
 
