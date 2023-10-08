@@ -4,8 +4,8 @@ if (isset($_SESSION['user'])) {
   exit();
 } ?>
 
-<div class="pt-36">
-  <div class="text-sm breadcrumbs flex justify-center">
+<div class="min-h-[100svh] w-full flex flex-col justify-center items-center px-8 py-8">
+  <div class="hidden md:flex text-sm breadcrumbs justify-center">
     <ul>
       <li><a href="/">Home</a></li> 
       <li>Account</li>
@@ -13,26 +13,25 @@ if (isset($_SESSION['user'])) {
     </ul>
   </div>
 
-  <h1 class="text-center text-4xl font-bold mb-12">Log in to your account</h1>
+  <h1 class="sm:text-center md:text-center text-4xl font-bold mb-8">Log in to your account</h1>
   
-  <form action="/src/lib/account/login.php" method="post" class="flex flex-col items-center gap-4">
-    <div class="form-control w-full max-w-xs">
-      <label class="label">
-        <span class="label-text">Email</span>
-      </label>
-      <input type="email" name="email" placeholder="john.doe@gmail.com" class="input input-bordered w-full max-w-xs" required />
+  <form action="/src/lib/account/login.php" method="post" class="flex flex-col gap-8 w-full sm:w-80">
+    <div class="flex flex-col gap-4">
+      <div class="form-control">
+        <label class="label">
+          <span class="label-text">Email</span>
+        </label>
+        <input type="email" name="email" placeholder="john.doe@gmail.com" class="input input-bordered" required />
+      </div>
+      <div class="form-control">
+        <label class="label">
+          <span class="label-text">Password</span>
+        </label>
+        <input type="password" name="password" placeholder="****" class="input input-bordered" required />
+      </div>
     </div>
 
-    <div class="form-control w-full max-w-xs">
-      <label class="label">
-        <span class="label-text">Password</span>
-      </label>
-      <input type="password" name="password" placeholder="john.doe@gmail.com" class="input input-bordered w-full max-w-xs" required />
-    </div>
-
-    <div class="form-control w-full max-w-xs">
-      <button name="login" class="btn btn-primary">Sign in</button>
-    </div>
+    <button name="login" class="btn btn-primary">Sign in</button>
   </form>
 
   <div class="w-full text-center mt-8">
