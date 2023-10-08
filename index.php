@@ -44,7 +44,7 @@ if ($succes) {
   ';
 }
 
-$containerClasses = $route['container'] ? 'container mx-auto' : '';
+$containerClasses = $route['container'] ? 'container mx-auto pt-4 md:pt-12' : '';
 $language = isset($_SESSION["user"]) ? $_SESSION["user"]["language"] : $_SESSION["guest"]["language"] ?? 'text_en';
 $translations = fetch('SELECT id, ' . $language . ' FROM translations');
 ?>
