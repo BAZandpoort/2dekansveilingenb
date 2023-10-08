@@ -27,14 +27,49 @@ if ($user) {
 ?>
 
 <!-- Top navbar -->
-<div class="navbar bg-base-100 px-8">
+<div class="navbar bg-base-100 px-4">
   <!-- Left - logo -->
   <div class="navbar-start flex-1">
-    <a href="/" class="btn btn-ghost normal-case text-xl"><?php echo $translations[1][$language];?></a>
+    <!-- Dropdown menu on small devices -->
+    <div class="dropdown">
+      <label tabindex="0" class="btn btn-ghost md:hidden">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+      </svg>
+      </label>
+      <ul tabindex="0" class="menu menu-sm ml-0 dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-64">
+        <!-- Language Select -->
+        <li>
+          <details>
+            <summary class="text-lg"><?php echo $languageDisplay ?></summary>
+            <ul>
+              <li><a href="" class="text-lg">English</a></li>
+              <li><a href="" class="text-lg">Dutch</a></li>
+              <li><a href="" class="text-lg">French</a></li>
+            </ul>
+          </details>
+        </li>
+        <!-- Account actions -->
+        <li><a href="#" class="text-lg">Login</a></li>
+        <li><a href="#" class="text-lg">Register</a></li>
+
+        <!-- Categories -->
+        <li>
+          <details>
+            <summary class="text-lg">Catalog</summary>
+            <ul>
+              <li><a href="" class="text-lg">All categories...</a></li>
+            </ul>
+          </details>
+        </li>
+      </ul>
+    </div>
+
+    <a href="/" class="hidden btn btn-ghost normal-case text-xl md:flex"><?php echo $translations[1][$language];?></a>
   </div>
 
   <!-- Center - search -->
-  <div class="flex-1">
+  <div class="w-full md:flex-1">
     <div class="form-control w-full relative">
       <input type="text" placeholder="Search" class="input input-bordered w-auto">
         <i class="fa-solid fa-magnifying-glass fa-lg absolute right-4 top-1/2 opacity-60"></i>
@@ -43,7 +78,7 @@ if ($user) {
   </div>
 
   <!-- Right - User actions -->
-  <div class="flex-1 justify-end gap-4">
+  <div class="hidden flex-1 justify-end gap-4 md:flex">
       <div class="dropdown dropdown-end">
           <label tabindex="0" class="btn m-1"><?php echo $languageDisplay ?></label>
           <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
@@ -75,7 +110,7 @@ if ($user) {
 </div>
 
 <!-- Bottom navbar -->
-<div class="navbar bg-base-100 shadow-sm pt-8">
+<div class="hidden navbar bg-base-100 shadow-sm pt-8 md:flex">
   <div class="navbar-center flex w-full">
     <ul class="menu menu-horizontal px-1 gap-16 w-full justify-center">
     <?php
