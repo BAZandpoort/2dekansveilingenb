@@ -1,8 +1,8 @@
 import * as mysql from 'mysql2/promise';
 import users from './data/user';
-import userProfiles from './data/user_profile';
-import userRoleMapping from './data/user_role_mapping';
-import productCategories from './data/product_categories';
+import userProfiles from './data/user-profile';
+import userRoleMapping from './data/user-role-mapping';
+import productCategories from './data/product-categories';
 import products from './data/products';
 
 const dbConfig = {
