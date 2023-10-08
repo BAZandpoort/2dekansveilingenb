@@ -5,7 +5,7 @@ require_once COMPONENTS . '/product-card.php';
 $categories = popularCategories(3);
 
 echo '
-<div class="flex flex-col gap-24">
+<div class="flex flex-col gap-12 md:gap-24">
 ';
 
 $i = 0;
@@ -17,7 +17,7 @@ foreach ($categories as $category) {
     <p class="text-3xl font-bold">' .
     $categoryName .
     '</p>
-    <div class="w-full flex flex-row flex-wrap justify-between gap-8">
+    <div class="w-full flex flex-col md:flex-row flex-wrap justify-between gap-8">
   ';
 
   foreach ($category as $product) {
