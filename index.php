@@ -35,7 +35,7 @@ if ($error) {
 
 if ($succes) {
   $alert = '
-  <div class="alert alert-success md:pr-6">
+  <div class="alert alert-success w-fit grid-flow-col md:pr-6">
     <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
     </svg>
@@ -54,13 +54,16 @@ $translations = fetch('SELECT id, ' . $language . ' FROM translations');
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://kit.fontawesome.com/58a210823e.js" crossorigin="anonymous"></script>
+
   <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.3/dist/full.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script src="https://kit.fontawesome.com/58a210823e.js" crossorigin="anonymous"></script>
 
   <script src="/public/js/countdown.js"></script>
   <script src="/public/js/share.js"></script>
   <script src="/public/js/bid.js"></script>
+
   <link rel="stylesheet" href="/public/css/theme.css">
   <title>2dekans veilingen - <?php echo $route['title']; ?></title>
 </head>

@@ -37,7 +37,7 @@ if ($user) {
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
       </svg>
       </label>
-      <ul tabindex="0" class="menu menu-sm ml-0 dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-64">
+      <ul tabindex="0" class="menu menu-sm ml-0 dropdown-content mt-3 z-[1] p-2 pb-4 shadow bg-base-100 rounded-box w-64">
         <!-- Account actions -->
         <li><a href="/account/login" class="text-lg">Login</a></li>
         <!-- Language Select -->
@@ -45,9 +45,11 @@ if ($user) {
           <details>
             <summary class="text-lg"><?php echo $languageDisplay ?></summary>
             <ul>
-              <li><a href="" class="text-lg">English</a></li>
-              <li><a href="" class="text-lg">Dutch</a></li>
-              <li><a href="" class="text-lg">French</a></li>
+              <form action="/src/lib/account/change-language.php" method="post">
+                <li><input type="submit" name="text_en" value='English'></li>
+                <li><input type="submit" name="text_nl" value='Nederlands'></li>
+                <li><input type="submit" name="text_fr" value='Français'></li>
+              </form>
             </ul>
           </details>
         </li>
@@ -56,8 +58,22 @@ if ($user) {
         <li>
           <details>
             <summary class="text-lg">Catalog</summary>
-            <ul>
-              <li><a href="" class="text-lg">All categories...</a></li>
+            <ul class="flex flex-col gap-2">
+              <?php
+                $categories = fetch('SELECT * FROM product_categories LIMIT 10');
+                if ($categories) {
+                  foreach ($categories as $category) {
+                    echo '
+                    <li>
+                      <a href="/catalog/products?category=' . $category['name'] . '" class="text-lg">
+                        <i class="fa-solid ' . $category['icon'] . ' group-hover:-translate-y-1 transition"></i>
+                        <span class="label-text">' . $category['name'] . '</span>
+                      </a>
+                    </li>
+                    ';
+                  }
+                }
+              ?>
             </ul>
           </details>
         </li>
