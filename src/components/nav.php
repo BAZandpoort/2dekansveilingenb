@@ -38,8 +38,32 @@ if ($user) {
       </svg>
       </label>
       <ul tabindex="0" class="menu menu-sm ml-0 dropdown-content mt-3 z-[1] p-2 pb-4 shadow bg-base-100 rounded-box w-64">
+        <li><a href="/" class="text-lg">Home</a></li>
+        <div class="divider my-2 px-6"></div>
+        
         <!-- Account actions -->
-        <li><a href="/account/login" class="text-lg">Login</a></li>
+        <?php
+        echo isset($_SESSION['user'])
+          ? '
+          <li>
+            <details>
+              <summary class="text-lg">
+              <div class="w-8">
+                <img class="rounded-full" src="https://avatars.githubusercontent.com/u/64209400?v=4" />
+              </div>
+              Account
+              </summary>
+              <ul>
+                <li><a class="justify-between">Profile</a></li>
+                <li><a href="/src/lib/account/change-theme.php" >Switch to ' . $theme . '</a></li>
+                <li><a href="/account/settings/edit">Settings</a></li>
+                <li><a href="/account/logout"> ' . $translations[2][$language] . ' </a></li>
+              </ul>
+            </details>
+          </li>
+          '
+          : '<li><a href="/account/login" class="text-lg">Login</a></li>'
+        ?>
         <!-- Language Select -->
         <li>
           <details>

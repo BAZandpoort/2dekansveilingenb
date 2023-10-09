@@ -22,28 +22,28 @@ function productCard($product, $shareable = false) {
       : '';
 
   echo '
-  <div id="product-' . $product['id'] . '" href="/" class="group card card-compact transition hover:opacity-90 flex-1 bg-base-100 shadow-xl">
-    <figure>
-      <img class="w-full" src="/public/images/' . $product["imageUrl"] . '" alt="Shoes" />
-    </figure>
+      <div id="product-' . $product['id'] . '" href="/" class="group card card-compact transition hover:opacity-90 flex-1 bg-base-100 shadow-xl">
+        <figure>
+          <img class="w-full" src="/public/images/' . $product["imageUrl"] . '" alt="Shoes" />
+        </figure>
 
-    
-    <div class="card-body transition relative">
+        
+        <div class="card-body transition relative">
 
-      ' . $share . '
+          ' . $share . '
 
-      <h2 class="card-title">' . $product["name"] . '</h2>
-      <p>' . $product["description"] . '</p>
-      <div class="card-actions justify-between items-center">
-        <p class="text-xl text-left font-bold">€' . $product["price"] . '</p>
-        <span id="countdown-wrapper" class="countdown font-mono text-xl">
-          <span id="hours" style="--value:00;"></span>:
-          <span id="minutes" style="--value:00;"></span>:
-          <span id="seconds" style="--value:00;"></span>
-        </span>
+          <h2 class="card-title">' . $product["name"] . '</h2>
+          <p>' . $product["description"] . '</p>
+          <div class="card-actions justify-between items-center">
+            <p class="text-xl text-left font-bold">€' . $product["price"] . '</p>
+            <span id="countdown-wrapper" class="hidden countdown font-mono text-xl xl:flex">
+              <span id="hours" style="--value:00;"></span>:
+              <span id="minutes" style="--value:00;"></span>:
+              <span id="seconds" style="--value:00;"></span>
+            </span>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
   <script>
     productCardCountdown("' . $product['id'] . '", "' . $product['endDate'] . '");
