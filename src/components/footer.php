@@ -1,26 +1,24 @@
-
-
 <div class="mt-32">
   <footer class="footer p-10 bg-base-200 text-base-content">
     <nav>
-      <header class="footer-title">Diensten</header>
-      <a class="link link-hover">Branding</a>
-      <a class="link link-hover">Ontwerp</a>
-      <a class="link link-hover">Marketing</a>
-      <a class="link link-hover">Advertentie</a>
+      <header class="footer-title"><?php echo $data[3][$language];?></header>
+      <a class="link link-hover"><?php echo $data[4][$language];?></a>
+      <a class="link link-hover"><?php echo $data[5][$language];?></a>
+      <a class="link link-hover"><?php echo $data[6][$language];?></a>
+      <a class="link link-hover"><?php echo $data[7][$language];?></a>
     </nav>
     <nav>
-      <header class="footer-title">Bedrijf</header>
-      <a class="link link-hover">Over ons</a>
-      <a class="link link-hover">Contact</a>
-      <a class="link link-hover">Vacatures</a>
-      <a class="link link-hover">Perskit</a>
+      <header class="footer-title"><?php echo $data[8][$language];?></header>
+      <a class="link link-hover"><?php echo $data[9][$language];?></a>
+      <a class="link link-hover"><?php echo $data[10][$language];?></a>
+      <a class="link link-hover"><?php echo $data[11][$language];?></a>
+      <a class="link link-hover"><?php echo $data[12][$language];?></a>
     </nav>
     <nav>
-      <header class="footer-title">Juridisch</header>
-      <a class="link link-hover">Gebruiksvoorwaarden</a>
-      <a class="link link-hover">Privacybeleid</a>
-      <a class="link link-hover">Cookiebeleid</a>
+      <header class="footer-title"><?php echo $data[13][$language];?></header>
+      <a class="link link-hover"><?php echo $data[14][$language];?></a>
+      <a class="link link-hover"><?php echo $data[15][$language];?></a>
+      <a class="link link-hover"><?php echo $data[16][$language];?></a>
     </nav>
         
 

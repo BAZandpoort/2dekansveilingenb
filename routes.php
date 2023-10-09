@@ -37,6 +37,13 @@ $routes = [
     'nav' => true,
     'footer' => true,
   ],
+  '/account/settings/edit' => [
+    'view' => 'account/edit.php',
+    'title' => 'Edit account settings',
+    'auth_roles' => [],
+    'nav' => true,
+    'footer' => true,
+  ],
   // Catalog routes
   '/catalog/products' => [
     'view' => 'catalog/products.php',
@@ -44,6 +51,20 @@ $routes = [
     'auth_roles' => ['member', 'guest', 'admin'],
     'nav' => true,
     'footer' => true,
+    ],
+    '/catalog/product' => [
+      'view' => 'product.php',
+      'title' => 'Product',
+      'auth_roles' => ['member', 'guest', 'admin'],
+      'nav' => true,
+      'footer' => true,
+      ],
+    '/products/share' => [
+      'view' => 'catalog/product.php',
+      'title' => 'Products',
+      'auth_roles' => ['member', 'guest', 'admin'],
+      'nav' => false,
+      'footer' => false,
     ],
   // '/searchbar' => [
   //   'view' => 'zoekbalk.php',
@@ -60,6 +81,34 @@ $routes = [
     'nav' => true,
     'footer' => false,
   ],
+  '/dashboard/products/mine' => [
+    'view' => 'member/myProducts.php',
+    'title' => 'My Products',
+    'auth_roles' => ['member'],
+    'nav' => true,
+    'footer' => false,
+  ],
+  '/dashboard/see-translations' => [
+    'view' => 'member/see-translations.php',
+    'title' => 'See translations',
+    'auth_roles' => ['member'],
+    'nav' => true,
+    'footer' => false,
+  ],
+  '/dashboard/edit-translation' => [
+    'view' => 'member/edit-translation.php',
+    'title' => 'Edit translations',
+    'auth_roles' => ['member'],
+    'nav' => true,
+    'footer' => false,
+  ],
+  '/dashboard/add-translation' => [
+    'view' => 'member/add-translation.php',
+    'title' => 'Add translations',
+    'auth_roles' => ['member'],
+    'nav' => true,
+    'footer' => false,
+  ],
   // Error routes
   '/404' => [
     'view' => 'errors/404.php',
@@ -67,5 +116,19 @@ $routes = [
     'auth_roles' => [],
     'nav' => false,
     'footer' => false,
+  ],
+  '/catalog/bied' => [
+    'view' => '/catalog/bied.php',
+    'title' => 'bieden',
+    'auth_roles' => ['member'],
+    'nav' => true,
+    'footer' => true,
+  ],
+  '/account/language-select' => [
+    'view' => 'account/language_select.php',
+    'title' => 'Language select',
+    'auth_roles' => ['guest'],
+    'nav' => true,
+    'footer' => true,
   ],
 ];
