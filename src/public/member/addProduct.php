@@ -4,6 +4,9 @@ if (!isset($_SESSION['user'])) {
   exit();
 }
 
+$user = $_SESSION['user'];
+
+
 $error = $_GET['error'] ?? false;
 
 if ($error) {
@@ -20,26 +23,31 @@ if ($error) {
 
 <div>
   <form action="/src/lib/member/addProduct.php" method="post" class="flex flex-col items-center gap-4">
-    <div class="flex flex-col gap-2 w-full max-w-xs">
-      <label for="userid">User ID</label>
-      <input
+    <input
       name="userid"
       id="userid"
-      type="number"
-      placeholder="1"
+      type="hidden"
+      value="<?php echo $user["id"]?>"
       class="input input-bordered w-full placeholder:opacity-30"
-      required/>
-    </div>
+    />
 
     <div class="flex flex-col gap-2 w-full max-w-xs">
       <label for="categoryid">Category ID</label>
-      <input
-      name="categoryid"
-      id="categoryid"
-      type="categoryid"
-      placeholder="1"
-      class="input input-bordered w-full placeholder:opacity-30"
-      required/>
+      <?php
+        $query = 'SELECT * FROM product_categories';
+        $categories = fetch($query);
+        echo '
+          <select name="categoryid" id="categoryid" class="select select-bordered">
+        ';
+        foreach ($categories as $category) {
+          echo '
+            <option value='.$category["id"].'>'.$category["name"].'</option>
+          ';
+        }
+        echo '
+          </select>
+        ';
+      ?>
     </div>
   
     <div class="flex flex-col gap-2 w-full max-w-xs">
