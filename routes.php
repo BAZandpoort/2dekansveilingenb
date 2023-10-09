@@ -81,6 +81,27 @@ $routes = [
     'nav' => true,
     'footer' => false,
   ],
+  '/verkoper-dashboard' => [
+    'view' => 'member/verkoperDashboard.php',
+    'title' => 'Dashboard',
+    'auth_roles' => ['member'],
+    'nav' => true,
+    'footer' => true,
+  ],
+    'src/member/delete' => [
+      'view' => 'member/verkoperDashboard.php',
+      'title' => 'Dashboard',
+      'auth_roles' => ['member'],
+      'nav' => true,
+      'footer' => true,
+  ],
+  'public/member/edit' => [
+    'view' => 'member/editProduct.php',
+    'title' => 'Edit Product',
+    'auth_roles' => ['member'],
+    'nav' => true,
+    'footer' => false,
+  ],
   '/dashboard/see-translations' => [
     'view' => 'member/see-translations.php',
     'title' => 'See translations',
