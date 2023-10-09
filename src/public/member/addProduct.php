@@ -87,11 +87,11 @@ if ($error) {
     </div>
 
     <div class="flex flex-col gap-2 w-full max-w-xs">
-      <label for="auction_duration">Auction end date | <b>For auctions only</b></label>
+      <label for="auction_end_time">Auction end time | <b>For auctions only</b></label>
       <input
-      name="auction_duration"
-      id="auction_duration"
-      type="date"
+      name="auction_end_time"
+      id="auction_end_time"
+      type="datetime-local"
       class="input input-bordered w-full placeholder:opacity-30"
       />
     </div>

@@ -1,5 +1,11 @@
 <?php
 
+    function secondsToTime($seconds) {
+        $dtF = new \DateTime('@0');
+        $dtT = new \DateTime("@$seconds");
+        return $dtF->diff($dtT)->format('%a:%h:%i:%s');
+    }
+
     if(!isset($_GET["id"])){
         header("location: /");
         exit();
@@ -9,7 +15,7 @@
     require_once LIB . '/util/util.php';
     
     $id=$_GET["id"];
-    $query = "SELECT * FROM products WHERE id = ?";
+    $query = "SELECT *, TIMESTAMPDIFF(SECOND, createdAT, auctionEndTime) AS timeleftatstart,TIMESTAMPDIFF(SECOND, now(), auctionEndTime) AS timeleft FROM products WHERE id = ?";
     $products = fetch($query, ['type' => 'i', 'value' => $id]);
 
     $query2 = "SELECT * FROM users,user_profile
@@ -25,9 +31,18 @@
     </div>
     <div class="flex-[0.9] flex items-stretch card w-full shadow-xl ">
         <div class="card w-full my-auto">
-                <div class="radial-progress mx-auto" style="--value:70;">
-                    time
-                </div>
+                <?php
+                    if (isset($products["auctionEndTime"])){
+                        $timeleft = secondsToTime($products["timeleft"]);
+                                                
+                        $progress_percent = ($products["timeleft"] / $products["timeleftatstart"]) * 100;
+                        echo '
+                            <div class="radial-progress mx-auto" style="--value:'.$progress_percent.';">
+                                '.$timeleft.'
+                            </div>
+                        ';
+                    }
+                ?>
                 <div class="card-body items-center text-center space-x-10 ">
                     <table class="table-auto flex space-x-10"> 
                         <tr>

@@ -11,14 +11,14 @@ if (isset($_POST['add'])) {
   $price = $_POST['price'];
   $imageUrl = $_POST['imageUrl'];
 
-  if (isset($auction_end_time)){
-    $auction_end_time = $_POST["auction_duration"];
+  if (isset($_POST["auction_end_time"])){
+    $auction_end_time = $_POST["auction_end_time"];
   } else {
     $auction_end_time = null;
   }
 
-  $query = 'INSERT INTO products (userid, categoryid, name, description, price, imageUrl, isAuction, auctionEndTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
-  $insertData = insert(
+  $query = 'INSERT INTO products (userid, categoryid, name, description, price, imageUrl, auctionEndTime) VALUES (?, ?, ?, ?, ?, ?, ?)';
+  insert(
     $query,
     ['type' => 'i', 'value' => $userid],
     ['type' => 'i', 'value' => $categoryid],
@@ -27,10 +27,7 @@ if (isset($_POST['add'])) {
     ['type' => 'd', 'value' => $price],
     ['type' => 's', 'value' => $imageUrl],
     ['type' => 's', 'value' => $auction_end_time],
-  );
-
-  return $insertData;
-  
+  );  
 }
 header('Location: /');
 return;
