@@ -11,7 +11,7 @@ if (isset($_POST['add'])) {
   $price = $_POST['price'];
   $imageUrl = $_POST['imageUrl'];
 
-  if (isset($_POST["auction_end_time"])){
+  if (isset($_POST["isAuction"])){
     $auction_end_time = $_POST["auction_end_time"];
   } else {
     $auction_end_time = null;

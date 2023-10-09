@@ -86,15 +86,35 @@ if ($error) {
       required />
     </div>
 
-    <div class="flex flex-col gap-2 w-full max-w-xs">
-      <label for="auction_end_time">Auction end time | <b>For auctions only</b></label>
-      <input
-      name="auction_end_time"
-      id="auction_end_time"
-      type="datetime-local"
-      class="input input-bordered w-full placeholder:opacity-30"
-      />
+
+    <label for="isAuction">Is this an auction?</label> 
+    <input type="checkbox" id="isAuction" name="isAuction" onclick="showInput()" class="checkbox checkbox-lg">
+
+    <div id="input_field" style="display:none">
+      <div class="flex flex-col gap-2 w-full max-w-xs">
+        <label for="auction_end_time">Auction end time</label>
+        <input
+        name="auction_end_time"
+        id="auction_end_time"
+        type="datetime-local"
+        class="input input-bordered w-full placeholder:opacity-30"
+        />
+      </div>
     </div>
+
+    <script>
+    function showInput() {
+      var checkBox = document.getElementById("isAuction");
+      var text = document.getElementById("input_field");
+      if (checkBox.checked == true){
+        input_field.style.display = "block";
+      } else {
+        input_field.style.display = "none";
+      }
+    }
+    </script>
+
+    
 
     <input type="submit" name="add" value="Add product" class="btn btn-wide place-self-center">
   </form>
