@@ -2,11 +2,13 @@
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/util/util.php';
+session_start();
+
 
 $user = $_SESSION['user'];
 
 
-if (isset($_POST['bid'])) {
+if (isset($_POST['bied'])) {
   $userid = $user['id'];
   $productid = $_POST['productid'];
   $bid_price = $_POST['bidInput'];
@@ -24,10 +26,10 @@ if (isset($_POST['bid'])) {
             ['type' => 'd', 'value' => $bid_price],
         );  
   } else {
-        $query = 'UPDATE bid SET bidPrice = ?, bidOfferedAt = now() WHERE id = ?';
+        $query = 'UPDATE bids SET bidPrice = ?, bidOfferedAt = now() WHERE id = ?';
         insert(
             $query,
-            ['type' => 'i', 'value' => $productid],
+            ['type' => 'i', 'value' => $bid_price],
             ['type' => 'd', 'value' => $bid_id],
         );
   }
