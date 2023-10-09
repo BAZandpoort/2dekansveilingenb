@@ -4,32 +4,164 @@
     <title>Seller Dashboard</title>
    
 </head>
-<body>
-    
+<body >
 <style>
-        .table-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 10px;
-            
-           
-        }
-      
+    .table-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+        background-color: rgb(64,64,64);
+        border-radius: 20px;
+    }
 
-        th, td {
-         margin-right: 40px;
-        
-        }
+    th, td {
+        border: 12px;
+        padding: 20px;
+        text-align: center;
+    }
 
-       
-    </style>
-    <form method="post" action="delete_products.php">
+    .box {
+        margin-top: 50px;
+        border-radius: 20px;
+        width: auto;
+        height: auto;
+        border: 4px solid dimgray; /* Border color is gray */
+        background-color: dimgray; /* Background color is gray */
+        padding: 10px;
+        margin: 10px;
+        display: inline-block;
+    }
+    .container {
+    width: 100%;
+    height: 100vh;
+    color: white;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.description {
+    text-align: center;
+    width: 43%;
+}
+
+.clientImage {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.clientImage span {
+    margin-left: 10px;
+}
+
+.clientImage img {
+    width: 40px;
+}
+
+.reviewSection {
+    padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.reviewItem {
+    width: 300px;
+    padding: 10px;
+    margin: 1rem;
+    cursor: pointer;
+    border-radius: 10px;
+
+    border: 1px solid #10102a;
+    transition: all .2s linear;
+}
+
+.reviewItem:hover {
+    border-color: aqua;
+    transform: scale(1.01);
+
+    box-shadow: 0 0px 5px 0px #cbc0c0;
+}
+
+.top {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.top ul {
+    display: flex;
+    list-style: none;
+}
+
+.top ul li {
+    padding-left: 4px;
+}
+
+article p {
+    font-size: 15px;
+    font-weight: 100;
+    margin-bottom: 1rem;
+    font-family: system-ui;
+}
+
+
+@media screen and (max-width:700px) {
+    .container {
+        height: auto;
+    }
+
+    .description {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width:375px) {
+    .reviewSection {
+        padding: 0;
+    }
+
+    .reviewItem {
+        width: 100%;
+    }
+
+    .clientImage {
+        margin-bottom: 0.6rem;
+    }
+
+    .top {
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
+
+
+</style>
+
+
+<div style="margin-top: 340px;">
+<div class="box">
+
+<form method="post" action="delete_products.php">
     <div class="table-container">
         <div class="overflow-x-auto">
 
-            <table class="table" >
-                <thead>
-                    <tr>
+            <table>
+                <tr>
                         <th>
                             <input type="checkbox" id="checkAll" /> 
                         </th>
@@ -83,17 +215,121 @@
                 </tbody>
             </table>
         </div>
-            </div>
+          
         </div>
         <div class="w-full text-center mt-8">
-        <div class="flex justify-center space-x-4">
         <button type="submit" name="delete_selected" class="btn btn-outline text-center">Delete</button>  
      
     </form>
  
         <a class="btn btn-outline text-center" href="/dashboard/products/add">Add Product</a>
  
+        </div>
+        
+        </div>
+        </div>
+
+        <div class="container">
+        <h2>Your reviews</h2>
+        <p class="description">See what your latest buyers said about your product or your attitude as a seller/auctioneer!</p>
+    
+        <!-- Clients Review Section -->
+        <div class="reviewSection">
+
+        <!-- Clients Review-1 Section Starts from Here  -->
+            <div class="reviewItem">
+                <div class="top">
+                    <div class="clientImage">
+                        <img src="https://preview.redd.it/i-keep-seeing-this-angry-cat-meme-does-anyone-know-what-v0-n9p8aheg9jw91.jpg?width=1080&crop=smart&auto=webp&s=af0ff55ee92c8479c148d47e34d285633b98f76b" alt="">
+                        <span>Ben Dover</span>
+                    </div>
+                    <ul>
+                        <li><i class="fa-solid fa-star"></i></li>
+                        <li><i class="fa-solid fa-star"></i></li>
+                        <li><i class="fa-solid fa-star"></i></li>
+                        <li><i class="fa-regular fa-star"></i></li>
+                        <li><i class="fa-regular fa-star"></i></li>
+                    </ul>
+                </div>
+                <article>
+                    <p class="review">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit beatae ipsa
+                        voluptatibus perferendis quos eaque nemo error tempora harum quas, laudantium tenetur, neque,
+                        facere exercitationem!</p>
+                    <p>Jan 01, 2023</p>
+                </article>
+            </div>
+
+        <!-- Clients Review-2 Section Starts from Here  -->
+            <div class="reviewItem">
+                <div class="top">
+                    <div class="clientImage">
+                        <img src="https://thumbs.dreamstime.com/b/young-happy-positive-teenager-man-gesturing-ok-isolated-white-background-40784002.jpg" alt="">
+                        <span>Craven Morehed</span>
+                    </div>
+                    <ul>
+                        <li><i class="fa-solid fa-star"></i></li>
+                        <li><i class="fa-solid fa-star"></i></li>
+                        <li><i class="fa-solid fa-star"></i></li>
+                        <li><i class="fa-regular fa-star"></i></li>
+                        <li><i class="fa-regular fa-star"></i></li>
+                    </ul>
+                </div>
+                <article>
+                    <p class="review">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit beatae ipsa
+                        voluptatibus perferendis quos eaque nemo error tempora harum quas, laudantium tenetur, neque,
+                        facere exercitationem!</p>
+                    <p>Jan 01, 2023</p>
+                </article>
+            </div>
+
+        <!-- Clients Review-3 Section Starts from Here  -->
+            <div class="reviewItem">
+                <div class="top">
+                    <div class="clientImage">
+                        <img src="https://images.unsplash.com/photo-1605980776566-0486c3ac7617?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8YmxhY2slMjBndXl8ZW58MHx8MHx8fDA%3D&w=1000&q=80" alt="">
+                        <span>Hugh Jass</span>
+                    </div>
+                    <ul>
+                        <li><i class="fa-solid fa-star"></i></li>
+                        <li><i class="fa-solid fa-star"></i></li>
+                        <li><i class="fa-solid fa-star"></i></li>
+                        <li><i class="fa-regular fa-star"></i></li>
+                        <li><i class="fa-regular fa-star"></i></li>
+                    </ul>
+                </div>
+                <article>
+                    <p class="review">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit beatae ipsa
+                        voluptatibus perferendis quos eaque nemo error tempora harum quas, laudantium tenetur, neque,
+                        facere exercitationem!</p>
+                    <p>Jan 01, 2023</p>
+                </article>
+
+                
+            </div>
+            
+
+    
+        </div>
+        <a href="/" class="link">Click to see more</a>
+<br><br>
+        <h2>Your current rating as seller/auctioneer</h2>
+        <br>
+            <div class="rating">
+  <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" />
+  <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" />
+  <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" checked />
+  <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" />
+  <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400 " />
+</div>
     </div>
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br><br><br>
+
+
+   
+    
 
     <script>
       
