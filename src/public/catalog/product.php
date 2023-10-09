@@ -19,9 +19,16 @@ $query = 'SELECT * FROM users,user_profile
 $sellerData = fetch($query, ['type' => 'i', 'value' => $productId]);
 ?>
 
-<div class="flex flex-row gap-4">
-  <div class="flex-[1.3] rounded-2xl overflow-clip">
-    <img class="w-full h-full aspect-[3/2]" src="/public/images/<?php echo $productData["imageUrl"]  ?>" alt="">
+<div class="w-full flex justify-center md:justify-start text-sm breadcrumbs">
+  <ul>
+    <li><a href="/">Home</a></li> 
+    <li>Catalog</li>
+    <li><a href="/catalog/products">All Products</a></li>
+  </ul>
+</div>
+<div class="flex flex-col md:flex-row gap-4">
+  <div class="flex-[1.3]">
+    <img class="w-full h-full aspect-[3/2] rounded-2xl" src="/public/images/<?php echo $productData["imageUrl"]  ?>" alt="">
   </div>
   <div id="actions" class="flex flex-[.7] bg-neutral rounded-2xl p-8 flex-col items-center justify-center">
     <?php
@@ -39,7 +46,7 @@ $sellerData = fetch($query, ['type' => 'i', 'value' => $productId]);
         60
       </div>
     </div>
-    <div class="flex flex-row justify-center gap-24 pb-8">
+    <div class="flex flex-row justify-center gap-8 md:gap-24 pb-8">
       <div class="flex flex-col items-center">
         <p class="uppercase text-xs opacity-40 font-bold">Huidig bod</p>
         <p id="currentBid" class="font-semibold text-xl">€19</p>
@@ -66,7 +73,7 @@ $sellerData = fetch($query, ['type' => 'i', 'value' => $productId]);
 </div>
 
 <div class="flex justify-center gap-4 mt-4">
-  <div class="flex flex-col flex-[1.3] gap-4">
+  <div class="flex flex-col md:flex-[1.3] gap-4">
     <h1 class="text-2xl font-semibold"> <?php echo $productData['name']; ?></h1>
     <p> <?php echo $productData['description']; ?></p>
   </div>
