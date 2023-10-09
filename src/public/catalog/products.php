@@ -6,19 +6,29 @@ require_once COMPONENTS . '/product-card.php';
 $products = getAllProducts();
 
 echo '
-<div class="pl-24 pr-80 sm:pr-40 mx-auto pt-24 pb-40 flex flex-row gap-4 flex-wrap shadow-lg">
-  <div class="flex-[.4] bg-neutral rounded-2xl">
+<div class="w-full flex flex-col md:flex-row gap-4 p-8 md:pr-40">
+  <div class="hidden md:block md:flex-[.4] bg-neutral rounded-2xl">
   </div>
-  <div class="divider divider-horizontal"></div> 
+
+  <div class="hidden md:flex divider divider-horizontal"></div> 
+
   <div class="flex flex-row flex-wrap gap-8 flex-[1.6]">
-    <div class="flex flex-row flex-wrap justify-between gap-8">
+    <div class="w-full flex text-sm breadcrumbs">
+      <ul>
+        <li><a href="/">Home</a></li> 
+        <li>Catalog</li>
+        <li><a href="/catalog/products">All Products</a></li>
+      </ul>
+    </div>
+    
+    <div class="flex flex-wrap justify-between gap-8">
 ';
 
 foreach ($products as $index => $product) {
   if ($index > 0 && $index % 4 === 0) {
     echo '
       </div>
-      <div class="flex flex-row flex-wrap justify-between gap-8">
+      <div class="flex flex-col md:flex-row flex-wrap justify-between gap-8">
     ';
   }
 
@@ -26,7 +36,6 @@ foreach ($products as $index => $product) {
 }
 
 echo '
-    </div>
   </div>
 </div>
 ';
