@@ -86,6 +86,16 @@ if ($error) {
       required />
     </div>
 
+    <div class="flex flex-col gap-2 w-full max-w-xs">
+      <label for="auction_duration">Auction end date | <b>For auctions only</b></label>
+      <input
+      name="auction_duration"
+      id="auction_duration"
+      type="date"
+      class="input input-bordered w-full placeholder:opacity-30"
+      />
+    </div>
+
     <input type="submit" name="add" value="Add product" class="btn btn-wide place-self-center">
    
   </form>
