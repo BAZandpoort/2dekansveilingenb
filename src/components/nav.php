@@ -12,7 +12,7 @@ $languageMap = [
 ];
 
 if ($user) {
-  $theme = $user["theme"];
+  $theme = ($user["theme"] === 'dark') ? 'light' : 'dark';
   
   $language = $user['language'];
   $languageDisplay = $languageMap[$language];

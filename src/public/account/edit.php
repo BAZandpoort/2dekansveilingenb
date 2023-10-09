@@ -24,43 +24,46 @@ $data = fetch($query, ['type' => 'i', 'value' => $userId]);
 
   <h1 class="md:text-center text-4xl font-bold mb-8">Edit your account details</h1>
 
-  <form action="/src/lib/account/update-profile.php" method="post" class="flex flex-col gap-8 w-full sm:w-80">
+  <form action="/src/lib/account/update-profile.php" method="post" class="flex flex-col gap-8 w-full md:max-w-2xl">
     <div class="flex flex-col gap-4">
-      <!-- Username and email -->
+      
       <div class="flex flex-col gap-4 md:flex-row">
-        <div class="form-control w-full max-w-xs">
+        <!-- Usernale -->
+        <div class="form-control md:flex-1">
           <label class="label">
             <span class="label-text">Username</span>
           </label>
-          <input type="text" name="username" value="<?php echo $data['username']; ?>" class="input input-bordered w-full max-w-xs" required />
+          <input type="text" name="username" value="<?php echo $data['username']; ?>" class="input input-bordered w-full" required />
         </div>
-        <div class="form-control w-full max-w-xs">
+
+        <!-- Email -->
+        <div class="form-control md:flex-1">
           <label class="label">
             <span class="label-text">Email</span>
           </label>
-          <input type="email" name="email" value="<?php echo $data['email']; ?>" class="input input-bordered w-full max-w-xs" required />
+          <input type="email" name="email" value="<?php echo $data['email']; ?>" class="input input-bordered w-full" required />
         </div>
       </div>
 
-      <!-- First and lastname -->
       <div class="flex flex-col gap-4 md:flex-row">
-        <div class="form-control w-full max-w-xs">
+        <!-- Firstname -->
+        <div class="form-control md:flex-1">
           <label class="label">
             <span class="label-text">First name</span>
           </label>
-          <input type="text" name="firstname" value="<?php echo $data['firstname']; ?>" class="input input-bordered w-full max-w-xs" required />
+          <input type="text" name="firstname" value="<?php echo $data['firstname']; ?>" class="input input-bordered w-full" required />
         </div>
-        <div class="form-control w-full max-w-xs">
+
+        <!-- Lastname -->
+        <div class="form-control md:flex-1">
           <label class="label">
             <span class="label-text">Last name</span>
           </label>
-          <input type="text" name="lastname" value="<?php echo $data['lastname']; ?>" class="input input-bordered w-full max-w-xs" required />
+          <input type="text" name="lastname" value="<?php echo $data['lastname']; ?>" class="input input-bordered w-full" required />
         </div>
       </div>
     </div>
 
-    <div class="form-control w-full max-w-xs">
-      <button name="update" class="btn btn-primary">Update</button>
-    </div>
+    <button name="update" class="btn btn-primary">Update</button>
   </form>
 </div>
