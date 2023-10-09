@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 09, 2023 at 01:22 PM
+-- Generation Time: Oct 09, 2023 at 04:33 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -60,64 +60,70 @@ CREATE TABLE `products` (
   `price` decimal(10,2) NOT NULL,
   `imageUrl` varchar(255) NOT NULL,
   `updatedAt` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
+  `auctionEndTime` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `userid`, `categoryid`, `name`, `description`, `price`, `imageUrl`, `updatedAt`, `createdAt`) VALUES
-(1, 14, 13, 'Small Granite Hat', 'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J', 784.00, 'https://picsum.photos/seed/BLuZELAvR/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(2, 42, 9, 'Ergonomic Fresh Shoes', 'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J', 534.00, 'https://picsum.photos/seed/HPdYqbJ10/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(3, 9, 4, 'Modern Bronze Bike', 'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J', 765.00, 'https://picsum.photos/seed/O7AzfWFY08/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(4, 21, 6, 'Sleek Concrete Salad', 'Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support', 238.00, 'https://picsum.photos/seed/mQssVg0x/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(5, 50, 5, 'Sleek Wooden Salad', 'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients', 336.00, 'https://picsum.photos/seed/9dpEmlE/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(6, 39, 16, 'Ergonomic Concrete Hat', 'New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016', 689.00, 'https://picsum.photos/seed/JuTdO/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(7, 11, 7, 'Practical Cotton Bacon', 'Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support', 483.00, 'https://picsum.photos/seed/U8MMhE2/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(8, 22, 8, 'Intelligent Cotton Tuna', 'The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design', 865.00, 'https://picsum.photos/seed/9nD88tN/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(9, 3, 11, 'Licensed Cotton Mouse', 'Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals', 709.00, 'https://picsum.photos/seed/eA9Vd/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(10, 34, 11, 'Small Steel Car', 'The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality', 458.00, 'https://picsum.photos/seed/ldYWEqoIIv/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(11, 18, 21, 'Handcrafted Rubber Shoes', 'New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016', 45.00, 'https://picsum.photos/seed/9rvZG97W0j/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(12, 5, 2, 'Handcrafted Frozen Gloves', 'Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support', 834.00, 'https://picsum.photos/seed/WhrXv1uhA/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(13, 10, 7, 'Recycled Fresh Sausages', 'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J', 525.00, 'https://picsum.photos/seed/7Nmkj/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(14, 30, 10, 'Refined Concrete Fish', 'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients', 333.00, 'https://picsum.photos/seed/ajcK4/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(15, 27, 1, 'Recycled Steel Ball', 'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients', 381.00, 'https://picsum.photos/seed/AfcZOp/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(16, 45, 17, 'Handcrafted Wooden Gloves', 'Carbonite web goalkeeper gloves are ergonomically designed to give easy fit', 741.00, 'https://picsum.photos/seed/WkF6Y2/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(17, 8, 20, 'Tasty Plastic Pizza', 'Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support', 277.00, 'https://picsum.photos/seed/QQpN4AQmq/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(18, 43, 20, 'Fantastic Frozen Computer', 'The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design', 587.00, 'https://picsum.photos/seed/Y8rfLDB/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(19, 44, 6, 'Sleek Steel Hat', 'Carbonite web goalkeeper gloves are ergonomically designed to give easy fit', 538.00, 'https://picsum.photos/seed/3yYAx/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(20, 32, 21, 'Recycled Bronze Tuna', 'The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality', 511.00, 'https://picsum.photos/seed/I3OD80/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(21, 23, 10, 'Practical Cotton Soap', 'New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016', 813.00, 'https://picsum.photos/seed/HMbhJF9EPI/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(22, 33, 14, 'Oriental Bronze Pizza', 'The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality', 491.00, 'https://picsum.photos/seed/TYmjY/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(23, 24, 16, 'Handmade Wooden Pizza', 'The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive', 785.00, 'https://picsum.photos/seed/6txJqvAd/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(24, 17, 19, 'Electronic Cotton Salad', 'New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016', 17.00, 'https://picsum.photos/seed/SWBnwg/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(25, 40, 18, 'Bespoke Wooden Pizza', 'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J', 875.00, 'https://picsum.photos/seed/zSxcOnienO/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(26, 49, 15, 'Handmade Frozen Tuna', 'Boston\'s most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles', 885.00, 'https://picsum.photos/seed/s6rzuRW/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(27, 16, 1, 'Sleek Rubber Sausages', 'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J', 112.00, 'https://picsum.photos/seed/zJ3YTUe/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(28, 25, 1, 'Licensed Wooden Shoes', 'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J', 745.00, 'https://picsum.photos/seed/QJVUirQslK/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(29, 38, 11, 'Ergonomic Fresh Ball', 'The Football Is Good For Training And Recreational Purposes', 437.00, 'https://picsum.photos/seed/BwD0dIzm/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(30, 41, 18, 'Electronic Soft Shoes', 'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients', 540.00, 'https://picsum.photos/seed/c8LR3Xc/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(31, 4, 21, 'Intelligent Cotton Car', 'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J', 375.00, 'https://picsum.photos/seed/Geormq/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(32, 12, 20, 'Small Steel Chips', 'Boston\'s most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles', 876.00, 'https://picsum.photos/seed/2CXKCStw/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(33, 19, 1, 'Licensed Rubber Pants', 'The Football Is Good For Training And Recreational Purposes', 612.00, 'https://picsum.photos/seed/WEWlWh/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(34, 26, 11, 'Luxurious Metal Bacon', 'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J', 881.00, 'https://picsum.photos/seed/KhzXB/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(35, 47, 22, 'Licensed Frozen Cheese', 'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J', 909.00, 'https://picsum.photos/seed/zYlUIZ/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(36, 6, 14, 'Tasty Wooden Car', 'New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart', 144.00, 'https://picsum.photos/seed/t1t2zZJmU/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(37, 2, 16, 'Generic Metal Tuna', 'New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016', 456.00, 'https://picsum.photos/seed/wKcLr2K/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(38, 20, 5, 'Luxurious Bronze Chicken', 'The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design', 966.00, 'https://picsum.photos/seed/AgkOUID/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(39, 13, 15, 'Ergonomic Frozen Keyboard', 'Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals', 354.00, 'https://picsum.photos/seed/Zq0jebw/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(40, 35, 12, 'Handcrafted Fresh Computer', 'Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support', 561.00, 'https://picsum.photos/seed/l4syOcdbH/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(41, 15, 3, 'Fantastic Steel Fish', 'New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016', 533.00, 'https://picsum.photos/seed/sRckntr1dw/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(42, 46, 16, 'Fantastic Steel Bike', 'Carbonite web goalkeeper gloves are ergonomically designed to give easy fit', 527.00, 'https://picsum.photos/seed/4JUNT/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(43, 36, 15, 'Refined Granite Chair', 'Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support', 977.00, 'https://picsum.photos/seed/ikfvizPaP/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(44, 7, 14, 'Rustic Fresh Bike', 'New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart', 62.00, 'https://picsum.photos/seed/gPYxlQuP/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(45, 37, 9, 'Refined Cotton Salad', 'Carbonite web goalkeeper gloves are ergonomically designed to give easy fit', 900.00, 'https://picsum.photos/seed/zmOUs/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(46, 29, 5, 'Small Fresh Ball', 'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J', 835.00, 'https://picsum.photos/seed/Ui3kepTT5/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(47, 1, 5, 'Refined Wooden Car', 'The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design', 298.00, 'https://picsum.photos/seed/WquZx/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(48, 31, 11, 'Oriental Fresh Cheese', 'The Football Is Good For Training And Recreational Purposes', 809.00, 'https://picsum.photos/seed/1P0xmt/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(49, 28, 22, 'Gorgeous Cotton Chair', 'The Football Is Good For Training And Recreational Purposes', 863.00, 'https://picsum.photos/seed/qlrnfQKkd/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55'),
-(50, 48, 15, 'Licensed Granite Computer', 'New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart', 676.00, 'https://picsum.photos/seed/Sr5dp5G/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55');
+INSERT INTO `products` (`id`, `userid`, `categoryid`, `name`, `description`, `price`, `imageUrl`, `updatedAt`, `createdAt`, `auctionEndTime`) VALUES
+(1, 14, 13, 'Small Granite Hat', 'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J', 784.00, 'https://picsum.photos/seed/BLuZELAvR/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(2, 42, 9, 'Ergonomic Fresh Shoes', 'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J', 534.00, 'https://picsum.photos/seed/HPdYqbJ10/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(3, 9, 4, 'Modern Bronze Bike', 'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J', 765.00, 'https://picsum.photos/seed/O7AzfWFY08/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(4, 21, 6, 'Sleek Concrete Salad', 'Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support', 238.00, 'https://picsum.photos/seed/mQssVg0x/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(5, 50, 5, 'Sleek Wooden Salad', 'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients', 336.00, 'https://picsum.photos/seed/9dpEmlE/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(6, 39, 16, 'Ergonomic Concrete Hat', 'New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016', 689.00, 'https://picsum.photos/seed/JuTdO/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(7, 11, 7, 'Practical Cotton Bacon', 'Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support', 483.00, 'https://picsum.photos/seed/U8MMhE2/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(8, 22, 8, 'Intelligent Cotton Tuna', 'The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design', 865.00, 'https://picsum.photos/seed/9nD88tN/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(9, 3, 11, 'Licensed Cotton Mouse', 'Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals', 709.00, 'https://picsum.photos/seed/eA9Vd/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(10, 34, 11, 'Small Steel Car', 'The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality', 458.00, 'https://picsum.photos/seed/ldYWEqoIIv/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(11, 18, 21, 'Handcrafted Rubber Shoes', 'New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016', 45.00, 'https://picsum.photos/seed/9rvZG97W0j/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(12, 5, 2, 'Handcrafted Frozen Gloves', 'Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support', 834.00, 'https://picsum.photos/seed/WhrXv1uhA/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(13, 10, 7, 'Recycled Fresh Sausages', 'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J', 525.00, 'https://picsum.photos/seed/7Nmkj/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(14, 30, 10, 'Refined Concrete Fish', 'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients', 333.00, 'https://picsum.photos/seed/ajcK4/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(15, 27, 1, 'Recycled Steel Ball', 'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients', 381.00, 'https://picsum.photos/seed/AfcZOp/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(16, 45, 17, 'Handcrafted Wooden Gloves', 'Carbonite web goalkeeper gloves are ergonomically designed to give easy fit', 741.00, 'https://picsum.photos/seed/WkF6Y2/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(17, 8, 20, 'Tasty Plastic Pizza', 'Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support', 277.00, 'https://picsum.photos/seed/QQpN4AQmq/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(18, 43, 20, 'Fantastic Frozen Computer', 'The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design', 587.00, 'https://picsum.photos/seed/Y8rfLDB/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(19, 44, 6, 'Sleek Steel Hat', 'Carbonite web goalkeeper gloves are ergonomically designed to give easy fit', 538.00, 'https://picsum.photos/seed/3yYAx/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(20, 32, 21, 'Recycled Bronze Tuna', 'The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality', 511.00, 'https://picsum.photos/seed/I3OD80/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(21, 23, 10, 'Practical Cotton Soap', 'New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016', 813.00, 'https://picsum.photos/seed/HMbhJF9EPI/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(22, 33, 14, 'Oriental Bronze Pizza', 'The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality', 491.00, 'https://picsum.photos/seed/TYmjY/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(23, 24, 16, 'Handmade Wooden Pizza', 'The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive', 785.00, 'https://picsum.photos/seed/6txJqvAd/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(24, 17, 19, 'Electronic Cotton Salad', 'New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016', 17.00, 'https://picsum.photos/seed/SWBnwg/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(25, 40, 18, 'Bespoke Wooden Pizza', 'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J', 875.00, 'https://picsum.photos/seed/zSxcOnienO/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(26, 49, 15, 'Handmade Frozen Tuna', 'Boston\'s most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles', 885.00, 'https://picsum.photos/seed/s6rzuRW/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(27, 16, 1, 'Sleek Rubber Sausages', 'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J', 112.00, 'https://picsum.photos/seed/zJ3YTUe/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(28, 25, 1, 'Licensed Wooden Shoes', 'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J', 745.00, 'https://picsum.photos/seed/QJVUirQslK/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(29, 38, 11, 'Ergonomic Fresh Ball', 'The Football Is Good For Training And Recreational Purposes', 437.00, 'https://picsum.photos/seed/BwD0dIzm/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(30, 41, 18, 'Electronic Soft Shoes', 'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients', 540.00, 'https://picsum.photos/seed/c8LR3Xc/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(31, 4, 21, 'Intelligent Cotton Car', 'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J', 375.00, 'https://picsum.photos/seed/Geormq/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(32, 12, 20, 'Small Steel Chips', 'Boston\'s most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles', 876.00, 'https://picsum.photos/seed/2CXKCStw/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(33, 19, 1, 'Licensed Rubber Pants', 'The Football Is Good For Training And Recreational Purposes', 612.00, 'https://picsum.photos/seed/WEWlWh/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(34, 26, 11, 'Luxurious Metal Bacon', 'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J', 881.00, 'https://picsum.photos/seed/KhzXB/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(35, 47, 22, 'Licensed Frozen Cheese', 'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J', 909.00, 'https://picsum.photos/seed/zYlUIZ/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(36, 6, 14, 'Tasty Wooden Car', 'New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart', 144.00, 'https://picsum.photos/seed/t1t2zZJmU/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(37, 2, 16, 'Generic Metal Tuna', 'New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016', 456.00, 'https://picsum.photos/seed/wKcLr2K/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(38, 20, 5, 'Luxurious Bronze Chicken', 'The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design', 966.00, 'https://picsum.photos/seed/AgkOUID/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(39, 13, 15, 'Ergonomic Frozen Keyboard', 'Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals', 354.00, 'https://picsum.photos/seed/Zq0jebw/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(40, 35, 12, 'Handcrafted Fresh Computer', 'Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support', 561.00, 'https://picsum.photos/seed/l4syOcdbH/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(41, 15, 3, 'Fantastic Steel Fish', 'New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016', 533.00, 'https://picsum.photos/seed/sRckntr1dw/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(42, 46, 16, 'Fantastic Steel Bike', 'Carbonite web goalkeeper gloves are ergonomically designed to give easy fit', 527.00, 'https://picsum.photos/seed/4JUNT/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(43, 36, 15, 'Refined Granite Chair', 'Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support', 977.00, 'https://picsum.photos/seed/ikfvizPaP/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(44, 7, 14, 'Rustic Fresh Bike', 'New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart', 62.00, 'https://picsum.photos/seed/gPYxlQuP/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(45, 37, 9, 'Refined Cotton Salad', 'Carbonite web goalkeeper gloves are ergonomically designed to give easy fit', 900.00, 'https://picsum.photos/seed/zmOUs/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(46, 29, 5, 'Small Fresh Ball', 'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J', 835.00, 'https://picsum.photos/seed/Ui3kepTT5/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(47, 1, 5, 'Refined Wooden Car', 'The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design', 298.00, 'https://picsum.photos/seed/WquZx/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(48, 31, 11, 'Oriental Fresh Cheese', 'The Football Is Good For Training And Recreational Purposes', 809.00, 'https://picsum.photos/seed/1P0xmt/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(49, 28, 22, 'Gorgeous Cotton Chair', 'The Football Is Good For Training And Recreational Purposes', 863.00, 'https://picsum.photos/seed/qlrnfQKkd/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(50, 48, 15, 'Licensed Granite Computer', 'New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart', 676.00, 'https://picsum.photos/seed/Sr5dp5G/640/480', '2023-10-08 16:22:55', '2023-10-08 16:22:55', NULL),
+(51, 1, 1, 'Cheese', 'no', 9.00, 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Ch%C3%A8vre_affin%C3%A9_cr%C3%A9meux.jpg/576px-Ch%C3%A8vre_affin%C3%A9_cr%C3%A9meux.jpg', '2023-10-09 11:46:59', '2023-10-09 11:46:59', NULL),
+(52, 1, 2, 'Cat', 'Meowmeow', 11.00, 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Domestic_cat_2011_G02.jpg/640px-Domestic_cat_2011_G02.jpg', '2023-10-09 12:57:31', '2023-10-09 11:49:51', '2023-10-09 14:01:00'),
+(54, 3, 2, 'Rubiks Cube', 'Gaming cube', 2.00, 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Rubiks_Cube_%2811913429076%29.jpg/640px-Rubiks_Cube_%2811913429076%29.jpg', '2023-10-09 14:08:09', '2023-10-09 14:08:09', NULL),
+(55, 6, 2, 'Tank', 'An actual tank', 32.00, 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Rehearsal29april15Moscow-17.jpg/640px-Rehearsal29april15Moscow-17.jpg', '2023-10-09 14:11:02', '2023-10-09 14:11:02', '2023-10-11 00:03:00'),
+(56, 51, 10, 'Hammer', 'It hammers.', 7.00, 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Claw-hammer.jpg/640px-Claw-hammer.jpg', '2023-10-09 14:25:33', '2023-10-09 14:25:33', '2023-10-18 20:22:00');
 
 -- --------------------------------------------------------
 
@@ -343,7 +349,7 @@ INSERT INTO `user_profile` (`id`, `userid`, `profilePictureUrl`, `about`, `theme
 (48, 19, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/231.jpg', 'Aduro teres tenetur complectus stips verecundia uter alienus quam turpis. Damnatio sol dignissimos conatus timidus testimonium ad confido dedico ocer. Aestas theca valetudo tam alo dedico.', 'light', 'text_en'),
 (49, 4, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/576.jpg', 'Tamen uterque substantia vulariter ultra apud patior auxilium aetas magnam. Cubicularis unde cetera desidero. Solum molestias sum advenio debilito coadunatio vitium.', 'dark', 'text_en'),
 (50, 36, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1202.jpg', 'Minus dedecor cohors suppellex absum sulum ara virtus. Ut video comminor aperiam temptatio. Tabella comminor censura.', 'light', 'text_en'),
-(51, 51, 'https://avatars.githubusercontent.com/u/64209400?v=4', 'Hello!', 'light', 'text_nl');
+(51, 51, 'https://avatars.githubusercontent.com/u/64209400?v=4', 'Hello!', 'light', 'text_en');
 
 -- --------------------------------------------------------
 
@@ -508,7 +514,7 @@ ALTER TABLE `bids`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `product_categories`
