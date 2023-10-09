@@ -14,7 +14,15 @@ $data = fetch($query, ['type' => 'i', 'value' => $userId]);
 ?>
 
 <div class="w-full flex flex-col justify-center items-center px-8 py-8">
-  <h1 class="sm:text-center md:text-center text-4xl font-bold mb-8">Edit your account details</h1>
+  <div class="w-full flex justify-center text-sm breadcrumbs mb-2 md:hidden">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li>Account</li>
+      <li><a href="/account/settings/edit">Settings</a></li>
+    </ul>
+  </div>
+
+  <h1 class="md:text-center text-4xl font-bold mb-8">Edit your account details</h1>
 
   <form action="/src/lib/account/update-profile.php" method="post" class="flex flex-col gap-8 w-full sm:w-80">
     <div class="flex flex-col gap-4">
