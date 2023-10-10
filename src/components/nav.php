@@ -73,6 +73,7 @@ $query = 'SELECT id, '.$language.' FROM translations' ;
             </li>
             <li><a href="/src/lib/account/change-theme.php" >Switch to ' . $theme . '</a></li>
             <li><a href="/account/settings/edit">Settings</a></li>
+            <li><a href="/verkoper-dashboard">Dashboard (Products)</a></li>
             <li><a href="/account/logout"> '.$data[2][$language].' </a></li>
             
           </ul>

@@ -1,8 +1,11 @@
-<?php
-
+    <?php
+if (!isset($_SESSION['user'])) {
+    header('Location: /');
+    exit();
+  }
 if (isset($_GET['id'])) {
     $productId = $_GET['id'];
-
+    $sellerId= $_SESSION['user']['id'];
 
     require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
     require_once DATABASE . '/connect.php';
@@ -13,7 +16,7 @@ if (isset($_GET['id'])) {
 
     $result = mysqli_query($connection, $sql);
 
-    if (mysqli_num_rows($result) == 1) {
+    if (mysqli_num_rows($result) >= 1) {
         $row = mysqli_fetch_assoc($result);
         $productName = $row['name'];
         $productDescription = $row['description'];

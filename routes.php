@@ -88,14 +88,14 @@ $routes = [
     'nav' => true,
     'footer' => true,
   ],
-    'src/member/delete' => [
-      'view' => 'member/verkoperDashboard.php',
-      'title' => 'Dashboard',
-      'auth_roles' => ['member'],
-      'nav' => true,
-      'footer' => true,
+  '/member/delete' => [
+    'view' => 'src/lib/member/delete-products.php',
+    'title' => 'Dashboard',
+    'auth_roles' => ['member'],
+    'nav' => true,
+    'footer' => true,
   ],
-  'public/member/edit' => [
+  '/member/edit' => [
     'view' => 'member/editProduct.php',
     'title' => 'Edit Product',
     'auth_roles' => ['member'],
