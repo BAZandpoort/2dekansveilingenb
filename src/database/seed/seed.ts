@@ -64,7 +64,7 @@ async function seedDatabase() {
 
         productCategoriesData.forEach(async (productCategory) => {
             await connection.execute(
-              'INSERT INTO product_categories (name, icon) VALUES (?, ?)',
+              'INSERT INTO product_categories (name) VALUES (?)',
               Object.values(productCategory),
             );
         });

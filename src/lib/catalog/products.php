@@ -53,7 +53,6 @@ function products() {
         
                     <p class="text-base text-center -mt-3">Status: <span id="status">Open</span></p>
                 </div>
-                </div>
             </form>
         </a>
         ';

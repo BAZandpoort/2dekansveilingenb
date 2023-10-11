@@ -37,13 +37,6 @@ $routes = [
     'nav' => true,
     'footer' => true,
   ],
-  '/account/purchases' => [
-    'view' => 'account/purchases.php',
-    'title' => 'Purchase history',
-    'auth_roles' => ['member'],
-    'nav' => true,
-    'footer' => true,
-  ],
   // Catalog routes
   '/catalog/products' => [
     'view' => 'catalog/products.php',
