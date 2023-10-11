@@ -25,9 +25,13 @@ function products() {
                     <div class="hover-dots cursor-pointer absolute -mt-56 right-2 text-7xl text-amber-400 opacity-0 block">...</div>
                 </label>
                 <ul tabindex="0" class="dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-26 -mt-36 mr-2">
-                      <svg name="favorieten" href="#" class="w-6 h-6 hover:text-black text-gray-600 inline-block mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 21 19">
+                <form method="post" action="?id=' . $product["id"]. '">
+                <button name="favorieten">
+                      <svg  href="#" class="w-6 h-6 hover:text-black text-gray-600 inline-block mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 21 19">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4C5.5-1.5-1.5 5.5 4 11l7 7 7-7c5.458-5.458-1.542-12.458-7-7Z"/>
                       </svg>
+                      </button>
+                      </form>
                   <button name="copy" onclick="fallbackCopyTextToClipboard(window.location.origin + \'/products/share' . '?id=' . $product["id"] . '\')"><svg class="w-5 h-5 hover:text-black text-gray-600 inline-block mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5.953 7.467 6.094-2.612m.096 8.114L5.857 9.676m.305-1.192a2.581 2.581 0 1 1-5.162 0 2.581 2.581 0 0 1 5.162 0ZM17 3.84a2.581 2.581 0 1 1-5.162 0 2.581 2.581 0 0 1 5.162 0Zm0 10.322a2.581 2.581 0 1 1-5.162 0 2.581 2.581 0 0 1 5.162 0Z"/></svg>
                   </button>
@@ -42,7 +46,9 @@ function products() {
                   <input type="hidden" name="image" value="' . $product["imageUrl"] . '">
                   <input type="hidden" name="name" value="' . $product["name"] . '">
                   <input type="hidden" name="price" value="' . $product["price"] . '">
-                  <button type="submit" class="btn btn-warning mr-0 mx-32 -mt-11" name="bied">Bide</button>
+                 
+                   <button type="submit" class="btn btn-warning mr-0 mx-32 -mt-11" name="bied">Bid</button>
+                  
       ';
 
       if (isset($product["auctionEndTime"])){
@@ -61,6 +67,15 @@ function products() {
       </a>
       ';
     }
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["favorieten"])) {
+
+      //include_once PUBLIC_S . '/account/favorite.php';
+      $userid = $_SESSION['user']['id'] ;
+  $proid = $_GET["id"];
+ 
+  $sql = insert("INSERT INTO favorieten (userid, id) VALUES ($userid, $proid)");
+  
+  }
   echo '</section>';
 }
 
@@ -106,17 +121,7 @@ function userProducts($userid) {
         ';
         
     }
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["favorieten"])) {
-
-        //include_once PUBLIC_S . '/account/favorite.php';
-        $userid = $_SESSION['user']['id'] ;
-    $proid = $_GET["id"];
- 
-    
- 
-    $sql = insert("INSERT INTO favorieten (userid, id) VALUES ($userid, $proid)");
-    
-    }
+   
     
     
    
