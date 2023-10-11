@@ -108,7 +108,7 @@ $routes = [
     'title' => 'Delete products',
     'auth_roles' => ['member'],
     'nav' => true,
-    'footer' => false,
+    'footer' => true,
   ],
   // Error routes
   '/404' => [
