@@ -102,12 +102,20 @@ $routes = [
     'nav' => true,
     'footer' => false,
   ],
+ 
   '/dashboard/add-translation' => [
     'view' => 'member/add-translation.php',
     'title' => 'Add translations',
     'auth_roles' => ['member'],
     'nav' => true,
     'footer' => false,
+  ],
+  '/dashboard/product-verwijderen' => [
+    'view' => 'member/product-verwijderen.php',
+    'title' => 'Delete products',
+    'auth_roles' => ['member'],
+    'nav' => true,
+    'footer' => true,
   ],
   // Error routes
   '/404' => [

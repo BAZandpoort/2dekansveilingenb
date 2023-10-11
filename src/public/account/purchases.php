@@ -1,5 +1,10 @@
 <?php
-  
+
+  if (!isset($_SESSION['user'])) {
+    header('Location: /');
+    exit();
+  }
+
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once DATABASE . '/connect.php';
@@ -7,8 +12,23 @@ require_once LIB . '/util/util.php';
 
 $userId = $_SESSION['user']['id'];
 
-// Get all purchases and put them in an array
-$purchaseHistory = fetchSingle('SELECT * FROM user_purchases WHERE id = ?', ["type" => "i", "value" => $userId]);
+$purchaseHistory = fetch('SELECT * FROM user_purchases WHERE id = ?', ["type" => "i", "value" => $userId]);
+
+if (!$purchaseHistory) {
+  $purchaseHistory = [];
+}
+
+$purchases = [];
+
+foreach ($purchaseHistory as $purchase) {
+  $productId = $purchase['productId'];
+  $product = fetch('SELECT * FROM products WHERE id = ?', ["type" => "i", "value" => $productId]);
+  $purchases[] = [
+    'productName' => $product['name'],
+    'price' => $product['price'],
+    'timeOfPurchase' => $purchase['timeOfPurchase'],
+  ];
+}
 
 ?>
 
@@ -25,10 +45,10 @@ $purchaseHistory = fetchSingle('SELECT * FROM user_purchases WHERE id = ?', ["ty
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($purchaseHistory as $purchase): ?>
+        <?php foreach ($purchases as $purchase): ?>
           <tr>
             <td><?= $purchase['productName'] ?></td>
-            <td><?= $purchase['price'] ?>€</td>
+            <td><?= $purchase['price'] ?></td>
             <td><?= date('F j, Y', strtotime($purchase['timeOfPurchase'])) ?></td>
           </tr>
         <?php endforeach; ?>
