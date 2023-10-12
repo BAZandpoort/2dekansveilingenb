@@ -33,9 +33,9 @@ $routes = [
   '/account/settings/edit' => [
     'view' => 'account/edit.php',
     'title' => 'Edit account settings',
+    'auth_roles' => [],
     'nav' => true,
     'footer' => true,
-    'container' => true,
   ],
   // Catalog routes
   '/catalog/products' => [
@@ -82,12 +82,11 @@ $routes = [
     'footer' => false,
     'container' => true,
   ],
-  '/dashboard/translations/add' => [
+  '/dashboard/add/translations/add' => [
     'view' => 'member/add-translation.php',
     'title' => 'Add translations',
     'nav' => true,
     'footer' => false,
-    'container' => true,
   ],
   // Other
   '/products/share' => [
@@ -96,6 +95,20 @@ $routes = [
     'nav' => false,
     'footer' => false,
     'container' => true,
+  ],
+  '/dashboard/product-verwijderen' => [
+    'view' => 'member/product-verwijderen.php',
+    'title' => 'Delete products',
+    'auth_roles' => ['member'],
+    'nav' => true,
+    'footer' => true,
+  ],
+  '/dashboard/product-verwijderen' => [
+    'view' => 'member/product-verwijderen.php',
+    'title' => 'Delete products',
+    'auth_roles' => ['member'],
+    'nav' => true,
+    'footer' => true,
   ],
   // Error routes
   '/404' => [

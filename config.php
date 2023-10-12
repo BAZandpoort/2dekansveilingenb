@@ -35,6 +35,7 @@ define('ERROR_MAPPING', [
   'noChanges' => 'No changes were made',
   'accountUpdate' => 'Something went wrong while updating your account',
   'usernameTaken' => 'Username is already taken',
+  'delete-product-failed' => 'Failed to delete product',
 ]);
 
 // Success mapping
