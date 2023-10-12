@@ -13,16 +13,16 @@ if (isset($_POST['productid'])) {
     $deleteData = insert($query, ['type' => 'i', 'value' => $product_id]);
 
     if ($deleteData) {
-        header('Location: /dashboard/product-verwijderen?success=deleteProduct');
+        header('Location: /dashboard/products/delete?success=deleteProduct');
         return;
     } else {
-        header('Location: /dashboard/product-verwijderen?error=deleteProduct');
+        header('Location: /dashboard/products/delete?error=deleteProduct');
         return;
     }
 } else {
     echo "Geen product_id meegegeven.";
 }
 
-header('Location: /dashboard/product-verwijderen');
+header('Location: /dashboard/products/delete');
 return;
 ?>

@@ -10,7 +10,7 @@ require_once LIB . '/util/util.php';
 
 
 <div class="mt-24">
-  <form action="/src/lib/member/product-verwijderen.php" method="post" class="flex flex-col items-center gap-4">
+  <form action="/src/lib/user/admin/delete-product.php" method="post" class="flex flex-col items-center gap-4">
     <div class="flex flex-col gap-2 w-full max-w-xs">
       <label for="productid">product ID</label>
       <input

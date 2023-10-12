@@ -22,7 +22,7 @@ $translation_text = fetch($query);
 ?>
 
 <div>
-  <form action="/src/lib/member/edit-translation.php" method="post" class="flex flex-col items-center gap-4">
+  <form action="/src/lib/user/admin/edit-translation.php" method="post" class="flex flex-col items-center gap-4">
     <p class="text-2xl">Edit translation ID: <?php echo $_GET["translation"]?></p>
     <input type="hidden" name="id" id="id" value=<?php echo $_GET["translation"]?>>
     <div class="flex flex-col gap-2 w-full max-w-xs">

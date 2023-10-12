@@ -55,7 +55,7 @@ if ($user) {
               </summary>
               <ul>
                 <li><a class="justify-between">Profile</a></li>
-                <li><a href="/src/lib/account/change-theme.php" >Switch to ' . $theme . '</a></li>
+                <li><a href="/src/lib/user/member/change-theme.php" >Switch to ' . $theme . '</a></li>
                 <li><a href="/account/settings/edit">Settings</a></li>
                 <li><a href="/account/logout"> ' . $translations[2][$language] . ' </a></li>
               </ul>
@@ -69,7 +69,7 @@ if ($user) {
           <details>
             <summary class="text-lg"><?php echo $languageDisplay ?></summary>
             <ul>
-              <form action="/src/lib/account/change-language.php" method="post">
+              <form action="/src/lib/user/member/change-language.php" method="post">
                 <li><input type="submit" name="text_en" value='English'></li>
                 <li><input type="submit" name="text_nl" value='Nederlands'></li>
                 <li><input type="submit" name="text_fr" value='Français'></li>
@@ -121,7 +121,7 @@ if ($user) {
     <details class="dropdown dropdown-end">
       <summary class="m-1 btn"><?php echo $languageDisplay ?></summary>
       <ul class="mt-2 p-2 shadow menu dropdown-content z-[1] bg-base-200 rounded-box w-52">
-        <form action="/src/lib/account/change-language.php" method="post">
+        <form action="/src/lib/user/member/change-language.php" method="post">
           <li><input type="submit" name="text_en" value='English'></li>
           <li><input type="submit" name="text_nl" value='Nederlands'></li>
           <li><input type="submit" name="text_fr" value='Français'></li>
@@ -138,17 +138,25 @@ if ($user) {
         </summary>
         <ul class="mt-2 p-2 shadow menu dropdown-content z-[1] bg-base-200 rounded-box w-52">
           <li><a class="justify-between">Profile</a></li>
-          <li><a href="/src/lib/account/change-theme.php" >Switch to ' . $theme . '</a></li>
+          <li><a href="/src/lib/user/member/change-theme.php" >Switch to ' . $theme . '</a></li>
           <li><a href="/account/settings/edit">Settings</a></li>
           <div class="divider px-4 my-2"></div> 
           <li><a href="/account/logout"> ' . $translations[2][$language] . ' </a></li>
           <div class="divider px-4 mb-2">TEMP</div>
           <li>
             <details class="dropdown dropdown-left">
+              <summary class="m-1">Member Dashboard</summary>
+              <ul class="mr-4 p-2 shadow menu dropdown-content z-[1] bg-base-200 rounded-box w-52">
+                <li><a href="/dashboard/products/history">Purchase history</a></li>
+              </ul>
+            </details>
+          </li>
+          <li>
+            <details class="dropdown dropdown-left">
               <summary class="m-1">Seller Dashboard</summary>
               <ul class="mr-4 p-2 shadow menu dropdown-content z-[1] bg-base-200 rounded-box w-52">
                 <li><a href="/dashboard/products/add">Add product</a></li>
-                <li><a href="/dashboard/products/mine">My products</a></li>
+                <li><a href="/dashboard/products/own">My products</a></li>
               </ul>
             </details>
           </li>
@@ -156,7 +164,7 @@ if ($user) {
             <details class="dropdown dropdown-left">
               <summary class="m-1">Admin Dashboard</summary>
               <ul class="mr-4 p-2 shadow menu dropdown-content z-[1] bg-base-200 rounded-box w-52">
-                <li><a href="/dashboard/product-verwijderen">Remove products</a></li>
+                <li><a href="/dashboard/products/delete">Remove products</a></li>
                 <li>
                   <details class="dropdown dropdown-bottom">
                     <summary class="m-1">Translations</summary>

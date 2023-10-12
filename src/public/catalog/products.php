@@ -7,7 +7,7 @@ $products = getAllProducts();
 
 echo '
 <div class="w-full flex flex-col md:flex-row gap-4 p-8 md:pr-40">
-  <div class="hidden md:block md:flex-[.4] bg-neutral rounded-2xl">
+  <div class="hidden md:block md:flex-[.4] bg-base-300 rounded-2xl">
   </div>
 
   <div class="hidden md:flex divider divider-horizontal"></div> 

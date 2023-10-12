@@ -24,7 +24,7 @@ $data = fetch($query, ['type' => 'i', 'value' => $userId]);
 
   <h1 class="md:text-center text-4xl font-bold mb-8">Edit your account details</h1>
 
-  <form action="/src/lib/account/update-profile.php" method="post" class="flex flex-col gap-8 w-full md:max-w-2xl">
+  <form action="/src/lib/account/update-account.php" method="post" class="flex flex-col gap-8 w-full md:max-w-2xl">
     <div class="flex flex-col gap-4">
       
       <div class="flex flex-col gap-4 md:flex-row">

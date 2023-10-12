@@ -7,7 +7,6 @@ require_once LIB . '/util/util.php';
 
 $userId = $_SESSION['user']['id'];
 
-// Get all purchases and put them in an array
 $purchaseHistory = fetchSingle('SELECT * FROM user_purchases WHERE id = ?', ["type" => "i", "value" => $userId]);
 
 ?>
@@ -34,8 +33,8 @@ $purchaseHistory = fetchSingle('SELECT * FROM user_purchases WHERE id = ?', ["ty
         <?php endforeach; ?>
       </tbody>
     </table>
-  <?php else: ?>
-    <p>You have not made any purchases yet.</p>
-  <?php endif; ?>
+    <?php else: ?>
+      <p>You have not made any purchases yet.</p>
+    <?php endif; ?>
 </div>
 <!-- END: Display Purchase History -->

@@ -12,7 +12,7 @@ $categories = fetch("SELECT * FROM product_categories");
 
 <h1 class="text-center text-4xl font-bold mb-12">Add a new product</h1>
 
-<form action="/src/lib/member/add-product.php" method="post" enctype="multipart/form-data" class="flex flex-col items-center justify-center gap-4 max-w-2xl mx-auto">
+<form action="/src/lib/user/seller/add-product.php" method="post" enctype="multipart/form-data" class="flex flex-col items-center justify-center gap-4 max-w-2xl mx-auto">
   <div class="flex flex-row justify-center gap-4 w-full">
     <!-- Category -->
     <div class="form-control flex-1 w-full">

@@ -31,9 +31,8 @@ $routes = [
     'container' => true,
   ],
   '/account/settings/edit' => [
-    'view' => 'account/edit.php',
+    'view' => 'account/settings.php',
     'title' => 'Edit account settings',
-    'auth_roles' => [],
     'nav' => true,
     'footer' => true,
   ],
@@ -59,24 +58,32 @@ $routes = [
     'footer' => false,
     'container' => true,
   ],
-  // Seller Dashboard routes
-  '/dashboard/products/add' => [
-    'view' => 'member/add-product.php',
+  // Member Dashboard routes
+  '/dashboard/products/history' => [
+    'view' => 'user/member/purchases.php',
     'title' => 'Add Products',
     'nav' => true,
     'footer' => false,
     'container' => true,
   ],
-  '/dashboard/products/mine' => [
-    'view' => 'member/personal-products.php',
+  // Seller Dashboard routes
+  '/dashboard/products/add' => [
+    'view' => 'user/seller/add-product.php',
+    'title' => 'Add Products',
+    'nav' => true,
+    'footer' => false,
+    'container' => true,
+  ],
+  '/dashboard/products/own' => [
+    'view' => 'user/seller/products.php',
     'title' => 'My Products',
     'nav' => true,
     'footer' => false,
     'container' => true,
   ],
   // Admin Dashboard routes
-  '/dashboard/product-verwijderen' => [
-    'view' => 'member/product-verwijderen.php',
+  '/dashboard/products/delete' => [
+    'view' => 'user/admin/delete-product.php',
     'title' => 'Delete products',
     'auth_roles' => ['member'],
     'nav' => true,
@@ -84,21 +91,21 @@ $routes = [
     'container' => true,
   ],
   '/dashboard/translations' => [
-    'view' => 'member/translations.php',
+    'view' => 'user/admin/translations.php',
     'title' => 'See translations',
     'nav' => true,
     'footer' => false,
     'container' => true,
   ],
   '/dashboard/translations/edit' => [
-    'view' => 'member/edit-translation.php',
+    'view' => 'user/admin/edit-translation.php',
     'title' => 'Edit translations',
     'nav' => true,
     'footer' => false,
     'container' => true,
   ],
   '/dashboard/translations/add' => [
-    'view' => 'member/add-translation.php',
+    'view' => 'user/admin/add-translation.php',
     'title' => 'Add translations',
     'nav' => true,
     'footer' => false,
