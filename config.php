@@ -24,6 +24,7 @@ define('ERROR_MAPPING', [
   'empty' => 'Empty email or password',
   'invalid' => 'Invalid email or password',
   'password' => 'Passwords do not match',
+  'delete-product-failed' => 'Failed to delete product',
   
 ]);
 
