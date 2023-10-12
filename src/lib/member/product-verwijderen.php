@@ -9,10 +9,6 @@ if (isset($_POST['productid'])) {
     require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
     require_once LIB . '/util/util.php';
 
-    // Voorkomen van SQL-injectie
-    $product_id = mysqli_real_escape_string($connection, $product_id);
-
-    // SQL-query om het product te verwijderen
     $query = "DELETE FROM products WHERE id = ?";
     $deleteData = insert($query, ['type' => 'i', 'value' => $product_id]);
 
