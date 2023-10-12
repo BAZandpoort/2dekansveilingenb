@@ -1,9 +1,12 @@
 {
   "name": "2dekans-veilingen",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "scripts": {
+    "start": "php -S localhost:8080",
     "prettier": "prettier \"./**/*.php\" --write",
-    "db:seed": "ts-node ./src/database/seed/seed.ts"
+    "db:migrate": "ts-node ./src/database/migrate.ts",
+    "db:seed": "ts-node ./src/database/seed/seed.ts",
+    "db:refreshdates": "ts-node ./src/database/seed/countdown-refresh.ts"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.1.0",

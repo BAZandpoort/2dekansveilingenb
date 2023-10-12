@@ -2,8 +2,8 @@
 // Database credentials
 define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
-define('DB_NAME', '2dekans-veilingen');
+define('DB_PASSWORD', 'root');
+define('DB_NAME', '2dekansveilingen');
 
 // Import aliases
 define('ROOT', $_SERVER['DOCUMENT_ROOT']);
@@ -15,34 +15,41 @@ define('DATABASE', SRC . '/database');
 define('LIB', SRC . '/lib');
 define('PUBLIC_S', SRC . '/public');
 
-define('ADMIN', 'admin');
-define('MEMBER', 'member');
-define('GUEST', 'guest');
-
-define('ERROR_MAPPING', [
-  'missing' => 'Missing email or password',
-  'empty' => 'Empty email or password',
-  'invalid' => 'Invalid email or password',
-  'password' => 'Passwords do not match',
-  'delete-product-failed' => 'Failed to delete product',
-  
-]);
-
-define('SUCCES_MAPPING', [
-  'success' => 'You have been succesfully registered',
-]);
-
+// User structure
 define('USER_STRUCTURE', [
   'id' => null,
   'username' => null,
   'email' => null,
   'theme' => null,
+  'language' => null,
 ]);
 
+// Error mapping
+define('ERROR_MAPPING', [
+  'server' => 'Something went wrong on our end, please try again later',
+  'missing' => 'Missing email or password',
+  'empty' => 'Empty email or password',
+  'invalid' => 'Invalid email or password',
+  'password' => 'Passwords do not match',
+  'email' => 'Email is already in use',
+  'noChanges' => 'No changes were made',
+  'accountUpdate' => 'Something went wrong while updating your account',
+  'usernameTaken' => 'Username is already taken',
+  'deleteProduct' => 'Failed to delete product',
+]);
+
+// Success mapping
+define('SUCCES_MAPPING', [
+  'register' => 'You have been succesfully registered',
+  'accountUpdate' => 'Your account has been updated',
+  'deleteProduct' => 'Product has been deleted',
+]);
+
+// Theme mapping
 define('THEME_MAPPING', [
-  'default' => 'dark',
-  'dark' => 'dark',
-  'light' => 'garden',
+  'default' => 'customLight',
+  'dark' => 'customDark',
+  'light' => 'customLight',
 ]);
 
 ?>

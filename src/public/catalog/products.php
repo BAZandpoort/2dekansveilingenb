@@ -1,20 +1,43 @@
 <?php
- 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
+require_once LIB . '/catalog/products.php';
+require_once COMPONENTS . '/product-card.php';
 
-$error = $_GET['error'] ?? false;
+$products = getAllProducts();
 
-if ($error) {
-  echo '
-    <div class="alert alert-warning w-full max-w-xs mx-auto mb-8">
-      <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
-      <span>' .
-    (ERROR_MAPPING[$error] ?? 'Unknown error') .
-    '</span>
+echo '
+<div class="w-full flex flex-col md:flex-row gap-4 p-8 md:pr-40">
+  <div class="hidden md:block md:flex-[.4] bg-base-300 rounded-2xl">
+  </div>
+
+  <div class="hidden md:flex divider divider-horizontal"></div> 
+
+  <div class="flex flex-row flex-wrap gap-8 flex-[1.6]">
+    <div class="w-full flex text-sm breadcrumbs">
+      <ul>
+        <li><a href="/">Home</a></li> 
+        <li>Catalog</li>
+        <li><a href="/catalog/products">All Products</a></li>
+      </ul>
     </div>
-  ';
+    
+    <div class="flex flex-wrap justify-between gap-8">
+';
+
+foreach ($products as $index => $product) {
+  if ($index > 0 && $index % 4 === 0) {
+    echo '
+      </div>
+      <div class="flex flex-col md:flex-row flex-wrap justify-between gap-8">
+    ';
+  }
+
+  productCard($product, true);
 }
 
-include_once LIB . '/catalog/products.php';
-products();
+echo '
+  </div>
+</div>
+';
 ?>
+

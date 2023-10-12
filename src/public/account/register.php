@@ -2,53 +2,71 @@
 if (isset($_SESSION['user'])) {
   header('Location: /');
   exit();
-}
+} ?>
 
-$error = $_GET['error'] ?? false;
+<div class="min-h-[100svh] w-full flex flex-col justify-center items-center px-8 py-8">
+  <div class="w-full flex justify-center text-sm breadcrumbs mb-2">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li>Account</li>
+      <li><a href="/account/register">Register</a></li>
+    </ul>
+  </div>
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
+  <h1 class="md:text-center text-4xl font-bold mb-8">Create a new account</h1>
 
-if ($error) {
-  echo '
-    <div class="alert alert-warning w-full max-w-xs mx-auto mb-8">
-      <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
-      <span>' . (ERROR_MAPPING[$error] ?? 'Unknown error') . '</span>
+  <form action="/src/lib/account/register.php" method="post" class="flex flex-col gap-8 w-full md:max-w-2xl">
+    <div class="flex flex-col gap-4">
+      <div class="flex flex-col gap-4 md:flex-row">
+        <div class="form-control md:flex-1">
+          <label class="label">
+            <span class="label-text">Firstname</span>
+          </label>
+          <input type="text" name="firstname" placeholder="John" class="input input-bordered w-full" required />
+        </div>
+        
+        <div class="form-control md:flex-1">
+          <label class="label">
+            <span class="label-text">Lastname</span>
+          </label>
+          <input type="text" name="lastname" placeholder="Doe" class="input input-bordered w-full" required />
+        </div>
+      </div>
+      
+      <div class="flex flex-col gap-4 md:flex-row">
+        <div class="form-control md:flex-1">
+          <label class="label">
+            <span class="label-text">Email</span>
+          </label>
+          <input type="email" name="email" placeholder="john.doe@gmail.com" class="input input-bordered w-full" required />
+        </div>
+        
+        <div class="form-control md:flex-1">
+          <label class="label">
+            <span class="label-text">Username</span>
+          </label>
+          <input type="text" name="username" placeholder="john.doe" class="input input-bordered w-full" required />
+        </div>
+      </div>
+      
+      <div class="flex flex-col gap-4 md:flex-row">
+        <div class="form-control md:flex-1">
+          <label class="label">
+            <span class="label-text">Password</span>
+          </label>
+          <input type="password" name="password" placeholder="Make it a good one!" class="input input-bordered w-full" required />
+        </div>
+        
+        <div class="form-control md:flex-1">
+          <label class="label">
+            <span class="label-text">Confirm password</span>
+          </label>
+          <input type="password" name="passwordConfirm" placeholder="Confirm..." class="input input-bordered w-full" required />
+        </div>
+      </div>
     </div>
-  ';
-}
-?>
 
-<div>
-  <form action="/src/lib/account/register.php" method="post" class="flex flex-col items-center gap-4">
-    <div class="flex flex-col gap-2 w-full max-w-xs">
-      <label for="firstname">First Name</label>
-      <input name="firstname" id="firstname" type="firstname" placeholder="Jan" class="input input-bordered w-full placeholder:opacity-30" required />
-    </div>
-    <div class="flex flex-col gap-2 w-full max-w-xs">
-      <label for="lastname">Last name</label>
-      <input name="lastname" id="lastname" type="lastname" placeholder="Van Bergen" class="input input-bordered w-full placeholder:opacity-30" required />
-    </div>
-    <div class="flex flex-col gap-2 w-full max-w-xs">
-      <label for="email">Email</label>
-      <input name="email" id="email" type="email" placeholder="cats.are@best.com" class="input input-bordered w-full placeholder:opacity-30" required />
-    </div>
-
-    <div class="flex flex-col gap-2 w-full max-w-xs">
-      <label for="username">Username</label>
-      <input name="username" id="username" type="text" placeholder="Cat" class="input input-bordered w-full placeholder:opacity-30" required />
-    </div>
-
-    <div class="flex flex-col gap-2 w-full max-w-xs">
-      <label for="password">Password</label>
-      <input name="password" id="password" type="password" placeholder="Secret..." class="input input-bordered w-full placeholder:opacity-30" required />
-    </div>
-
-    <div class="flex flex-col gap-2 w-full max-w-xs">
-      <label for="passwordConfirm">Confirm password</label>
-      <input name="passwordConfirm" id="passwordConfirm" type="password" placeholder="Secret... 2.0" class="input input-bordered w-full placeholder:opacity-30" required />
-    </div>
-
-    <input type="submit" name="register" value="register" class="btn btn-wide place-self-center">
+    <button name="register" class="btn btn-primary">Register</button>
   </form>
 
   <div class="w-full text-center mt-8">
