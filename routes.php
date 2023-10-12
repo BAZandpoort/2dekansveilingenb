@@ -89,7 +89,7 @@ $routes = [
     'footer' => true,
   ],
   '/member/delete' => [
-    'view' => 'src/lib/member/delete-products.php',
+    'view' => 'member/delete-products.php',
     'title' => 'Dashboard',
     'auth_roles' => ['member'],
     'nav' => true,
@@ -103,7 +103,7 @@ $routes = [
     'footer' => false,
   ],
   '/member/update' => [
-    'view' => 'src/lib/member/updateProduct.php',
+    'view' => 'member/updateProduct.php',
     'title' => 'Update Product',
     'auth_roles' => ['member'],
     'nav' => true,

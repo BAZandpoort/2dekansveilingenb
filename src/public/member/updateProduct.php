@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 
 if (isset($_POST['update_product'])) {
 
@@ -44,21 +44,17 @@ if (isset($_POST['update_product'])) {
              
                 $_SESSION['update_successfully'] =
                 'Product updated successfully!';
+                
             } else {
                 echo "Error updating product: " . mysqli_error($connection);
             }
-        } else {
+        }} else {
             
             $_SESSION['no_changes1'] = 'No changes were made to your product.';
         }
-    } else {
-        echo "Product not found.";
-    }
 
-    mysqli_close($connection);
-} else {
-   
-    header("Location:/member/edit?id=" . $_POST['productId']);
+        header("Location:/verkoper-dashboard");
     exit();
 }
+   
 ?>
