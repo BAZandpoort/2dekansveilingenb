@@ -102,6 +102,13 @@ $routes = [
     'nav' => true,
     'footer' => false,
   ],
+  '/member/update' => [
+    'view' => 'src/lib/member/updateProduct.php',
+    'title' => 'Update Product',
+    'auth_roles' => ['member'],
+    'nav' => true,
+    'footer' => false,
+  ],
   '/dashboard/see-translations' => [
     'view' => 'member/see-translations.php',
     'title' => 'See translations',

@@ -183,7 +183,7 @@ article p {
                     $sql = "SELECT * FROM products WHERE userid = $sellerId";
                     $result = mysqli_query($connection, $sql);
 
-                    if (mysqli_num_rows($result) > 0) {
+                    if (mysqli_num_rows($result) >0) {
                         while ($row = mysqli_fetch_assoc($result)) {
                             echo "<tr>";
                             echo "<td><input type='checkbox' name='selected_products[]' value='" . $row['id'] . "'></td>"; 
@@ -201,7 +201,8 @@ article p {
 
                             echo "<td>" . $categoryName . "</td>";
                             echo "<td>
-                            <a class='btn btn-outline text-center' href='/member/edit?id='" .$row['id'] .  "'>Edit</a>
+                          
+                            <a class='btn btn-outline text-center' href='/member/edit?id=" . $row['id'] . "'>Edit</a>
                    
                             </td>"; 
                             echo "</tr>";

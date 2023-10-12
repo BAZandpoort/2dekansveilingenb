@@ -58,7 +58,7 @@ if (isset($_POST['update_product'])) {
     mysqli_close($connection);
 } else {
    
-    header("Location: public/member/edit?id=" . $_POST['productId']);
+    header("Location:/member/edit?id=" . $_POST['productId']);
     exit();
 }
 ?>
