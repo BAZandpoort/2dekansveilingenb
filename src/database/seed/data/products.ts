@@ -22,7 +22,7 @@ export default async function products(): Promise<Products[]> {
     const price = faker.commerce.price();
     const imageId = faker.helpers.arrayElement(imageIds);
     const imageUrl = imageId + '.jpg';
-    const endDate = faker.date.soon();
+    const endDate = faker.date.soon().toISOString().split('T').join(' ').split('.')[0];
 
     userIds.splice(userIds.indexOf(userid), 1);
     imageIds.splice(userIds.indexOf(imageId), 1);
@@ -33,7 +33,7 @@ export default async function products(): Promise<Products[]> {
       description,
       price,
       imageUrl,
-      endDate: endDate.toISOString(),
+      endDate: endDate,
     });
   }
 

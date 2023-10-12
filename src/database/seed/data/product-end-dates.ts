@@ -7,9 +7,9 @@ interface EndDate {
 export default async function endDates(): Promise<EndDate[]> {
   const result: EndDate[] = [];
   for (let i = 0; i < 50; i++) {
-    const endDate = faker.date.soon();
+    const endDate = faker.date.soon().toISOString().split('T').join(' ').split('.')[0];
     result.push({
-      endDate: endDate.toISOString(),
+      endDate: endDate,
     });
   }
 

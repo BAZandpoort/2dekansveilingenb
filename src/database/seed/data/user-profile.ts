@@ -28,5 +28,14 @@ export default async function userProfiles(): Promise<UserProfile[]> {
     });
   }
 
+  const testUserProfile: UserProfile = {
+    userid: 51,
+    profilePictureUrl: faker.image.avatar(),
+    about: 'Testing Account',
+    theme: 'light',
+    language: 'text_en',
+  }
+  result.push(testUserProfile);
+
   return result;
 }
