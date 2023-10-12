@@ -22,6 +22,16 @@
     WHERE users.id=user_profile.userid
     AND users.id = ?";
     $seller = fetch($query2,['type' => 'i', 'value' => $id]);
+
+
+
+    $query3 = 'SELECT *, COUNT(*) AS aantal FROM bids WHERE productid = '.$id.' AND userid = '.$_SESSION['user']['id'];
+    $bid_info = fetch($query3);
+    if ($bid_info["aantal"] > 0){
+        $last_bid_amount = $bid_info["bidPrice"];
+    } else {
+        $last_bid_amount = 0;
+    }
    
 
 ?>
@@ -50,7 +60,7 @@
                             <td class="text-xl pl-4">Highest bid</td>
                         </tr>
                         <tr>
-                            <td id="currentBid">€0</td>
+                            <td id="currentBid">€<?php echo $last_bid_amount?></td>
                             <td id="suggestedBid">€<?php echo $products["price"]?></td>
                         </tr>
                     </table>
@@ -62,8 +72,8 @@
                             <form action="/src/lib/catalog/bid.php" method="post">
                                 <input type="hidden" name="productid" id="productid" value=<?php echo $_GET["id"];?>>
                                 <span>Price</span>
-                                <input id="bidInput" name="bidInput" type="number" placeholder="0,00" class="input input-bordered" step="0.01" required/>
-                                <button onClick="bid();"type="submit" class="btn btn-primary" name="bied">Bid</button>
+                                <input id="bidInput" name="bidInput" type="number" placeholder="0,00" class="input input-bordered" step="0.01" min="1.00" required/>
+                                <button type="submit" class="btn btn-primary" name="bied">Bid</button>
                             </form>
                         </label>
                         </div>
@@ -85,38 +95,4 @@
     </div>
 </div>
 
-<script>
-
-
-// Whenever the button to bid is clicked, this function will be called and update the current bid price
-function bid() {
-    // Get the current bid price
-    let currentBid = Number(document.getElementById("currentBid").innerHTML.split("€")[1]);
-    // Get the suggested bid price
-    let suggestedBid = Number(document.getElementById("suggestedBid").innerHTML.split("€")[1]);
-    // Get the input field
-    let input = document.getElementById("bidInput").value;
-
-
-    // Check if the input is a number
-    if (isNaN(input)) {
-        alert("Please enter a number");
-    } else {
-        // Check if the input is higher than the current bid price
-        if (input > currentBid) {
-            // Check if the input is higher than the suggested bid price
-            if (input > suggestedBid) {
-                // Update the suggested bid price
-                document.getElementById("suggestedBid").innerHTML = "€" + input;
-            }
-            // Update the current bid price
-            document.getElementById("currentBid").innerHTML = "€" + input;
-        } else {
-            alert("Please enter a higher bid");
-        }
-
-    }
-}
-
-
-</script>
+// Bid function removed as it is now unnecessary.

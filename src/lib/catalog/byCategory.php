@@ -3,6 +3,12 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/util/util.php';
 
+function secondsToTime($seconds) {
+    $dtF = new \DateTime('@0');
+    $dtT = new \DateTime("@$seconds");
+    return $dtF->diff($dtT)->format('%a:%h:%i:%s');
+}
+
 function byCategory() {
 	$query = "SELECT categoryid, product_categories.name, COUNT(*) AS count
             FROM products
@@ -12,7 +18,7 @@ function byCategory() {
 	$categories = fetch($query);
 
 	foreach ($categories as $category) {
-		$query = "SELECT * FROM products WHERE categoryid = ? ORDER BY categoryid LIMIT 5";
+        $query = "SELECT *, TIMESTAMPDIFF(SECOND, createdAT, auctionEndTime) AS timeleftatstart,TIMESTAMPDIFF(SECOND, now(), auctionEndTime) AS timeleft FROM products WHERE categoryid = ? ORDER BY categoryid LIMIT 5";
 		$products = fetch($query, ['type' => 'i', 'value' => $category['categoryid']]);
 
 		echo '
@@ -20,6 +26,12 @@ function byCategory() {
         <p class="text-2xl font-bold	">' . $category["name"] . '</p>
         ';
 		foreach ($products as $product) {
+            if (isset($product["timeleft"])){
+                $timeleft = secondsToTime($product["timeleft"]);
+            } else {
+                $timeleft = "";
+            }
+            
 			$productName = (strlen($product["name"]) > 20)
 				? substr_replace($product["name"], "...", 21)
 				: $product["name"];
@@ -49,8 +61,8 @@ function byCategory() {
                             <input type="hidden" name="image" value="' . $product["imageUrl"] . '">
                             <input type="hidden" name="name" value="' . $product["name"] . '">
                             <input type="hidden" name="price" value="' . $product["price"] . '">
-                            <button type="submit" class="btn btn-warning mr-0 mx-32 -mt-11" name="bied">Bid</button>
-                            <p class="text-base text-center"><span id="timer">00:00:00</span></p>
+                            <a href=""><button type="submit" class="btn btn-warning mr-0 mx-32 -mt-11" name="bied">Bid</button></a>
+                            <p class="text-base text-center"><span id="timer">'.$timeleft.'</span></p>
                             <p class="text-base text-center -mt-3">Status: <span id="status">Open</span></p>
                         </div>
                     </form>

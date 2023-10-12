@@ -3,8 +3,14 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/util/util.php'; 
 
+function secondsToTime($seconds) {
+  $dtF = new \DateTime('@0');
+  $dtT = new \DateTime("@$seconds");
+  return $dtF->diff($dtT)->format('%a:%h:%i:%s');
+}
+
 function products() {
-  $query = 'SELECT * FROM products';
+  $query = "SELECT *, TIMESTAMPDIFF(SECOND, createdAT, auctionEndTime) AS timeleftatstart,TIMESTAMPDIFF(SECOND, now(), auctionEndTime) AS timeleft FROM products";
   $products = fetch($query);
 
     echo '<section class="inline-block ml-60 mt-24">';
@@ -39,14 +45,13 @@ function products() {
                     <input type="hidden" name="image" value="' . $product["imageUrl"] . '">
                     <input type="hidden" name="name" value="' . $product["name"] . '">
                     <input type="hidden" name="price" value="' . $product["price"] . '">
-                    <button type="submit" class="btn btn-warning mr-0 mx-32 -mt-11" name="bied">Bid</button>
+                    <a href="../catalog/product?id=' . $product["id"] . '"><button type="submit" class="btn btn-warning mr-0 mx-32 -mt-11" name="bied">Bid</button></a>
         ';
 
         if (isset($product["auctionEndTime"])){
-            $timestamp = time();
-            $current_date = date("F d, Y h:i:s A", $timestamp);
+            $timeleft = secondsToTime($product["timeleft"]);
             echo '
-                    <p class="text-base text-center"><span id="timer"> '.$current_date.' | 00:00:00</span></p>
+                    <p class="text-base text-center"><span id="timer"> '.$timeleft.'</span></p>
             ';
         }
         echo '
