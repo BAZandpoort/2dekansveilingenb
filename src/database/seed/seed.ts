@@ -1,17 +1,16 @@
 import * as mysql from 'mysql2/promise';
 import users from './data/user';
-import userProfiles from './data/user_profile';
-import userRoleMapping from './data/user_role_mapping';
-import productCategories from './data/product_categories';
+import userProfiles from './data/user-profile';
+import userRoleMapping from './data/user-role-mapping';
+import productCategories from './data/product-categories';
 import products from './data/products';
-
-
+import userPurchases from './data/user-purchases';
 
 const dbConfig = {
     host: 'localhost',
     user: 'root',
-    password: '',
-    database: '2dekans-veilingen',
+    password: 'root',
+    database: '2dekansveilingen',
 };
 
 
@@ -21,6 +20,7 @@ async function seedDatabase() {
     const userData = await users();
     const userProfilesData = await userProfiles();
     const userRoleMapppingData = await userRoleMapping();
+    const userPurchaseData = await userPurchases();
 
     const connection = await mysql.createConnection(dbConfig);
 
@@ -35,11 +35,13 @@ async function seedDatabase() {
         await connection.execute('TRUNCATE TABLE product_categories');
         await connection.execute('TRUNCATE TABLE users');
         await connection.execute('SET FOREIGN_KEY_CHECKS=1');
+        console.log('Truncated all tables.');
 
         await connection.execute(
             'INSERT INTO user_roles (name) VALUES (?), (?), (?)',
             ['guest', 'member', 'admin'],
         );
+        console.log('Inserted user roles.');
 
         userData.forEach(async (user) => {
             await connection.execute(
@@ -47,13 +49,15 @@ async function seedDatabase() {
               Object.values(user),
             );
         });
+        console.log('Inserted users.');
 
         userProfilesData.forEach(async (userProfile) => {
             await connection.execute(
-              'INSERT INTO user_profile (userid, profilePictureUrl, about, theme) VALUES (?, ?, ?, ?)',
+              'INSERT INTO user_profile (userid, profilePictureUrl, about, theme, language) VALUES (?, ?, ?, ?, ?)',
               Object.values(userProfile),
             );
         });
+        console.log('Inserted user profiles.');
 
         userRoleMapppingData.forEach(async (userRoleMapping) => {
             await connection.execute(
@@ -61,6 +65,7 @@ async function seedDatabase() {
               Object.values(userRoleMapping),
             );
         });
+        console.log('Inserted user role mappings.');
 
         productCategoriesData.forEach(async (productCategory) => {
             await connection.execute(
@@ -68,13 +73,23 @@ async function seedDatabase() {
               Object.values(productCategory),
             );
         });
+        console.log('Inserted product categories.');
 
         productData.forEach(async (product) => {
             await connection.execute(
-              'INSERT INTO products (userid, categoryid, name, description, price, imageUrl) VALUES (?, ?, ?, ?, ?, ?)',
+              'INSERT INTO products (userid, categoryid, name, description, price, imageUrl, endDate) VALUES (?, ?, ?, ?, ?, ?, ?)',
               Object.values(product),
             );
         });
+        console.log('Inserted products.');
+
+        userPurchaseData.forEach(async (userPurchase) => {
+            await connection.execute(
+              'INSERT INTO user_purchases (id, timeOfPurchase, productId, price, productName, productImage) VALUES (?, ?, ?, ?, ?, ?)',
+              Object.values(userPurchase),
+            );
+        });
+        console.log('Inserted user purchases.');
 
         await connection.commit();
 
