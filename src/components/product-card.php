@@ -32,7 +32,7 @@ function productCard($product, $shareable = false) {
 
           ' . $share . '
 
-          <h2 class="card-title">' . $product["name"] . '</h2>
+          <a href="/catalog/product?id=' . $product['id'] . '" class="card-title hover:underline">' . $product["name"] . '</a>
           <p>' . $product["description"] . '</p>
           <div class="card-actions justify-between items-center">
             <p class="text-xl text-left font-bold">€' . $product["price"] . '</p>

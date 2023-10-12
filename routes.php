@@ -9,28 +9,28 @@ $routes = [
     'container' => true,
   ],
   // Account routes
-  '/account/login' => [
+  '/account/login' => [ // Accessible
     'view' => 'account/login.php',
     'title' => 'Login',
     'nav' => false,
     'footer' => false,
     'container' => false,
   ],
-  '/account/register' => [
+  '/account/register' => [ // Accessible
     'view' => 'account/register.php',
     'title' => 'Register',
     'nav' => false,
     'footer' => false,
     'container' => false,
   ],
-  '/account/logout' => [
+  '/account/logout' => [ // Accessible
     'view' => 'account/logout.php',
     'title' => 'Logout',
     'nav' => false,
     'footer' => false,
     'container' => true,
   ],
-  '/account/settings/edit' => [
+  '/account/settings/edit' => [ // Accessible
     'view' => 'account/edit.php',
     'title' => 'Edit account settings',
     'auth_roles' => [],
@@ -38,14 +38,14 @@ $routes = [
     'footer' => true,
   ],
   // Catalog routes
-  '/catalog/products' => [
+  '/catalog/products' => [ // Accessible
     'view' => 'catalog/products.php',
     'title' => 'Products',
     'nav' => true,
     'footer' => true,
     'container' => false,
   ],
-  '/catalog/product' => [
+  '/catalog/product' => [ // Not Accessible
     'view' => 'catalog/product.php',
     'title' => 'Product',
     'nav' => true,
@@ -53,14 +53,14 @@ $routes = [
     'container' => true,
   ],
   // Dashboard routes
-  '/dashboard/products/add' => [
+  '/dashboard/products/add' => [ // Not Accessible
     'view' => 'member/add-product.php',
     'title' => 'Add Products',
     'nav' => true,
     'footer' => false,
     'container' => true,
   ],
-  '/dashboard/products/mine' => [
+  '/dashboard/products/mine' => [ // Not Accessible
     'view' => 'member/personal-products.php',
     'title' => 'My Products',
     'nav' => true,
@@ -68,21 +68,21 @@ $routes = [
     'container' => true,
   ],
   // Translation routes
-  '/dashboard/translations' => [
+  '/dashboard/translations' => [ // Not Accessible
     'view' => 'member/translations.php',
     'title' => 'See translations',
     'nav' => true,
     'footer' => false,
     'container' => true,
   ],
-  '/dashboard/translations/edit' => [
+  '/dashboard/translations/edit' => [ // Not Accessible
     'view' => 'member/edit-translation.php',
     'title' => 'Edit translations',
     'nav' => true,
     'footer' => false,
     'container' => true,
   ],
-  '/dashboard/add/translations/add' => [
+  '/dashboard/add/translations/add' => [ // Not Accessible
     'view' => 'member/add-translation.php',
     'title' => 'Add translations',
     'nav' => true,
@@ -96,14 +96,7 @@ $routes = [
     'footer' => false,
     'container' => true,
   ],
-  '/dashboard/product-verwijderen' => [
-    'view' => 'member/product-verwijderen.php',
-    'title' => 'Delete products',
-    'auth_roles' => ['member'],
-    'nav' => true,
-    'footer' => true,
-  ],
-  '/dashboard/product-verwijderen' => [
+  '/dashboard/product-verwijderen' => [ // Not Accessible
     'view' => 'member/product-verwijderen.php',
     'title' => 'Delete products',
     'auth_roles' => ['member'],
