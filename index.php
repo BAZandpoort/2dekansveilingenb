@@ -50,7 +50,7 @@ $translations = fetch('SELECT id, ' . $language . ' FROM translations');
 ?>
 
 <!DOCTYPE html>
-<html lang="en" data-theme='<?php echo $theme; ?>'>
+<html lang="en" class="bg-base-200" data-theme='<?php echo $theme; ?>'>
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">

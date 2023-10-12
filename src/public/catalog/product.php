@@ -30,7 +30,7 @@ $sellerData = fetch($query, ['type' => 'i', 'value' => $productId]);
   <div class="flex-[1.3]">
     <img class="w-full h-full aspect-[3/2] rounded-2xl" src="/public/images/<?php echo $productData["imageUrl"]  ?>" alt="">
   </div>
-  <div id="actions" class="flex flex-[.7] bg-neutral rounded-2xl p-8 flex-col items-center justify-center">
+  <div id="actions" class="flex flex-[.7] bg-base-100 rounded-2xl p-8 flex-col items-center justify-center">
     <?php
     if (strtotime($productData['endDate']) > time()) {
       echo '<p class="opacity-70 pb-12">Veiling sluit om ' . $time . '</p>';

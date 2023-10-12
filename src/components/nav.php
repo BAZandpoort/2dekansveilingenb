@@ -120,7 +120,7 @@ if ($user) {
   <div class="hidden flex-1 justify-end gap-4 md:flex">
     <details class="dropdown dropdown-end">
       <summary class="m-1 btn"><?php echo $languageDisplay ?></summary>
-      <ul class="mt-2 p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+      <ul class="mt-2 p-2 shadow menu dropdown-content z-[1] bg-base-200 rounded-box w-52">
         <form action="/src/lib/account/change-language.php" method="post">
           <li><input type="submit" name="text_en" value='English'></li>
           <li><input type="submit" name="text_nl" value='Nederlands'></li>
@@ -136,7 +136,7 @@ if ($user) {
             <img src="https://avatars.githubusercontent.com/u/64209400?v=4" />
           </div>
         </summary>
-        <ul class="mt-2 p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+        <ul class="mt-2 p-2 shadow menu dropdown-content z-[1] bg-base-200 rounded-box w-52">
           <li><a class="justify-between">Profile</a></li>
           <li><a href="/src/lib/account/change-theme.php" >Switch to ' . $theme . '</a></li>
           <li><a href="/account/settings/edit">Settings</a></li>
@@ -146,7 +146,7 @@ if ($user) {
           <li>
             <details class="dropdown dropdown-left">
               <summary class="m-1">Seller Dashboard</summary>
-              <ul class="mr-4 p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+              <ul class="mr-4 p-2 shadow menu dropdown-content z-[1] bg-base-200 rounded-box w-52">
                 <li><a href="/dashboard/products/add">Add product</a></li>
                 <li><a href="/dashboard/products/mine">My products</a></li>
               </ul>
@@ -155,12 +155,12 @@ if ($user) {
           <li>
             <details class="dropdown dropdown-left">
               <summary class="m-1">Admin Dashboard</summary>
-              <ul class="mr-4 p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+              <ul class="mr-4 p-2 shadow menu dropdown-content z-[1] bg-base-200 rounded-box w-52">
                 <li><a href="/dashboard/product-verwijderen">Remove products</a></li>
                 <li>
                   <details class="dropdown dropdown-bottom">
                     <summary class="m-1">Translations</summary>
-                    <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+                    <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-200 rounded-box w-52">
                       <li><a href="/dashboard/translations">View translations</a></li>
                       <li><a href="/dashboard/translations/add">Add translations</a></li>
                     </ul>
