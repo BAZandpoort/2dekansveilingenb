@@ -63,6 +63,6 @@ $translation_routes = array_keys($routes);
   </form>
   
   <div class="w-full text-center mt-8">
-    <a class="link" href="/">Go back</a>
+    <a class="link" href="/dashboard/translations">Go back</a>
   </div>
 </div>

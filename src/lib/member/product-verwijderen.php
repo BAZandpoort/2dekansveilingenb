@@ -1,32 +1,32 @@
 <?php
-if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
-    die("Je hebt geen toestemming om deze actie uit te voeren.");
-}
+// if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
+//     die("Je hebt geen toestemming om deze actie uit te voeren.");
+// }
 
-if (isset($_GET['product_id'])) {
-    $product_id = $_GET['product_id'];
+if (isset($_POST['productid'])) {
+    $product_id = $_POST['productid'];
 
     require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
     require_once LIB . '/util/util.php';
 
     // Voorkomen van SQL-injectie
-    $product_id = mysqli_real_escape_string($conn, $product_id);
+    $product_id = mysqli_real_escape_string($connection, $product_id);
 
     // SQL-query om het product te verwijderen
-    $query = "DELETE FROM products WHERE product_id = ?";
+    $query = "DELETE FROM products WHERE id = ?";
     $deleteData = insert($query, ['type' => 'i', 'value' => $product_id]);
 
     if ($deleteData) {
-        echo "Product succesvol verwijderd.";
+        header('Location: /dashboard/product-verwijderen?success=deleteProduct');
+        return;
     } else {
-        echo "Fout bij het verwijderen van het product.";
+        header('Location: /dashboard/product-verwijderen?error=deleteProduct');
+        return;
     }
-
-    $conn->close();
 } else {
     echo "Geen product_id meegegeven.";
 }
 
-header('Location: /');
+header('Location: /dashboard/product-verwijderen');
 return;
 ?>

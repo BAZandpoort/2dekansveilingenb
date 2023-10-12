@@ -2,7 +2,7 @@
 // Database credentials
 define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
+define('DB_PASSWORD', 'root');
 define('DB_NAME', '2dekansveilingen');
 
 // Import aliases
@@ -35,13 +35,14 @@ define('ERROR_MAPPING', [
   'noChanges' => 'No changes were made',
   'accountUpdate' => 'Something went wrong while updating your account',
   'usernameTaken' => 'Username is already taken',
-  'delete-product-failed' => 'Failed to delete product',
+  'deleteProduct' => 'Failed to delete product',
 ]);
 
 // Success mapping
 define('SUCCES_MAPPING', [
   'register' => 'You have been succesfully registered',
   'accountUpdate' => 'Your account has been updated',
+  'deleteProduct' => 'Product has been deleted',
 ]);
 
 // Theme mapping

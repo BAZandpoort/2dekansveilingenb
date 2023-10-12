@@ -118,33 +118,61 @@ if ($user) {
 
   <!-- Right - User actions -->
   <div class="hidden flex-1 justify-end gap-4 md:flex">
-      <div class="dropdown dropdown-end">
-          <label tabindex="0" class="btn m-1"><?php echo $languageDisplay ?></label>
-          <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-            <form action="/src/lib/account/change-language.php" method="post">
-              <li><input type="submit" name="text_en" value='English'></li>
-              <li><input type="submit" name="text_nl" value='Nederlands'></li>
-              <li><input type="submit" name="text_fr" value='Français'></li>
-            </form>
-          </ul>
-      </div>
-      <?php echo isset($_SESSION['user'])
-        ? '
-        <div class="dropdown dropdown-end">
-          <label tabindex="0" class="btn btn-ghost btn-circle avatar">
-            <div class="w-10 rounded-full">
-              <img src="https://avatars.githubusercontent.com/u/64209400?v=4" />
-            </div>
-          </label>
-          <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-            <li><a class="justify-between">Profile</a></li>
-            <li><a href="/src/lib/account/change-theme.php" >Switch to ' . $theme . '</a></li>
-            <li><a href="/account/settings/edit">Settings</a></li>
-            <li><a href="/account/logout"> ' . $translations[2][$language] . ' </a></li>
-          </ul>
-        </div>
-        '
-      : '<a href="/account/login" class="btn">Login</a>'; ?>
+    <details class="dropdown dropdown-end">
+      <summary class="m-1 btn"><?php echo $languageDisplay ?></summary>
+      <ul class="mt-2 p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+        <form action="/src/lib/account/change-language.php" method="post">
+          <li><input type="submit" name="text_en" value='English'></li>
+          <li><input type="submit" name="text_nl" value='Nederlands'></li>
+          <li><input type="submit" name="text_fr" value='Français'></li>
+        </form>
+      </ul>
+    </details>
+    <?php echo isset($_SESSION['user'])
+      ? '
+      <details class="dropdown dropdown-end">
+        <summary class="m-1 btn btn-ghost btn-circle avatar">
+          <div class="w-10 rounded-full">
+            <img src="https://avatars.githubusercontent.com/u/64209400?v=4" />
+          </div>
+        </summary>
+        <ul class="mt-2 p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+          <li><a class="justify-between">Profile</a></li>
+          <li><a href="/src/lib/account/change-theme.php" >Switch to ' . $theme . '</a></li>
+          <li><a href="/account/settings/edit">Settings</a></li>
+          <div class="divider px-4 my-2"></div> 
+          <li><a href="/account/logout"> ' . $translations[2][$language] . ' </a></li>
+          <div class="divider px-4 mb-2">TEMP</div>
+          <li>
+            <details class="dropdown dropdown-left">
+              <summary class="m-1">Seller Dashboard</summary>
+              <ul class="mr-4 p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+                <li><a href="/dashboard/products/add">Add product</a></li>
+                <li><a href="/dashboard/products/mine">My products</a></li>
+              </ul>
+            </details>
+          </li>
+          <li>
+            <details class="dropdown dropdown-left">
+              <summary class="m-1">Admin Dashboard</summary>
+              <ul class="mr-4 p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+                <li><a href="/dashboard/product-verwijderen">Remove products</a></li>
+                <li>
+                  <details class="dropdown dropdown-bottom">
+                    <summary class="m-1">Translations</summary>
+                    <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+                      <li><a href="/dashboard/translations">View translations</a></li>
+                      <li><a href="/dashboard/translations/add">Add translations</a></li>
+                    </ul>
+                  </details>
+                </li>
+              </ul>
+            </details>
+          </li>
+        </ul>
+      </details>
+      '
+    : '<a href="/account/login" class="btn">Login</a>'; ?>
   </div>
 </div>
 
