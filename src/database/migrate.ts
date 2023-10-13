@@ -5,7 +5,7 @@ import * as mysql from 'mysql2/promise';
 const dbConfig = {
   host: 'localhost',
   user: 'root',
-  password: 'root',
+  password: '',
   database: '2dekansveilingen',
 };
 
