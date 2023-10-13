@@ -3,7 +3,15 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/catalog/products.php';
 require_once COMPONENTS . '/product-card.php';
 
-$products = getAllProducts();
+$products = [];
+if (isset($_POST['search'])) {
+  $searchTerm = $_POST['searchItem'];
+  // create a query that will find products that match the search term with LIKE
+  $sql = "SELECT * FROM products WHERE name LIKE '%$searchTerm%' OR description LIKE '%$searchTerm%'";
+  $products = fetch($sql);
+} else {
+  $products = getAllProducts();
+}
 
 echo '
 <div class="w-full flex flex-col md:flex-row gap-4 p-8 md:pr-40">

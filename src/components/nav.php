@@ -109,11 +109,11 @@ if ($user) {
 
   <!-- Center - search -->
   <div class="w-full md:flex-1">
-    <div class="form-control w-full relative">
-      <input type="text" placeholder="Search" class="input input-bordered w-auto">
-        <i class="fa-solid fa-magnifying-glass fa-lg absolute right-4 top-1/2 opacity-60"></i>
+    <form action="/catalog/products" method="post" class="form-control w-full relative flex flex-row gap-4">
+      <input name="searchItem" type="text" placeholder="Search" class="input input-bordered w-full">
       </input>
-    </div>
+      <button name="search" class="btn btn-primary">Zoeken</button>
+    </form>
   </div>
 
   <!-- Right - User actions -->
