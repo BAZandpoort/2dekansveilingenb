@@ -24,6 +24,8 @@ if ($user) {
   $language = $_SESSION["guest"]["language"];
   $languageDisplay = $languageMap[$language];
 }
+
+$searchTerm = $_GET['search'] ?? '';
 ?>
 
 <!-- Top navbar -->
@@ -109,10 +111,15 @@ if ($user) {
 
   <!-- Center - search -->
   <div class="w-full md:flex-1">
-    <form action="/catalog/products" method="post" class="form-control w-full relative flex flex-row gap-4">
-      <input name="searchItem" type="text" placeholder="Search" class="input input-bordered w-full">
+    <form action="/catalog/products" method="get" class="form-control w-full relative">
+      <input name="search" type="text" placeholder="Search" value="<?= $searchTerm ?>" class="input input-bordered w-full" required>
+        <button>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 absolute right-4 top-3 opacity-60">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+          </svg>
+        </button>
       </input>
-      <button name="search" class="btn btn-primary">Zoeken</button>
+      <!-- <button name="search" class="btn btn-primary">Zoeken</button> -->
     </form>
   </div>
 

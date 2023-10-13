@@ -4,11 +4,10 @@ require_once LIB . '/catalog/products.php';
 require_once COMPONENTS . '/product-card.php';
 
 $products = [];
-if (isset($_POST['search'])) {
-  $searchTerm = $_POST['searchItem'];
-  // create a query that will find products that match the search term with LIKE
-  $sql = "SELECT * FROM products WHERE name LIKE '%$searchTerm%' OR description LIKE '%$searchTerm%'";
-  $products = fetch($sql);
+if (isset($_GET['search'])) {
+  $searchTerm = $_GET['search'];
+  $query = "SELECT * FROM products WHERE MATCH(name, description) AGAINST(? IN BOOLEAN MODE)";
+  $products = fetch($query, ['type' => 's', 'value' => "$searchTerm*"]);
 } else {
   $products = getAllProducts();
 }
