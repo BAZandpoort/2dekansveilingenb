@@ -9,7 +9,7 @@ import userPurchases from './data/user-purchases';
 const dbConfig = {
     host: 'localhost',
     user: 'root',
-    password: 'root',
+    password: '',
     database: '2dekansveilingen',
 };
 

@@ -3,7 +3,14 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/catalog/products.php';
 require_once COMPONENTS . '/product-card.php';
 
-$products = getAllProducts();
+$products = [];
+if (isset($_GET['search'])) {
+  $searchTerm = $_GET['search'];
+  $query = "SELECT * FROM products WHERE MATCH(name, description) AGAINST(? IN BOOLEAN MODE)";
+  $products = fetch($query, ['type' => 's', 'value' => "$searchTerm*"]);
+} else {
+  $products = getAllProducts();
+}
 
 echo '
 <div class="w-full flex flex-col md:flex-row gap-4 p-8 md:pr-40">
