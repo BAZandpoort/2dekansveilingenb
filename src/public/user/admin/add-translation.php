@@ -59,7 +59,7 @@ $translation_routes = array_keys($routes);
 
     WARNING! ANY EMPTY FIELDS FOR TRANSLATION WILL SEND A DEFAULT "TRANSLATION UNAVAILABLE" TO THE DATABASE!
 
-    <input type="submit" name="add" value="Add translation" class="btn btn-wide place-self-center">
+    <button name="add" class="btn btn-primary btn-wide">Add translation</button>
   </form>
   
   <div class="w-full text-center mt-8">

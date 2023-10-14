@@ -35,6 +35,7 @@ $routes = [
     'title' => 'Edit account settings',
     'nav' => true,
     'footer' => true,
+    'container' => true,
   ],
   // Catalog routes
   '/catalog/products' => [
@@ -109,6 +110,7 @@ $routes = [
     'title' => 'Add translations',
     'nav' => true,
     'footer' => false,
+    'container' => true,
   ],
   // Error routes
   '/404' => [

@@ -21,6 +21,6 @@ require_once LIB . '/util/util.php';
       class="input input-bordered w-full placeholder:opacity-30"
       required/>
     </div>
-    <button type="submit" class="btn btn-error">Verwijderen</button>
+    <button class="btn btn-error">Verwijderen</button>
   </form>
 </div>
