@@ -58,7 +58,9 @@ $translation_text = fetch($query);
       required />
     </div>
 
-    <input type="submit" name="edit" value="Edit translation" class="btn btn-wide place-self-center">
+    <button name="edit" class="btn btn-primary btn-wide">
+      Edit translation
+    </button>
   </form>
   
   <div class="w-full text-center mt-8">
