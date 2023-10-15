@@ -8,6 +8,7 @@ if (isset($_POST['productid'])) {
 
     require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
     require_once LIB . '/util/util.php';
+    require_once LIB . '/catalog/products.php';
 
     $query = "DELETE FROM products WHERE id = ?";
     $deleteData = insert($query, ['type' => 'i', 'value' => $product_id]);
