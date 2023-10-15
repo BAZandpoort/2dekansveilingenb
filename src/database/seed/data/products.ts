@@ -25,7 +25,7 @@ export default async function products(): Promise<Products[]> {
     const endDate = faker.date.soon().toISOString().split('T').join(' ').split('.')[0];
 
     userIds.splice(userIds.indexOf(userid), 1);
-    imageIds.splice(userIds.indexOf(imageId), 1);
+    imageIds.splice(imageIds.indexOf(imageId), 1);
     result.push({
       userid,
       categoryid,
