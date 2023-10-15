@@ -1,21 +1,13 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
+require_once LIB . '/catalog/products.php';
+
 if (!isset($_SESSION['user'])) {
     header('Location: /account/login');
     exit();
 }
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
-require_once LIB . '/catalog/products.php';
-require_once LIB . '/util/util.php';
-
-?>
-
-<?php
-
 $products = getAllProducts(); 
-
-
-
 if (!$products) {
   echo '
   <div class="flex flex-col items-center justify-center gap-4">
@@ -44,20 +36,17 @@ foreach ($products as $product) {
         <div class="flex flex-row gap-2">
           <a href="/catalog/product?id=' . $product['id'] . '" class="btn btn-primary">bekijk product pagina</a>
           <form action="/src/lib/user/admin/delete-product.php" method="post" class="flex flex-col items-center gap-4">
-                <input type="text" name="productid" value="' . $product['id'] . '" hidden>          
-          <label for="productid" hidden>product ID</label>
-          <button ?id=' . $product['id'] . '" class="btn btn-error">Verwijderen</a>
-  </form>
+              <input type="text" name="productid" value="' . $product['id'] . '" hidden>          
+            <label for="productid" hidden>product ID</label>
+            <button ?id=' . $product['id'] . '" class="btn btn-error">Verwijderen</a>
+          </form>
         </div>
       </div>
     </div>
   </div>
   ';
 }
-//vardump button
-
 echo '
-
 </div>
 ';
 ?>
