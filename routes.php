@@ -112,6 +112,13 @@ $routes = [
     'footer' => false,
     'container' => true,
   ],
+  '/account/favorite' => [
+    'view' => 'account/favorite.php',
+    'title' => 'Favorite',
+    'auth_roles' => ['guest'],
+    'nav' => true,
+    'footer' => true,
+  ],
   // Error routes
   '/404' => [
     'view' => 'errors/404.php',
