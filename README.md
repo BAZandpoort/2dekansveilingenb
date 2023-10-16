@@ -14,6 +14,19 @@ Het project maakt voornamelijk gebruik van de volgende technologieën:
 * [NodeJS LTS](https://nodejs.org/en)
 
 ## Installatie
+### NodeJS installeren
+1. Download de laatste LTS versie van [NodeJS](https://nodejs.org/en)
+2. Run `node --version` in een terminal, dit zou normaal gezien de node versie moeten tonen.
+
+### PHP aan je commandline toevoegen
+1. Eerst en vooral heb je één van de twee nodig: [XAMPP](https://sourceforge.net/projects/xampp/) of [WAMP](https://sourceforge.net/projects/wampserver/)
+2. Daarna zoek je naar de folder waar je één van de twee hebt gedownload, in deze folder zoek je naar een folder genaamd "php", ga in de folder en kopieer het path.
+3. In windows zoek je op NL: "Omgeving" || EN: "Environment" en dan klik je op de eerste die tevoorschijn komt.
+4. Hierna klik je onderaan op NL: "Omgevingsvariabelen" || EN: "Environment Variables"
+5. In de bovenste tabel wil je "Path" bewerken, hierin maak je een nieuwe entry en plak je daar de locatie van stap 2 in.
+6. Om te kijken of alles werkt, run je `php --version`.
+
+### Alles starten
 1. Clone de repository
 2. Installeer al de depedencies: `npm i`
 3. Als laatste kan je de server starten: `php -S localhost:8080`
