@@ -9,7 +9,7 @@
     "db:refreshdates": "ts-node ./src/database/seed/countdown-refresh.ts"
   },
   "devDependencies": {
-    "@faker-js/faker": "^8.1.0",
+    "@faker-js/faker": "^8.2.0",
     "@prettier/plugin-php": "^0.20.1",
     "lint-staged": "^14.0.1",
     "prettier": "3.0.3",
