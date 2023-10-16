@@ -1,20 +1,19 @@
 <?php
-
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/util/util.php';
-session_start();
 
+session_start();
 
 $user = $_SESSION['user'];
 
 
-if (isset($_POST['bied'])) {
+if (isset($_POST['bid'])) {
   $userid = $user['id'];
   $productid = $_POST['productid'];
-  $bid_price = $_POST['bidInput'];
+  $bid_price = $_POST['amount'];
  
-  $query = 'SELECT *, COUNT(*) AS "amount" FROM bids WHERE productid = '.$productid.' AND userid = '.$userid.'';
-  $result = fetch($query);
+  $query = 'SELECT *, COUNT(*) AS amount FROM bids WHERE productid = ? AND userid = ?';
+  $result = fetch($query, ["type" => "i", "value" => $productid], ["type" => "i", "value" => $userid]);
   $bid_id = $result["id"];
 
   if ($result["amount"] == 0){

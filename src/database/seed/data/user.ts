@@ -27,5 +27,15 @@ export default async function users(): Promise<User[]> {
     });
   }
 
+  const testUser: User = {
+    username: 'Testing Account',
+    email: 'test@gmail.com',
+    password: await argon2.hash('123'),
+    firstname: 'Testing',
+    lastname: 'Account',
+  }
+
+  result.push(testUser);
+
   return result;
 }
