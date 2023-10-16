@@ -13,7 +13,6 @@ if (isset($_GET['search'])) {
     $start_price = $_GET['start_price'];
     $end_price = $_GET['end_price'];
     $query .= " AND price BETWEEN ? AND ?";
-    // Add the types and values to the params array like this: "'type' => 'n'", "'value' => $var", add a new array for each parameter
     $products = fetch($query, $params, ['type' => 'i', 'value' => $start_price], ['type' => 'i', 'value' => $end_price] );
   } else {
     $products = fetch($query, $params);
@@ -58,6 +57,7 @@ echo '
   </div>
   </div>
   ';
+
 
 
 // if(isset($_GET['start_price']) && isset($_GET['end_price']) && !empty($_GET['start_price']) && !empty($_GET['end_price'])){
