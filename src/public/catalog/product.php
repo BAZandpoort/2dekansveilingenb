@@ -69,6 +69,8 @@ $sellerData = fetch($query, ['type' => 'i', 'value' => $productId]);
       </div>
       <button onclick="bid()" class="btn btn-outline btn-primary join-item">Place bid</button>
     </div>
+    <br>
+    <a href="/catalog/report-abuse?productid=<?php echo $productId?>"><button class="btn btn-outline btn-error">Report abuse</button></a>
   </div>
 </div>
 

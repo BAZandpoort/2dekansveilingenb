@@ -59,6 +59,13 @@ $routes = [
     'footer' => false,
     'container' => true,
   ],
+  '/catalog/report-abuse' => [
+    'view' => 'catalog/report-abuse.php',
+    'title' => 'Report abuse',
+    'nav' => true,
+    'footer' => true,
+    'container' => true,
+  ],
   // Member Dashboard routes
   '/dashboard/products/history' => [
     'view' => 'user/member/purchases.php',
