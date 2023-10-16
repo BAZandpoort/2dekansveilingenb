@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Oct 12, 2023 at 07:22 PM
--- Server version: 10.6.12-MariaDB-0ubuntu0.22.04.1
--- PHP Version: 8.1.2-1ubuntu2.14
+-- Host: 127.0.0.1
+-- Generation Time: Oct 16, 2023 at 02:15 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -35,7 +35,7 @@ CREATE TABLE `products` (
   `description` text NOT NULL,
   `price` decimal(10,2) NOT NULL,
   `imageUrl` varchar(255) NOT NULL,
-  `endDate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp(),
+  `endDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updatedAt` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -173,6 +173,7 @@ ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
   ADD KEY `products_userid` (`userid`),
   ADD KEY `products_categoryid` (`categoryid`);
+ALTER TABLE `products` ADD FULLTEXT KEY `products_zoeken` (`name`,`description`);
 
 --
 -- Indexes for table `product_categories`
