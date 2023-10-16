@@ -1,13 +1,9 @@
 <?php
-// if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
-//     die("Je hebt geen toestemming om deze actie uit te voeren.");
-// }
+require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
+require_once LIB . '/util/util.php';
 
 if (isset($_POST['productid'])) {
     $product_id = $_POST['productid'];
-
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
-    require_once LIB . '/util/util.php';
 
     $query = "DELETE FROM products WHERE id = ?";
     $deleteData = insert($query, ['type' => 'i', 'value' => $product_id]);
@@ -19,8 +15,6 @@ if (isset($_POST['productid'])) {
         header('Location: /dashboard/products/delete?error=deleteProduct');
         return;
     }
-} else {
-    echo "Geen product_id meegegeven.";
 }
 
 header('Location: /dashboard/products/delete');
