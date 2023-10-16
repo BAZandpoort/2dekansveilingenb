@@ -76,7 +76,7 @@ $translations = fetch('SELECT id, ' . $language . ' FROM translations');
       <?php
       echo strlen($alert) > 0 
       ? '
-      <div class="absolute px-4 flex justify-center w-full md:w-auto left-1/2 transform -translate-x-1/2 top-8">
+      <div class="absolute px-4 flex justify-center w-full md:w-auto left-1/2 transform -translate-x-1/2 top-8 z-50">
         ' . $alert . '
       </div>
       ' 
