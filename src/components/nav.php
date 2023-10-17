@@ -199,8 +199,10 @@ $searchTerm = $_GET['search'] ?? '';
         $categories = fetch('SELECT * FROM product_categories LIMIT 10');
         if ($categories) {
           foreach ($categories as $category) {
+            
             echo '
-            <a href="/catalog/products?category=' . $category['name'] . '" class="group flex flex-col gap-2 items-center">
+            
+            <a href="/catalog/products?category=' . $category['id'] . '" class="group flex flex-col gap-2 items-center">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 group-hover:-translate-y-1 transition">
                 <path stroke-linecap="round" stroke-linejoin="round" d="' . $category['icon'] . '" />
               </svg>

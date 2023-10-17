@@ -4,6 +4,10 @@ require_once LIB . '/catalog/products.php';
 require_once COMPONENTS . '/product-card.php';
 
 $products = [];
+$categoryid = $_GET['category'] ?? null;
+
+
+
 if (isset($_GET['search'])) {
   $searchTerm = $_GET['search'];
   $query = "SELECT * FROM products WHERE MATCH(name, description) AGAINST(? IN BOOLEAN MODE)";
@@ -13,19 +17,23 @@ if (isset($_GET['search'])) {
     $start_price = $_GET['start_price'];
     $end_price = $_GET['end_price'];
     $query .= " AND price BETWEEN ? AND ?";
-    $products = fetch($query, $params, ['type' => 'i', 'value' => $start_price], ['type' => 'i', 'value' => $end_price] );
+    $products = fetchSingle($query, $params, ['type' => 'i', 'value' => $start_price], ['type' => 'i', 'value' => $end_price] );
   } else {
-    $products = fetch($query, $params);
+    $products = fetchSingle($query, $params);
   }
 } else {
   if (isset($_GET['start_price']) && isset($_GET['end_price'])) {
     $start_price = $_GET['start_price'];
     $end_price = $_GET['end_price'];
     $query = "SELECT * FROM products WHERE price BETWEEN ? AND ?";
-    $products = fetch($query, ['type' => 'i', 'value' => $start_price], ['type' => 'i', 'value' => $end_price]);
+    $products = fetchSingle($query, ['type' => 'i', 'value' => $start_price], ['type' => 'i', 'value' => $end_price]);
   } else {
     $products = getAllProducts();
   }
+}
+
+if ($categoryid) {
+  $products = fetchSingle('SELECT * FROM products WHERE categoryid = ?', ['type' => 'i', 'value' => $categoryid]);
 }
 
 
@@ -53,6 +61,9 @@ echo '
         <button class="btn btn-primary">Click Me</button>
       </div> 
     </div>
+    <input type="hidden" name="search" value="';
+    if(isset($_GET['search'])) echo $_GET['search'];
+    echo '">
   </form>
   </div>
   </div>
@@ -102,3 +113,4 @@ echo '
 ';
 ?>
 
+  
