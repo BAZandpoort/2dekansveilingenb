@@ -28,13 +28,14 @@ if (isset($_POST['bid'])) {
         $query = 'UPDATE bids SET bidPrice = ?, bidOfferedAt = now() WHERE id = ?';
         insert(
             $query,
-            ['type' => 'i', 'value' => $bid_price],
-            ['type' => 'd', 'value' => $bid_id],
+            ['type' => 'd', 'value' => $bid_price],
+            ['type' => 'i', 'value' => $bid_id],
         );
   }
 
   
 }
-header('Location: /');
-return;
+header('Location: '.$_SERVER['HTTP_REFERER']);
+return
+;
 

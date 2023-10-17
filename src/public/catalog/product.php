@@ -18,9 +18,14 @@ $query = 'SELECT * FROM users,user_profile
           AND users.id = ?';
 $sellerData = fetch($query, ['type' => 'i', 'value' => $productId]);
 
-$query = "SELECT *, COUNT(*) AS amount FROM bids WHERE productid = ? AND userid = ?";
-$bidData = fetch($query, ["type" => "i", "value" => $productId], ["type" => "i", "value" => $_SESSION["user"]["id"]]);
-$lastBid = ($bidData["amount"] > 0) ? $bidData["bidPrice"] : 0.00; 
+if (isset($_SESSION["user"])){
+  $query = "SELECT *, COUNT(*) AS amount FROM bids WHERE productid = ? AND userid = ?";
+  $bidData = fetch($query, ["type" => "i", "value" => $productId], ["type" => "i", "value" => $_SESSION["user"]["id"]]);
+  $lastBid = ($bidData["amount"] > 0) ? $bidData["bidPrice"] : 0.00;
+} else {
+  $lastBid = 0;
+  
+}
 ?>
 
 <div class="w-full flex justify-center md:justify-start text-sm breadcrumbs">
@@ -61,16 +66,25 @@ $lastBid = ($bidData["amount"] > 0) ? $bidData["bidPrice"] : 0.00;
         <p id="suggestedBid" class="font-semibold text-xl">€ <?= $productData["price"]?></p>
       </div>
     </div>
-    <form action="/src/lib/catalog/bid.php" method="post">
-      <div class="join">
-        <div class="relative">
-          <input type="hidden" name="productid" value="<?= $productId ?>">
-          <input name="amount" type="number" min="1" step="0.01" placeholder="Your bid" class="input input-bordered w-full max-w-xs join-item pl-5 relative" />
-          <p class="absolute top-3 left-2 opacity-40">€</p>
-        </div>
-        <button name="bid" class="btn btn-outline btn-primary join-item">Place bid</button>
-      </div>
-    </form>
+    <?php
+      if (isset($_SESSION['user'])){
+        echo '
+          <form action="/src/lib/catalog/bid.php" method="post">
+            <div class="join">
+              <div class="relative">
+                <input type="hidden" name="productid" value="'.$productId.'">
+                <input name="amount" type="number" min="'.$lastBid + 0.01.'" step="0.01" placeholder="Your bid" class="input input-bordered w-full max-w-xs join-item pl-5 relative" required/>
+                <p class="absolute top-3 left-2 opacity-40">€</p>
+              </div>
+              <button name="bid" class="btn btn-outline btn-primary join-item">Place bid</button>
+            </div>
+          </form>
+        ';
+      } else {
+        echo '<a href="/account/login"><button class="btn btn-outline btn-primary">Log in to begin bidding</button></a>';
+      }
+    ?>
+    
   </div>
 </div>
 
