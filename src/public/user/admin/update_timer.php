@@ -6,12 +6,11 @@ require_once LIB . '/util/util.php';
 
 if (isset($_POST['change'])) {
   $endDate = $_POST['endDate'];
-  $id = $productData['id']; // Assuming you have the product ID available in $productData
-
+  $id = $_POST['id'];
   $query = 'UPDATE products SET endDate = ? WHERE id = ?';
-  $success = fetch(
+  $success = insert(
     $query,
-    ['type' => 's', 'value' => '' . $endDate . ''],
+    ['type' => 's', 'value' => $endDate],
     ['type' => 'i', 'value' => $id]
 );
 
@@ -21,4 +20,6 @@ if (isset($_POST['change'])) {
       echo "Failed to update the auction end date.";
   }
 }
+header('location: /')
+
 ?>
