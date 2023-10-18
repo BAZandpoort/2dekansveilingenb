@@ -2,15 +2,7 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/util/util.php';
 function productCard($product, $shareable = false) {
-  if (isset($_POST["favorieten"])) {
-
-    $userid = $_SESSION['user']['id'] ;
-    $proid = $_GET["id"];
-  
-    $sql = insert("INSERT INTO favorieten (userid, id) VALUES ($userid, $proid)");
-   exit();
-   
-}else{
+ 
 
 
   $share = $shareable
@@ -70,5 +62,13 @@ function productCard($product, $shareable = false) {
   ';
 }
   
+if (isset($_POST["favorieten"])) {
+
+  $userid = $_SESSION['user']['id'] ;
+  $proid = $_GET["id"];
+
+  $sql = insert("INSERT INTO favorieten (userid, id) VALUES ($userid, $proid)");
+ 
+ 
 }
 
