@@ -20,6 +20,6 @@ if (isset($_POST['change'])) {
       echo "Failed to update the auction end date.";
   }
 }
-header('location: /')
+header('location: /dashboard/products/edit-time')
 
 ?>

@@ -82,6 +82,13 @@ $routes = [
     'footer' => false,
     'container' => true,
   ],
+  '/dashboard/products/edit-time' => [
+    'view' => 'user/seller/edit-time.php',
+    'title' => 'Edit Auction Date',
+    'nav' => true,
+    'footer' => false,
+    'container' => true,
+  ],
   // Admin Dashboard routes
   '/dashboard/products/delete' => [
     'view' => 'user/admin/delete-product.php',
