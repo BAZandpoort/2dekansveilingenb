@@ -46,19 +46,19 @@ echo '
     <div class="row"> 
       <div class="col-md-4"> 
         <label for="">Start Price</label> 
-        <input type="text" name="start_price" value="';
+        <input type="text" name="start_price" value="" placeholder="Type here" class="input input-bordered input-success w-full max-w-xs" ';
         if(isset($_GET['start_price'])) echo $_GET['start_price'];  else{echo'100';};
          echo'" class="form-control">  
       </div> 
       <div class="col-md-4"> 
         <label for="">End Price</label> 
-        <input type="text" name="end_price" value="';
+        <input type="text" name="end_price" value="" placeholder="Type here" class="input input-bordered input-success w-full max-w-xs" ';
         if(isset($_GET['end_price'])) echo $_GET['end_price']; else{echo'900';}; 
          echo'"class="form-control"> 
       </div> 
       <br>
       <div class="col-md-4"> 
-        <button class="btn btn-primary">Click Me</button>
+        <button class="btn btn-outline btn-success">Klik hier</button>
       </div> 
     </div>
     <input type="hidden" name="search" value="';
