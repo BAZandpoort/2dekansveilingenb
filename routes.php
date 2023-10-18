@@ -118,6 +118,7 @@ $routes = [
     'auth_roles' => ['member'],
     'nav' => false,
     'footer' => false,
+    'container' => true,
   ],
   // Error routes
   '/404' => [
