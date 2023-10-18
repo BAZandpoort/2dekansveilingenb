@@ -82,9 +82,38 @@ $routes = [
     'footer' => false,
     'container' => true,
   ],
-  '/dashboard/see-translations' => [
-    'view' => 'member/see-translations.php',
-    'title' => 'See translations',
+  '/dashboard/main' => [
+    'view' => 'user/seller/verkoperDashboard.php',
+    'title' => 'Dashboard',
+    'auth_roles' => ['member'],
+    'nav' => true,
+    'footer' => true,
+  ],
+  '/main-dash/delete' => [
+    'view' => 'user/seller/delete-products.php',
+    'title' => 'Dashboard',
+    'auth_roles' => ['member'],
+    'nav' => true,
+    'footer' => true,
+  ],
+  '/main-dash/edit' => [
+    'view' => 'user/seller/editProduct.php',
+    'title' => 'Edit Product',
+    'auth_roles' => ['member'],
+    'nav' => true,
+    'footer' => false,
+  ],
+  '/main-dash/update' => [
+    'view' => 'user/seller/updateProduct.php',
+    'title' => 'Update Product',
+    'auth_roles' => ['member'],
+    'nav' => true,
+    'footer' => false,
+  ],
+  // Admin Dashboard routes
+  '/dashboard/products/delete' => [
+    'view' => 'user/admin/delete-product.php',
+    'title' => 'Delete products',
     'auth_roles' => ['member'],
     'nav' => true,
     'footer' => true,

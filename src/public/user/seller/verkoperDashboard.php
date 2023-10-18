@@ -6,31 +6,25 @@
 </head>
 <body >
 <style>
+   
     .table-container {
-        display: flex;
-        justify-content: center;
-        margin-top: 10px;
-        background-color: rgb(64,64,64);
-        border-radius: 20px;
-    }
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+            margin-top: 10px;
+            background-color: rgb(64, 64, 64);
+            border-radius: 20px;
+            width: 100%; 
+        }
 
-    th, td {
-        border: 12px;
-        padding: 20px;
-        text-align: center;
-    }
+        th, td {
+            border: 12px;
+            padding: 20px;
+            text-align: center;
+        }
 
-    .box {
-        margin-top: 50px;
-        border-radius: 20px;
-        width: auto;
-        height: auto;
-        border: 4px solid dimgray; /* Border color is gray */
-        background-color: dimgray; /* Background color is gray */
-        padding: 10px;
-        margin: 10px;
-        display: inline-block;
-    }
+        
+
     .container {
     width: 100%;
     height: 100vh;
@@ -154,9 +148,9 @@ article p {
 
 
 <div style="margin-top: 340px;">
-<div class="box">
+<div class=" mt-16 rounded-2xl w-auto h-auto border-4 border-dimgray bg-dimgray p-10 m-10 mt-[-300px] inline-block">
 
-<form method="post" action="/member/delete">
+<form method="post" action="/main-dash/delete">
     <div class="table-container">
         <div class="overflow-x-auto">
 
@@ -169,6 +163,7 @@ article p {
                         <th>Name</th>
                         <th>Description</th>
                         <th>Price</th>
+                        <th>imageUrl</th>
                         <th>Category</th>
                         <th>Actions</th>
                     </tr>
@@ -191,6 +186,15 @@ article p {
                             echo "<td>" . $row["name"] . "</td>";
                             echo "<td>" . $row["description"] . "</td>";
                             echo "<td>" . $row["price"] . "</td>";
+                            echo "<td>" . $row["imageUrl"] . "</td>"; // Echo the image URL to check if it's correct
+
+                            echo "<td><div class='avatar'>
+                                <div class='w-24 h-24 rounded overflow-hidden'>
+                                    <div class='bg-cover bg-center' style='background-image: url(" . $row["imageUrl"] . ");'></div>
+                                </div>
+                            </div></td>";
+                            
+
 
                             // Fetch the category name
                             $categoryId = $row["categoryid"];
@@ -202,7 +206,7 @@ article p {
                             echo "<td>" . $categoryName . "</td>";
                             echo "<td>
                           
-                            <a class='btn btn-outline text-center' href='/member/edit?id=" . $row['id'] . "'>Edit</a>
+                            <a class='btn btn-outline text-center' href='/main-dash/edit?id=" . $row['id'] . "'>Edit</a>
                    
                             </td>"; 
                             echo "</tr>";
@@ -315,12 +319,12 @@ article p {
 <br><br>
         <h2>Your current rating as seller/auctioneer</h2>
         <br>
-            <div class="rating">
+        <div class="rating">
+  <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" />
+  <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400"/>
   <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" />
   <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" />
-  <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" checked />
   <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" />
-  <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400 " />
 </div>
     </div>
     <br><br>
