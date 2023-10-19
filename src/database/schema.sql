@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Oct 06, 2023 at 09:34 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Host: localhost
+-- Generation Time: Oct 16, 2023 at 09:13 PM
+-- Server version: 10.6.12-MariaDB-0ubuntu0.22.04.1
+-- PHP Version: 8.1.2-1ubuntu2.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,8 +18,22 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `2dekans-veilingen`
+-- Database: `2dekansveilingen`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bids`
+--
+
+CREATE TABLE `bids` (
+  `id` int(11) NOT NULL,
+  `productid` int(11) NOT NULL,
+  `userid` int(11) NOT NULL,
+  `bidPrice` decimal(18,2) NOT NULL,
+  `bidOfferedAt` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -35,6 +49,7 @@ CREATE TABLE `products` (
   `description` text NOT NULL,
   `price` decimal(10,2) NOT NULL,
   `imageUrl` varchar(255) NOT NULL,
+  `endDate` datetime DEFAULT NULL,
   `updatedAt` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -74,22 +89,23 @@ INSERT INTO `translations` (`id`, `location`, `text_en`, `text_nl`, `text_fr`) V
 (2, 'nav', '2nd-chance auctions', '2dekans veilingen', '2ème-chance enchères'),
 (3, 'nav', 'Log out', 'Log uit', 'Se déconnecter'),
 (4, 'footer', 'Services', 'Diensten', 'Service'),
-(5, 'footer', 'UNAVAILABLE', 'Branding', 'INDISPONIBLE'),
-(6, 'footer', 'UNAVAILABLE', 'Ontwerp', 'INDISPONIBLE'),
-(7, 'footer', 'UNAVAILABLE', 'Marketing', 'INDISPONIBLE'),
-(8, 'footer', 'UNAVAILABLE', 'Advertentie', 'INDISPONIBLE'),
+(5, 'footer', 'Branding', 'Branding', 'Marque'),
+(6, 'footer', 'Design', 'Ontwerp', 'Design'),
+(7, 'footer', 'Marketing', 'Marketing', 'Marketing'),
+(8, 'footer', 'Advertisement', 'Advertentie', 'Publicité'),
 (9, 'footer', 'Business', 'Bedrijf', 'Enterprise'),
-(10, 'footer', 'UNAVAILABLE', 'Over ons', 'INDISPONIBLE'),
-(11, 'footer', 'Contact', 'Contact', 'INDISPONIBLE'),
-(12, 'footer', 'UNAVAILABLE', 'Vacatures', 'INDISPONIBLE'),
-(13, 'footer', 'UNAVAILABLE', 'Perskit', 'INDISPONIBLE'),
-(14, 'footer', 'UNAVAILABLE', 'Juridisch', 'INDISPONIBLE'),
-(15, 'footer', 'Terms', 'Gebruiksvoorwaarden', 'INDISPONIBLE'),
-(16, 'footer', 'UNAVAILABLE', 'Privacybeleid', 'Politique de confidentialité'),
-(17, 'footer', 'UNAVAILABLE', 'Cookiebeleid', 'INDISPONIBLE'),
+(10, 'footer', 'About us', 'Over ons', 'A propos de nous'),
+(11, 'footer', 'Contact', 'Contact', 'Contact'),
+(12, 'footer', 'Vacancies', 'Vacatures', 'Postes vacants'),
+(13, 'footer', 'Press kit', 'Perskit', 'Kit de presse'),
+(14, 'footer', 'Legal', 'Juridisch', 'Juridique'),
+(15, 'footer', 'Terms', 'Gebruiksvoorwaarden', 'Conditions d\'utilisation'),
+(16, 'footer', 'Privacy Policy', 'Privacybeleid', 'Politique de confidentialité'),
+(17, 'footer', 'Cookie Policy', 'Cookiebeleid', 'Politique de cookies'),
 (18, 'nav', 'Auctions', 'Veilingen', 'Enchères'),
 (19, 'nav', 'Location', 'Locatie', 'Emplacement'),
-(20, 'nav', 'Products', 'Producten', 'Produits');
+(20, 'nav', 'Products', 'Producten', 'Produits'),
+(21, 'nav', 'test', 'test', 'test');
 
 -- --------------------------------------------------------
 
@@ -119,8 +135,24 @@ CREATE TABLE `user_profile` (
   `userid` int(11) NOT NULL,
   `profilePictureUrl` varchar(255) NOT NULL,
   `about` text NOT NULL,
-  `theme` text NOT NULL
+  `theme` text NOT NULL DEFAULT 'light',
+  `language` text NOT NULL DEFAULT 'text_en'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_purchases`
+--
+
+CREATE TABLE `user_purchases` (
+  `id` int(11) NOT NULL,
+  `timeOfPurchase` datetime NOT NULL,
+  `productId` int(11) NOT NULL,
+  `price` int(11) NOT NULL,
+  `productName` text NOT NULL,
+  `productImage` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -150,12 +182,19 @@ CREATE TABLE `user_role_mapping` (
 --
 
 --
+-- Indexes for table `bids`
+--
+ALTER TABLE `bids`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
   ADD KEY `products_userid` (`userid`),
   ADD KEY `products_categoryid` (`categoryid`);
+ALTER TABLE `products` ADD FULLTEXT KEY `search` (`name`,`description`);
 
 --
 -- Indexes for table `product_categories`
@@ -205,6 +244,12 @@ ALTER TABLE `user_role_mapping`
 --
 
 --
+-- AUTO_INCREMENT for table `bids`
+--
+ALTER TABLE `bids`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
@@ -220,7 +265,7 @@ ALTER TABLE `product_categories`
 -- AUTO_INCREMENT for table `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `users`
