@@ -11,7 +11,7 @@ if (isset($_POST['create'])) {
   $description = $_POST['description'];
   $price = $_POST['price'];
   $file = $_FILES['image'];
-  $endDate = $_POST['endDate'];
+  $endDate = isset($_POST["auction"]) ? $_POST['endDate'] : null;
 
   $insertData = addProduct(
     $userid,
@@ -27,7 +27,6 @@ if (isset($_POST['create'])) {
 header('Location: /');
 exit();
 
-// Add auction time
 function addProduct(
   $userid,
   $categoryid,

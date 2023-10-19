@@ -10,6 +10,7 @@ require_once LIB . '/util/util.php';
 $productId = $_GET['id'];
 $query = 'SELECT * FROM products WHERE id = ?';
 $productData = fetch($query, ['type' => 'i', 'value' => $productId]);
+$ended = strtotime($productData['endDate']) < time();
 
 $time = substr($productData['endDate'], 0, 16);
 
@@ -18,6 +19,15 @@ $query = 'SELECT * FROM users,user_profile
           WHERE users.id=user_profile.userid
           AND users.id = ?';
 $sellerData = fetch($query, ['type' => 'i', 'value' => $productId]);
+
+if (isset($_SESSION["user"])){
+  $query = "SELECT *, COUNT(*) AS amount FROM bids WHERE productid = ? AND userid = ?";
+  $bidData = fetch($query, ["type" => "i", "value" => $productId], ["type" => "i", "value" => $_SESSION["user"]["id"]]);
+  $lastBid = ($bidData["amount"] > 0) ? $bidData["bidPrice"] : 0.00;
+} else {
+  $lastBid = 0;
+  
+}
 ?>
 
 <div class="w-full flex justify-center md:justify-start text-sm breadcrumbs">
@@ -50,26 +60,40 @@ $sellerData = fetch($query, ['type' => 'i', 'value' => $productId]);
     <div class="flex flex-row justify-center gap-8 md:gap-24 pb-8">
       <div class="flex flex-col items-center">
         <p class="uppercase text-xs opacity-40 font-bold">Huidig bod</p>
-        <p id="currentBid" class="font-semibold text-xl">€19</p>
+        <p id="currentBid" class="font-semibold text-xl">€ <?= $lastBid ?></p>
       </div>
       
       <div class="flex flex-col items-center">
         <p class="uppercase text-xs opacity-40 font-bold">Adviesprijs</p>
-        <p id="suggestedBid" class="font-semibold text-xl">€119</p>
-      </div>
-      
-      <div class="flex flex-col items-center">
-        <p class="uppercase text-xs opacity-40 font-bold">Bieders</p>
-        <p id="bidders" class="font-semibold text-xl">0</p>
+        <p id="suggestedBid" class="font-semibold text-xl">€ <?= $productData["price"]?></p>
       </div>
     </div>
-    <div class="join">
-      <div class="relative">
-        <input id="bidInput" type="number" min="1" step="0.01" placeholder="Your bid" class="input input-bordered w-full max-w-xs join-item pl-5 relative" />
-        <p class="absolute top-3 left-2 opacity-40">€</p>
-      </div>
-      <button onclick="bid()" class="btn btn-outline btn-primary join-item">Place bid</button>
-    </div>
+    <?php
+      if (isset($_SESSION['user']) && !$ended) {
+        echo '
+          <form action="/src/lib/catalog/bid.php" method="post">
+            <div class="join">
+              <div class="relative">
+                <input type="hidden" name="productid" value="'.$productId.'">
+                <input name="amount" type="number" min="' . $lastBid + 0.01 . '" step="0.01" placeholder="Your bid" class="input input-bordered w-full max-w-xs join-item pl-5 relative" required/>
+                <p class="absolute top-3 left-2 opacity-40">€</p>
+              </div>
+              <button name="bid" class="btn btn-outline btn-primary join-item">Place bid</button>
+            </div>
+          </form>
+        ';
+      } else {
+        if ($ended) {
+          echo '<p class="text-center text-xl font-semibold">Winning bid was: €' . $lastBid . '</p>';
+        } else {
+          echo '
+          <a href="/account/login" class="btn btn-primary">
+            Log in to begin bidding
+          </a>';
+        }
+      }
+    ?>
+    
   </div>
 </div>
 
