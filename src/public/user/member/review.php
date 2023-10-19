@@ -15,21 +15,24 @@ $sellerId = $_GET['seller'];
 
 $sellerInfo = fetchSingle('SELECT * FROM users WHERE id = ?', ["type" => "i", "value" => $sellerId]);
 
-
+//make it so that u can only review once and that u can only review if u have bought the product and that the other people the revieuws  can see but not add to it if they havent bought the product
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $review = $_POST['review'];
   $rating = $_POST['rating'];
 
   // Insert review into database
-  $insertReview = insert('INSERT INTO review (member, review, sterren, seller, date) VALUES (?, ?, ?, ?, ?)', [
-    "type" => "isiss",
-    "value" => [$userId, $review, $rating, $sellerId, date('Y-m-d')]
-  ]);
+  $insertReview = insert('INSERT INTO review (member, review, sterren, seller, date) VALUES (?, ?, ?, ?, ?)', 
+  ["type" => "i", "value" => $userId],
+  ["type" => "s", "value" => $review],
+  ["type" => "i", "value" => $rating],
+  ["type" => "i", "value" => $sellerId],
+  ["type" => "s", "value" => date('Y-m-d')]
+);
 }
 
 // Fetch seller reviews
-$sellerReviews = fetch('SELECT * FROM review WHERE seller = ?', ["type" => "i", "value" => $sellerId]);
+$sellerReviews = fetchSingle('SELECT * FROM review WHERE seller = ?', ["type" => "i", "value" => $sellerId]);
 
 ?>
 
