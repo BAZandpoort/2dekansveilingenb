@@ -37,6 +37,7 @@ $routes = [
     'footer' => true,
     'container' => true,
   ],
+
   // Catalog routes
   '/catalog/products' => [
     'view' => 'catalog/products.php',
@@ -67,6 +68,14 @@ $routes = [
     'footer' => false,
     'container' => true,
   ],
+  '/dashboard/products/review' => [
+    'view' => 'user/member/review.php',
+    'title' => 'Add Products',
+    'nav' => true,
+    'footer' => false,
+    'container' => true,
+  ],
+
   // Seller Dashboard routes
   '/dashboard/products/add' => [
     'view' => 'user/seller/add-product.php',
