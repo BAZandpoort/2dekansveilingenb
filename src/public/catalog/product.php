@@ -11,7 +11,8 @@ $productId = $_GET['id'];
 $query = 'SELECT * FROM products WHERE id = ?';
 $productData = fetch($query, ['type' => 'i', 'value' => $productId]);
 
-$time = substr($productData['endDate'], 11, 5);
+$time = substr($productData['endDate'], 0, 16);
+
 
 $query = 'SELECT * FROM users,user_profile
           WHERE users.id=user_profile.userid
@@ -32,7 +33,7 @@ $sellerData = fetch($query, ['type' => 'i', 'value' => $productId]);
   </div>
   <div id="actions" class="flex flex-[.7] bg-base-100 rounded-2xl p-8 flex-col items-center justify-center">
     <?php
-    if (strtotime($productData['endDate']) > time()) {
+    if (strtotime($productData['endDate'])) {
       echo '<p class="opacity-70 pb-12">Veiling sluit om ' . $time . '</p>';
     }
     ?>
@@ -79,6 +80,25 @@ $sellerData = fetch($query, ['type' => 'i', 'value' => $productId]);
   </div>
   <div class="flex-[.7] p-8"></div>
 </div>
+
+
+
+<form action="/src/public/user/admin/update_timer.php" method="post" enctype="multipart/form-data" class="flex flex-col items-center justify-center gap-4 max-w-2xl mx-auto">
+  <div class="flex flex-row justify-center gap-4 w-full">
+    <!-- Auction End Date -->
+    <div class="form-control flex-1 w-full">
+      <label class="label">
+        <span class="label-text">Auction End Date</span>
+      </label>
+      <input type="datetime-local" name="endDate" placeholder="20.00" class="input input-bordered w-full" required />
+      <input type="hidden" name="id" value="<?php echo $productData['id']; ?>" /> 
+    </div>
+  </div>
+  <div class="form-control w-full max-w-xs mt-4">
+    <button name="change" class="btn btn-primary">change</button>
+  </div>
+</form>
+
 
 <script>
   productCountdown("<?php echo $productData['endDate']; ?>")
