@@ -10,6 +10,7 @@ require_once LIB . '/util/util.php';
 $productId = $_GET['id'];
 $query = 'SELECT * FROM products WHERE id = ?';
 $productData = fetch($query, ['type' => 'i', 'value' => $productId]);
+$ended = strtotime($productData['endDate']) < time();
 
 $time = substr($productData['endDate'], 11, 5);
 
@@ -67,13 +68,13 @@ if (isset($_SESSION["user"])){
       </div>
     </div>
     <?php
-      if (isset($_SESSION['user'])){
+      if (isset($_SESSION['user']) && !$ended) {
         echo '
           <form action="/src/lib/catalog/bid.php" method="post">
             <div class="join">
               <div class="relative">
                 <input type="hidden" name="productid" value="'.$productId.'">
-                <input name="amount" type="number" min="'.$lastBid + 0.01.'" step="0.01" placeholder="Your bid" class="input input-bordered w-full max-w-xs join-item pl-5 relative" required/>
+                <input name="amount" type="number" min="' . $lastBid + 0.01 . '" step="0.01" placeholder="Your bid" class="input input-bordered w-full max-w-xs join-item pl-5 relative" required/>
                 <p class="absolute top-3 left-2 opacity-40">€</p>
               </div>
               <button name="bid" class="btn btn-outline btn-primary join-item">Place bid</button>
@@ -81,7 +82,14 @@ if (isset($_SESSION["user"])){
           </form>
         ';
       } else {
-        echo '<a href="/account/login"><button class="btn btn-outline btn-primary">Log in to begin bidding</button></a>';
+        if ($ended) {
+          echo '<p class="text-center text-xl font-semibold">Winning bid was: €' . $lastBid . '</p>';
+        } else {
+          echo '
+          <a href="/account/login" class="btn btn-primary">
+            Log in to begin bidding
+          </a>';
+        }
       }
     ?>
     

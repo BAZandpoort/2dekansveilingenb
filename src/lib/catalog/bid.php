@@ -6,7 +6,6 @@ session_start();
 
 $user = $_SESSION['user'];
 
-
 if (isset($_POST['bid'])) {
   $userid = $user['id'];
   $productid = $_POST['productid'];
@@ -17,25 +16,23 @@ if (isset($_POST['bid'])) {
   $bid_id = $result["id"];
 
   if ($result["amount"] == 0){
-        $query = 'INSERT INTO bids (productid, userid, bidPrice) VALUES (?, ?, ?)';
-        insert(
-            $query,
-            ['type' => 'i', 'value' => $productid],
-            ['type' => 'i', 'value' => $userid],
-            ['type' => 'd', 'value' => $bid_price],
-        );  
+    $query = 'INSERT INTO bids (productid, userid, bidPrice) VALUES (?, ?, ?)';
+    insert(
+      $query,
+      ['type' => 'i', 'value' => $productid],
+      ['type' => 'i', 'value' => $userid],
+      ['type' => 'd', 'value' => $bid_price],
+    );  
   } else {
-        $query = 'UPDATE bids SET bidPrice = ?, bidOfferedAt = now() WHERE id = ?';
-        insert(
-            $query,
-            ['type' => 'd', 'value' => $bid_price],
-            ['type' => 'i', 'value' => $bid_id],
-        );
+    $query = 'UPDATE bids SET bidPrice = ?, bidOfferedAt = now() WHERE id = ?';
+    insert(
+      $query,
+      ['type' => 'd', 'value' => $bid_price],
+      ['type' => 'i', 'value' => $bid_id],
+    );
   }
 
   
 }
 header('Location: '.$_SERVER['HTTP_REFERER']);
-return
-;
-
+return;
