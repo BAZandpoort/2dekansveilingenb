@@ -1,55 +1,15 @@
-<!-- <style>
-  .table-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-    background-color: rgb(64, 64, 64);
-    border-radius: 20px;
-  }
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
+require_once DATABASE . '/connect.php';
+require_once LIB . '/util/util.php';
 
-  th,
-  td {
-    border: 12px;
-    padding: 20px;
-    text-align: center;
-  }
+$sellerId = $_SESSION['user']['id'];
 
-  .box {
-    margin-top: 50px; /* mt-12 */
-    border-radius: 20px; /* rounded-2xl */
-    width: auto; /* w-auto */
-    height: auto; /* h-auto */
-    border: 4px solid dimgray; /* border-4 border-solid border-slate-200 */
-    /* Border color is gray */
-    background-color: dimgray; /* bg-slate-200 */
-    /* Background color is gray */
-    padding: 10px; /* p-2.5 */
-    margin: 10px; /* m-2.5 */
-    display: inline-block; /* inline-block */
-  }
+$query = "SELECT * FROM products WHERE userid = ?";
+$products = fetchSingle($query, ['type' => 'i', 'value' => $sellerId]);
+?>
 
-  .container {
-    width: 100%;
-    height: 100vh;
-    color: white;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-
-  }
-
-  h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    text-align: center;
-  }
-
-  .description {
-    text-align: center;
-    width: 43%;
-  }
-
+<style>
   .clientImage {
     display: flex;
     flex-direction: row;
@@ -113,38 +73,7 @@
     margin-bottom: 1rem;
     font-family: system-ui;
   }
-
-
-  @media screen and (max-width:700px) {
-    .container {
-      height: auto;
-    }
-
-    .description {
-      width: 90%;
-    }
-  }
-
-  @media screen and (max-width:375px) {
-    .reviewSection {
-      padding: 0;
-    }
-
-    .reviewItem {
-      width: 100%;
-    }
-
-    .clientImage {
-      margin-bottom: 0.6rem;
-    }
-
-    .top {
-      align-items: center;
-      flex-direction: column;
-      justify-content: center;
-    }
-  }
-</style> -->
+</style>
 
 <!-- Top box -->
 <div class="mt-24">
@@ -153,120 +82,62 @@
     <form method="post" action="delete_products.php">
       <div class="table-container">
         <div class="overflow-x-auto">
-          <!-- <table>
+          <table class="table">
             <thead>
               <tr>
                 <th>
-                  <input type="checkbox" id="checkAll" />
+                  <label>
+                    <input type="checkbox" class="checkbox" id="checkAll" />
+                  </label>
                 </th>
-                <th>ID</th>
                 <th>Name</th>
                 <th>Description</th>
                 <th>Price</th>
                 <th>Category</th>
-                <th>Actions</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
               <?php
-              require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
-              require_once DATABASE . '/connect.php';
-
-              $sellerId = $_SESSION['user']['id'];
-
-              $sql = "SELECT * FROM products WHERE userid = $sellerId";
-              $result = mysqli_query($connection, $sql);
-
-              if (mysqli_num_rows($result) > 0) {
-                while ($row = mysqli_fetch_assoc($result)) {
-                  echo "<tr>";
-                  echo "<td><input type='checkbox' name='selected_products[]' value='" . $row['id'] . "'></td>";
-                  echo "<td>" . $row["id"] . "</td>";
-                  echo "<td>" . $row["name"] . "</td>";
-                  echo "<td>" . $row["description"] . "</td>";
-                  echo "<td>" . $row["price"] . "</td>";
-
-                  // Fetch the category name
-                  $categoryId = $row["categoryid"];
-                  $categoryQuery = "SELECT name FROM product_categories WHERE id = $categoryId";
-                  $categoryResult = $connection->query($categoryQuery);
-                  $categoryRow = $categoryResult->fetch_assoc();
-                  $categoryName = $categoryRow["name"];
-
-                  echo "<td>" . $categoryName . "</td>";
-                  echo "<td>
-                            <a class='btn btn-outline text-center' href='/'>Edit</a>
-                   
-                            </td>";
-                  echo "</tr>";
-                }
-              } else {
-                echo "<tr><td colspan='7'>No products found.</td></tr>";
-              }
-
-              $connection->close();
+              foreach($products as $product):
+                $categoryName = fetchSingle('SELECT * FROM product_categories WHERE id = ?', ['type' => 'i', 'value' => $product['categoryid']])[0]['name'];
               ?>
+              <tr>
+                <th>
+                  <label>
+                    <input name="products[]" type="checkbox" class="checkbox" />
+                  </label>
+                </th>
+
+                <td>
+                  <div class="flex flex-col">
+                    <div class="font-bold"><?= $product['name'] ?></div>
+                    <div class="text-sm opacity-50">Until <?= $product['endDate'] ?></div>
+                  </div>
+                </td>
+                
+                <td><?= $product['description'] ?></td>
+                <td>€ <?= $product['price'] ?></td>
+                <td><?= $categoryName ?></td>
+
+                <th>
+                  <button class="btn btn-ghost btn-xs">Edit</button>
+                </th>
+              </tr>
+              <?php endforeach ?>
             </tbody>
-          </table> -->
 
-          <div class="overflow-x-auto">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>
-                    <label>
-                      <input type="checkbox" class="checkbox" />
-                    </label>
-                  </th>
-                  <th>Name</th>
-                  <th>Description</th>
-                  <th>Price</th>
-                  <th>Category</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- row 1 -->
-                <tr>
-                  <th>
-                    <label>
-                      <input type="checkbox" class="checkbox" />
-                    </label>
-                  </th>
-
-                  <td>
-                    <div class="flex flex-col">
-                      <div class="font-bold">Hart Hagerty</div>
-                      <div class="text-sm opacity-50">United States</div>
-                    </div>
-                  </td>
-
-                  <td>
-                    Zemlak, Daniel and Leannon
-                    <br/>
-                    <span class="badge badge-ghost badge-sm">Desktop Support Technician</span>
-                  </td>
-
-                  <td>Purple</td>
-
-                  <th>
-                    <button class="btn btn-ghost btn-xs">Edit</button>
-                  </th>
-                </tr>
-              </tbody>
-
-              <tfoot>
-                <tr>
-                  <th></th>
-                  <th>Name</th>
-                  <th>Description</th>
-                  <th>Price</th>
-                  <th>Category</th>
-                  <th></th>
-                </tr>
-              </tfoot>
-            </table>
-          </div>
+            <tfoot>
+              <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th></th>
+              </tr>
+            </tfoot>
+          </table>
         </div>
       </div>
 
@@ -362,11 +233,11 @@
   </div>
 </div>
 
-<script>
+<script defer>
   const checkAll = document.getElementById('checkAll');
-  const checkboxes = document.querySelectorAll('input[name="selected_products[]"]');
-
-  checkAll.addEventListener('change', function() {
+  const checkboxes = document.querySelectorAll('input[name="products[]"]');
+  
+  checkAll.addEventListener('change', () => {
     checkboxes.forEach((checkbox) => {
       checkbox.checked = checkAll.checked;
     });
