@@ -7,74 +7,67 @@
     $users=$users_exists["MAX(id)"];
 
     $new_users = fetch("SELECT * FROM `users` ORDER BY `createdAt` DESC Limit 6;");
-    $new_products = fetch("SELECT * FROM `products` ORDER BY `createdAt` DESC Limit 5;");
-    
+    $new_products = fetch("SELECT products.*,product_categories.name AS categoryname FROM products JOIN product_categories ON products.id = product_categories.id ORDER BY `createdAt` DESC Limit 6;");
 
 ?>
 
 <div class="drawer drawer-open ">
   <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
    <div class="drawer-content">
-   <div class="navbar bg-base-100 shadow-sm pt-8 ">
+   <div class="navbar bg-base-100 shadow-sm rounded-lg ">
   <div class="navbar-start flex-1">
   </div>
-  <div class="navbar-center hidden lg:flex">
-    <ul class="menu menu-horizontal px-1 gap-16 ">
-      <div class="flex justify-center items-center w-10 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
+  <div class="navbar-center hidden lg:flex ">
+    <ul class="menu menu-horizontal px-1 gap-16 rounded-8 ">
+      <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
         <svg width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="stroke-current text-blue-800 dark:text-gray-800 transform transition-transform duration-500 ease-in-out"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
       </div>
       <div class="text-right">
         <p class="text-2xl"><?php echo $users ?></p>
         <p>users</p>
       </div>
-      <div class="flex justify-center items-center w-10 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
+      <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
         <svg width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="stroke-current text-blue-800 dark:text-gray-800 transform transition-transform duration-500 ease-in-out"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
       </div>
       <div class="text-right">
         <p class="text-2xl">557</p>
         <p>Orders</p>
       </div>
-      <div class="flex justify-center items-center w-10 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
+      <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
         <svg width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="stroke-current text-blue-800 dark:text-gray-800 transform transition-transform duration-500 ease-in-out"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
       </div>
       <div class="text-right">
         <p class="text-2xl">$11,257</p>
         <p>Sales</p>
       </div>
-      <div class="flex justify-center items-center w-10 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
+      <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
         <svg width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="stroke-current text-blue-800 dark:text-gray-800 transform transition-transform duration-500 ease-in-out"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
       </div>
       <div class="text-right">
         <p class="text-2xl">$75,257</p>
         <p>Balances</p>
-      </div>
-  
-      
+      </div>    
     </ul>
   </div>
-
   <div class="flex-1 justify-end">
   </div>
-</div>
-  
-  
-        
+</div>    
          <!-- New Users -->  
-          <div class="mt-4 mx-4">
+          <div class="mt-4">
           <div class="w-full overflow-hidden rounded-lg shadow-xs">
             <div class=" overflow-x-auto">
               <table class="table">
                 <thead>
-                  <tr class="text-xs font-semibold tracking-wide text-left  text-gray-500 uppercase border-b shadow bg-base-100">
+                  <tr class="text-xs font-semibold tracking-wide text-left  uppercase border-b shadow bg-base-100">
                     <th class="px-4 py-3">new User</th>
                     <th class="px-4 py-3">E-mail</th>
                     <th class="px-4 py-3">Created At</th>
                     
                   </tr>
                 </thead>
-                <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                <tbody class="border-b shadow bg-base-100">
                 <?php foreach ($new_users as $user) { ?>
-                  <tr class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
+                  <tr class="hover">
                     <td class="px-4 py-3">
                       <div class="flex items-center text-sm">
                         <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
@@ -100,127 +93,54 @@
 
 
 
-          <!-- Client Table -->
-        <div class="mt-4 mx-4">
+        <!-- New products -->
+        <div class="mt-4 ">
           <div class="w-full overflow-hidden rounded-lg shadow-xs">
-            <div class="w-full overflow-x-auto">
-              <table class="w-full">
+            <div class=" overflow-x-auto">
+              <table class="table">
                 <thead>
-                  <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                    <th class="px-4 py-3">Client</th>
-                    <th class="px-4 py-3">Amount</th>
-                    <th class="px-4 py-3">Status</th>
-                    <th class="px-4 py-3">Date</th>
+                  <tr class="text-xs font-semibold tracking-wide text-left  uppercase border-b shadow bg-base-100">
+                    <th class="px-4 py-3 ">New products</th>
+                    <th class="px-4 py-3">catagories</th>
+                    <th class="px-4 py-3">description</th>
+                    <th class="px-4 py-3">price</th>
+                    <th class="px-4 py-3">Created At</th>
+                    
                   </tr>
                 </thead>
-                <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                  <tr class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
+                <tbody class="border-b shadow bg-base-100">
+                <?php foreach ($new_products as $product) { ?>
+                  <tr class="hover">
                     <td class="px-4 py-3">
                       <div class="flex items-center text-sm">
-                        <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                          <img class="object-cover w-full h-full rounded-full" src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjE3Nzg0fQ" alt="" loading="lazy" />
+                        <div class="relative hidden w-14 h-8 mr-3 md:block">
+                            <img class="rounded-full h-12" width="80px" src="<?php echo '/public/images/' . $product['imageUrl']?>" />
                           <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
                         </div>
                         <div>
-                          <p class="font-semibold">Hans Burger</p>
-                          <p class="text-xs text-gray-600 dark:text-gray-400">10x Developer</p>
+                          <p class="font-semibold"><?php echo $product["name"] ?></p>
+                          <p class="text-xs text-gray-600 dark:text-gray-400">#<?php echo $product["id"] ?></p>
                         </div>
                       </div>
                     </td>
-                    <td class="px-4 py-3 text-sm">$855.85</td>
-                    <td class="px-4 py-3 text-xs">
-                      <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"> Approved </span>
+                    <td>
+                    <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"><?php echo $product["categoryname"] ?></span>
                     </td>
-                    <td class="px-4 py-3 text-sm">15-01-2021</td>
+                    <td class="px-4 py-3 text-sm"><?php echo $product["description"] ?></td>
+                    <td class="px-4 py-3 text-sm"><?php echo $product["price"] ?></td>
+                    <td class="px-4 py-3 text-sm"><?php echo $user["createdAt"]?></td>
                   </tr>
-                  <tr class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
-                    <td class="px-4 py-3">
-                      <div class="flex items-center text-sm">
-                        <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                          <img class="object-cover w-full h-full rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;facepad=3&amp;fit=facearea&amp;s=707b9c33066bf8808c934c8ab394dff6" alt="" loading="lazy" />
-                          <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                        </div>
-                        <div>
-                          <p class="font-semibold">Jolina Angelie</p>
-                          <p class="text-xs text-gray-600 dark:text-gray-400">Unemployed</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="px-4 py-3 text-sm">$369.75</td>
-                    <td class="px-4 py-3 text-xs">
-                      <span class="px-2 py-1 font-semibold leading-tight text-yellow-700 bg-yellow-100 rounded-full"> Pending </span>
-                    </td>
-                    <td class="px-4 py-3 text-sm">23-03-2021</td>
-                  </tr>
-                  <tr class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
-                    <td class="px-4 py-3">
-                      <div class="flex items-center text-sm">
-                        <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                          <img class="object-cover w-full h-full rounded-full" src="https://images.unsplash.com/photo-1502720705749-871143f0e671?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;fit=max&amp;s=b8377ca9f985d80264279f277f3a67f5" alt="" loading="lazy" />
-                          <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                        </div>
-                        <div>
-                          <p class="font-semibold">Dave Li</p>
-                          <p class="text-xs text-gray-600 dark:text-gray-400">Influencer</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="px-4 py-3 text-sm">$775.45</td>
-                    <td class="px-4 py-3 text-xs">
-                      <span class="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-full dark:text-gray-100 dark:bg-gray-700"> Expired </span>
-                    </td>
-                    <td class="px-4 py-3 text-sm">09-02-2021</td>
-                  </tr>
-                  <tr class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
-                    <td class="px-4 py-3">
-                      <div class="flex items-center text-sm">
-                        <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                          <img class="object-cover w-full h-full rounded-full" src="https://images.unsplash.com/photo-1551006917-3b4c078c47c9?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjE3Nzg0fQ" alt="" loading="lazy" />
-                          <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                        </div>
-                        <div>
-                          <p class="font-semibold">Rulia Joberts</p>
-                          <p class="text-xs text-gray-600 dark:text-gray-400">Actress</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="px-4 py-3 text-sm">$1276.75</td>
-                    <td class="px-4 py-3 text-xs">
-                      <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"> Approved </span>
-                    </td>
-                    <td class="px-4 py-3 text-sm">17-04-2021</td>
-                  </tr>
-                  <tr class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
-                    <td class="px-4 py-3">
-                      <div class="flex items-center text-sm">
-                        <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                          <img class="object-cover w-full h-full rounded-full" src="https://images.unsplash.com/photo-1566411520896-01e7ca4726af?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjE3Nzg0fQ" alt="" loading="lazy" />
-                          <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                        </div>
-                        <div>
-                          <p class="font-semibold">Hitney Wouston</p>
-                          <p class="text-xs text-gray-600 dark:text-gray-400">Singer</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="px-4 py-3 text-sm">$863.45</td>
-                    <td class="px-4 py-3 text-xs">
-                      <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700"> Denied </span>
-                    </td>
-                    <td class="px-4 py-3 text-sm">11-01-2021</td>
-                  </tr>
+                  <?php } ?>
                 </tbody>
               </table>
             </div>
-           
           </div>
         </div>
-        <!-- ./New -->
-
+        <!-- ./New products-->
   </div> 
   <div class="drawer-side"> 
     <label for="my-drawer-4" aria-label="close sidebar"></label>
-    <ul class="menu p-4 w-80 min-h-full bg-base-200 text-base-content mt-8">
+    <ul class="menu p-4 w-64 min-h-full bg-base-200 text-base-content mt-8">
       <!-- Sidebar content here -->
       <li> <a href="/" >
                 <svg class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path></svg>
