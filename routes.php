@@ -90,7 +90,7 @@ $routes = [
     'container' => true,
   ],
   '/verkoper-dashboard' => [
-    'view' => 'member/verkoperDashboard.php',
+    'view' => 'user/seller/verkoperDashboard.php',
     'title' => 'Dashboard',
     'nav' => true,
     'footer' => true,

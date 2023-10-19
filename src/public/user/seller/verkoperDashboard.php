@@ -1,4 +1,4 @@
-<style>
+<!-- <style>
   .table-container {
     display: flex;
     justify-content: center;
@@ -144,14 +144,16 @@
       justify-content: center;
     }
   }
-</style>
+</style> -->
 
+<!-- Top box -->
 <div class="mt-24">
   <div class="box">
+    <!-- Box contents -->
     <form method="post" action="delete_products.php">
       <div class="table-container">
         <div class="overflow-x-auto">
-          <table>
+          <!-- <table>
             <thead>
               <tr>
                 <th>
@@ -205,14 +207,74 @@
               $connection->close();
               ?>
             </tbody>
-          </table>
-        </div>
+          </table> -->
 
+          <div class="overflow-x-auto">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>
+                    <label>
+                      <input type="checkbox" class="checkbox" />
+                    </label>
+                  </th>
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th>Price</th>
+                  <th>Category</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- row 1 -->
+                <tr>
+                  <th>
+                    <label>
+                      <input type="checkbox" class="checkbox" />
+                    </label>
+                  </th>
+
+                  <td>
+                    <div class="flex flex-col">
+                      <div class="font-bold">Hart Hagerty</div>
+                      <div class="text-sm opacity-50">United States</div>
+                    </div>
+                  </td>
+
+                  <td>
+                    Zemlak, Daniel and Leannon
+                    <br/>
+                    <span class="badge badge-ghost badge-sm">Desktop Support Technician</span>
+                  </td>
+
+                  <td>Purple</td>
+
+                  <th>
+                    <button class="btn btn-ghost btn-xs">Edit</button>
+                  </th>
+                </tr>
+              </tbody>
+
+              <tfoot>
+                <tr>
+                  <th></th>
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th>Price</th>
+                  <th>Category</th>
+                  <th></th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
       </div>
+
       <div class="w-full text-center mt-8">
         <button type="submit" name="delete_selected" class="btn btn-outline text-center">Delete</button>
         <a class="btn btn-outline text-center" href="/dashboard/products/add">Add Product</a>
       </div>
+
     </form>
   </div>
 </div>
@@ -299,10 +361,6 @@
     <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400 " />
   </div>
 </div>
-
-
-
-
 
 <script>
   const checkAll = document.getElementById('checkAll');
