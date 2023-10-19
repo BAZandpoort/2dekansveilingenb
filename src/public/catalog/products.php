@@ -6,17 +6,27 @@ require_once COMPONENTS . '/product-card.php';
 $products = [];
 $categoryname = $_GET['category'] ?? null;
 
-$minPrice = $_GET['minPrice'] ?? 0;
-$maxPrice = $_GET['maxPrice'] ?? 0;
+if ($categoryname) {
+  $categoryId = fetchSingle('SELECT * FROM product_categories WHERE name = ?', ['type' => 's', 'value' => $categoryname])[0]['id'];
+  $minPrice = fetchSingle('SELECT MIN(price) FROM products WHERE categoryid = ?', ['type' => 'i', 'value' => $categoryId])[0]['MIN(price)'];
+} else {
+  $minPrice = fetchSingle('SELECT MIN(price) FROM products')[0]['MIN(price)'];
+}
+if ($categoryname) {
+  $categoryId = fetchSingle('SELECT * FROM product_categories WHERE name = ?', ['type' => 's', 'value' => $categoryname])[0]['id'];
+  $maxPrice = fetchSingle('SELECT MAX(price) FROM products WHERE categoryid = ?', ['type' => 'i', 'value' => $categoryId])[0]['MAX(price)'];
+} else {
+  $maxPrice = fetchSingle('SELECT MAX(price) FROM products')[0]['MAX(price)'];
+}
 
-if (isset($_GET['search'])) {
-  $searchTerm = $_GET['search'];
+if (isset($_GET['filter'])) {
+  $searchTerm = $_GET['filter'];
   $query = "SELECT * FROM products WHERE MATCH(name, description) AGAINST(? IN BOOLEAN MODE)";
   $products = fetchSingle($query, ['type' => 's', 'value' => "$searchTerm*"]);
 
 } else if (isset($_GET['minPrice']) && isset($_GET['maxPrice'])) {
   $query = "SELECT * FROM products WHERE price BETWEEN ? AND ?";
-  $products = fetchSingle($query, ['type' => 'i', 'value' => $minPrice], ['type' => 'i', 'value' => $maxPrice]);
+  $products = fetchSingle($query, ['type' => 'i', 'value' => $_GET['minPrice']], ['type' => 'i', 'value' => $_GET['maxPrice']]);
 } else if ($categoryname) {
   $categoryId = fetchSingle('SELECT * FROM product_categories WHERE name = ?', ['type' => 's', 'value' => $categoryname])[0]['id'];
   $products = fetchSingle('SELECT * FROM products WHERE categoryid = ?', ['type' => 'i', 'value' => $categoryId]);
@@ -34,13 +44,17 @@ echo '
             <label class="label">
               <span id="priceMinLabel" class="label-text">€' . $minPrice . '</span>
             </label>
-            <input id="priceMin" name="minPrice" type="range" min="0" max="100" value="' . $minPrice . '" class="range range-accent" />
-          </div>
+            <div class="form-control w-full max-w-xs">  
+              <input id="priceMin" name="minPrice" type="range" min="' . $minPrice . '" max="' . $maxPrice . '" value="' . $minPrice . '" class="range range-accent" />
+            </div>
           <div class="form-control w-full max-w-xs">
             <label class="label">
               <span id="priceMaxLabel" class="label-text">€' . $maxPrice . '</span>
             </label>
-            <input id="priceMax" name="maxPrice" type="range" min="0" max="100" value="' . $maxPrice . '" class="range range-accent" />
+            </div>
+            <div class="form-control w-full max-w-xs">
+              <input id="priceMax" name="maxPrice" type="range" min="0" max="' . $maxPrice . '" value="' . $maxPrice . '" class="range range-accent" />
+            </div>
           </div>
         </div>
 
