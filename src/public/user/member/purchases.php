@@ -23,7 +23,6 @@ $purchaseHistory = fetchSingle('SELECT * FROM user_purchases WHERE id = ?', ["ty
           <th>Price</th>
           <th>Date Purchased</th>
           <th>product</th>
-          <th>Rate the trasaction</th>
         </tr>
       </thead>
       <tbody>
@@ -34,19 +33,7 @@ $purchaseHistory = fetchSingle('SELECT * FROM user_purchases WHERE id = ?', ["ty
             <td><?= date('F j, Y', strtotime($purchase['timeOfPurchase'])) ?></td>
             <td>
               <a href="/catalog/product?id=<?= $purchase['productId'] ?>" class="btn btn-primary">View product page</a>
-            </td>
-            <td>
-            <div class="rating rating-lg">
-                <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400" />
-                <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400" />
-                <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400" />
-                <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400" />
-                <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400" checked />
-                <button class="btn btn-outline btn-warning">Review</button>
-
-                </div>
-
-            </td>
+            </td>   
           </tr>
         <?php endforeach; ?>
       </tbody>

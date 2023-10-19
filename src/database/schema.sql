@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 16, 2023 at 02:15 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Gegenereerd op: 19 okt 2023 om 13:18
+-- Serverversie: 10.4.28-MariaDB
+-- PHP-versie: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `products`
+-- Tabelstructuur voor tabel `products`
 --
 
 CREATE TABLE `products` (
@@ -43,7 +43,7 @@ CREATE TABLE `products` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_categories`
+-- Tabelstructuur voor tabel `product_categories`
 --
 
 CREATE TABLE `product_categories` (
@@ -55,7 +55,21 @@ CREATE TABLE `product_categories` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `translations`
+-- Tabelstructuur voor tabel `review`
+--
+
+CREATE TABLE `review` (
+  `member` int(11) NOT NULL,
+  `review` text NOT NULL,
+  `sterren` int(11) NOT NULL,
+  `seller` int(11) NOT NULL,
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `translations`
 --
 
 CREATE TABLE `translations` (
@@ -67,7 +81,7 @@ CREATE TABLE `translations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `translations`
+-- Gegevens worden geëxporteerd voor tabel `translations`
 --
 
 INSERT INTO `translations` (`id`, `location`, `text_en`, `text_nl`, `text_fr`) VALUES
@@ -95,7 +109,7 @@ INSERT INTO `translations` (`id`, `location`, `text_en`, `text_nl`, `text_fr`) V
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Tabelstructuur voor tabel `users`
 --
 
 CREATE TABLE `users` (
@@ -112,7 +126,7 @@ CREATE TABLE `users` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_profile`
+-- Tabelstructuur voor tabel `user_profile`
 --
 
 CREATE TABLE `user_profile` (
@@ -127,7 +141,7 @@ CREATE TABLE `user_profile` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_purchases`
+-- Tabelstructuur voor tabel `user_purchases`
 --
 
 CREATE TABLE `user_purchases` (
@@ -142,7 +156,7 @@ CREATE TABLE `user_purchases` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_roles`
+-- Tabelstructuur voor tabel `user_roles`
 --
 
 CREATE TABLE `user_roles` (
@@ -153,7 +167,7 @@ CREATE TABLE `user_roles` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_role_mapping`
+-- Tabelstructuur voor tabel `user_role_mapping`
 --
 
 CREATE TABLE `user_role_mapping` (
@@ -163,11 +177,11 @@ CREATE TABLE `user_role_mapping` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Indexes for dumped tables
+-- Indexen voor geëxporteerde tabellen
 --
 
 --
--- Indexes for table `products`
+-- Indexen voor tabel `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
@@ -176,20 +190,20 @@ ALTER TABLE `products`
 ALTER TABLE `products` ADD FULLTEXT KEY `products_zoeken` (`name`,`description`);
 
 --
--- Indexes for table `product_categories`
+-- Indexen voor tabel `product_categories`
 --
 ALTER TABLE `product_categories`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `product_category_name` (`name`);
 
 --
--- Indexes for table `translations`
+-- Indexen voor tabel `translations`
 --
 ALTER TABLE `translations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Indexen voor tabel `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
@@ -197,21 +211,21 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- Indexes for table `user_profile`
+-- Indexen voor tabel `user_profile`
 --
 ALTER TABLE `user_profile`
   ADD PRIMARY KEY (`id`),
   ADD KEY `profile_userid` (`userid`);
 
 --
--- Indexes for table `user_roles`
+-- Indexen voor tabel `user_roles`
 --
 ALTER TABLE `user_roles`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `name` (`name`);
 
 --
--- Indexes for table `user_role_mapping`
+-- Indexen voor tabel `user_role_mapping`
 --
 ALTER TABLE `user_role_mapping`
   ADD PRIMARY KEY (`id`),
@@ -219,70 +233,70 @@ ALTER TABLE `user_role_mapping`
   ADD KEY `role_mapping_userid` (`userid`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT voor geëxporteerde tabellen
 --
 
 --
--- AUTO_INCREMENT for table `products`
+-- AUTO_INCREMENT voor een tabel `products`
 --
 ALTER TABLE `products`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `product_categories`
+-- AUTO_INCREMENT voor een tabel `product_categories`
 --
 ALTER TABLE `product_categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `translations`
+-- AUTO_INCREMENT voor een tabel `translations`
 --
 ALTER TABLE `translations`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT voor een tabel `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `user_profile`
+-- AUTO_INCREMENT voor een tabel `user_profile`
 --
 ALTER TABLE `user_profile`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `user_roles`
+-- AUTO_INCREMENT voor een tabel `user_roles`
 --
 ALTER TABLE `user_roles`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `user_role_mapping`
+-- AUTO_INCREMENT voor een tabel `user_role_mapping`
 --
 ALTER TABLE `user_role_mapping`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Constraints for dumped tables
+-- Beperkingen voor geëxporteerde tabellen
 --
 
 --
--- Constraints for table `products`
+-- Beperkingen voor tabel `products`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `products_categoryid` FOREIGN KEY (`categoryid`) REFERENCES `product_categories` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `products_userid` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `user_profile`
+-- Beperkingen voor tabel `user_profile`
 --
 ALTER TABLE `user_profile`
   ADD CONSTRAINT `profile_userid` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `user_role_mapping`
+-- Beperkingen voor tabel `user_role_mapping`
 --
 ALTER TABLE `user_role_mapping`
   ADD CONSTRAINT `role_mapping_roleid` FOREIGN KEY (`roleid`) REFERENCES `user_roles` (`id`) ON DELETE CASCADE,

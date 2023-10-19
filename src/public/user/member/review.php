@@ -12,6 +12,7 @@ $purchaseHistory = fetchSingle('SELECT * FROM user_purchases WHERE id = ?', ["ty
 // Fetch seller information
 $sellerId = $_GET['seller'];
 
+
 $sellerInfo = fetchSingle('SELECT * FROM users WHERE id = ?', ["type" => "i", "value" => $sellerId]);
 
 
@@ -60,7 +61,7 @@ $sellerReviews = fetch('SELECT * FROM review WHERE seller = ?', ["type" => "i", 
               <form method="POST">
                 <div class="rating rating-lg">
                   <input type="radio" name="rating" value="1" class="mask mask-star-2 bg-orange-400" />
-                  <input type="radio" name="rati  ng" value="2" class="mask mask-star-2 bg-orange-400" />
+                  <input type="radio" name="rating" value="2" class="mask mask-star-2 bg-orange-400" />
                   <input type="radio" name="rating" value="3" class="mask mask-star-2 bg-orange-400" />
                   <input type="radio" name="rating" value="4" class="mask mask-star-2 bg-orange-400" />
                   <input type="radio" name="rating" value="5" class="mask mask-star-2 bg-orange-400" checked />
@@ -99,7 +100,7 @@ $sellerReviews = fetch('SELECT * FROM review WHERE seller = ?', ["type" => "i", 
             <td><?= $review['sterren'] ?></td>
             <td><?= date('F j, Y', strtotime($review['date'])) ?></td>
           </tr>
-        <?php endforeach; ?>
+        <?php endforeach; ?>  
       </tbody>
     </table>
   <?php else: ?>
