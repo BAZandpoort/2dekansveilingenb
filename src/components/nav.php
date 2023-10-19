@@ -58,7 +58,8 @@ $searchTerm = $_GET['search'] ?? '';
               <ul>
                 <li><a class="justify-between">Profile</a></li>
                 <li><a href="/src/lib/user/member/change-theme.php" >Switch to ' . $theme . '</a></li>
-                <li><a href="/dashboard/products/review">Reviews</a></li> 
+                <li><a href="/dashboard/products/review">Reviews</a></li>
+                <li><a href="/dashboard/products/review?seller=' . $user['username'] . '">Reviews</a></li>
                 <li><a href="/account/settings/edit">Settings</a></li>
                 <li><a href="/account/logout"> ' . $translations[2][$language] . ' </a></li>
               </ul>
@@ -147,7 +148,7 @@ $searchTerm = $_GET['search'] ?? '';
         <ul class="mt-2 p-2 shadow menu dropdown-content z-[1] bg-base-200 rounded-box w-52">
           <li><a class="justify-between">Profile</a></li>
           <li><a href="/src/lib/user/member/change-theme.php" >Switch to ' . $theme . '</a></li>
-          <li><a href="/dashboard/products/review">Reviews</a></li>
+          <li><a href="/dashboard/products/review?seller=' . $user['username'] . '">Reviews</a></li>
           <li><a href="/account/settings/edit">Settings</a></li>
           <div class="divider px-4 my-2"></div> 
           <li><a href="/account/logout"> ' . $translations[2][$language] . ' </a></li>
