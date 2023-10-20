@@ -147,9 +147,10 @@ $searchTerm = $_GET['search'] ?? '';
         <ul class="mt-2 p-2 shadow menu dropdown-content z-[1] bg-base-200 rounded-box w-52">
           <li><a class="justify-between">Profile</a></li>
           <li><a href="/src/lib/user/member/change-theme.php" >Switch to ' . $theme . '</a></li>
-          <form method="post" action="/account/favorite">
-                  <li><button type="submit" name="favo">Favorites</button></li>
-                </form>
+         
+          
+            <li><a href="/account/favorite">Favorites</a></li>
+                
           <li><a href="/account/settings/edit">Settings</a></li>
           <div class="divider px-4 my-2"></div> 
           <li><a href="/account/logout"> ' . $translations[2][$language] . ' </a></li>

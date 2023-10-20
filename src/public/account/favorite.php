@@ -32,7 +32,7 @@ if (mysqli_stmt_execute($stmt)) {
                             <p class="text-xl text-left font-bold">€' . $row["price"] . '</p>
                             <div class="flex flex-row gap-2">
                                 <a href="/catalog/product?id=' . $row['id'] . '" class="btn btn-primary">View product page</a>
-                                <form method="post" action="">
+                                <form method="post" action="/src/lib/account/favorite-delete.php">
                                 <input type="hidden" name="product_id" value="' . $row["id"] . '">
                                     <button class="btn btn-error btn-square" name="delete">
                                         <i class="fa-regular fa-trash-can fa-xl text-white"></i>
@@ -51,14 +51,5 @@ if (mysqli_stmt_execute($stmt)) {
 } else {
     die("Execute failed: " . mysqli_error($connection));
 }
-if(isset($_POST['delete'])){
- 
-    $userid = $_SESSION['user']['id'] ;
-    $proid = $_POST['product_id'];
- 
-    $sql = "DELETE FROM favorieten WHERE userid = '$userid' AND id = ?";
-    $delete = insert($sql, ['type' => 'i', 'value' => $proid]);
-    
-    
-    }
+
 ?>

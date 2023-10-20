@@ -118,6 +118,22 @@ $routes = [
     'auth_roles' => ['guest'],
     'nav' => true,
     'footer' => true,
+    'container' => true,
+  ],
+  '/account/favorite-delete' => [
+    'view' => 'account/favorite-delete.php',
+    'title' => 'Delete Favorite',
+    'auth_roles' => ['guest'],
+    'nav' => true,
+    'footer' => true,
+  ],
+  '/account/favorite-insert' => [
+    'view' => 'account/favorite-insert.php',
+    'title' => 'Insert Favorite',
+    'auth_roles' => ['guest'],
+    'nav' => true,
+    'footer' => true,
+    'container' => false
   ],
   // Error routes
   '/404' => [
