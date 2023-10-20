@@ -15,31 +15,6 @@ $sellerId = $_GET['seller'];
 
 $sellerInfo = fetchSingle('SELECT * FROM users WHERE id = ?', ["type" => "i", "value" => $sellerId]);
 
-// Handle form submission
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $review = $_POST['review'];
-  $rating = $_POST['rating'];
-
-  // Check if user has already reviewed the seller
-  $insertReview = fetchSingle('SELECT * FROM review WHERE member = ? AND seller = ?', 
-  ["type" => "i", "value" => $userId], ["type" => "i", "value" => $sellerId]);
-  if ($insertReview) {
-    // User has already reviewed the seller 
-    $errorMessage = header('Location: /dashboard/products/review?error=leaveReview');
-    
-  } else {
-    // Insert review into database
-    $insertReview = insert('INSERT INTO review (member, review, sterren, seller, date) VALUES (?, ?, ?, ?, ?)', 
-    ["type" => "i", "value" => $userId],
-    ["type" => "s", "value" => $review],
-    ["type" => "i", "value" => $rating],
-    ["type" => "i", "value" => $sellerId],+
-    ["type" => "s", "value" => date('Y-m-d')] 
-  );
-  $errorMessage = header('Location: /dashboard/products/review?success=leaveReview');
-  exit;
-  }
-}
 
 // Fetch seller reviews
 $sellerReviews = fetchSingle('SELECT * FROM review WHERE seller = ?', ["type" => "i", "value" => $sellerId]);
@@ -65,13 +40,14 @@ if (count($sellerReviews) > 0) {
           <a href="/catalog/product?id=<?= $purchase['productId'] ?>" class="btn btn-primary">View product page</a>
         </div>
         <div>
-          <form method="POST">
+          <form method="POST" action="/src/lib/user/member/add-review.php">
             <div class="rating rating-lg">
               <input type="radio" name="rating" value="1" class="mask mask-star-2 bg-orange-400" />
               <input type="radio" name="rating" value="2" class="mask mask-star-2 bg-orange-400" />
               <input type="radio" name="rating" value="3" class="mask mask-star-2 bg-orange-400" />
               <input type="radio" name="rating" value="4" class="mask mask-star-2 bg-orange-400" />
               <input type="radio" name="rating" value="5" class="mask mask-star-2 bg-orange-400" checked />
+              <input type="hidden" name="seller" value="<?= $sellerId ?>" />
               <textarea name= "review" class="textarea textarea-success" placeholder="Leave a review"></textarea>
               <!-- <?php if ($errorMessage): ?>
                 <p class="text-red-500"><?= $errorMessage ?></p>
