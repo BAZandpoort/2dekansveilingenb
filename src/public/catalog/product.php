@@ -70,7 +70,27 @@ $sellerData = fetch($query, ['type' => 'i', 'value' => $productId]);
       <button onclick="bid()" class="btn btn-outline btn-primary join-item">Place bid</button>
     </div>
     <br>
-    <a href="/catalog/report-abuse?productid=<?php echo $productId?>"><button class="btn btn-outline btn-error">Report abuse</button></a>
+    <?php
+      if (isset($_SESSION["user"])){
+        echo '
+          <a href="/catalog/report-abuse?productid='.$productId.'"><button class="btn btn-outline btn-error">Report abuse</button></a>
+        ';
+      } else {
+        echo '
+          <button class="btn btn-outline btn-error" onclick="my_modal_2.showModal()">Report abuse</button>
+          <dialog id="my_modal_2" class="modal">
+            <div class="modal-box">
+              <h3 class="font-bold text-lg">Account required for this action</h3>
+              <p class="py-4"><a href="../account/login"><b><u>Log in</u></b></a> to report abuse</p>
+            </div>
+            <form method="dialog" class="modal-backdrop">
+              <button>close</button>
+            </form>
+          </dialog>
+        ';
+      }
+    ?>
+    
   </div>
 </div>
 

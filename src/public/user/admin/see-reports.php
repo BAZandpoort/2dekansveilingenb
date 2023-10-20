@@ -20,61 +20,60 @@ if ($error) {
 
 ?>
 
-QUERY FOR LATER:
-SELECT abuse_reports.*, sender.username AS sender, products.name AS product, accused.username AS accused
-FROM `abuse_reports`
-INNER JOIN products ON (abuse_reports.productid = products.id)
-INNER JOIN users AS sender ON (abuse_reports.senderid = sender.id)
-INNER JOIN users AS accused ON (products.userid = accused.id);
-
 <div>
     <div class="overflow-x-auto">
     <table class="table table-xs">
         <thead>
         <tr>
-            <th>ID</th> 
-            <th>Sender</th>
-            <th>Seller</th> 
-            <th>Product</th>
             <th>Created at</th>
+            <th>Sender</th>
+            <th>Accused</th>
+            <th>Product</th>
+            <th>Abuse info</th>
         </tr>
-        </thead> 
+        </thead>
         <tbody>
 
         <?php
-            $query = 'SELECT * FROM translations ' . $end_of_query;
-            if (isset($_GET["location"])){
-                echo 'See translations of '.$_GET["location"];
-            }
-            $translations = fetch($query);
+            $query = 'SELECT abuse_reports.*, sender.username AS senderUsername, products.name AS productName, accused.id AS accusedid, accused.username AS accusedUsername
+                FROM `abuse_reports`
+                INNER JOIN products ON (abuse_reports.productid = products.id)
+                INNER JOIN users AS sender ON (abuse_reports.senderid = sender.id)
+                INNER JOIN users AS accused ON (products.userid = accused.id)
+                ORDER BY createdAt DESC
+            ';
+            $reports = fetch($query);
 
-            foreach($translations as $row){
-                $text_english = (strlen($row["text_en"]) > 40)
-				? substr_replace($row["text_en"], "...", 41)
-				: $row["text_en"];
-
-                $text_nederlands = (strlen($row["text_nl"]) > 40)
-				? substr_replace($row["text_nl"], "...", 41)
-				: $row["text_nl"];
-
-                $text_francais = (strlen($row["text_fr"]) > 40)
-				? substr_replace($row["text_fr"], "...", 41)
-				: $row["text_fr"];
+            foreach($reports as $report){
 
                 echo '
                     <tr>
-                        <th>'.$row["id"].'</th> 
-                        <td>'.$text_english.'</td> 
-                        <td>'.$text_nederlands.'</td> 
-                        <td>'.$text_francais.'</td>
+                        <td>'.$report["createdAt"].'</td> 
                         <td>
-                            <a href="/dashboard/translations/edit?translation='.$row["id"].'">
-                                <button class="btn btn-xs">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
-                                    </svg>
-                                </button>
-                            </a>
+                            <div class="tooltip" data-tip="User ID: '.$report["senderid"].'">
+                                '.$report["senderUsername"].'
+                            </div>
+                        </td> 
+                        <td>
+                            <div class="tooltip" data-tip="User ID: '.$report["accusedid"].'">
+                                '.$report["accusedUsername"].'
+                            </div>
+                        </td>
+                        <td>
+                            <div class="tooltip" data-tip="Product ID: '.$report["productid"].'">
+                                <u><a href="../catalog/product?id='.$report["productid"].'">'.$report["productName"].'</a></u>
+                            </div>
+                        </td> 
+                        <td>
+                            <div class="collapse bg-base-50">
+                                <input type="checkbox" class="peer" /> 
+                                <div class="collapse-title bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content">
+                                    <b>'.$report["typeOfAbuse"].'</b>
+                                </div>
+                                <div class="collapse-content bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content"> 
+                                    <p>Context: <i>'.$report["context"].'</i></p>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 ';
@@ -85,10 +84,11 @@ INNER JOIN users AS accused ON (products.userid = accused.id);
         </tbody> 
         <tfoot>
         <tr>
-            <th></th> 
-            <th>English</th> 
-            <th>Nederlands</th> 
-            <th>Français</th>
+            <th>Created at</th>
+            <th>Sender</th>
+            <th>Accused</th>
+            <th>Product</th>
+            <th>Abuse info</th>
         </tr>
         </tfoot>
     </table>

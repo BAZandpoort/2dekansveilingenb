@@ -119,6 +119,13 @@ $routes = [
     'footer' => false,
     'container' => true,
   ],
+  '/dashboard/see-reports' => [
+    'view' => 'user/admin/see-reports.php',
+    'title' => 'See reports',
+    'nav' => true,
+    'footer' => false,
+    'container' => true,
+  ],
   // Error routes
   '/404' => [
     'view' => 'errors/404.php',
