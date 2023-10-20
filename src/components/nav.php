@@ -26,6 +26,9 @@ if ($user) {
 }
 
 $searchTerm = $_GET['search'] ?? '';
+
+
+$outbid = fetch("SELECT * From `bids` Where userid = ? ",['type' => '', 'value' => $user]);
 ?>
 
 <!-- Top navbar -->
@@ -214,7 +217,7 @@ $searchTerm = $_GET['search'] ?? '';
 <?php
 
 
-if (false) {
+if (true) {
 
 
   echo '<script>
