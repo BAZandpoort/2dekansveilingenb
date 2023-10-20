@@ -9,72 +9,6 @@ $query = "SELECT * FROM products WHERE userid = ?";
 $products = fetchSingle($query, ['type' => 'i', 'value' => $sellerId]);
 ?>
 
-<style>
-  .clientImage {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-
-  .clientImage span {
-    margin-left: 10px;
-  }
-
-  .clientImage img {
-    width: 40px;
-  }
-
-  .reviewSection {
-    padding: 1rem;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-around;
-  }
-
-  .reviewItem {
-    width: 300px;
-    padding: 10px;
-    margin: 1rem;
-    cursor: pointer;
-    border-radius: 10px;
-
-    border: 1px solid #10102a;
-    transition: all .2s linear;
-  }
-
-  .reviewItem:hover {
-    border-color: aqua;
-    transform: scale(1.01);
-
-    box-shadow: 0 0px 5px 0px #cbc0c0;
-  }
-
-  .top {
-    margin-bottom: 1rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .top ul {
-    display: flex;
-    list-style: none;
-  }
-
-  .top ul li {
-    padding-left: 4px;
-  }
-
-  article p {
-    font-size: 15px;
-    font-weight: 100;
-    margin-bottom: 1rem;
-    font-family: system-ui;
-  }
-</style>
-
 <!-- Top box -->
 <div class="flex flex-col gap-16">
   <!-- Box contents -->
@@ -154,14 +88,14 @@ $products = fetchSingle($query, ['type' => 'i', 'value' => $sellerId]);
       <p class="description">See what your latest buyers said about your product or your attitude as a seller/auctioneer!</p>
     </div>
 
-    <div class="reviewSection">
-      <div class="reviewItem">
-        <div class="top">
-          <div class="clientImage">
-            <img src="https://preview.redd.it/i-keep-seeing-this-angry-cat-meme-does-anyone-know-what-v0-n9p8aheg9jw91.jpg?width=1080&crop=smart&auto=webp&s=af0ff55ee92c8479c148d47e34d285633b98f76b" alt="">
-            <span>Ben Dover</span>
+    <div class="flex flex-wrap items-center justify-center p-1">
+      <div class="w-72 p-2 m-1 rounded-lg border-solid border-2 border-pink-900">
+        <div class="mb-1 flex flex-row items-center justify-between">
+          <div class="flex flex-row items-center">
+            <img class="w-10" src="https://preview.redd.it/i-keep-seeing-this-angry-cat-meme-does-anyone-know-what-v0-n9p8aheg9jw91.jpg?width=1080&crop=smart&auto=webp&s=af0ff55ee92c8479c148d47e34d285633b98f76b" alt="">
+            <span class="ml-4">Ben Dover</span>
           </div>
-          <ul>
+          <ul class="flex">
             <li><i class="fa-solid fa-star"></i></li>
             <li><i class="fa-solid fa-star"></i></li>
             <li><i class="fa-solid fa-star"></i></li>
@@ -169,7 +103,7 @@ $products = fetchSingle($query, ['type' => 'i', 'value' => $sellerId]);
             <li><i class="fa-regular fa-star"></i></li>
           </ul>
         </div>
-        <article>
+        <article class="text-lg font-thin mb-1">
           <p class="review">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit beatae ipsa
             voluptatibus perferendis quos eaque nemo error tempora harum quas, laudantium tenetur, neque,
             facere exercitationem!</p>
@@ -177,13 +111,13 @@ $products = fetchSingle($query, ['type' => 'i', 'value' => $sellerId]);
         </article>
       </div>
 
-      <div class="reviewItem">
-        <div class="top">
-          <div class="clientImage">
-            <img src="https://thumbs.dreamstime.com/b/young-happy-positive-teenager-man-gesturing-ok-isolated-white-background-40784002.jpg" alt="">
-            <span>Craven Morehed</span>
+      <div class="w-72 p-2 m-1 rounded-lg border-solid border-2 border-pink-900">
+        <div class="mb-1 flex flex-row items-center justify-between">
+          <div class="flex flex-row items-center">
+            <img class="w-10" src="https://thumbs.dreamstime.com/b/young-happy-positive-teenager-man-gesturing-ok-isolated-white-background-40784002.jpg" alt="">
+            <span class="ml-4">Craven Morehed</span>
           </div>
-          <ul>
+          <ul class="flex">
             <li><i class="fa-solid fa-star"></i></li>
             <li><i class="fa-solid fa-star"></i></li>
             <li><i class="fa-solid fa-star"></i></li>
@@ -191,7 +125,7 @@ $products = fetchSingle($query, ['type' => 'i', 'value' => $sellerId]);
             <li><i class="fa-regular fa-star"></i></li>
           </ul>
         </div>
-        <article>
+        <article class="text-lg font-thin mb-1">
           <p class="review">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit beatae ipsa
             voluptatibus perferendis quos eaque nemo error tempora harum quas, laudantium tenetur, neque,
             facere exercitationem!</p>
@@ -199,13 +133,13 @@ $products = fetchSingle($query, ['type' => 'i', 'value' => $sellerId]);
         </article>
       </div>
 
-      <div class="reviewItem">
-        <div class="top">
-          <div class="clientImage">
-            <img src="https://images.unsplash.com/photo-1605980776566-0486c3ac7617?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8YmxhY2slMjBndXl8ZW58MHx8MHx8fDA%3D&w=1000&q=80" alt="">
-            <span>Hugh Jass</span>
+      <div class="w-72 p-2 m-1 rounded-lg border-solid border-2 border-pink-900">
+        <div class="mb-1 flex flex-row items-center justify-between">
+          <div class="flex flex-row items-center">
+            <img class="w-10" src="https://images.unsplash.com/photo-1605980776566-0486c3ac7617?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8YmxhY2slMjBndXl8ZW58MHx8MHx8fDA%3D&w=1000&q=80" alt="">
+            <span class="ml-4">Hugh Jass</span>
           </div>
-          <ul>
+          <ul class="flex">
             <li><i class="fa-solid fa-star"></i></li>
             <li><i class="fa-solid fa-star"></i></li>
             <li><i class="fa-solid fa-star"></i></li>
@@ -213,7 +147,7 @@ $products = fetchSingle($query, ['type' => 'i', 'value' => $sellerId]);
             <li><i class="fa-regular fa-star"></i></li>
           </ul>
         </div>
-        <article>
+        <article class="text-lg font-thin mb-1">
           <p class="review">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit beatae ipsa
             voluptatibus perferendis quos eaque nemo error tempora harum quas, laudantium tenetur, neque,
             facere exercitationem!</p>
