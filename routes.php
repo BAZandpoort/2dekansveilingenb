@@ -82,9 +82,18 @@ $routes = [
     'footer' => false,
     'container' => true,
   ],
-  '/dashboard/products/edit-time' => [
-    'view' => 'user/seller/edit-time.php',
-    'title' => 'Edit Auction Date',
+  '/seller/dashboard' => [
+    'view' => 'user/seller/dashboard.php',
+    'title' => 'Dashboard',
+    'auth_roles' => ['member'],
+    'nav' => true,
+    'footer' => true,
+    'container' => true,
+  ],
+  '/seller/dashboard/edit' => [
+    'view' => 'user/seller/edit-product.php',
+    'title' => 'Edit Product',
+    'auth_roles' => ['member'],
     'nav' => true,
     'footer' => false,
     'container' => true,
