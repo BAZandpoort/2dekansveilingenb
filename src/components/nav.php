@@ -165,7 +165,7 @@ $searchTerm = $_GET['search'] ?? '';
                 <li><a href="/dashboard/products/add">Add product</a></li>
                 <li><a href="/dashboard/products/own">My products</a></li>
                 <li><a href="/seller/dashboard">Dashboard</a></li>
-                <li><a href="/dashboard/products/edit-time">Edit Auction Date</a></li>
+                <li><a href="/dashboard/products/time/edit">Edit Auction Date</a></li>
               </ul>
             </details>
           </li>

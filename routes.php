@@ -85,7 +85,6 @@ $routes = [
   '/seller/dashboard' => [
     'view' => 'user/seller/dashboard.php',
     'title' => 'Dashboard',
-    'auth_roles' => ['member'],
     'nav' => true,
     'footer' => true,
     'container' => true,
@@ -102,7 +101,6 @@ $routes = [
   '/dashboard/products/delete' => [
     'view' => 'user/admin/delete-product.php',
     'title' => 'Delete products',
-    'auth_roles' => ['member'],
     'nav' => true,
     'footer' => true,
     'container' => true,
@@ -131,9 +129,15 @@ $routes = [
   '/admin/dashboard' => [
     'view' => 'user/admin/dashboard.php',
     'title' => 'My Products',
-    'auth_roles' => ['member'],
     'nav' => false,
     'footer' => false,
+    'container' => true,
+  ],
+  '/dashboard/products/time/edit' => [
+    'view' => 'user/seller/edit-time.php',
+    'title' => 'Update timer',
+    'nav' => true,
+    'footer' => true,
     'container' => true,
   ],
   // Error routes
