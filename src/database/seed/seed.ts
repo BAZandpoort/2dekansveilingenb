@@ -31,6 +31,7 @@ async function seedDatabase() {
         await connection.execute('TRUNCATE TABLE user_profile');
         await connection.execute('TRUNCATE TABLE user_roles');
         await connection.execute('TRUNCATE TABLE user_role_mapping');
+        await connection.execute('TRUNCATE TABLE user_purchases');
         await connection.execute('TRUNCATE TABLE products');
         await connection.execute('TRUNCATE TABLE product_categories');
         await connection.execute('TRUNCATE TABLE users');
@@ -69,7 +70,7 @@ async function seedDatabase() {
 
         productCategoriesData.forEach(async (productCategory) => {
             await connection.execute(
-              'INSERT INTO product_categories (name) VALUES (?)',
+              'INSERT INTO product_categories (name, icon) VALUES (?, ?)',
               Object.values(productCategory),
             );
         });
