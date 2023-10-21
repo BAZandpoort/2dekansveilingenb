@@ -84,33 +84,17 @@ $routes = [
   ],
 
   // WORK
-  '/dashboard/main' => [
-    'view' => 'user/seller/verkoperDashboard.php',
+  '/seller/dashboard' => [
+    'view' => 'user/seller/dashboard.php',
     'title' => 'Dashboard',
     'auth_roles' => ['member'],
     'nav' => true,
     'footer' => true,
     'container' => true,
   ],
-  '/main-dash/delete' => [
-    'view' => 'user/seller/delete-products.php',
-    'title' => 'Dashboard',
-    'auth_roles' => ['member'],
-    'nav' => true,
-    'footer' => true,
-    'container' => true,
-  ],
-  '/main-dash/edit' => [
+  '/seller/dashboard/edit' => [
     'view' => 'user/seller/editProduct.php',
     'title' => 'Edit Product',
-    'auth_roles' => ['member'],
-    'nav' => true,
-    'footer' => false,
-    'container' => true,
-  ],
-  '/main-dash/update' => [
-    'view' => 'user/seller/updateProduct.php',
-    'title' => 'Update Product',
     'auth_roles' => ['member'],
     'nav' => true,
     'footer' => false,
