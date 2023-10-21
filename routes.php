@@ -89,11 +89,25 @@ $routes = [
     'footer' => false,
     'container' => true,
   ],
+  '/seller/dashboard' => [
+    'view' => 'user/seller/dashboard.php',
+    'title' => 'Dashboard',
+    'nav' => true,
+    'footer' => true,
+    'container' => true,
+  ],
+  '/seller/dashboard/edit' => [
+    'view' => 'user/seller/edit-product.php',
+    'title' => 'Edit Product',
+    'auth_roles' => ['member'],
+    'nav' => true,
+    'footer' => false,
+    'container' => true,
+  ],
   // Admin Dashboard routes
   '/dashboard/products/delete' => [
     'view' => 'user/admin/delete-product.php',
     'title' => 'Delete products',
-    'auth_roles' => ['member'],
     'nav' => true,
     'footer' => true,
     'container' => true,
@@ -124,6 +138,20 @@ $routes = [
     'title' => 'See reports',
     'nav' => true,
     'footer' => false,
+    'container' => true,
+  ],
+  '/admin/dashboard' => [
+    'view' => 'user/admin/dashboard.php',
+    'title' => 'My Products',
+    'nav' => false,
+    'footer' => false,
+    'container' => true,
+  ],
+  '/dashboard/products/time/edit' => [
+    'view' => 'user/seller/edit-time.php',
+    'title' => 'Update timer',
+    'nav' => true,
+    'footer' => true,
     'container' => true,
   ],
   // Error routes

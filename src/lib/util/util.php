@@ -35,7 +35,7 @@ function fetch($query, ...$params) {
 }
 
 function fetchSingle($query, ...$params) {
- global $connection;
+  global $connection;
 
   $stmt = $connection->prepare($query);
 
