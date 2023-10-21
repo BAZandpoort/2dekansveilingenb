@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Gegenereerd op: 19 okt 2023 om 13:18
--- Serverversie: 10.4.28-MariaDB
--- PHP-versie: 8.2.4
+-- Host: localhost
+-- Generation Time: Oct 22, 2023 at 12:30 AM
+-- Server version: 10.6.12-MariaDB-0ubuntu0.22.04.1
+-- PHP Version: 8.1.2-1ubuntu2.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,21 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `products`
+-- Table structure for table `bids`
+--
+
+CREATE TABLE `bids` (
+  `id` int(11) NOT NULL,
+  `productid` int(11) NOT NULL,
+  `userid` int(11) NOT NULL,
+  `bidPrice` decimal(18,2) NOT NULL,
+  `bidOfferedAt` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
 --
 
 CREATE TABLE `products` (
@@ -35,7 +49,7 @@ CREATE TABLE `products` (
   `description` text NOT NULL,
   `price` decimal(10,2) NOT NULL,
   `imageUrl` varchar(255) NOT NULL,
-  `endDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `endDate` datetime DEFAULT NULL,
   `updatedAt` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -43,7 +57,7 @@ CREATE TABLE `products` (
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `product_categories`
+-- Table structure for table `product_categories`
 --
 
 CREATE TABLE `product_categories` (
@@ -55,7 +69,22 @@ CREATE TABLE `product_categories` (
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `review`
+-- Table structure for table `reports`
+--
+
+CREATE TABLE `reports` (
+  `id` int(11) NOT NULL,
+  `productid` int(11) NOT NULL,
+  `userid` int(11) NOT NULL,
+  `typeOfAbuse` text NOT NULL,
+  `context` text NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `review`
 --
 
 CREATE TABLE `review` (
@@ -63,13 +92,13 @@ CREATE TABLE `review` (
   `review` text NOT NULL,
   `sterren` int(11) NOT NULL,
   `seller` int(11) NOT NULL,
-  `date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `translations`
+-- Table structure for table `translations`
 --
 
 CREATE TABLE `translations` (
@@ -81,7 +110,7 @@ CREATE TABLE `translations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `translations`
+-- Dumping data for table `translations`
 --
 
 INSERT INTO `translations` (`id`, `location`, `text_en`, `text_nl`, `text_fr`) VALUES
@@ -104,12 +133,13 @@ INSERT INTO `translations` (`id`, `location`, `text_en`, `text_nl`, `text_fr`) V
 (17, 'footer', 'Cookie Policy', 'Cookiebeleid', 'Politique de cookies'),
 (18, 'nav', 'Auctions', 'Veilingen', 'Enchères'),
 (19, 'nav', 'Location', 'Locatie', 'Emplacement'),
-(20, 'nav', 'Products', 'Producten', 'Produits');
+(20, 'nav', 'Products', 'Producten', 'Produits'),
+(21, 'nav', 'test', 'test', 'test');
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -126,7 +156,7 @@ CREATE TABLE `users` (
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `user_profile`
+-- Table structure for table `user_profile`
 --
 
 CREATE TABLE `user_profile` (
@@ -141,7 +171,7 @@ CREATE TABLE `user_profile` (
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `user_purchases`
+-- Table structure for table `user_purchases`
 --
 
 CREATE TABLE `user_purchases` (
@@ -156,7 +186,7 @@ CREATE TABLE `user_purchases` (
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `user_roles`
+-- Table structure for table `user_roles`
 --
 
 CREATE TABLE `user_roles` (
@@ -167,7 +197,7 @@ CREATE TABLE `user_roles` (
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `user_role_mapping`
+-- Table structure for table `user_role_mapping`
 --
 
 CREATE TABLE `user_role_mapping` (
@@ -177,33 +207,45 @@ CREATE TABLE `user_role_mapping` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Indexen voor geëxporteerde tabellen
+-- Indexes for dumped tables
 --
 
 --
--- Indexen voor tabel `products`
+-- Indexes for table `bids`
+--
+ALTER TABLE `bids`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
   ADD KEY `products_userid` (`userid`),
   ADD KEY `products_categoryid` (`categoryid`);
-ALTER TABLE `products` ADD FULLTEXT KEY `products_zoeken` (`name`,`description`);
+ALTER TABLE `products` ADD FULLTEXT KEY `search` (`name`,`description`);
 
 --
--- Indexen voor tabel `product_categories`
+-- Indexes for table `product_categories`
 --
 ALTER TABLE `product_categories`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `product_category_name` (`name`);
 
 --
--- Indexen voor tabel `translations`
+-- Indexes for table `reports`
+--
+ALTER TABLE `reports`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `translations`
 --
 ALTER TABLE `translations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexen voor tabel `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
@@ -211,21 +253,21 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- Indexen voor tabel `user_profile`
+-- Indexes for table `user_profile`
 --
 ALTER TABLE `user_profile`
   ADD PRIMARY KEY (`id`),
   ADD KEY `profile_userid` (`userid`);
 
 --
--- Indexen voor tabel `user_roles`
+-- Indexes for table `user_roles`
 --
 ALTER TABLE `user_roles`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `name` (`name`);
 
 --
--- Indexen voor tabel `user_role_mapping`
+-- Indexes for table `user_role_mapping`
 --
 ALTER TABLE `user_role_mapping`
   ADD PRIMARY KEY (`id`),
@@ -233,70 +275,82 @@ ALTER TABLE `user_role_mapping`
   ADD KEY `role_mapping_userid` (`userid`);
 
 --
--- AUTO_INCREMENT voor geëxporteerde tabellen
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT voor een tabel `products`
+-- AUTO_INCREMENT for table `bids`
+--
+ALTER TABLE `bids`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT voor een tabel `product_categories`
+-- AUTO_INCREMENT for table `product_categories`
 --
 ALTER TABLE `product_categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT voor een tabel `translations`
+-- AUTO_INCREMENT for table `reports`
 --
-ALTER TABLE `translations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+ALTER TABLE `reports`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT voor een tabel `users`
+-- AUTO_INCREMENT for table `translations`
+--
+ALTER TABLE `translations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT voor een tabel `user_profile`
+-- AUTO_INCREMENT for table `user_profile`
 --
 ALTER TABLE `user_profile`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT voor een tabel `user_roles`
+-- AUTO_INCREMENT for table `user_roles`
 --
 ALTER TABLE `user_roles`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT voor een tabel `user_role_mapping`
+-- AUTO_INCREMENT for table `user_role_mapping`
 --
 ALTER TABLE `user_role_mapping`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Beperkingen voor geëxporteerde tabellen
+-- Constraints for dumped tables
 --
 
 --
--- Beperkingen voor tabel `products`
+-- Constraints for table `products`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `products_categoryid` FOREIGN KEY (`categoryid`) REFERENCES `product_categories` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `products_userid` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
--- Beperkingen voor tabel `user_profile`
+-- Constraints for table `user_profile`
 --
 ALTER TABLE `user_profile`
   ADD CONSTRAINT `profile_userid` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
--- Beperkingen voor tabel `user_role_mapping`
+-- Constraints for table `user_role_mapping`
 --
 ALTER TABLE `user_role_mapping`
   ADD CONSTRAINT `role_mapping_roleid` FOREIGN KEY (`roleid`) REFERENCES `user_roles` (`id`) ON DELETE CASCADE,
