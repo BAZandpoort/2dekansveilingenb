@@ -59,6 +59,13 @@ $routes = [
     'footer' => false,
     'container' => true,
   ],
+  '/catalog/report' => [
+    'view' => 'catalog/report.php',
+    'title' => 'Report Abuse',
+    'nav' => true,
+    'footer' => true,
+    'container' => true,
+  ],
   // Member Dashboard routes
   '/dashboard/products/history' => [
     'view' => 'user/member/purchases.php',
@@ -122,6 +129,13 @@ $routes = [
   '/dashboard/translations/add' => [
     'view' => 'user/admin/add-translation.php',
     'title' => 'Add translations',
+    'nav' => true,
+    'footer' => false,
+    'container' => true,
+  ],
+  '/dashboard/reports' => [
+    'view' => 'user/admin/reports.php',
+    'title' => 'See reports',
     'nav' => true,
     'footer' => false,
     'container' => true,
