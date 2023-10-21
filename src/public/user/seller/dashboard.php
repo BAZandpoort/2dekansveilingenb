@@ -31,6 +31,12 @@ $products = fetchSingle($query, ['type' => 'i', 'value' => $userId]);
 					</tr>
 				<?php else : ?>
 					<?php foreach ($products as $product) : ?>
+						<?php
+						$description = $product['description'];
+						if (strlen($product['description']) > 50) {
+							$description = substr_replace($product['description'], '...', 51);
+						}
+						?>
 						<tr>
 							<th>
 								<label>
@@ -50,7 +56,11 @@ $products = fetchSingle($query, ['type' => 'i', 'value' => $userId]);
 									</div>
 								</div>
 							</td>
-							<td><?= $product["description"] ?></td>
+							<td>
+								<div class="tooltip before:max-w-7xl" data-tip="<?= $product["description"] ?>">
+									<?= $description ?>
+								</div>
+							</td>
 							<td>€ <?= $product["price"] ?></td>
 							<td><?= $product["category"] ?></td>
 							<th>
