@@ -82,6 +82,22 @@ $routes = [
     'footer' => false,
     'container' => true,
   ],
+  '/seller/dashboard' => [
+    'view' => 'user/seller/dashboard.php',
+    'title' => 'Dashboard',
+    'auth_roles' => ['member'],
+    'nav' => true,
+    'footer' => true,
+    'container' => true,
+  ],
+  '/seller/dashboard/edit' => [
+    'view' => 'user/seller/edit-product.php',
+    'title' => 'Edit Product',
+    'auth_roles' => ['member'],
+    'nav' => true,
+    'footer' => false,
+    'container' => true,
+  ],
   // Admin Dashboard routes
   '/dashboard/products/delete' => [
     'view' => 'user/admin/delete-product.php',
