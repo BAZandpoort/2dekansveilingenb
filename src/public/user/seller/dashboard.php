@@ -64,7 +64,7 @@ $products = fetchSingle($query, ['type' => 'i', 'value' => $userId]);
 							<td>€ <?= $product["price"] ?></td>
 							<td><?= $product["category"] ?></td>
 							<th>
-								<button name="id" value="<?= $product["id"] ?>" class="btn btn-ghost btn-xs">Edit</button>
+								<a href="/seller/dashboard/edit?id=<?= $product["id"] ?>" class="btn btn-ghost btn-xs">Edit</a>
 							</th>
 						</tr>
 					<?php endforeach; ?>
