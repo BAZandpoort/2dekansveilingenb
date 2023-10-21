@@ -82,12 +82,15 @@ $routes = [
     'footer' => false,
     'container' => true,
   ],
+
+  // WORK
   '/dashboard/main' => [
     'view' => 'user/seller/verkoperDashboard.php',
     'title' => 'Dashboard',
     'auth_roles' => ['member'],
     'nav' => true,
     'footer' => true,
+    'container' => true,
   ],
   '/main-dash/delete' => [
     'view' => 'user/seller/delete-products.php',
@@ -95,6 +98,7 @@ $routes = [
     'auth_roles' => ['member'],
     'nav' => true,
     'footer' => true,
+    'container' => true,
   ],
   '/main-dash/edit' => [
     'view' => 'user/seller/editProduct.php',
@@ -102,6 +106,7 @@ $routes = [
     'auth_roles' => ['member'],
     'nav' => true,
     'footer' => false,
+    'container' => true,
   ],
   '/main-dash/update' => [
     'view' => 'user/seller/updateProduct.php',
@@ -109,7 +114,10 @@ $routes = [
     'auth_roles' => ['member'],
     'nav' => true,
     'footer' => false,
+    'container' => true,
   ],
+  // WORK
+
   // Admin Dashboard routes
   '/dashboard/products/delete' => [
     'view' => 'user/admin/delete-product.php',
