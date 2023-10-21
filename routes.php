@@ -112,8 +112,8 @@ $routes = [
     'footer' => false,
     'container' => true,
   ],
-  '/dashboard' => [
-    'view' => 'dashboard/admin.php',
+  '/admin/dashboard' => [
+    'view' => 'user/admin/dashboard.php',
     'title' => 'My Products',
     'auth_roles' => ['member'],
     'nav' => false,
