@@ -59,9 +59,9 @@ $routes = [
     'footer' => false,
     'container' => true,
   ],
-  '/catalog/report-abuse' => [
-    'view' => 'catalog/report-abuse.php',
-    'title' => 'Report abuse',
+  '/catalog/report' => [
+    'view' => 'catalog/report.php',
+    'title' => 'Report Abuse',
     'nav' => true,
     'footer' => true,
     'container' => true,
@@ -119,8 +119,8 @@ $routes = [
     'footer' => false,
     'container' => true,
   ],
-  '/dashboard/see-reports' => [
-    'view' => 'user/admin/see-reports.php',
+  '/dashboard/reports' => [
+    'view' => 'user/admin/reports.php',
     'title' => 'See reports',
     'nav' => true,
     'footer' => false,

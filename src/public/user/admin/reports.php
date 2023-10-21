@@ -35,14 +35,14 @@ if ($error) {
         <tbody>
 
         <?php
-            $query = 'SELECT abuse_reports.*, sender.username AS senderUsername, products.name AS productName, accused.id AS accusedid, accused.username AS accusedUsername
-                FROM `abuse_reports`
-                INNER JOIN products ON (abuse_reports.productid = products.id)
-                INNER JOIN users AS sender ON (abuse_reports.senderid = sender.id)
+            $query = 'SELECT reports.*, sender.username AS senderUsername, products.name AS productName, accused.id AS accusedid, accused.username AS accusedUsername
+                FROM `reports`
+                INNER JOIN products ON (reports.productid = products.id)
+                INNER JOIN users AS sender ON (reports.userid = sender.id)
                 INNER JOIN users AS accused ON (products.userid = accused.id)
                 ORDER BY createdAt DESC
             ';
-            $reports = fetch($query);
+            $reports = fetchSingle($query);
 
             foreach($reports as $report){
 
@@ -50,7 +50,7 @@ if ($error) {
                     <tr>
                         <td>'.$report["createdAt"].'</td> 
                         <td>
-                            <div class="tooltip" data-tip="User ID: '.$report["senderid"].'">
+                            <div class="tooltip" data-tip="User ID: '.$report["userid"].'">
                                 '.$report["senderUsername"].'
                             </div>
                         </td> 

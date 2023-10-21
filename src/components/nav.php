@@ -172,6 +172,7 @@ $searchTerm = $_GET['search'] ?? '';
               <summary class="m-1">Admin Dashboard</summary>
               <ul class="mr-4 p-2 shadow menu dropdown-content z-[1] bg-base-200 rounded-box w-52">
                 <li><a href="/dashboard/products/delete">Remove products</a></li>
+                <li><a href="/dashboard/reports">Reports</a></li>
                 <li>
                   <details class="dropdown dropdown-bottom">
                     <summary class="m-1">Translations</summary>

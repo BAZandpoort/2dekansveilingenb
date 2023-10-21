@@ -28,7 +28,7 @@ function sendReport(
   $typeOfAbuse,
   $context
 ) {
-  $query = 'INSERT INTO abuse_reports (productid, senderid, typeOfAbuse, context)
+  $query = 'INSERT INTO reports (productid, userid, typeOfAbuse, context)
             VALUES (?, ?, ?, ?)';
 
   $insertData = insert(

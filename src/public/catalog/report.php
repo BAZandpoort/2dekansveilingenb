@@ -21,7 +21,7 @@ $productData = fetch($query, ['type' => 'i', 'value' => $productId]);
 <h1 class="text-center text-4xl font-bold mb-12">Report abuse</h1>
 <h2 class="text-center text-2xl font-bold mb-12">Product: <u><?php echo $productData["name"]?></u></h2>
 
-<form action="/src/lib/user/member/report-abuse.php" method="post" class="flex flex-col items-center justify-center gap-4 max-w-2xl mx-auto">
+<form action="/src/lib/user/member/report.php" method="post" class="flex flex-col items-center justify-center gap-4 max-w-2xl mx-auto">
   <input type="hidden" name="productid" id="productid" value="<?php echo $_GET["productid"]?>">
 
   <div class="flex flex-row justify-center gap-4 w-full">
