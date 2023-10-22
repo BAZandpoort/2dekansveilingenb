@@ -119,6 +119,13 @@ $routes = [
     'footer' => false,
     'container' => true,
   ],
+  '/dashboard-koper/dashboard' => [
+    'view' => 'dashboard-koper/dashboard.php',
+    'title' => 'Dashboard koper',
+    'nav' => true,
+    'footer' => false,
+    'container' => true,
+  ],
   // Error routes
   '/404' => [
     'view' => 'errors/404.php',
