@@ -2,9 +2,6 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/util/util.php';
 function productCard($product, $shareable = false) {
- 
-
-
   $share = $shareable
     ? '<div class="dropdown dropdown-end absolute top-5 right-4">
         <label tabindex="0" class="hover:cursor-pointer">
@@ -12,7 +9,7 @@ function productCard($product, $shareable = false) {
         </label>
         <ul tabindex="0" class="dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-26 flex gap-2">
           <button class="hover:cursor-pointer">
-          <form method="post" action="/src/lib/account/favorite-insert.php">
+          <form method="post" action="/src/lib/account/add-favorite.php">
             <input type="hidden" name="product_id" value="' . $product["id"] . '">
             <input type="hidden" name="refer" value="' . $_SERVER['REQUEST_URI'] . '">
             <button name="favorieten">
@@ -31,8 +28,7 @@ function productCard($product, $shareable = false) {
           </button>
         </ul>
       </div>'
-      : '';
-      
+    : '';
 
   echo '
       <div id="product-' . $product['id'] . '" href="/" class="group card card-compact transition hover:opacity-90 md:flex-1 bg-base-100 shadow-xl">
@@ -63,6 +59,3 @@ function productCard($product, $shareable = false) {
   </script>
   ';
 }
-  
-
-

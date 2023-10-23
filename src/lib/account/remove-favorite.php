@@ -11,10 +11,9 @@ if(isset($_POST['delete'])){
  $userid = $_SESSION['user']['id'] ;
  $proid = $_POST['product_id'];
 
- $sql = "DELETE FROM favorieten WHERE userid = ? AND id = ?";
+ $sql = "DELETE FROM favorites WHERE userid = ? AND productid = ?";
  $delete = insert($sql, ['type' => 'i', 'value' => $userid], ['type' => 'i', 'value' => $proid]);
  
- header('Location: /account/favorite');
-
+ header('Location: /account/favorites');
  }
  ?>
