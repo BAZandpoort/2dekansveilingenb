@@ -1,6 +1,9 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/util/util.php';
+
+
+
 function productCard($product, $shareable = false) {
   $share = $shareable
     ? '<div class="dropdown dropdown-end absolute top-5 right-4">
