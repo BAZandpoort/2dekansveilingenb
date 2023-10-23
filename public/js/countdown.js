@@ -15,6 +15,7 @@ function productCardCountdown(productId, date) {
     var seconds = Math.floor(timeDiff / 1000);
     var minutes = Math.floor(seconds / 60);
     var hours = Math.floor(minutes / 60);
+    var days = Math.floor(hours / 24);
 
     hours %= 24;
     minutes %= 60;
@@ -24,7 +25,7 @@ function productCardCountdown(productId, date) {
       countdownWrapper.innerHTML = 'Auction ended';
       countdownWrapper.className = 'text-base font-semibold';
     } else {
-      hoursElement.style = '--value:' + hours;
+      hoursElement.style = '--value:' + (hours + Math.floor(days * 24));
       minutesElement.style = '--value:' + minutes;
       secondsElement.style = '--value:' + seconds;
 
@@ -61,6 +62,7 @@ function productCountdown(date) {
     var seconds = Math.floor(timeDiff / 1000);
     var minutes = Math.floor(seconds / 60);
     var hours = Math.floor(minutes / 60);
+    var days = Math.floor(hours / 24);
 
     hours %= 24;
     minutes %= 60;
@@ -83,7 +85,7 @@ function productCountdown(date) {
       return;
     }
 
-    hoursElement.style = '--value:' + hours;
+    hoursElement.style = '--value:' + (hours + Math.floor(days * 24));
     minutesElement.style = '--value:' + minutes;
     secondsElement.style = '--value:' + seconds;
 
