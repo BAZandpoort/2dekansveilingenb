@@ -28,7 +28,33 @@ if ($user) {
 $searchTerm = $_GET['search'] ?? '';
 
 
-$outbid = fetch("SELECT * From `bids` Where userid = ? ",['type' => '', 'value' => $user]);
+//$outbid = fetch("SELECT * From `bids` Where userid = ? ",['type' => 'i', 'value' => $user]);
+
+
+
+// Retrieve the previous data
+$previousData = [];
+$result = fetch("SELECT * FROM bids WHERE ID = ?", ['type' => 'i', 'value' => 123]);
+
+// Retrieve the current data
+$currentData = [];
+$result = mysqli_query($connection, "SELECT * FROM YourTable WHERE ID = 123");
+if ($result) {
+    $currentData = mysqli_fetch_assoc($result);
+    mysqli_free_result($result);
+}
+
+// Close the database connection
+mysqli_close($connection);
+
+// Compare the previous and current data
+if ($previousData !== $currentData) {
+    // The row has changed
+    echo "Row with ID 123 has changed.";
+} else {
+    // The row has not changed
+    echo "Row with ID 123 has not changed.";
+}
 ?>
 
 <!-- Top navbar -->
