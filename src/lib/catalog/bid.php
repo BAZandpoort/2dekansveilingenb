@@ -32,6 +32,14 @@ if (isset($_POST['bid'])) {
     );
   }
 
+  $query = 'INSERT INTO bidsHistory (productid, userid, bidPrice) VALUES (?, ?, ?)';
+    insert(
+      $query,
+      ['type' => 'i', 'value' => $productid],
+      ['type' => 'i', 'value' => $userid],
+      ['type' => 'd', 'value' => $bid_price],
+    ); 
+
   
 }
 header('Location: '.$_SERVER['HTTP_REFERER']);

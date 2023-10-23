@@ -36,13 +36,14 @@ $searchTerm = $_GET['search'] ?? '';
 $previousData = [];
 $result = fetch("SELECT * FROM bids WHERE ID = ?", ['type' => 'i', 'value' => 123]);
 
-// Retrieve the current data
+/* Retrieve the current 
 $currentData = [];
 $result = mysqli_query($connection, "SELECT * FROM YourTable WHERE ID = 123");
 if ($result) {
     $currentData = mysqli_fetch_assoc($result);
     mysqli_free_result($result);
 }
+
 
 // Close the database connection
 mysqli_close($connection);
@@ -55,6 +56,7 @@ if ($previousData !== $currentData) {
     // The row has not changed
     echo "Row with ID 123 has not changed.";
 }
+*/
 ?>
 
 <!-- Top navbar -->
