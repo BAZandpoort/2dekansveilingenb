@@ -163,6 +163,13 @@ $routes = [
     'footer' => true,
     'container' => true,
   ],
+  '/account/favorites' => [
+    'view' => 'account/favorites.php',
+    'title' => 'Favorite',
+    'nav' => true,
+    'footer' => true,
+    'container' => true,
+  ],
   // Error routes
   '/404' => [
     'view' => 'errors/404.php',
