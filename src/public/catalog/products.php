@@ -88,6 +88,7 @@ foreach ($products as $index => $product) {
   }
 
   productCard($product, true);
+  
 }
 
 echo '
