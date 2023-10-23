@@ -7,23 +7,23 @@ if (!isset($_SESSION['user'])) {
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/util/util.php';
 
-$categories = fetch("SELECT * FROM products");
+$products = fetch('SELECT * FROM products WHERE userid = '.$_SESSION["user"]["id"].'');
 ?>
 
 <h1 class="text-center text-4xl font-bold mb-12">Add a new advertisement</h1>
 
-<form action="/src/lib/user/seller/add-product.php" method="post" enctype="multipart/form-data" class="flex flex-col items-center justify-center gap-4 max-w-2xl mx-auto">
+<form action="/src/lib/user/seller/add-advertisement.php" method="post" enctype="multipart/form-data" class="flex flex-col items-center justify-center gap-4 max-w-2xl mx-auto">
   <div class="flex flex-row justify-center gap-4 w-full">
     <!-- Category -->
     <div class="form-control flex-1 w-full">
       <label class="label">
         <span class="label-text">Product</span>
       </label>
-      <select name="product" class="select select-bordered w-full">
-        <option disabled selected>Product category</option>
+      <select name="productid" class="select select-bordered w-full">
+        <option disabled selected>Product</option>
         <?php
-        foreach ($categories as $category) {
-          echo '<option value="' . $category['id'] . '">' . $category['name'] . '</option>';
+        foreach ($products as $product) {
+          echo '<option value="' . $product['id'] . '">' . $product['name'] . '</option>';
         }
         ?>
       </select>
@@ -32,44 +32,9 @@ $categories = fetch("SELECT * FROM products");
     <!-- Title -->
     <div class="form-control flex-1 w-full">
       <label class="label">
-        <span class="label-text">Title</span>
+        <span class="label-text">Alt text</span>
       </label>
-      <input type="text" name="title" placeholder="Big Mac" class="input input-bordered w-full" required />
-    </div>
-  </div>
-  
-  <!-- Description -->
-  <div class="form-control w-full">
-    <label class="label">
-      <span class="label-text">Description</span>
-    </label>
-    <textarea name="description" class="textarea textarea-bordered min-h-[8em]" placeholder="Very healthy food" required></textarea>
-  </div>
-
-  <div class="flex flex-row justify-center gap-4 w-full">
-    <!-- Price -->
-    <div class="form-control flex-1 w-full">
-      <label class="label">
-        <span class="label-text tooltip" data-tip="Prices in euro">Price</span>
-      </label>
-      <input type="number" step="0.01" min="0.00" name="price" placeholder="20.00" class="input input-bordered w-full" required />
-    </div>
-
-    <!-- Auction End Date -->
-    <div id="auctionWrapper" class="form-control flex-1 flex-row w-full justify-center gap-4">
-      <div id="endDate" class="hidden">
-        <label class="label">
-          <span class="label-text">Auction End Date</span>
-        </label>
-        <input type="datetime-local" name="endDate" placeholder="20.00" class="input input-bordered w-full" required />
-      </div>
-
-      <div class="flex flex-row gap-4 justify-center items-center mt-10">
-        <input type="checkbox" name="auction" id="auction" onclick="showInput()" class="checkbox checkbox-lg" />
-        <label id="auctionLabel" class="label">
-          <span class="label-text">Is this an auction?</span>
-        </label>
-      </div>
+      <input type="text" name="altText" placeholder="Big Mac" class="input input-bordered w-full" required />
     </div>
   </div>
 
