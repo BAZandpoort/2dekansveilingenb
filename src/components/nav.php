@@ -29,6 +29,30 @@ $searchTerm = $_GET['search'] ?? '';
 
 $currentData = fetch( "SELECT * FROM `bidshistory` WHERE productid = ? ORDER BY bidPrice DESC" , ['type' => 'i', 'value' => 2]);
 var_dump($currentData);
+$userexist=false;
+
+
+foreach($currentData as $data){
+     print " ".$data['userid'];
+
+  if ( $data['userid'] === $user["id"] ){
+     print "true";
+  }else{
+     print"false";
+  }
+break;
+}
+foreach($currentData as $data){
+  print " ".$data['userid'];
+
+if ( $data['userid'] === $user["id"] ){
+  print "true";
+ $userexist=true;
+}else{
+  print"false";
+}
+}
+
 
 
 
