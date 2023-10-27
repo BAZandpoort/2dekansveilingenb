@@ -27,32 +27,35 @@ if ($user) {
 
 $searchTerm = $_GET['search'] ?? '';
 
-$currentData = fetch( "SELECT * FROM `bidshistory` WHERE productid = ? ORDER BY bidPrice DESC" , ['type' => 'i', 'value' => 2]);
-var_dump($currentData);
 $userexist=false;
+$nothighest=false;
+
+$maxproductData = fetch("SELECT MAX(productid) AS maxid From `bidshistory`");
 
 
-foreach($currentData as $data){
-     print " ".$data['userid'];
+for( $i = 1 ; $i<=$maxproductData['maxid'] ; $i++){
+  
+  $currentData = fetchSingle( "SELECT * FROM `bidshistory` WHERE productid = ? ORDER BY bidPrice DESC" , ['type' => 'i', 'value' => $i]);
 
-  if ( $data['userid'] === $user["id"] ){
-     print "true";
-  }else{
-     print"false";
+  foreach($currentData as $data){
+
+    if ( $data['userid'] !== $user["id"] ){
+     
+      $nothighest = true;
+      $product=$data['productid'];
+    }
+  break;
   }
-break;
-}
-foreach($currentData as $data){
-  print " ".$data['userid'];
 
-if ( $data['userid'] === $user["id"] ){
-  print "true";
- $userexist=true;
-}else{
-  print"false";
-}
-}
+  foreach($currentData as $data){
 
+    if ( $data['userid'] === $user["id"] ){
+    $userexist=true;
+   
+  } 
+  
+}
+}
 
 
 
@@ -157,18 +160,34 @@ if ( $data['userid'] === $user["id"] ){
 
   <!-- Right - User actions -->
   <div class="hidden flex-1 justify-end gap-4 md:flex">
-  <div id="popup-window" style="display:none">
-
-<div class="alert shadow-lg">
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-info shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
   <div>
-    <h3 class="font-bold">New message!</h3>
-    <div class="text-xs">You have been outbid</div>
-  </div>
-  <button class="btn btn-sm">See</button>
-  <button id="close-button" class="btn btn-sm">Close</button>
-</div>
- 
+
+  <?php if($userexist && $nothighest ){ ?>
+    <div class="alert shadow-lg" id="myDiv">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-info shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+      <div>
+        <h3 class="font-bold">New message!</h3>
+        <div class="text-xs">You have been outbid</div>
+      </div>
+      <ul class="flex flex-col gap-2 shadow">
+      <li><a href="/catalog/product?id=<?php echo $product ?>" class="btn btn-sm"> See</a></li>
+      </ul>
+      <button id="hideButton" class="btn btn-sm">Close</button>
+    </div>
+    <?php } ?>
+    <script>
+        // Get references to the div and the button
+        const div = document.getElementById('myDiv');
+        const button = document.getElementById('hideButton');
+
+        // Add a click event listener to the button
+        button.addEventListener('click', function() {
+            // Hide the div by setting its display property to 'none'
+            div.style.display = 'none';
+        });
+    </script>
+    
+  
 </div> 
     <details class="dropdown dropdown-end">
       <summary class="m-1 btn"><?php echo $languageDisplay ?></summary>
@@ -246,37 +265,7 @@ if ( $data['userid'] === $user["id"] ){
 
 
 
-
-
-<?php
-
-
-if (true) {
-
-
-  echo '<script>
-  // Get the elements by their ID
-  var popupLink = document.getElementById("popup-link"); 
-  var popupWindow = document.getElementById("popup-window");
-  var closeButton = document.getElementById("close-button");
-  // Show the pop-up window when the link is clicked
-  popupWindow.style = "display:unset";
-  popupLink.addEventListener("click", function(event) {
-    event.preventDefault();
-    popupWindow.classList.remove("hidden");
-  });
-  // Hide the pop-up window when the close button is clicked
-  closeButton.addEventListener("click", function() {
-    popupWindow.classList.add("hidden");
-  });
- 
-</script> ';
-
   
-};
-
-
-?>
 
 <!-- Bottom navbar -->
 <div class="hidden navbar bg-base-100 shadow-sm pt-8 md:flex">
