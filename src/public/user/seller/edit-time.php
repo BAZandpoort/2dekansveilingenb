@@ -43,7 +43,7 @@ foreach ($products as $index => $product) {
     productCard($product, true);
     ?>
 
-    <form action="/src/public/user/admin/update_timer.php" method="post" enctype="multipart/form-data" class="flex flex-col items-center justify-center gap-4 max-w-2xl mx-auto">
+    <form action="/src/lib/user/seller/update-timer.php" method="post" enctype="multipart/form-data" class="flex flex-col items-center justify-center gap-4 max-w-2xl mx-auto">
         <div class="flex flex-row justify-center gap-4 w-full">
             <!-- Auction End Date -->
             <div class="form-control flex-1 w-full">

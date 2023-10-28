@@ -36,7 +36,7 @@ foreach ($products as $product) {
       <div class="card-actions justify-between items-center">
         <p class="text-xl text-left font-bold">€' . $product["price"] . '</p>
         <div class="flex flex-row gap-2">
-          <a href="/catalog/product?id=' . $product['id'] . '" class="btn btn-primary">View product page</a>
+          <a href="/catalog/product?id=' . $product['id'] . '/?seller=' . $user['username'] . '" class="btn btn-primary">View product page</a>
           <button class="btn btn-error btn-square">
             <i class="fa-regular fa-trash-can fa-xl text-white"></i>
           </button>

@@ -94,6 +94,28 @@ if (isset($_SESSION["user"])){
       }
     ?>
     
+    <br>
+    <?php
+      if (isset($_SESSION["user"])){
+        echo '
+          <a href="/catalog/report?productid='.$productId.'"><button class="btn btn-outline btn-error">Report abuse</button></a>
+        ';
+      } else {
+        echo '
+          <button class="btn btn-outline btn-error" onclick="my_modal_2.showModal()">Report abuse</button>
+          <dialog id="my_modal_2" class="modal">
+            <div class="modal-box">
+              <h3 class="font-bold text-lg">Account required for this action</h3>
+              <p class="py-4"><a href="/account/login"><b><u>Log in</u></b></a> to report abuse</p>
+            </div>
+            <form method="dialog" class="modal-backdrop">
+              <button>close</button>
+            </form>
+          </dialog>
+        ';
+      }
+    ?>
+    
   </div>
 </div>
 
@@ -101,13 +123,117 @@ if (isset($_SESSION["user"])){
   <div class="flex flex-col md:flex-[1.3] gap-4">
     <h1 class="text-2xl font-semibold"> <?php echo $productData['name']; ?></h1>
     <p> <?php echo $productData['description']; ?></p>
+    <br>
   </div>
   <div class="flex-[.7] p-8"></div>
 </div>
 
+<?php
+//make a revieuw system of the product and make it so that u can only review once and that u can only review if u have bought the product and that the other people the revieuws  can see but not add to it if they havent bought the product
+
+// Fetch seller information
+$sellerId = $_GET['id'];
+$userId = $_SESSION['user']['id'];
+
+// Check if user has bought the product
+$hasBoughtProduct = false;
+$purchaseHistory = fetchSingle('SELECT * FROM user_purchases WHERE id = ?', ["type" => "i", "value" => $userId]);
+foreach ($purchaseHistory as $purchase) {
+  if ($purchase['productId'] == $sellerId) {
+    $hasBoughtProduct = true;
+    break;
+  }
+}
+
+$sellerInfo = fetchSingle('SELECT * FROM users WHERE id = ?', ["type" => "i", "value" => $sellerId]);
+// Handle form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  if (!$hasBoughtProduct) {
+    // User has not bought the product
+    $errorMessage = "You can only review a product that you have bought.";
+  } else {
+    $review = $_POST['review'];
+    $rating = $_POST['rating'];
+
+    // Check if user has already reviewed the seller
+    $insertReview = fetchSingle('SELECT * FROM review WHERE member = ? AND seller = ?', 
+    ["type" => "i", "value" => $userId], ["type" => "i", "value" => $sellerId]);
+    if ($insertReview) {
+      // User has already reviewed the seller
+      $errorMessage = "You have already reviewed this seller.";
+    } else {
+      // Insert review into database
+      $insertReview = insert('INSERT INTO review (member, review, sterren, seller, date) VALUES (?, ?, ?, ?, ?)', 
+      ["type" => "i", "value" => $userId],
+      ["type" => "s", "value" => $review],
+      ["type" => "i", "value" => $rating],
+      ["type" => "i", "value" => $sellerId],
+      ["type" => "s", "value" => date('Y-m-d')]
+    );
+    }
+  }
+}
+
+// Fetch seller reviews
+$sellerReviews = fetchSingle('SELECT * FROM review WHERE seller = ?', ["type" => "i", "value" => $sellerId]);
+// Calculate average rating
+$averageRating = 0;
+if (count($sellerReviews) > 0) {
+  foreach ($sellerReviews as $review) {
+    $averageRating += $review['sterren'];
+  }
+  $averageRating /= count($sellerReviews);
+}
+?>
 
 
-<form action="/src/public/user/admin/update_timer.php" method="post" enctype="multipart/form-data" class="flex flex-col items-center justify-center gap-4 max-w-2xl mx-auto">
+<div class="flex flex-col">
+  <h1 class="text-2xl font-bold mb-4">Rate the product</h1>
+  <?php if (!$hasBoughtProduct): ?>
+    <p>You can only review a product that you have bought.</p>
+  <?php else: ?>
+    <form method="POST" class="flex flex-col gap-4">
+      <div class="rating rating-lg flex gap-4">
+        <input type="radio" name="rating" value="1" class="mask mask-star-2 bg-orange-400" />
+        <input type="radio" name="rating" value="2" class="mask mask-star-2 bg-orange-400" />
+        <input type="radio" name="rating" value="3" class="mask mask-star-2 bg-orange-400" />
+        <input type="radio" name="rating" value="4" class="mask mask-star-2 bg-orange-400" />
+        <input type="radio" name="rating" value="5" class="mask mask-star-2 bg-orange-400" checked />
+      </div>
+      <textarea name= "review" class="textarea textarea-success" placeholder="Leave a review"></textarea>
+      <?php if (isset($errorMessage)): ?>
+        <p class="text-red-500"><?= $errorMessage ?></p>
+      <?php else: ?>
+        <button type="submit" class="btn btn-outline btn-warning">Submit Review</button>
+      <?php endif; ?>
+    </form>
+  <?php endif; ?>
+</div>
+
+<div class="flex flex-col">
+  <h1 class="text-2xl font-bold mb-4">Product Reviews</h1>
+  <?php if (count($sellerReviews) > 0): ?>
+    <p>Average Rating: <?= number_format($averageRating, 1) ?></p>
+    <div class="flex flex-col gap-4">
+      <?php foreach ($sellerReviews as $review): ?>
+        <div class="border border-gray-300 p-4">
+          <p class="font-bold"><?= $review['review'] ?></p>
+          <p><?= $review['sterren'] ?></p>
+          <p><?= date('F j, Y', strtotime($review['date'])) ?></p>
+        </div>
+      <?php endforeach; ?>  
+    </div>
+  <?php else: ?>
+    <p>This product has no reviews yet.</p>
+  <?php endif; ?>
+</div>
+
+
+
+
+
+
+<form action="/src/lib/user/seller/update-timer.php" method="post" enctype="multipart/form-data" class="flex flex-col items-center justify-center gap-4 max-w-2xl mx-auto">
   <div class="flex flex-row justify-center gap-4 w-full">
     <!-- Auction End Date -->
     <div class="form-control flex-1 w-full">
@@ -127,3 +253,4 @@ if (isset($_SESSION["user"])){
 <script>
   productCountdown("<?php echo $productData['endDate']; ?>")
 </script>
+
