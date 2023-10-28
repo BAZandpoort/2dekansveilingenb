@@ -142,9 +142,9 @@ $routes = [
     'footer' => false,
     'container' => true,
   ],
-  '/dashboard-koper/dashboard' => [
-    'view' => 'dashboard-koper/dashboard.php',
-    'title' => 'Dashboard koper',
+  '/member/dashboard' => [
+    'view' => 'user/member/dashboard.php',
+    'title' => 'Member Dashboard',
     'nav' => true,
     'footer' => false,
     'container' => true,
