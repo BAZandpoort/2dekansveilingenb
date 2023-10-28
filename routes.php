@@ -142,6 +142,13 @@ $routes = [
     'footer' => false,
     'container' => true,
   ],
+  '/member/dashboard' => [
+    'view' => 'user/member/dashboard.php',
+    'title' => 'Member Dashboard',
+    'nav' => true,
+    'footer' => false,
+    'container' => true,
+  ],
   '/dashboard/reports' => [
     'view' => 'user/admin/reports.php',
     'title' => 'See reports',
