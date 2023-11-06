@@ -6,8 +6,6 @@ require_once LIB . '/util/util.php';
 
 if (isset($_POST['create'])) {
   $userid = $_SESSION['user']['id'];
-
-  echo $_POST['productid'];
   $productid = $_POST['productid'];
   $altText = $_POST['altText'];
   $file = $_FILES['image'];
@@ -43,8 +41,8 @@ function addAdvertisement(
   echo "<br><br>";
   $insertData = insert(
     $query,
-    ['type' => 'i', 'value' => $userid],
     ['type' => 'i', 'value' => $productid],
+    ['type' => 'i', 'value' => $userid],
     ['type' => 's', 'value' => $altText],
     ['type' => 's', 'value' => $baseImageName],
   );

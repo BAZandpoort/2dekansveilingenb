@@ -7,11 +7,8 @@ if (!isset($_SESSION['user'])) {
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/util/util.php';
 
-
-$query = "SELECT *, COUNT(*) AS 'aantal' FROM products WHERE userid = ?";
+$query = "SELECT * FROM products WHERE userid = ?";
 $my_products = fetch($query, ['type' => 'i', 'value' => $_SESSION["user"]["id"]]);
-
-
 ?>
 
 <h1 class="text-center text-4xl font-bold mb-12">Add a new advertisement</h1>
@@ -24,15 +21,10 @@ $my_products = fetch($query, ['type' => 'i', 'value' => $_SESSION["user"]["id"]]
         <span class="label-text">Product</span>
       </label>
       <select name="productid" id="productid" class="select select-bordered w-full">
-        <option disabled selected>Product</option>
         <?php
-          if (isset($my_products["id"])){
-            echo '<option value="'.$my_products['id'].'">'.$my_products['name'].'</option>';
-          } else {
             foreach ($my_products as $my_product) {
-              echo '<option value="'.$my_product['id'].'">'.$my_product['name'].'</option>';
+              echo '<option value='.$my_product['id'].'>'.$my_product['id'].' '.$my_product['name'].'</option>';
             }
-          }
         ?>
       </select>
     </div>
@@ -58,20 +50,3 @@ $my_products = fetch($query, ['type' => 'i', 'value' => $_SESSION["user"]["id"]]
     <button name="create" class="btn btn-primary">Create</button>
   </div>
 </form>
-
-<script>
-  function showInput() {
-    var auctionWrapper = document.getElementById("auctionWrapper");
-    var checkBox = document.getElementById("auction");
-    var checkBoxLabel = document.getElementById("auctionLabel");
-    var input = document.getElementById("endDate");
-
-    if (checkBox.checked == true) {
-      input.classList.remove("hidden");
-      checkBoxLabel.classList.add("hidden");
-    } else {
-      input.classList.add("hidden");
-      checkBoxLabel.classList.remove("hidden");
-    }
-  }
-</script>

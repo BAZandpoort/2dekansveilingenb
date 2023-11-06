@@ -82,9 +82,7 @@ $translations = fetch('SELECT id, ' . $language . ' FROM translations');
       ' 
       : null;
       ?>
-      <div class="flex justify-center items-center pt-12"> 
-        <a href="https://en.wikipedia.org/"><img id="advert" src="https://upload.wikimedia.org/wikipedia/commons/8/87/Wikipedia_banner%2C_animated.gif" width="970" height="250"></a>
-      </div>
+      
 
       <?php include PUBLIC_S . '/' . $route['view']; ?>
     </div>
