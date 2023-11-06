@@ -7,7 +7,11 @@ if (!isset($_SESSION['user'])) {
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/util/util.php';
 
-$products = fetch('SELECT * FROM products WHERE userid = '.$_SESSION["user"]["id"].'');
+
+$query = "SELECT *, COUNT(*) AS 'aantal' FROM products WHERE userid = ?";
+$my_products = fetch($query, ['type' => 'i', 'value' => $_SESSION["user"]["id"]]);
+
+
 ?>
 
 <h1 class="text-center text-4xl font-bold mb-12">Add a new advertisement</h1>
@@ -19,12 +23,16 @@ $products = fetch('SELECT * FROM products WHERE userid = '.$_SESSION["user"]["id
       <label class="label">
         <span class="label-text">Product</span>
       </label>
-      <select name="productid" class="select select-bordered w-full">
+      <select name="productid" id="productid" class="select select-bordered w-full">
         <option disabled selected>Product</option>
         <?php
-        foreach ($products as $product) {
-          echo '<option value="' . $product['id'] . '">' . $product['name'] . '</option>';
-        }
+          if (isset($my_products["id"])){
+            echo '<option value="'.$my_products['id'].'">'.$my_products['name'].'</option>';
+          } else {
+            foreach ($my_products as $my_product) {
+              echo '<option value="'.$my_product['id'].'">'.$my_product['name'].'</option>';
+            }
+          }
         ?>
       </select>
     </div>

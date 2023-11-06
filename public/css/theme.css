@@ -119,3 +119,10 @@
   --tab-border: 1px;
   --tab-radius: 0.5rem;
 }
+
+#advert {
+  border-radius: 25px;
+  background-position: left top;
+  background-repeat: repeat;
+  padding: 20px;
+}

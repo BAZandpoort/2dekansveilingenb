@@ -6,6 +6,8 @@ require_once LIB . '/util/util.php';
 
 if (isset($_POST['create'])) {
   $userid = $_SESSION['user']['id'];
+
+  echo $_POST['productid'];
   $productid = $_POST['productid'];
   $altText = $_POST['altText'];
   $file = $_FILES['image'];
@@ -27,7 +29,7 @@ function addAdvertisement(
   $altText,
   $file,
 ) {
-  $query = 'INSERT INTO products (productid, sellerid, altText, imageUrl)
+  $query = 'INSERT INTO advertisements (productid, sellerid, altText, imageUrl)
             VALUES (?, ?, ?, ?)';
 
   $imageName = $file['name'];
@@ -37,7 +39,8 @@ function addAdvertisement(
   $baseImageName = basename($imageName, ".jpg") . '--userid-' . $userid . ".jpg";
   $targetFile = $targetDir . $baseImageName;
   move_uploaded_file($imageTmpName, $targetFile);
-
+  var_dump($userid, $productid, $altText, $baseImageName);
+  echo "<br><br>";
   $insertData = insert(
     $query,
     ['type' => 'i', 'value' => $userid],
