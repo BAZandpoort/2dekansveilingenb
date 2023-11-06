@@ -216,12 +216,12 @@ $searchTerm = $_GET['search'] ?? '';
           }
         }
 
-        $advert = fetch("SELECT *, COUNT(*) AS 'aantal' FROM advertisements ORDER BY RAND() LIMIT 1");
+        $advert = fetch("SELECT * FROM advertisements ORDER BY RAND () LIMIT 1");
 
-        if ($advert["aantal"] > 0){
+        if ($advert) {
           echo '
             <div class="flex justify-center items-center pt-12"> 
-              <a href="./catalog/product?id='.$advert["productid"].'"><img id="advert" alt="'.$advert["altText"].'" src="/public/images/'.$advert["imageUrl"].'" width="970" height="250"></a>
+              <a href="../catalog/product?id='.$advert["productid"].'"><img id="advert" alt="'.$advert["altText"].'" src="/public/adverts/'.$advert["imageUrl"].'" width="970" height="125"></a>
             </div>
           ';
         }
