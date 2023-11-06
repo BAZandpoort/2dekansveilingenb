@@ -50,12 +50,12 @@ for( $i = 1 ; $i<=$maxproductData['maxid'] ; $i++){
 
   foreach($currentData as $data){
 
-    if ( $data['userid'] === $user["id"] ){
-    $userexist=true;
-   
-  } 
-  
-  }
+      if ( $data['userid'] === $user["id"] ){
+      $userexist=true;
+    
+      } 
+    
+    }
   }
 }
 var_dump($currentData);
@@ -189,14 +189,14 @@ var_dump($currentData);
             var_dump($data);
             
             if ($data['read'] === 1) { ?>
-            div.style.display = 'none';
+               div.style.display = 'none';
             
             <?php }else{ ?> 
             
             button.addEventListener('click', function() {
                 
                 div.style.display = 'none';
-                <?php  $test = insert('UPDATE bidshistory SET `read` = 0 Where productid = ?',['type' => 'i', 'value' => $data['productid']]); 
+                <?php  $test = insert('UPDATE bidshistory SET `read` = 1 Where productid = ?',['type' => 'i', 'value' => $product]); 
                  //var_dump($test);
                 ?>
 
