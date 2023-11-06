@@ -33,6 +33,7 @@ $nothighest=false;
 $maxproductData = fetch("SELECT MAX(productid) AS maxid From `bidshistory`");
 
 
+if($user){
 for( $i = 1 ; $i<=$maxproductData['maxid'] ; $i++){
   
   $currentData = fetchSingle( "SELECT * FROM `bidshistory` WHERE productid = ? ORDER BY bidPrice DESC" , ['type' => 'i', 'value' => $i]);
@@ -54,11 +55,10 @@ for( $i = 1 ; $i<=$maxproductData['maxid'] ; $i++){
    
   } 
   
+  }
+  }
 }
-}
-
-
-
+var_dump($currentData);
 ?>
 
 <!-- Top navbar -->
@@ -161,7 +161,7 @@ for( $i = 1 ; $i<=$maxproductData['maxid'] ; $i++){
   <!-- Right - User actions -->
   <div class="hidden flex-1 justify-end gap-4 md:flex">
   <div>
-
+  <!-- message if outbid -->
   <?php if($userexist && $nothighest ){ ?>
     <div class="alert shadow-lg" id="myDiv">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-info shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -176,18 +176,38 @@ for( $i = 1 ; $i<=$maxproductData['maxid'] ; $i++){
     </div>
     <?php } ?>
     <script>
-        // Get references to the div and the button
         const div = document.getElementById('myDiv');
         const button = document.getElementById('hideButton');
 
-        // Add a click event listener to the button
-        button.addEventListener('click', function() {
-            // Hide the div by setting its display property to 'none'
+
+        <?php
+        for( $i = 1 ; $i <= $maxproductData['maxid'] ; $i++){
+          $currentdata = fetchSingle( "SELECT * FROM `bidshistory` WHERE productid = ? ORDER BY bidPrice DESC" , ['type' => 'i', 'value' => $i]);
+
+  
+          foreach ($currentdata as $data){
+            var_dump($data);
+            
+            if ($data['read'] === 1) { ?>
             div.style.display = 'none';
-        });
+            
+            <?php }else{ ?> 
+            
+            button.addEventListener('click', function() {
+                
+                div.style.display = 'none';
+                <?php  $test = insert('UPDATE bidshistory SET `read` = 0 Where productid = ?',['type' => 'i', 'value' => $data['productid']]); 
+                 //var_dump($test);
+                ?>
+
+            });
+          <?php 
+          }
+        } 
+      }?>
     </script>
     
-  
+  <!--/ message if outbid -->
 </div> 
     <details class="dropdown dropdown-end">
       <summary class="m-1 btn"><?php echo $languageDisplay ?></summary>
