@@ -22,8 +22,8 @@ echo '
 <div class="flex flex-col gap-8">
 ';
 ?>
-<form action="/dashboard/products/delete" method="get" class="flex flex-col gap-8">
-  <div class="form-control w-full max-w-xs mx-auto">
+<form action="/dashboard/products/delete" method="get" class="flex flex-row justify-center gap-4">
+  <div class="form-control w-full max-w-xs">
     <input type="text" name="search" placeholder="Search" class="input input-primary input-bordered">
   </div>
   <button class="btn btn-primary">Search</button>
