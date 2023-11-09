@@ -30,6 +30,14 @@ if ($error) {
       </svg>
       <span>' . (ERROR_MAPPING[$error] ?? 'Something went wrong!') . '</span>
     </div>
+    <script>
+    setTimeout(function() {
+      var alerts = document.querySelectorAll(".alert");
+      alerts.forEach(function(alert) {
+        alert.style.display = "none";
+      });
+    }, 5000);
+  </script>
   ';
 }
 
@@ -41,8 +49,18 @@ if ($succes) {
     </svg>
     <span>' . (SUCCES_MAPPING[$succes] ?? 'We think it worked!') . '</span>
   </div>
+  <script>
+    setTimeout(function() {
+      var alerts = document.querySelectorAll(".alert");
+      alerts.forEach(function(alert) {
+        alert.style.display = "none";
+      });
+    }, 2000);
+  </script>
   ';
+
 }
+
 
 $containerClasses = $route['container'] ? 'container mx-auto px-2 pt-4 pb-12 md:pt-12 md:pb-24 md:px-0' : '';
 $language = isset($_SESSION["user"]) ? $_SESSION["user"]["language"] : $_SESSION["guest"]["language"] ?? 'text_en';
