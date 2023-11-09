@@ -36,6 +36,7 @@ define('ERROR_MAPPING', [
   'accountUpdate' => 'Something went wrong while updating your account',
   'usernameTaken' => 'Username is already taken',
   'deleteProduct' => 'Failed to delete product',
+  'leaveReview' => 'Failed to leave review',
 ]);
 
 // Success mapping
@@ -43,6 +44,7 @@ define('SUCCES_MAPPING', [
   'register' => 'You have been succesfully registered',
   'accountUpdate' => 'Your account has been updated',
   'deleteProduct' => 'Product has been deleted',
+  'leaveReview' => 'Review has been left',
 ]);
 
 // Theme mapping

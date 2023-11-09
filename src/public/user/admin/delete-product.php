@@ -2,6 +2,9 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/catalog/products.php';
 
+require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
+require_once LIB . '/catalog/products.php';
+
 if (!isset($_SESSION['user'])) {
     header('Location: /account/login');
     exit();

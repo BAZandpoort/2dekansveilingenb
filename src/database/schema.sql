@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 12, 2023 at 07:22 PM
+-- Generation Time: Oct 24, 2023 at 01:05 AM
 -- Server version: 10.6.12-MariaDB-0ubuntu0.22.04.1
 -- PHP Version: 8.1.2-1ubuntu2.14
 
@@ -24,6 +24,31 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `bids`
+--
+
+CREATE TABLE `bids` (
+  `id` int(11) NOT NULL,
+  `productid` int(11) NOT NULL,
+  `userid` int(11) NOT NULL,
+  `bidPrice` decimal(18,2) NOT NULL,
+  `bidOfferedAt` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `favorites`
+--
+
+CREATE TABLE `favorites` (
+  `userid` int(11) NOT NULL,
+  `productid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `products`
 --
 
@@ -35,7 +60,7 @@ CREATE TABLE `products` (
   `description` text NOT NULL,
   `price` decimal(10,2) NOT NULL,
   `imageUrl` varchar(255) NOT NULL,
-  `endDate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp(),
+  `endDate` datetime DEFAULT NULL,
   `updatedAt` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -50,6 +75,35 @@ CREATE TABLE `product_categories` (
   `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `icon` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reports`
+--
+
+CREATE TABLE `reports` (
+  `id` int(11) NOT NULL,
+  `productid` int(11) NOT NULL,
+  `userid` int(11) NOT NULL,
+  `typeOfAbuse` text NOT NULL,
+  `context` text NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `review`
+--
+
+CREATE TABLE `review` (
+  `member` int(11) NOT NULL,
+  `review` text NOT NULL,
+  `sterren` int(11) NOT NULL,
+  `seller` int(11) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -90,7 +144,8 @@ INSERT INTO `translations` (`id`, `location`, `text_en`, `text_nl`, `text_fr`) V
 (17, 'footer', 'Cookie Policy', 'Cookiebeleid', 'Politique de cookies'),
 (18, 'nav', 'Auctions', 'Veilingen', 'Enchères'),
 (19, 'nav', 'Location', 'Locatie', 'Emplacement'),
-(20, 'nav', 'Products', 'Producten', 'Produits');
+(20, 'nav', 'Products', 'Producten', 'Produits'),
+(21, 'nav', 'test', 'test', 'test');
 
 -- --------------------------------------------------------
 
@@ -167,12 +222,19 @@ CREATE TABLE `user_role_mapping` (
 --
 
 --
+-- Indexes for table `bids`
+--
+ALTER TABLE `bids`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
   ADD KEY `products_userid` (`userid`),
   ADD KEY `products_categoryid` (`categoryid`);
+ALTER TABLE `products` ADD FULLTEXT KEY `search` (`name`,`description`);
 
 --
 -- Indexes for table `product_categories`
@@ -180,6 +242,12 @@ ALTER TABLE `products`
 ALTER TABLE `product_categories`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `product_category_name` (`name`);
+
+--
+-- Indexes for table `reports`
+--
+ALTER TABLE `reports`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `translations`
@@ -222,6 +290,12 @@ ALTER TABLE `user_role_mapping`
 --
 
 --
+-- AUTO_INCREMENT for table `bids`
+--
+ALTER TABLE `bids`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
@@ -234,10 +308,16 @@ ALTER TABLE `product_categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `reports`
+--
+ALTER TABLE `reports`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `users`
