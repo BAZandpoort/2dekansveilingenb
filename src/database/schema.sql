@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 10 nov 2023 om 13:03
+-- Gegenereerd op: 10 nov 2023 om 14:30
 -- Serverversie: 10.4.28-MariaDB
 -- PHP-versie: 8.2.4
 
@@ -67,6 +67,7 @@ CREATE TABLE `favorites` (
 --
 
 CREATE TABLE `notification_read` (
+  `id` int(11) NOT NULL,
   `notificationid` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
   `read` tinyint(1) NOT NULL,
@@ -261,6 +262,12 @@ ALTER TABLE `bidshistory`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexen voor tabel `notification_read`
+--
+ALTER TABLE `notification_read`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexen voor tabel `products`
 --
 ALTER TABLE `products`
@@ -332,6 +339,12 @@ ALTER TABLE `bids`
 -- AUTO_INCREMENT voor een tabel `bidshistory`
 --
 ALTER TABLE `bidshistory`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT voor een tabel `notification_read`
+--
+ALTER TABLE `notification_read`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --

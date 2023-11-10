@@ -34,7 +34,7 @@ $maxproductData = fetch("SELECT MAX(productid) AS maxid From `bidshistory`");
 
 
 if($user){
-for( $i = 1 ; $i<=$maxproductData['maxid'] ; $i++){
+for( $i = 1 ; $i <= $maxproductData['maxid'] ; $i++){
   
   $currentData = fetchSingle( "SELECT * FROM `bidshistory` WHERE productid = ? ORDER BY bidPrice DESC" , ['type' => 'i', 'value' => $i]);
 
@@ -44,6 +44,7 @@ for( $i = 1 ; $i<=$maxproductData['maxid'] ; $i++){
      
       $nothighest = true;
       $product=$data['productid'];
+      $bid_id = $data['id'];
     }
   break;
   }
@@ -175,29 +176,31 @@ for( $i = 1 ; $i<=$maxproductData['maxid'] ; $i++){
       </div>
     </div>
     <?php } 
-   // for( $i = 1 ; $i <= $maxproductData['maxid'] ; $i++){
-          
+      
+      $Data = fetch('SELECT * From notification_read Where userid = ? AND userid2 != ? AND notificationid = ?',['type' => 'i', 'value' => $user['id']],['type' => 'i', 'value' => $user['id']],['type' => 'i', 'value' => $bid_id]);
 
-  
-          //foreach ($currentdata as $data){
-            
-            
-           // if ($data['read'] === 1) { 
-              
-            
-             //}else{ }?> 
+    ?>
     <script>
         const div = document.getElementById('myDiv');
         const button = document.getElementById('hideButton');
+   
+        <?php  if ($Data['read']===0){ ?>
 
         button.addEventListener('click', function() {
           
            div.style.display = 'none';
-           <?php  $test = insert('UPDATE notification_read SET `read` = 0  Where userid = ? and userid2 != ?',['type' => 'i', 'value' => $user],['type' => 'i', 'value' => $user]); ?>
+           <?php  insert('UPDATE notification_read SET `read` = 1  Where userid = ? AND userid2 != ? AND notificationid = ?',['type' => 'i', 'value' => $user['id']],['type' => 'i', 'value' => $user['id']],['type' => 'i', 'value' => $bid_id]);  ?>
         });
-              
+       
+        <?php }else{ ?>
+
+            div.style.display = 'none'; 
+
+        <?php } ?>
+
     </script>
-    <h2>test</h2>
+
+   
   <!--/ message if outbid -->
 </div> 
     <details class="dropdown dropdown-end">
