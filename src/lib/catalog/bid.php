@@ -40,20 +40,26 @@ if (isset($_POST['bid'])) {
       ['type' => 'd', 'value' => $bid_price],
     ); 
 
+$maxproductData = fetch("SELECT MAX(productid) AS maxid From `bidshistory`");
 
-    $currentData = fetchSingle( "SELECT * FROM `bidshistory` WHERE productid = ? ORDER BY bidPrice DESC" , ['type' => 'i', 'value' => $i]);
 
-    foreach($currentData as $data){
-    $query = 'INSERT INTO notification_read (notificationid, userid, `read` , userid2) VALUES (?, ?, ?, ?)';
-    insert(
-      $query,
-      ['type' => 'i', 'value' => $data  ["id"]],
-      ['type' => 'i', 'value' => $userid],
-      ['type' => 'd', 'value' => 0],
-      ['type' => 'i', 'value' => $data["userid"]]
-    ); 
+  $currentData = fetchSingle( "SELECT * FROM `bidshistory` WHERE productid = ? ORDER BY bidPrice DESC" , ['type' => 'i', 'value' => $productid]);
+
+  foreach($currentData as $data){
+    var_dump($data);
+  $query = 'INSERT INTO notification_read (notificationid, userid, `read` , userid2) VALUES (?, ?, ?, ?)';
+
+  insert(
+    $query,
+    ['type' => 'i', 'value' => $data ["id"]],
+    ['type' => 'i', 'value' => $userid],
+    ['type' => 'd', 'value' => 0],
+    ['type' => 'i', 'value' => $data["userid"]]
+  ); 
     break;
-  }
+}
+  
+
 
   
 }

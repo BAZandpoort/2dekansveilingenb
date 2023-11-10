@@ -58,7 +58,7 @@ for( $i = 1 ; $i<=$maxproductData['maxid'] ; $i++){
     }
   }
 }
-var_dump($currentData);
+
 ?>
 
 <!-- Top navbar -->
@@ -191,14 +191,11 @@ var_dump($currentData);
         const button = document.getElementById('hideButton');
 
         button.addEventListener('click', function() {
-          // Hide the div by setting its display property to 'none'
+          
            div.style.display = 'none';
-           <?php  $test = insert('UPDATE bidshistory SET `read` = 0  Where productid = ?',['type' => 'i', 'value' => $product]); ?>
+           <?php  $test = insert('UPDATE notification_read SET `read` = 0  Where userid = ? and userid2 != ?',['type' => 'i', 'value' => $user],['type' => 'i', 'value' => $user]); ?>
         });
-                
-
-             
-         
+              
     </script>
     
   <!--/ message if outbid -->
