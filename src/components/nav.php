@@ -197,7 +197,7 @@ for( $i = 1 ; $i<=$maxproductData['maxid'] ; $i++){
         });
               
     </script>
-    
+    <h2>test</h2>
   <!--/ message if outbid -->
 </div> 
     <details class="dropdown dropdown-end">
