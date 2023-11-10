@@ -46,6 +46,8 @@ if (isset($_SESSION["user"])){
     if (strtotime($productData['endDate'])) {
       echo '<p class="opacity-70 pb-12">Veiling sluit om ' . $time . '</p>';
     }
+
+    
     ?>
     <div class="pb-24">
       <span id="countdown-wrapper" class="countdown font-mono text-5xl">
@@ -96,6 +98,42 @@ if (isset($_SESSION["user"])){
     
     <br>
     <?php
+      if ($productData["supportStandard"]){
+        $emojiSD = "✔️";
+      } else {
+        $emojiSD = "❌";
+      }
+  
+      if ($productData["supportExpress"]){
+        $emojiED = "✔️";
+      } else {
+        $emojiED = "❌";
+      }
+  
+      if ($productData["supportPickup"]){
+        $emojiPU = "✔️";
+      } else {
+        $emojiPU = "❌";
+      }
+  
+      echo '<b>Beschikbare verzendopties</b>
+        <table>
+          <tr>
+            <td>Standard</td>
+            <td>'.$emojiSD.'</td>
+          </tr>
+          <tr>
+            <td>Express</td>
+            <td>'.$emojiED.'</td>
+          </tr>
+          <tr>
+            <td>Pickup</td>
+            <td>'.$emojiPU.'</td>
+          </tr>
+        </table>
+        <br><br>
+      ';
+
       if (isset($_SESSION["user"])){
         echo '
           <a href="/catalog/report?productid='.$productId.'"><button class="btn btn-outline btn-error">Report abuse</button></a>
@@ -114,6 +152,8 @@ if (isset($_SESSION["user"])){
           </dialog>
         ';
       }
+
+      
     ?>
     
   </div>

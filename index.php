@@ -65,6 +65,16 @@ if ($succes) {
 $containerClasses = $route['container'] ? 'container mx-auto px-2 pt-4 pb-12 md:pt-12 md:pb-24 md:px-0' : '';
 $language = isset($_SESSION["user"]) ? $_SESSION["user"]["language"] : $_SESSION["guest"]["language"] ?? 'text_en';
 $translations = fetch('SELECT id, ' . $language . ' FROM translations');
+
+// The following INCOMPLETE code SHOULD check for expired auctions and then add the highest bid from that auction into the succesful_bids table WHEN ITS DONE.
+
+$expired_auctions = fetch('SELECT * FROM products WHERE endDate < NOW()');
+foreach ($expired_auctions as $expired_auction) {
+  $successful_bid = fetch('SELECT * FROM bids WHERE  productid == '.$expired_auctions["id"].' ORDER BY bidPrice LIMIT 1');
+  if ($successful_bid) {
+
+  }
+}
 ?>
 
 <!DOCTYPE html>

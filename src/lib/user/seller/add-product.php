@@ -12,6 +12,9 @@ if (isset($_POST['create'])) {
   $price = $_POST['price'];
   $file = $_FILES['image'];
   $endDate = isset($_POST["auction"]) ? $_POST['endDate'] : null;
+  $standardDelivery = isset($_POST["standardDelivery"]);
+  $expressDelivery = isset($_POST["expressDelivery"]);
+  $pickUp = isset($_POST["pickUp"]);
 
   $insertData = addProduct(
     $userid,
@@ -20,7 +23,10 @@ if (isset($_POST['create'])) {
     $description,
     $price,
     $file,
-    $endDate
+    $endDate,
+    $standardDelivery,
+    $expressDelivery,
+    $pickUp
   );
 }
 
@@ -34,10 +40,13 @@ function addProduct(
   $description,
   $price,
   $file,
-  $endDate
+  $endDate,
+  $standardDelivery,
+  $expressDelivery,
+  $pickUp
 ) {
-  $query = 'INSERT INTO products (userid, categoryid, name, description, price, imageUrl, endDate)
-            VALUES (?, ?, ?, ?, ?, ?, ?)';
+  $query = 'INSERT INTO products (userid, categoryid, name, description, price, imageUrl, endDate, supportStandard, supportExpress, supportPickup)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
 
   $imageName = $file['name'];
   $imageTmpName = $file['tmp_name'];
@@ -56,6 +65,9 @@ function addProduct(
     ['type' => 'd', 'value' => $price],
     ['type' => 's', 'value' => $baseImageName],
     ['type' => 's', 'value' => $endDate],
+    ['type' => 'i', 'value' => $standardDelivery],
+    ['type' => 'i', 'value' => $expressDelivery],
+    ['type' => 'i', 'value' => $pickUp],
   );
 
   return $insertData;
