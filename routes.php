@@ -52,6 +52,22 @@ $routes = [
     'footer' => true,
     'container' => true,
   ],
+  '/chats/users' => [
+    'view' => 'chats/users.php',
+    'title' => 'Product',
+    'nav' => true,
+    'footer' => true,
+    'container' => true,
+    
+  ],
+  '/chats/chats' => [
+    'view' => 'chats/chat.php',
+    'title' => 'Product',
+    'nav' => true,
+    'footer' => true,
+    'container' => true,
+    
+  ],
   '/products/share' => [
     'view' => 'catalog/share.php',
     'title' => 'Products',
