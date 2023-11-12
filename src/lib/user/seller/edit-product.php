@@ -8,7 +8,30 @@ if (isset($_POST['edit'])) {
   $title = $_POST['title'];
   $description = $_POST['description'];
   $price = $_POST['price'];
-  
+ 
+  if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+    $file = $_FILES['image'];
+    $imageName = $file['name'];
+
+    // Move the uploaded image to the target directory
+    $targetDir = $_SERVER['DOCUMENT_ROOT'] . '/public/images/';
+    $baseImageName = 'productid-' . $id . '.jpg';
+    $targetFile = $targetDir . $baseImageName;
+
+    if (move_uploaded_file($file['tmp_name'], $targetFile)) {
+      // Update the image URL in the database
+      $imageUpdateQuery = "UPDATE products SET imageUrl = ? WHERE id = ?";
+      $insertData = insert($imageUpdateQuery, ['type' => 's', 'value' => $baseImageName], ['type' => 'i', 'value' => $id]);
+
+      // Check for errors in the database update
+      if ($insertData === false) {
+        die('Error updating image URL in the database.');
+      }
+    } else {
+      die('Error moving uploaded file.');
+    }
+  }
+
   $query = "UPDATE products SET categoryid = ?, name = ?, description = ?, price = ? WHERE id = ?";
   
 
