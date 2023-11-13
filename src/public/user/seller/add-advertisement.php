@@ -22,9 +22,13 @@ $my_products = fetch($query, ['type' => 'i', 'value' => $_SESSION["user"]["id"]]
       </label>
       <select name="productid" id="productid" class="select select-bordered w-full">
         <?php
+          if (!isset($my_products["id"])){
             foreach ($my_products as $my_product) {
               echo '<option value='.$my_product['id'].'>'.$my_product['id'].' '.$my_product['name'].'</option>';
             }
+          } else {
+            echo '<option value='.$my_products['id'].'>'.$my_products['id'].' '.$my_products['name'].'</option>';
+          }
         ?>
       </select>
     </div>
