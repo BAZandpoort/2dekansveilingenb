@@ -70,9 +70,20 @@ $translations = fetch('SELECT id, ' . $language . ' FROM translations');
 
 $expired_auctions = fetch('SELECT * FROM products WHERE endDate < NOW()');
 foreach ($expired_auctions as $expired_auction) {
-  $successful_bid = fetch('SELECT * FROM bids WHERE  productid == '.$expired_auctions["id"].' ORDER BY bidPrice LIMIT 1');
-  if ($successful_bid) {
+  $successful_bid = fetch('SELECT * FROM bids WHERE  productid = ' . $expired_auction["id"] . ' ORDER BY bidPrice LIMIT 1');
+  if (isset($successful_bid["id"])) {
+    echo $successful_bid["bidPrice"];
+    $query = 'INSERT INTO successful_bids (originalBidid, bidderid, productid, bidPrice) VALUES (?, ?, ?, ?)';
+    insert(
+      $query,
+      ['type' => 'i', 'value' => $successful_bid["id"]],
+      ['type' => 'i', 'value' => $successful_bid["userid"]],
+      ['type' => 'i', 'value' => $successful_bid["productid"]],
+      ['type' => 'i', 'value' => $successful_bid["bidPrice"]],
+    );
 
+    $query = "DELETE FROM bids WHERE id = ?";
+    $deleteData = insert($query, ['type' => 'i', 'value' => $product_id]);
   }
 }
 ?>
@@ -85,7 +96,7 @@ foreach ($expired_auctions as $expired_auction) {
 
   <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.3/dist/full.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.tailwindcss.com"></script>
-  
+
   <script src="https://kit.fontawesome.com/58a210823e.js" crossorigin="anonymous"></script>
 
   <script src="/public/js/countdown.js"></script>
@@ -93,7 +104,9 @@ foreach ($expired_auctions as $expired_auction) {
   <script src="/public/js/bid.js"></script>
 
   <link rel="stylesheet" href="/public/css/theme.css">
-  <title>2dekans veilingen - <?php echo $route['title']; ?></title>
+  <title>2dekans veilingen -
+    <?php echo $route['title']; ?>
+  </title>
 </head>
 
 <body>
@@ -102,13 +115,13 @@ foreach ($expired_auctions as $expired_auction) {
 
     <div class="relative <?php echo $containerClasses ?>">
       <?php
-      echo strlen($alert) > 0 
-      ? '
+      echo strlen($alert) > 0
+        ? '
       <div class="absolute px-4 flex justify-center w-full md:w-auto left-1/2 transform -translate-x-1/2 top-8 z-50">
         ' . $alert . '
       </div>
-      ' 
-      : null;
+      '
+        : null;
       ?>
 
       <?php include PUBLIC_S . '/' . $route['view']; ?>
@@ -117,4 +130,5 @@ foreach ($expired_auctions as $expired_auction) {
     <?php $route['footer'] ? include COMPONENTS . '/footer.php' : null; ?>
   </div>
 </body>
+
 </html>
