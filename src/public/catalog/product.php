@@ -86,7 +86,18 @@ if (isset($_SESSION["user"])){
         ';
       } else {
         if ($ended) {
-          echo '<p class="text-center text-xl font-semibold">Winning bid was: €' . $lastBid . '</p>';
+          $finalBid = fetch('SELECT * FROM successful_bids WHERE  productid = ?',['type' => 'i','value' => $productId]);
+          if (!isset($finalBid["bidPrice"])){
+            $finalBidMessage = "Auction ended with no bids";
+            echo '<p class="text-center text-xl font-semibold">' . $finalBidMessage .'</p>';
+          } else {
+            $finalBidMessage = 'Winning bid was: €' . $finalBid["bidPrice"] . '';
+            echo '<p class="text-center text-xl font-semibold">' . $finalBidMessage .'</p>';
+
+            if ($finalBid['bidderid'] ==  $_SESSION['user']['id']) {
+              
+            }
+          }
         } else {
           echo '
           <a href="/account/login" class="btn btn-primary">

@@ -96,7 +96,7 @@ function insert($query, ...$params) {
 
 $expired_auctions = fetch('SELECT * FROM products WHERE endDate < NOW()');
 foreach ($expired_auctions as $expired_auction) {
-  $successful_bid = fetch('SELECT * FROM bids WHERE  productid = ? ORDER BY bidPrice LIMIT 1',['type' => 'i','value' => $expired_auction["id"]]);
+  $successful_bid = fetch('SELECT * FROM bids WHERE  productid = ? ORDER BY bidPrice DESC LIMIT 1',['type' => 'i','value' => $expired_auction["id"]]);
   if (isset($successful_bid["id"])) {
     $query = 'INSERT INTO successful_bids (originalBidid, bidderid, productid, bidPrice) VALUES (?, ?, ?, ?)';
     insert(
@@ -107,7 +107,7 @@ foreach ($expired_auctions as $expired_auction) {
       ['type' => 'd', 'value' => ''.$successful_bid["bidPrice"].''],
     );
 
-    $query = "DELETE FROM bids WHERE id = ?";
-    $deleteData = insert($query, ['type' => 'i', 'value' => $successful_bid["id"]]);
+    $query = "DELETE FROM bids WHERE productid = ?";
+    $deleteData = insert($query, ['type' => 'i', 'value' => $successful_bid["productid"]]);
   }
 }
