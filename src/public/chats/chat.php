@@ -1,68 +1,70 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
 
 <body>
-    <div class="wrapper">
-        <section class="chat-area">
-            <header>
-                <a href="users.php" class="back-icon"><i class="fas fa-arrow-left"></i></a>
-                <img src="#" alt="#">
-                <div class="details">
-                    <span>Abdullah</span>
-                    <p>Active now</p>
-                </div>
-            </header>
-            <div class="chat-box">
-                <div class="chat outgoing">
+    <div class="box">
+        <div class="wrapper">
+            <section class="chat-area">
+                <header>
+                    <a href="/chats/users" class="back-icon"><i class="fas fa-arrow-left"></i></a>
+                    <img src="https://avatars.githubusercontent.com/u/64209400?v=4" alt="#">
                     <div class="details">
-                        <p>fwfwfwfwfwfwfw fwfwfwffwfwdfffff fffffffffffffffffff ffffffffffffffffffff</p>
+                        <span>Abdullah</span>
+                        <p>Active now</p>
+                    </div>
+                </header>
+                <div class="chat-box">
+                    <div class="chat outgoing">
+                        <div class="details">
+                            <p>fwfwfwfwfwfwfw fwfwfwffwfwdfffff fffffffffffffffffff ffffffffffffffffffff</p>
+                        </div>
+                    </div>
+                    <div class="chat incoming">
+                        <img src="https://avatars.githubusercontent.com/u/64209400?v=4" alt="#">
+                        <div class="details">
+                            <p>fwfwfwfwfwfwfwfwfwfwffwf</p>
+                        </div>
+                    </div>
+                    <div class="chat outgoing">
+                        <div class="details">
+                            <p>fwfwfwfwfwfwfw fwfwfwffwfwdfffff fffffffffffffffffff ffffffffffffffffffff</p>
+                        </div>
+                    </div>
+                    <div class="chat incoming">
+                        <img src="https://avatars.githubusercontent.com/u/64209400?v=4" alt="#">
+                        <div class="details">
+                            <p>fwfwfwfwfwfwfwfwfwfwffwf</p>
+                        </div>
+                    </div>
+                    <div class="chat outgoing">
+                        <div class="details">
+                            <p>fwfwfwfwfwfwfw fwfwfwffwfwdfffff fffffffffffffffffff ffffffffffffffffffff</p>
+                        </div>
+                    </div>
+                    <div class="chat incoming">
+                        <img src="https://avatars.githubusercontent.com/u/64209400?v=4" alt="#">
+                        <div class="details">
+                            <p>fwfwfwfwfwfwfwfwfwfwffwf</p>
+                        </div>
+                    </div>
+                    <div class="chat outgoing">
+                        <div class="details">
+                            <p>fwfwfwfwfwfwfw fwfwfwffwfwdfffff fffffffffffffffffff ffffffffffffffffffff</p>
+                        </div>
+                    </div>
+                    <div class="chat incoming">
+                        <img src="https://avatars.githubusercontent.com/u/64209400?v=4" alt="#">
+                        <div class="details">
+                            <p>fwfwfwfwfwfwfwfwfwfwffwf</p>
+                        </div>
                     </div>
                 </div>
-                <div class="chat incoming">
-                    <img src="#" alt="#">
-                    <div class="details">
-                        <p>fwfwfwfwfwfwfwfwfwfwffwf</p>
-                    </div>
-                </div>
-                <div class="chat outgoing">
-                    <div class="details">
-                        <p>fwfwfwfwfwfwfw fwfwfwffwfwdfffff fffffffffffffffffff ffffffffffffffffffff</p>
-                    </div>
-                </div>
-                <div class="chat incoming">
-                    <img src="#" alt="#">
-                    <div class="details">
-                        <p>fwfwfwfwfwfwfwfwfwfwffwf</p>
-                    </div>
-                </div>
-                <div class="chat outgoing">
-                    <div class="details">
-                        <p>fwfwfwfwfwfwfw fwfwfwffwfwdfffff fffffffffffffffffff ffffffffffffffffffff</p>
-                    </div>
-                </div>
-                <div class="chat incoming">
-                    <img src="#" alt="#">
-                    <div class="details">
-                        <p>fwfwfwfwfwfwfwfwfwfwffwf</p>
-                    </div>
-                </div>
-                <div class="chat outgoing">
-                    <div class="details">
-                        <p>fwfwfwfwfwfwfw fwfwfwffwfwdfffff fffffffffffffffffff ffffffffffffffffffff</p>
-                    </div>
-                </div>
-                <div class="chat incoming">
-                    <img src="#" alt="#">
-                    <div class="details">
-                        <p>fwfwfwfwfwfwfwfwfwfwffwf</p>
-                    </div>
-                </div>
-            </div>
-            <form action="/src/lib/chats/chat.php" class="typing-area">
-                <input type="text" placeholder="Type a message here...">
-                <button><i class="fab fa-telegram-plane"></i></button>
-            </form>
-        </section>
-    </div>
+                <form action="/src/lib/chats/chat.php" class="typing-area">
+                    <input type="text" placeholder="Type a message here...">
+                    <button><i class="fab fa-telegram-plane"></i></button>
+                </form>
+            </section>
+        </div>
+</div>
 </body>
 
 <style>
@@ -77,13 +79,9 @@
     font-family: 'Poppins', sans-serif;
 }
 
-body
+.box
 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background: #f7f7f7;
+    padding-left: 35%;
 }
 
 .wrapper

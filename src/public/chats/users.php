@@ -1,9 +1,14 @@
 <?php
 
+require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
+require_once DATABASE . '/connect.php';
+require_once LIB . '/util/util.php';
+
 if (!isset($_SESSION['user'])) {
     header('Location: /account/login');
     return;
 }
+
 ?>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
@@ -13,11 +18,20 @@ if (!isset($_SESSION['user'])) {
         <div class="wrapper">
             <section class="users">
                 <header>
+                    <?php
+                        $userid = $_SESSION['user']['id'];
+                        $sql = mysqli_query($connection, "SELECT * FROM users,user_profile
+                        WHERE users.id=user_profile.userid
+                        AND users.id = $userid");
+                        if (mysqli_num_rows($sql) > 0) {
+                            $row = mysqli_fetch_assoc($sql);
+                        }
+                    ?>
                     <div class="content">
-                        <img src="#">
+                        <img src="<?php echo $row['profilePictureUrl'] ?>">
                         <div class="details">
-                            <span>Abdullah</span>
-                            <p>Active now</p>
+                            <span><?php echo $row['firstname'] . " " . $row['lastname'] ?></span>
+                            <p><?php echo $row['status'] ?></p>
                         </div>
                     </div>
                 </header>
@@ -27,59 +41,9 @@ if (!isset($_SESSION['user'])) {
                     <button><i class="fas fa-search"></i></button>
                 </div>
                 <div class="users-list">
-                    <a href="#">
+                    <a href="/chats/chats">
                         <div class="content">
-                            <img src="#" alt="#">
-                            <div class="details">
-                            <span>Abdullah</span>
-                            <p>Test</p>
-                        </div>
-                        </div>
-                        <div class="status-dot"><i class="fas fa-circle"></i></div>
-                    </a>
-                    <a href="#">
-                        <div class="content">
-                            <img src="#" alt="#">
-                            <div class="details">
-                            <span>Abdullah</span>
-                            <p>Test</p>
-                        </div>
-                        </div>
-                        <div class="status-dot"><i class="fas fa-circle"></i></div>
-                    </a>
-                    <a href="#">
-                        <div class="content">
-                            <img src="#" alt="#">
-                            <div class="details">
-                            <span>Abdullah</span>
-                            <p>Test</p>
-                        </div>
-                        </div>
-                        <div class="status-dot"><i class="fas fa-circle"></i></div>
-                    </a>
-                    <a href="#">
-                        <div class="content">
-                            <img src="#" alt="#">
-                            <div class="details">
-                            <span>Abdullah</span>
-                            <p>Test</p>
-                        </div>
-                        </div>
-                        <div class="status-dot"><i class="fas fa-circle"></i></div>
-                    </a>
-                    <a href="#">
-                        <div class="content">
-                            <img src="#" alt="#">
-                            <div class="details">
-                            <span>Abdullah</span>
-                            <p>Test</p>
-                        </div>
-                        </div>
-                        <div class="status-dot"><i class="fas fa-circle"></i></div>
-                    </a>
-                    <a href="#">
-                        <div class="content">
-                            <img src="#" alt="#">
+                            <img src="https://avatars.githubusercontent.com/u/64209400?v=4" alt="#">
                             <div class="details">
                             <span>Abdullah</span>
                             <p>Test</p>
@@ -208,7 +172,7 @@ if (!isset($_SESSION['user'])) {
 
 .users-list::-webkit-scrollbar
 {
-    width: 0px;
+    width: 5px;
 }
 
 .users-list a
