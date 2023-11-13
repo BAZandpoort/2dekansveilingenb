@@ -10,10 +10,16 @@ if (!isset($_SESSION['user'])) {
     exit();
 }
 
+
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/util/util.php';
 
+
 $productId = $_GET['productid'];
+
+$query = 'SELECT COUNT(*) as aantal FROM delivery_orders WHERE productid = ?';
+$delivery_data = fetch($query, ['type' => 'i', 'value' => $productId]);
+
 $query = 'SELECT * FROM products WHERE id = ?';
 $productData = fetch($query, ['type' => 'i', 'value' => $productId]);
 
@@ -25,19 +31,8 @@ if ($bidData["bidderid"] != $_SESSION['user']['id'] || !isset($bidData["bidderid
     exit();
 }
 
-$deliveryOptionsList = "";
 
-if ($productData["supportStandard"]) {
-    $deliveryOptionsList += '<option value="Standard">Standard delivery</option>';
-}
 
-if ($productData["supportExpress"]) {
-    $deliveryOptionsList += '<option value="Express">Express delivery</option>';
-}
-
-if ($productData["supportPickup"]) {
-    $deliveryOptionsList += '<option value="Pickup">Pickup</option>';
-}
 ?>
 
 <h1 class="text-center text-4xl font-bold mb-12">Delivery order</h1>
@@ -55,7 +50,19 @@ if ($productData["supportPickup"]) {
                 <span class="label-text">Delivery method</span>
             </label>
             <select name="deliveryMethod" class="select select-bordered w-full">
-                <?php echo $deliveryOptionsList?>
+                <?php 
+                    if ($productData["supportStandard"]) {
+                        echo '<option value="Standard">Standard delivery</option>';
+                    }
+                    
+                    if ($productData["supportExpress"]) {
+                        echo '<option value="Express">Express delivery</option>';
+                    }
+                    
+                    if ($productData["supportPickup"]) {
+                        echo '<option value="Pickup">Pickup</option>';
+                    }
+                ?>
             </select>
         </div>
     </div>
