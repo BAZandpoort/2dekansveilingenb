@@ -23,6 +23,7 @@ $purchaseHistory = fetchSingle('SELECT * FROM user_purchases WHERE id = ?', ["ty
           <th>Price</th>
           <th>Date Purchased</th>
           <th>product</th>
+          <th>factuur</th>
         </tr>
       </thead>
       <tbody>
@@ -34,6 +35,9 @@ $purchaseHistory = fetchSingle('SELECT * FROM user_purchases WHERE id = ?', ["ty
             <td>
               <a href="/catalog/product?id=<?= $purchase['productId'] ?>" class="btn btn-primary">View product page</a>
             </td>   
+            <td>
+              <a href="/src/lib/user/member/factuur.php" class="btn btn-primary">Download factuur</a>
+            </td>
           </tr>
         <?php endforeach; ?>
       </tbody>
