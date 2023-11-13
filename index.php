@@ -72,18 +72,17 @@ $expired_auctions = fetch('SELECT * FROM products WHERE endDate < NOW()');
 foreach ($expired_auctions as $expired_auction) {
   $successful_bid = fetch('SELECT * FROM bids WHERE  productid = ' . $expired_auction["id"] . ' ORDER BY bidPrice LIMIT 1');
   if (isset($successful_bid["id"])) {
-    echo $successful_bid["bidPrice"];
-    $query = 'INSERT INTO successful_bids (originalBidid, bidderid, productid, bidPrice) VALUES (?, ?, ?, ?)';
+    $query = 'INSERT INTO succesful_bids (originalBidid, bidderid, productid, bidPrice) VALUES (?, ?, ?, ?)';
     insert(
       $query,
       ['type' => 'i', 'value' => $successful_bid["id"]],
       ['type' => 'i', 'value' => $successful_bid["userid"]],
       ['type' => 'i', 'value' => $successful_bid["productid"]],
-      ['type' => 'i', 'value' => $successful_bid["bidPrice"]],
+      ['type' => 'i', 'value' => ''.$successful_bid["bidPrice"].''],
     );
 
     $query = "DELETE FROM bids WHERE id = ?";
-    $deleteData = insert($query, ['type' => 'i', 'value' => $product_id]);
+    $deleteData = insert($query, ['type' => 'i', 'value' => $successful_bid["id"]]);
   }
 }
 ?>
