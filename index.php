@@ -66,25 +66,6 @@ $containerClasses = $route['container'] ? 'container mx-auto px-2 pt-4 pb-12 md:
 $language = isset($_SESSION["user"]) ? $_SESSION["user"]["language"] : $_SESSION["guest"]["language"] ?? 'text_en';
 $translations = fetch('SELECT id, ' . $language . ' FROM translations');
 
-// The following INCOMPLETE code SHOULD check for expired auctions and then add the highest bid from that auction into the succesful_bids table WHEN ITS DONE.
-
-$expired_auctions = fetch('SELECT * FROM products WHERE endDate < NOW()');
-foreach ($expired_auctions as $expired_auction) {
-  $successful_bid = fetch('SELECT * FROM bids WHERE  productid = ' . $expired_auction["id"] . ' ORDER BY bidPrice LIMIT 1');
-  if (isset($successful_bid["id"])) {
-    $query = 'INSERT INTO succesful_bids (originalBidid, bidderid, productid, bidPrice) VALUES (?, ?, ?, ?)';
-    insert(
-      $query,
-      ['type' => 'i', 'value' => $successful_bid["id"]],
-      ['type' => 'i', 'value' => $successful_bid["userid"]],
-      ['type' => 'i', 'value' => $successful_bid["productid"]],
-      ['type' => 'i', 'value' => ''.$successful_bid["bidPrice"].''],
-    );
-
-    $query = "DELETE FROM bids WHERE id = ?";
-    $deleteData = insert($query, ['type' => 'i', 'value' => $successful_bid["id"]]);
-  }
-}
 ?>
 
 <!DOCTYPE html>
