@@ -26,8 +26,8 @@ $productData = fetch($query, ['type' => 'i', 'value' => $productId]);
 $query = 'SELECT * FROM successful_bids WHERE productid = ?';
 $bidData = fetch($query, ['type' => 'i', 'value' => $productId]);
 
-if ($bidData["bidderid"] != $_SESSION['user']['id'] || !isset($bidData["bidderid"])) {
-    header('Location: /');
+if ($delivery_data["aantal"] > 0 || !isset($bidData["bidderid"]) || $bidData["bidderid"] != $_SESSION['user']['id']) {
+    echo '<script>window.location="../"</script>';
     exit();
 }
 
