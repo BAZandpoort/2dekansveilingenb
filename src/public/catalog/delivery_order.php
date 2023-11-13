@@ -45,7 +45,7 @@ if ($productData["supportPickup"]) {
         <?php echo $productData["name"] ?>
     </u></h2>
 
-<form action="/src/lib/user/member/report.php" method="post"
+<form action="/src/lib/user/member/delivery_order.php" method="post"
     class="flex flex-col items-center justify-center gap-4 max-w-2xl mx-auto">
     <input type="hidden" name="productid" id="productid" value="<?php echo $_GET["productid"] ?>">
 
