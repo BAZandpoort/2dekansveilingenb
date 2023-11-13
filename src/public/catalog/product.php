@@ -100,9 +100,16 @@ if (isset($_SESSION["user"])) {
           echo '<p class="text-center text-xl font-semibold">' . $finalBidMessage . '</p>';
 
           if ($finalBid['bidderid'] == $_SESSION['user']['id']) {
-            echo '
-              <a href="/catalog/delivery_order?productid=' . $productId . '"><button class="btn btn-outline btn-success">Order delivery</button></a>
-            ';
+
+            $query = 'SELECT COUNT(*) as aantal FROM delivery_orders WHERE productid = ?';
+            $delivery_data = fetch($query, ['type' => 'i', 'value' => $productId]);
+            if ($delivery_data["aantal"] > 0) {
+              echo '-<button class="btn btn-outline btn-warning">Delivery already made</button>';
+            } else {
+              echo '
+                <a href="/catalog/delivery_order?productid=' . $productId . '"><button class="btn btn-outline btn-success">Order delivery</button></a>
+              ';
+            }
           }
         }
       } else {
