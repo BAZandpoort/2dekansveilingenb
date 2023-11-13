@@ -52,13 +52,27 @@ $routes = [
     'footer' => true,
     'container' => true,
   ],
+  // chat routes
   '/chats/users' => [
     'view' => 'chats/users.php',
     'title' => 'Product',
     'nav' => true,
     'footer' => true,
     'container' => true,
-    
+  ],
+  '/lib/chats/users' => [
+    'view' => '../lib/chats/users.php',
+    'title' => 'Product',
+    'nav' => true,
+    'footer' => true,
+    'container' => true,
+  ],
+  '/lib/javascript/users' => [
+    'view' => '../lib/javascript/users.js',
+    'title' => 'Product',
+    'nav' => true,
+    'footer' => true,
+    'container' => true,
   ],
   '/chats/chats' => [
     'view' => 'chats/chat.php',

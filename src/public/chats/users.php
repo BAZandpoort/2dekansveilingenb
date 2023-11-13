@@ -2,7 +2,6 @@
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once DATABASE . '/connect.php';
-require_once LIB . '/util/util.php';
 
 if (!isset($_SESSION['user'])) {
     header('Location: /account/login');
@@ -36,25 +35,17 @@ if (!isset($_SESSION['user'])) {
                     </div>
                 </header>
                 <div class="search">
-                    <span class="text">Select a user to start chatting</span>
+                    <span class="text"></span>
                     <input type="text" placeholder="Enter name to search...">
                     <button><i class="fas fa-search"></i></button>
                 </div>
                 <div class="users-list">
-                    <a href="/chats/chats">
-                        <div class="content">
-                            <img src="https://avatars.githubusercontent.com/u/64209400?v=4" alt="#">
-                            <div class="details">
-                            <span>Abdullah</span>
-                            <p>Test</p>
-                        </div>
-                        </div>
-                        <div class="status-dot"><i class="fas fa-circle"></i></div>
-                    </a>
+                    
                 </div>
             </section>
         </div>
     </div>
+    <script src="../lib/javascript/users.js"></script>
 </body>
 
 <style>
