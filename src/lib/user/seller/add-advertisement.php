@@ -33,7 +33,7 @@ function addAdvertisement(
   $imageName = $file['name'];
   $imageTmpName = $file['tmp_name'];
 
-  $targetDir = PUBLIC_R . "/adverts/";
+  $targetDir = PUBLIC_R . "/advertisements/";
   $baseImageName = basename($imageName, ".jpg") . '--userid-' . $userid . ".jpg";
   $targetFile = $targetDir . $baseImageName;
   move_uploaded_file($imageTmpName, $targetFile);

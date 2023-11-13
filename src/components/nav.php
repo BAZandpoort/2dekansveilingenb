@@ -221,7 +221,7 @@ $searchTerm = $_GET['search'] ?? '';
         if ($advert) {
           echo '
             <div class="flex justify-center items-center pt-12"> 
-              <a href="../catalog/product?id='.$advert["productid"].'"><img id="advert" alt="'.$advert["altText"].'" src="/public/adverts/'.$advert["imageUrl"].'" width="970" height="125"></a>
+              <a href="../catalog/product?id='.$advert["productid"].'"><img id="advert" alt="'.$advert["altText"].'" src="/public/advertisements/'.$advert["imageUrl"].'" width="970" height="125"></a>
             </div>
           ';
         }
