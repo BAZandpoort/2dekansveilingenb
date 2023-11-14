@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 14 nov 2023 om 10:28
+-- Gegenereerd op: 14 nov 2023 om 21:11
 -- Serverversie: 10.4.28-MariaDB
 -- PHP-versie: 8.2.4
 
@@ -28,11 +28,35 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `messages` (
-  `id` int(100) NOT NULL,
+  `msg_id` int(11) NOT NULL,
   `incoming_msg_id` int(255) NOT NULL,
   `outgoing_msg_id` int(255) NOT NULL,
-  `msg` varchar(255) DEFAULT NULL
+  `msg` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `messages`
+--
+
+INSERT INTO `messages` (`msg_id`, `incoming_msg_id`, `outgoing_msg_id`, `msg`) VALUES
+(4, 31, 52, 'Helloo'),
+(5, 31, 52, 'me gon beat u up'),
+(6, 31, 52, 'yesyes'),
+(7, 31, 52, 'gege'),
+(8, 31, 52, 'awdada'),
+(9, 52, 53, 'hewwo'),
+(10, 53, 52, 'who are u??'),
+(11, 52, 53, 'ur mom'),
+(12, 53, 52, 'huh'),
+(13, 53, 52, 'i have 2 moms?'),
+(14, 52, 53, 'yeess hehehe'),
+(15, 53, 52, 'NOOOO'),
+(16, 53, 52, 'wdw'),
+(17, 53, 52, 'ww'),
+(18, 52, 53, 'wad'),
+(19, 31, 53, 'helooo'),
+(20, 3, 53, 'heahe'),
+(21, 1, 53, 'dwawdw');
 
 -- --------------------------------------------------------
 
@@ -251,7 +275,8 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `firstname`, `lastna
 (49, 'Skyla62', 'Adrien.Luettgen@yahoo.com', '$argon2id$v=19$m=65536,t=3,p=4$wy3GuC7cUvakLUttbbreBg$nrI5S1QDsQJEFYumpYhEbWLkPt1pUv5Rs5H3nAZ5Iq8', 'Brook', 'Hyatt', 'Offline now', '2023-11-13 07:44:07', '2023-11-13 07:44:07'),
 (50, 'Meggie_Metz', 'Rod_Bradtke27@yahoo.com', '$argon2id$v=19$m=65536,t=3,p=4$muDKEEDY2AYLgBXq6RALng$I7CiZ8m7VBl6/y6dRCgxg7wW21Wmy40DJyyauq5tdNo', 'Eliseo', 'Macejkovic', 'Offline now', '2023-11-13 07:44:07', '2023-11-13 07:44:07'),
 (51, 'Testing Account', 'test@gmail.com', '$argon2id$v=19$m=65536,t=3,p=4$+9rU3e41kDSk/ccW8QOXAQ$1jkdTgxdXq60+JFYkOmIj6Tkr2+ylTN6TDFMegDWSw8', 'Testing', 'Account', 'Offline now', '2023-11-13 07:44:07', '2023-11-13 07:44:07'),
-(52, 'Abdullah Evloev', 'abdevl76@gmail.com', '$argon2id$v=19$m=65536,t=4,p=1$RmROZi5ENlFkRlQuZERHRQ$rZ5tKCMiCefQa0qw271IcnIbEibdLH2YCSyK0B5psBY', 'Abdullah', 'Evloev', 'Offline now', '2023-11-13 08:26:44', '2023-11-13 07:44:22');
+(52, 'Abdullah Evloev', 'abdevl76@gmail.com', '$argon2id$v=19$m=65536,t=4,p=1$RmROZi5ENlFkRlQuZERHRQ$rZ5tKCMiCefQa0qw271IcnIbEibdLH2YCSyK0B5psBY', 'Abdullah', 'Evloev', 'Offline now', '2023-11-13 08:26:44', '2023-11-13 07:44:22'),
+(53, 'adwda', 'admin@gmail.com', '$argon2id$v=19$m=65536,t=4,p=1$NHdsc1JGVm5WMWZHbjVmQQ$MQN+ex1eCZ+OkHXZgpMg9slbinctraITfR0xiY0Ewlo', 'john', 'wick', 'Offline now', '2023-11-14 19:49:53', '2023-11-14 19:49:53');
 
 -- --------------------------------------------------------
 
@@ -324,7 +349,8 @@ INSERT INTO `user_profile` (`id`, `userid`, `profilePictureUrl`, `about`, `theme
 (49, 29, 'https://avatars.githubusercontent.com/u/68358263', 'Tepidus creo cur. Vestigium sursum argentum comburo adhaero articulus adhaero titulus. Deorsum cogo demo demitto curvo ager voluptatum.', 'dark', 'text_fr'),
 (50, 19, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/167.jpg', 'Thymum argumentum deorsum territo nostrum aeger. Aeneus eos vinculum uredo uterque adnuo catena vilicus. Validus laudantium cometes reiciendis conforto acies decet eaque ulterius tantum.', 'light', 'text_en'),
 (51, 51, 'https://avatars.githubusercontent.com/u/78645956', 'Testing Account', 'light', 'text_en'),
-(52, 52, 'https://avatars.githubusercontent.com/u/64209400?v=4', 'Hello!', 'light', 'text_en');
+(52, 52, 'https://avatars.githubusercontent.com/u/64209400?v=4', 'Hello!', 'dark', 'text_en'),
+(53, 53, 'https://avatars.githubusercontent.com/u/64209400?v=4', 'Hello!', 'light', 'text_en');
 
 -- --------------------------------------------------------
 
@@ -544,7 +570,7 @@ INSERT INTO `user_role_mapping` (`id`, `userid`, `roleid`) VALUES
 -- Indexen voor tabel `messages`
 --
 ALTER TABLE `messages`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`msg_id`);
 
 --
 -- Indexen voor tabel `products`
@@ -605,7 +631,7 @@ ALTER TABLE `user_role_mapping`
 -- AUTO_INCREMENT voor een tabel `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT voor een tabel `products`
@@ -629,13 +655,13 @@ ALTER TABLE `translations`
 -- AUTO_INCREMENT voor een tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT voor een tabel `user_profile`
 --
 ALTER TABLE `user_profile`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT voor een tabel `user_roles`

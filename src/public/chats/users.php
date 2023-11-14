@@ -1,5 +1,4 @@
 <?php
-
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once DATABASE . '/connect.php';
 
@@ -19,9 +18,10 @@ if (!isset($_SESSION['user'])) {
                 <header>
                     <?php
                         $userid = $_SESSION['user']['id'];
-                        $sql = mysqli_query($connection, "SELECT * FROM users,user_profile
-                        WHERE users.id=user_profile.userid
-                        AND users.id = $userid");
+                        $sql = mysqli_query($connection, "SELECT *
+                        FROM users
+                        JOIN user_profile ON users.id = user_profile.userid
+                        WHERE users.id = $userid");
                         if (mysqli_num_rows($sql) > 0) {
                             $row = mysqli_fetch_assoc($sql);
                         }
@@ -40,7 +40,6 @@ if (!isset($_SESSION['user'])) {
                     <button><i class="fas fa-search"></i></button>
                 </div>
                 <div class="users-list">
-                    
                 </div>
             </section>
         </div>

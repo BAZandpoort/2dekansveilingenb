@@ -1,3 +1,9 @@
+<?php 
+require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
+require_once DATABASE . '/connect.php';
+
+?>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
 
 <body>
@@ -5,67 +11,47 @@
         <div class="wrapper">
             <section class="chat-area">
                 <header>
+                    <?php
+                        $userssid = $_SESSION['user']['id'];
+                        $userid = mysqli_real_escape_string($connection, $_GET['userid']);
+                        $row = [];
+                        $sql = mysqli_query($connection, "SELECT * FROM users JOIN user_profile ON users.id = user_profile.userid WHERE users.id = {$userid}");
+                        if ($sql) {
+                            if (mysqli_num_rows($sql) > 0) {
+                                $row = mysqli_fetch_assoc($sql);
+                            }
+                        } else {
+                            echo "Error: " . mysqli_error($connection);
+                        }
+                    ?>
                     <a href="/chats/users" class="back-icon"><i class="fas fa-arrow-left"></i></a>
-                    <img src="https://avatars.githubusercontent.com/u/64209400?v=4" alt="#">
+                    <img src="<?php echo $row['profilePictureUrl'] ?>" alt="#">
                     <div class="details">
-                        <span>Abdullah</span>
-                        <p>Active now</p>
+                        <span><?php echo $row['firstname'] . " " . $row['lastname'] ?></span>
+                        <p><?php echo $row['status'] ?></p>
                     </div>
                 </header>
                 <div class="chat-box">
-                    <div class="chat outgoing">
-                        <div class="details">
-                            <p>fwfwfwfwfwfwfw fwfwfwffwfwdfffff fffffffffffffffffff ffffffffffffffffffff</p>
-                        </div>
-                    </div>
-                    <div class="chat incoming">
-                        <img src="https://avatars.githubusercontent.com/u/64209400?v=4" alt="#">
-                        <div class="details">
-                            <p>fwfwfwfwfwfwfwfwfwfwffwf</p>
-                        </div>
-                    </div>
-                    <div class="chat outgoing">
-                        <div class="details">
-                            <p>fwfwfwfwfwfwfw fwfwfwffwfwdfffff fffffffffffffffffff ffffffffffffffffffff</p>
-                        </div>
-                    </div>
-                    <div class="chat incoming">
-                        <img src="https://avatars.githubusercontent.com/u/64209400?v=4" alt="#">
-                        <div class="details">
-                            <p>fwfwfwfwfwfwfwfwfwfwffwf</p>
-                        </div>
-                    </div>
-                    <div class="chat outgoing">
-                        <div class="details">
-                            <p>fwfwfwfwfwfwfw fwfwfwffwfwdfffff fffffffffffffffffff ffffffffffffffffffff</p>
-                        </div>
-                    </div>
-                    <div class="chat incoming">
-                        <img src="https://avatars.githubusercontent.com/u/64209400?v=4" alt="#">
-                        <div class="details">
-                            <p>fwfwfwfwfwfwfwfwfwfwffwf</p>
-                        </div>
-                    </div>
-                    <div class="chat outgoing">
-                        <div class="details">
-                            <p>fwfwfwfwfwfwfw fwfwfwffwfwdfffff fffffffffffffffffff ffffffffffffffffffff</p>
-                        </div>
-                    </div>
-                    <div class="chat incoming">
-                        <img src="https://avatars.githubusercontent.com/u/64209400?v=4" alt="#">
-                        <div class="details">
-                            <p>fwfwfwfwfwfwfwfwfwfwffwf</p>
-                        </div>
-                    </div>
+                    
                 </div>
-                <form action="/src/lib/chats/chat.php" class="typing-area">
-                    <input type="text" placeholder="Type a message here...">
+                <form action="#" class="typing-area" autocomplete="off">
+                    <input type="text" name="outgoing_id" value="<?php echo $userssid; ?>" hidden>
+                    <input type="text" name="incoming_id" value="<?php echo $userid; ?>" hidden>
+                    <input type="text" name="message" class="input-field" placeholder="Type a message here...">
                     <button><i class="fab fa-telegram-plane"></i></button>
                 </form>
             </section>
         </div>
 </div>
+
+<script src="/public/js/chat.js"></script>
+
 </body>
+
+
+
+
+
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins');

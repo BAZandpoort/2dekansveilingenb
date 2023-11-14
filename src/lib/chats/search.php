@@ -6,10 +6,14 @@ require_once DATABASE . '/connect.php';
 $searchTerm = mysqli_real_escape_string($connection, $_POST['searchTerm']);
 $output = "";
 
-$sql = mysqli_query($connection, "SELECT * FROM users WHERE firstname LIKE '%{$searchTerm}%' OR lastname LIKE '%{$searchTerm}%'");
+$sql = mysqli_query($connection, "SELECT *
+FROM users
+JOIN user_profile ON users.id = user_profile.userid
+WHERE users.firstname LIKE '%{$searchTerm}%' OR users.lastname LIKE '%{$searchTerm}%';
+");
 if (mysqli_num_rows($sql) > 0) {
     while ($row = mysqli_fetch_assoc($sql)) {
-        $output .= '<a href="#">
+        $output .= '<a href="/chats/chat?userid=' . $row['userid'] . '">
                         <div class="content">
                             <img src="' . $row['profilePictureUrl'] . '">
                             <div class="details">

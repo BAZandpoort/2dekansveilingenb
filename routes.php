@@ -55,33 +55,19 @@ $routes = [
   // chat routes
   '/chats/users' => [
     'view' => 'chats/users.php',
-    'title' => 'Product',
+    'title' => 'chat',
     'nav' => true,
     'footer' => true,
     'container' => true,
   ],
-  '/lib/chats/users' => [
-    'view' => '../lib/chats/users.php',
-    'title' => 'Product',
-    'nav' => true,
-    'footer' => true,
-    'container' => true,
-  ],
-  '/lib/javascript/users' => [
-    'view' => '../lib/javascript/users.js',
-    'title' => 'Product',
-    'nav' => true,
-    'footer' => true,
-    'container' => true,
-  ],
-  '/chats/chats' => [
+  '/chats/chat' => [
     'view' => 'chats/chat.php',
-    'title' => 'Product',
+    'title' => 'chat',
     'nav' => true,
     'footer' => true,
     'container' => true,
-    
   ],
+  // product share
   '/products/share' => [
     'view' => 'catalog/share.php',
     'title' => 'Products',
