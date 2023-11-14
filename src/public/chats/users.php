@@ -45,7 +45,7 @@ if (!isset($_SESSION['user'])) {
             </section>
         </div>
     </div>
-    <script src="../lib/javascript/users.js"></script>
+    <script src="/public/js/users.js"></script>
 </body>
 
 <style>
