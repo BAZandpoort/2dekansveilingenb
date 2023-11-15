@@ -53,8 +53,6 @@ function addProduct(
   $targetFile = $targetDir . $baseImageName;
   move_uploaded_file($imageTmpName, $targetFile);
   // Before the insert query
-  var_dump($userid, $categoryid, $name, $description, $price, $baseImageName, $endDate);
-  echo "<br><br>";
   $insertData = insert(
     $query,
     ['type' => 'i', 'value' => $userid],
