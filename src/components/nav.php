@@ -44,8 +44,9 @@ for( $i = 1 ; $i <= $maxproductData['maxid'] ; $i++){
      
       $nothighest = true;
       $product=$data['productid'];
-      $bid_id = $data['id'];
+      
     }
+    $bid_id = $data['id'];
   break;
   }
 
@@ -176,7 +177,7 @@ for( $i = 1 ; $i <= $maxproductData['maxid'] ; $i++){
       </div>
     </div>
     <?php } 
-      
+      if($user){
       $Data = fetch('SELECT * From notification_read Where userid = ? AND userid2 != ? AND notificationid = ?',['type' => 'i', 'value' => $user['id']],['type' => 'i', 'value' => $user['id']],['type' => 'i', 'value' => $bid_id]);
 
     ?>
@@ -196,7 +197,9 @@ for( $i = 1 ; $i <= $maxproductData['maxid'] ; $i++){
 
             div.style.display = 'none'; 
 
-        <?php } ?>
+        <?php }
+      }
+        ?>
 
     </script>
 
