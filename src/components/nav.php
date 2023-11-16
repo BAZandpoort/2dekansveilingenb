@@ -29,6 +29,7 @@ $searchTerm = $_GET['search'] ?? '';
 
 $userexist=false;
 $nothighest=false;
+$bid_id=null;
 
 $maxproductData = fetch("SELECT MAX(productid) AS maxid From `bidshistory`");
 
