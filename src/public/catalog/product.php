@@ -93,8 +93,24 @@ if (isset($_SESSION["user"])){
         }
       }
     ?>
-    
+
     <br>
+    <?php
+if ($ended) {
+    if (isset($_SESSION["user"])) {
+        // Check if the user won the auction
+        if ($winningUserId == $_SESSION["user"]["id"]) {
+            // The user won the auction
+            echo '<a href="/payment?productId=' . $productId . '" class="btn btn-primary">Pay for the product</a>';
+        }
+    }
+} else {
+    echo '
+    <a href="/account/login" class="btn btn-primary">
+        Log in to begin bidding
+    </a>';
+}
+?>
     <?php
       if (isset($_SESSION["user"])){
         echo '
