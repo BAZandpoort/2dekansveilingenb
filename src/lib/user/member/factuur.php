@@ -45,8 +45,6 @@ if ($purchaseHistory) {
         $pdf->Cell(40, 10, 'Item Name: ' . $purchase['productName']);
         $pdf->Ln();
         $pdf->Cell(40, 10, 'Price: ' . $purchase['price']);
-        $pdf->Ln();
-        $pdf->Cell(40, 10, 'Date Purchased: ' . $purchase['timeOfPurchase']);
         $pdf->Ln(); 
         $pdf->Ln();  
         

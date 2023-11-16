@@ -78,13 +78,13 @@ if (isset($_SESSION["user"])){
                 <input name="amount" type="number" min="' . $lastBid + 0.01 . '" step="0.01" placeholder="Your bid" class="input input-bordered w-full max-w-xs join-item pl-5 relative" required/>
                 <p class="absolute top-3 left-2 opacity-40">€</p>
               </div>
-              <button name="bid" class="btn btn-outline btn-primary join-item">Place bid</button>
+              <button name="bid" class="btn btn-outline btn-primary join-item ">Place bid</button>
             </div>
           </form>
         ';
       } else {
         if ($ended) {
-          echo '<p class="text-center text-xl font-semibold">Winning bid was: €' . $lastBid . '</p>';
+          echo '<p class="text-center text-xl font-semibold mb-3">Winning bid was: €' . $lastBid . '</p>';
         } else {
           echo '
           <a href="/account/login" class="btn btn-primary">
@@ -93,8 +93,25 @@ if (isset($_SESSION["user"])){
         }
       }
     ?>
-
+    
     <br>
+    <?php
+      $sql = "SELECT userid FROM bids WHERE productid = ?";
+      $winningBidderId = ['userid'];
+    
+  if ($ended) {
+    if (isset($_SESSION["user"]) && $winningBidderId ) {
+      echo '
+      <form action="/src/lib/user/member/factuur.php"  method="post">
+        <input type="hidden" name="product_id" value="' . $productId . '">
+        <input type="hidden" name="amount" value="' . $lastBid . '">
+        <button type="submit" class="btn btn-primary mb-3">Pay Now</button>
+      </form>
+      ';
+    }
+  } 
+?>
+<br>
 
     <?php
       if (isset($_SESSION["user"])){
@@ -234,21 +251,7 @@ if (count($sellerReviews) > 0) {
 
 
 
-<form action="/src/lib/user/seller/update-timer.php" method="post" enctype="multipart/form-data" class="flex flex-col items-center justify-center gap-4 max-w-2xl mx-auto">
-  <div class="flex flex-row justify-center gap-4 w-full">
-    <!-- Auction End Date -->
-    <div class="form-control flex-1 w-full">
-      <label class="label">
-        <span class="label-text">Auction End Date</span>
-      </label>
-      <input type="datetime-local" name="endDate" placeholder="20.00" class="input input-bordered w-full" required />
-      <input type="hidden" name="id" value="<?php echo $productData['id']; ?>" /> 
-    </div>
-  </div>
-  <div class="form-control w-full max-w-xs mt-4">
-    <button name="change" class="btn btn-primary">change</button>
-  </div>
-</form>
+
 
 
 <script>
