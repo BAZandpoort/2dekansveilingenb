@@ -8,10 +8,11 @@ require_once LIB . '/util/util.php';
 
 
 $userssid = $_SESSION['user']['id'];
-
 $outgoing_id = $userssid;
-$sql = mysqli_query($connection, "SELECT * FROM users,user_profile
-WHERE users.id=user_profile.userid");
+
+$sql = mysqli_query($connection, "SELECT *
+FROM users
+JOIN user_profile ON users.id = user_profile.userid WHERE NOT userid = {$outgoing_id}");
 $output = "";
 
 if (mysqli_num_rows($sql) == 1)
@@ -31,15 +32,20 @@ if (mysqli_num_rows($sql) == 1)
         }
         (strlen($result) > 28) ? $msg = substr($result, 0, 28).'...' : $msg = $result;
 
+        $you = "";
+
+        if ($row2 !== null && is_array($row2) && array_key_exists('outgoing_msg_id', $row2)) {
+            $you = ($outgoing_id == $row2['outgoing_msg_id']) ? "You: " : "";
+        }
+
         $output .= '<a href="/chats/chat?userid=' . $row['userid'] . '">
                         <div class="content">
                             <img src="' . $row['profilePictureUrl'] . '">
                             <div class="details">
                             <span>' . $row['firstname'] . " " . $row['lastname'] .'</span>
-                            <p>'. $msg .'</p>
+                            <p>'. $you . $msg .'</p>
                         </div>
                         </div>
-                        <div class="status-dot"><i class="fas fa-circle"></i></div>
                     </a>';
     }
 }

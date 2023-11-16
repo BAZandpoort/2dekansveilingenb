@@ -30,7 +30,7 @@ if (!isset($_SESSION['user'])) {
                         <img src="<?php echo $row['profilePictureUrl'] ?>">
                         <div class="details">
                             <span><?php echo $row['firstname'] . " " . $row['lastname'] ?></span>
-                            <p><?php echo $row['status'] ?></p>
+                            <p class="status-dot">Online now</p>
                         </div>
                     </div>
                 </header>
@@ -191,17 +191,9 @@ if (!isset($_SESSION['user'])) {
     color: #67676a;;
 }
 
-.users-list a .status-dot
+.content .status-dot
 {
-    font-size: 12px;
-    color: #468669;
+    font-size: 15px;
 }
-
-.users-list a .status-dot.offline
-{
-    color: #ccc;
-}
-
-
 
 </style>
