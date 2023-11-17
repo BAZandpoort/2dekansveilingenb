@@ -113,6 +113,13 @@ $routes = [
     'footer' => false,
     'container' => true,
   ],
+  '/seller/add-advertisement' => [
+    'view' => 'user/seller/add-advertisement.php',
+    'title' => 'Dashboard',
+    'nav' => true,
+    'footer' => true,
+    'container' => false,
+  ],
   // Admin Dashboard routes
   '/dashboard/products/delete' => [
     'view' => 'user/admin/delete-product.php',
@@ -138,6 +145,13 @@ $routes = [
   '/dashboard/translations/add' => [
     'view' => 'user/admin/add-translation.php',
     'title' => 'Add translations',
+    'nav' => true,
+    'footer' => false,
+    'container' => true,
+  ],
+  '/member/dashboard' => [
+    'view' => 'user/member/dashboard.php',
+    'title' => 'Member Dashboard',
     'nav' => true,
     'footer' => false,
     'container' => true,

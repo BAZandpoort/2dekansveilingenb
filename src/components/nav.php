@@ -239,6 +239,7 @@ for( $i = 1 ; $i <= $maxproductData['maxid'] ; $i++){
               <summary class="m-1">Member Dashboard</summary>
               <ul class="mr-4 p-2 shadow menu dropdown-content z-[1] bg-base-200 rounded-box w-52">
                 <li><a href="/dashboard/products/history">Purchase history</a></li>
+                <li><a href="/member/dashboard">Dashboard</a></li>
               </ul>
             </details>
           </li>
@@ -250,6 +251,7 @@ for( $i = 1 ; $i <= $maxproductData['maxid'] ; $i++){
                 <li><a href="/dashboard/products/own">My products</a></li>
                 <li><a href="/seller/dashboard">Dashboard</a></li>
                 <li><a href="/dashboard/products/time/edit">Edit Auction Date</a></li>
+                <li><a href="/seller/add-advertisement">Add advertisement</a></li>
               </ul>
             </details>
           </li>
@@ -302,6 +304,16 @@ for( $i = 1 ; $i <= $maxproductData['maxid'] ; $i++){
             </a>
             ';
           }
+        }
+
+        $advert = fetch("SELECT * FROM advertisements ORDER BY RAND () LIMIT 1");
+
+        if ($advert) {
+          echo '
+            <div class="flex justify-center items-center pt-12"> 
+              <a href="../catalog/product?id='.$advert["productid"].'"><img style="border-radius: 25px;background-position: left top;background-repeat: repeat;padding: 20px;height: 125px;width: 970px;" alt="'.$advert["altText"].'" src="/public/advertisements/'.$advert["imageUrl"].'" width="970" height="125"></a>
+            </div>
+          ';
         }
       ?>
     </ul>

@@ -19,8 +19,8 @@ if ($categoryname) {
   $maxPrice = fetchSingle('SELECT MAX(price) FROM products')[0]['MAX(price)'];
 }
 
-if (isset($_GET['filter'])) {
-  $searchTerm = $_GET['filter'];
+if (isset($_GET['search'])) {
+  $searchTerm = $_GET['search'];
   $query = "SELECT * FROM products WHERE MATCH(name, description) AGAINST(? IN BOOLEAN MODE)";
   $products = fetchSingle($query, ['type' => 's', 'value' => "$searchTerm*"]);
 
