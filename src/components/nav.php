@@ -171,6 +171,7 @@ $searchTerm = $_GET['search'] ?? '';
                 <li><a href="/dashboard/products/own">My products</a></li>
                 <li><a href="/seller/dashboard">Dashboard</a></li>
                 <li><a href="/dashboard/products/time/edit">Edit Auction Date</a></li>
+                <li><a href="/seller/add-advertisement">Add advertisement</a></li>
               </ul>
             </details>
           </li>
@@ -217,6 +218,16 @@ $searchTerm = $_GET['search'] ?? '';
             </a>
             ';
           }
+        }
+
+        $advert = fetch("SELECT * FROM advertisements ORDER BY RAND () LIMIT 1");
+
+        if ($advert) {
+          echo '
+            <div class="flex justify-center items-center pt-12"> 
+              <a href="../catalog/product?id='.$advert["productid"].'"><img style="border-radius: 25px;background-position: left top;background-repeat: repeat;padding: 20px;height: 125px;width: 970px;" alt="'.$advert["altText"].'" src="/public/advertisements/'.$advert["imageUrl"].'" width="970" height="125"></a>
+            </div>
+          ';
         }
       ?>
     </ul>
