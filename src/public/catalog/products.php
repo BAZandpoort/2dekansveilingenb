@@ -3,35 +3,35 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/catalog/products.php';
 require_once COMPONENTS . '/product-card.php';
 
-$products = [];
-$categoryname = $_GET['category'] ?? null;
+$products = []; // Initialize an empty array to store the products
+$categoryname = $_GET['category'] ?? null; // Get the value of the 'category' parameter from the URL query string, if it exists
 
 if ($categoryname) {
-  $categoryId = fetchSingle('SELECT * FROM product_categories WHERE name = ?', ['type' => 's', 'value' => $categoryname])[0]['id'];
-  $minPrice = fetchSingle('SELECT MIN(price) FROM products WHERE categoryid = ?', ['type' => 'i', 'value' => $categoryId])[0]['MIN(price)'];
+  $categoryId = fetchSingle('SELECT * FROM product_categories WHERE name = ?', ['type' => 's', 'value' => $categoryname])[0]['id']; // Fetch the category ID from the 'product_categories' table based on the category name
+  $minPrice = fetchSingle('SELECT MIN(price) FROM products WHERE categoryid = ?', ['type' => 'i', 'value' => $categoryId])[0]['MIN(price)']; // Fetch the minimum price of products in the specified category
 } else {
-  $minPrice = fetchSingle('SELECT MIN(price) FROM products')[0]['MIN(price)'];
+  $minPrice = fetchSingle('SELECT MIN(price) FROM products')[0]['MIN(price)']; // Fetch the overall minimum price of all products
 }
+
 if ($categoryname) {
-  $categoryId = fetchSingle('SELECT * FROM product_categories WHERE name = ?', ['type' => 's', 'value' => $categoryname])[0]['id'];
-  $maxPrice = fetchSingle('SELECT MAX(price) FROM products WHERE categoryid = ?', ['type' => 'i', 'value' => $categoryId])[0]['MAX(price)'];
+  $categoryId = fetchSingle('SELECT * FROM product_categories WHERE name = ?', ['type' => 's', 'value' => $categoryname])[0]['id']; // Fetch the category ID from the 'product_categories' table based on the category name
+  $maxPrice = fetchSingle('SELECT MAX(price) FROM products WHERE categoryid = ?', ['type' => 'i', 'value' => $categoryId])[0]['MAX(price)']; // Fetch the maximum price of products in the specified category
 } else {
-  $maxPrice = fetchSingle('SELECT MAX(price) FROM products')[0]['MAX(price)'];
+  $maxPrice = fetchSingle('SELECT MAX(price) FROM products')[0]['MAX(price)']; // Fetch the overall maximum price of all products
 }
 
 if (isset($_GET['search'])) {
-  $searchTerm = $_GET['search'];
-  $query = "SELECT * FROM products WHERE MATCH(name, description) AGAINST(? IN BOOLEAN MODE)";
-  $products = fetchSingle($query, ['type' => 's', 'value' => "$searchTerm*"]);
-
+  $searchTerm = $_GET['search']; // Get the value of the 'search' parameter from the URL query string
+  $query = "SELECT * FROM products WHERE MATCH(name, description) AGAINST(? IN BOOLEAN MODE)"; // Construct a full-text search query to search for products based on name and description
+  $products = fetchSingle($query, ['type' => 's', 'value' => "$searchTerm*"]); // Fetch the products matching the search term
 } else if (isset($_GET['minPrice']) && isset($_GET['maxPrice'])) {
-  $query = "SELECT * FROM products WHERE price BETWEEN ? AND ?";
-  $products = fetchSingle($query, ['type' => 'i', 'value' => $_GET['minPrice']], ['type' => 'i', 'value' => $_GET['maxPrice']]);
+  $query = "SELECT * FROM products WHERE price BETWEEN ? AND ?"; // Construct a query to fetch products within a price range
+  $products = fetchSingle($query, ['type' => 'i', 'value' => $_GET['minPrice']], ['type' => 'i', 'value' => $_GET['maxPrice']]); // Fetch the products within the specified price range
 } else if ($categoryname) {
-  $categoryId = fetchSingle('SELECT * FROM product_categories WHERE name = ?', ['type' => 's', 'value' => $categoryname])[0]['id'];
-  $products = fetchSingle('SELECT * FROM products WHERE categoryid = ?', ['type' => 'i', 'value' => $categoryId]);
+  $categoryId = fetchSingle('SELECT * FROM product_categories WHERE name = ?', ['type' => 's', 'value' => $categoryname])[0]['id']; // Fetch the category ID from the 'product_categories' table based on the category name
+  $products = fetchSingle('SELECT * FROM products WHERE categoryid = ?', ['type' => 'i', 'value' => $categoryId]); // Fetch the products belonging to the specified category
 } else {
-  $products = getAllProducts();
+  $products = getAllProducts(); // Fetch all products
 }
 
 echo '

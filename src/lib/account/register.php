@@ -18,6 +18,10 @@ function register($formData) {
   $username = $formData['username'];
   $password = $formData['password'];
   $passwordConfirm = $formData['passwordConfirm'];
+  $straat = $formData['straat'];
+  $huisnummer = $formData['huisnummer'];
+  $postcode = $formData['postcode'];
+  $gemeente = $formData['gemeente'];
   
   $data = fetch('SELECT * FROM users WHERE email = ?', [
     'type' => 's',
@@ -45,7 +49,7 @@ function register($formData) {
   }
   
   $password = password_hash($password, PASSWORD_ARGON2ID);
-  $initialized = insertUser($username, $password, $email, $firstname, $lastname);
+  $initialized = insertUser($username, $password, $email, $firstname, $lastname,  $straat, $huisnummer, $postcode, $gemeente);
 
   if (!$initialized) {
     header('Location: /account/register?error=server');
@@ -56,7 +60,7 @@ function register($formData) {
   exit();
 }
 
-function insertUser($username, $password, $email, $firstname, $lastname) {
+function insertUser($username, $password, $email, $firstname, $lastname, $straat, $huisnummer, $postcode, $gemeente) {
   global $connection;
   $userData = insert(
     'INSERT INTO users (username, password, email, firstname, lastname) VALUES (?, ?, ?, ?, ?)',
@@ -72,14 +76,20 @@ function insertUser($username, $password, $email, $firstname, $lastname) {
   $userProfileData = insert(
     'INSERT INTO user_profile (userid, profilePictureUrl, about, theme, language) VALUES (?, ?, ?, ?, ?)',
     ['type' => 'i', 'value' => $userId],
-    [
-      'type' => 's',
-      'value' => 'https://avatars.githubusercontent.com/u/64209400?v=4',
-    ],
+    ['type' => 's', 'value' => 'https://avatars.githubusercontent.com/u/64209400?v=4'],
     ['type' => 's', 'value' => 'Hello!'],
     ['type' => 's', 'value' => 'light'],
     ['type' => 's', 'value' => 'text_en'],
   );
 
-  return $userData && $userProfileData;
+  $userAddressData = insert(
+    'INSERT INTO adres (userid, $straat, $huisnummer, $postcode, $gemeente) VALUES (?, ?, ?, ?, ?)',
+    ['type' => 'i', 'value' => $userId],
+    ['type' => 's', 'value' => $straat],
+    ['type' => 's', 'value' => $huisnummer],
+    ['type' => 's', 'value' => $postcode],
+    ['type' => 's', 'value' => $gemeente],
+  );
+
+  return $userData && $userProfileData && $userAddressData;
 }
