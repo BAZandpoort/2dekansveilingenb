@@ -32,7 +32,7 @@ if (isset($_POST['bid'])) {
     );
   }
 
-  $query = 'INSERT INTO bidsHistory (productid, userid, bidPrice) VALUES (?, ?, ?)';
+  $query = 'INSERT INTO bidshistory (productid, userid, bidPrice) VALUES (?, ?, ?)';
     $insert1=insert(
       $query,
       ['type' => 'i', 'value' => $productid],
