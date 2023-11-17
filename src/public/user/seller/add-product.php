@@ -56,11 +56,20 @@ $categories = fetch("SELECT * FROM product_categories");
     </div>
 
     <!-- Auction End Date -->
-    <div class="form-control flex-1 w-full">
-      <label class="label">
-        <span class="label-text">Auction End Date</span>
-      </label>
-      <input type="date" name="endDate" placeholder="20.00" class="input input-bordered w-full" required />
+    <div id="auctionWrapper" class="form-control flex-1 flex-row w-full justify-center gap-4">
+      <div id="endDate" class="hidden">
+        <label class="label">
+          <span class="label-text">Auction End Date</span>
+        </label>
+        <input type="datetime-local" name="endDate" placeholder="20.00" class="input input-bordered w-full" required />
+      </div>
+
+      <div class="flex flex-row gap-4 justify-center items-center mt-10">
+        <input type="checkbox" name="auction" id="auction" onclick="showInput()" class="checkbox checkbox-lg" />
+        <label id="auctionLabel" class="label">
+          <span class="label-text">Is this an auction?</span>
+        </label>
+      </div>
     </div>
   </div>
 
@@ -76,3 +85,20 @@ $categories = fetch("SELECT * FROM product_categories");
     <button name="create" class="btn btn-primary">Create</button>
   </div>
 </form>
+
+<script>
+  function showInput() {
+    var auctionWrapper = document.getElementById("auctionWrapper");
+    var checkBox = document.getElementById("auction");
+    var checkBoxLabel = document.getElementById("auctionLabel");
+    var input = document.getElementById("endDate");
+
+    if (checkBox.checked == true) {
+      input.classList.remove("hidden");
+      checkBoxLabel.classList.add("hidden");
+    } else {
+      input.classList.add("hidden");
+      checkBoxLabel.classList.remove("hidden");
+    }
+  }
+</script>

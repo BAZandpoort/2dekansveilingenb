@@ -1,18 +1,23 @@
 <?php
 session_start();
 
+if (!isset($_SESSION['user'])) {
+  header('Location: /');
+  exit();
+}
+
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/util/util.php';
 
 if (isset($_POST['create'])) {
-  $userid = $_SESSION['user']['id'];
+  $userid = $_SESSION["user"]["id"];
   $categoryid = $_POST['category'];
   $title = $_POST['title'];
   $description = $_POST['description'];
   $price = $_POST['price'];
   $file = $_FILES['image'];
-  $endDate = $_POST['endDate'];
-
+  $endDate = isset($_POST["auction"]) ? $_POST['endDate'] : null;
+  
   $insertData = addProduct(
     $userid,
     $categoryid,
@@ -27,7 +32,6 @@ if (isset($_POST['create'])) {
 header('Location: /');
 exit();
 
-// Add auction time
 function addProduct(
   $userid,
   $categoryid,
@@ -37,6 +41,7 @@ function addProduct(
   $file,
   $endDate
 ) {
+  
   $query = 'INSERT INTO products (userid, categoryid, name, description, price, imageUrl, endDate)
             VALUES (?, ?, ?, ?, ?, ?, ?)';
 
@@ -47,7 +52,7 @@ function addProduct(
   $baseImageName = basename($imageName, ".jpg") . '--userid-' . $userid . ".jpg";
   $targetFile = $targetDir . $baseImageName;
   move_uploaded_file($imageTmpName, $targetFile);
-
+  // Before the insert query
   $insertData = insert(
     $query,
     ['type' => 'i', 'value' => $userid],

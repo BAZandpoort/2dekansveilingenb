@@ -30,6 +30,14 @@ if ($error) {
       </svg>
       <span>' . (ERROR_MAPPING[$error] ?? 'Something went wrong!') . '</span>
     </div>
+    <script>
+    setTimeout(function() {
+      var alerts = document.querySelectorAll(".alert");
+      alerts.forEach(function(alert) {
+        alert.style.display = "none";
+      });
+    }, 5000);
+  </script>
   ';
 }
 
@@ -41,8 +49,18 @@ if ($succes) {
     </svg>
     <span>' . (SUCCES_MAPPING[$succes] ?? 'We think it worked!') . '</span>
   </div>
+  <script>
+    setTimeout(function() {
+      var alerts = document.querySelectorAll(".alert");
+      alerts.forEach(function(alert) {
+        alert.style.display = "none";
+      });
+    }, 2000);
+  </script>
   ';
+
 }
+
 
 $containerClasses = $route['container'] ? 'container mx-auto px-2 pt-4 pb-12 md:pt-12 md:pb-24 md:px-0' : '';
 $language = isset($_SESSION["user"]) ? $_SESSION["user"]["language"] : $_SESSION["guest"]["language"] ?? 'text_en';
@@ -76,16 +94,16 @@ $translations = fetch('SELECT id, ' . $language . ' FROM translations');
       <?php
       echo strlen($alert) > 0 
       ? '
-      <div class="absolute px-4 flex justify-center w-full md:w-auto left-1/2 transform -translate-x-1/2 top-8">
+      <div class="absolute px-4 flex justify-center w-full md:w-auto left-1/2 transform -translate-x-1/2 top-8 z-50">
         ' . $alert . '
       </div>
       ' 
       : null;
       ?>
+      
 
       <?php include PUBLIC_S . '/' . $route['view']; ?>
     </div>
-
     <?php $route['footer'] ? include COMPONENTS . '/footer.php' : null; ?>
   </div>
 </body>

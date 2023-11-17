@@ -31,6 +31,7 @@ async function seedDatabase() {
         await connection.execute('TRUNCATE TABLE user_profile');
         await connection.execute('TRUNCATE TABLE user_roles');
         await connection.execute('TRUNCATE TABLE user_role_mapping');
+        await connection.execute('TRUNCATE TABLE user_purchases');
         await connection.execute('TRUNCATE TABLE products');
         await connection.execute('TRUNCATE TABLE product_categories');
         await connection.execute('TRUNCATE TABLE users');

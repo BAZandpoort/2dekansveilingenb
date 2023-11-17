@@ -37,6 +37,7 @@ $routes = [
     'footer' => true,
     'container' => true,
   ],
+
   // Catalog routes
   '/catalog/products' => [
     'view' => 'catalog/products.php',
@@ -75,6 +76,13 @@ $routes = [
     'footer' => false,
     'container' => true,
   ],
+  '/catalog/report' => [
+    'view' => 'catalog/report.php',
+    'title' => 'Report Abuse',
+    'nav' => true,
+    'footer' => true,
+    'container' => true,
+  ],
   // Member Dashboard routes
   '/dashboard/products/history' => [
     'view' => 'user/member/purchases.php',
@@ -83,6 +91,14 @@ $routes = [
     'footer' => false,
     'container' => true,
   ],
+  '/dashboard/products/review' => [
+    'view' => 'user/member/review.php',
+    'title' => 'Add Products',
+    'nav' => true,
+    'footer' => false,
+    'container' => true,
+  ],
+
   // Seller Dashboard routes
   '/dashboard/products/add' => [
     'view' => 'user/seller/add-product.php',
@@ -98,11 +114,32 @@ $routes = [
     'footer' => false,
     'container' => true,
   ],
+  '/seller/dashboard' => [
+    'view' => 'user/seller/dashboard.php',
+    'title' => 'Dashboard',
+    'nav' => true,
+    'footer' => true,
+    'container' => true,
+  ],
+  '/seller/dashboard/edit' => [
+    'view' => 'user/seller/edit-product.php',
+    'title' => 'Edit Product',
+    'auth_roles' => ['member'],
+    'nav' => true,
+    'footer' => false,
+    'container' => true,
+  ],
+  '/seller/add-advertisement' => [
+    'view' => 'user/seller/add-advertisement.php',
+    'title' => 'Dashboard',
+    'nav' => true,
+    'footer' => true,
+    'container' => false,
+  ],
   // Admin Dashboard routes
   '/dashboard/products/delete' => [
     'view' => 'user/admin/delete-product.php',
     'title' => 'Delete products',
-    'auth_roles' => ['member'],
     'nav' => true,
     'footer' => true,
     'container' => true,
@@ -126,6 +163,41 @@ $routes = [
     'title' => 'Add translations',
     'nav' => true,
     'footer' => false,
+    'container' => true,
+  ],
+  '/member/dashboard' => [
+    'view' => 'user/member/dashboard.php',
+    'title' => 'Member Dashboard',
+    'nav' => true,
+    'footer' => false,
+    'container' => true,
+  ],
+  '/dashboard/reports' => [
+    'view' => 'user/admin/reports.php',
+    'title' => 'See reports',
+    'nav' => true,
+    'footer' => false,
+    'container' => true,
+  ],
+  '/admin/dashboard' => [
+    'view' => 'user/admin/dashboard.php',
+    'title' => 'My Products',
+    'nav' => false,
+    'footer' => false,
+    'container' => true,
+  ],
+  '/dashboard/products/time/edit' => [
+    'view' => 'user/seller/edit-time.php',
+    'title' => 'Update timer',
+    'nav' => true,
+    'footer' => true,
+    'container' => true,
+  ],
+  '/account/favorites' => [
+    'view' => 'account/favorites.php',
+    'title' => 'Favorite',
+    'nav' => true,
+    'footer' => true,
     'container' => true,
   ],
   // Error routes

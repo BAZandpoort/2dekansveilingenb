@@ -26,6 +26,42 @@ if ($user) {
 }
 
 $searchTerm = $_GET['search'] ?? '';
+
+$userexist=false;
+$nothighest=false;
+$bid_id=null;
+
+$maxproductData = fetch("SELECT MAX(productid) AS maxid From `bidshistory`");
+
+
+if($user){
+for( $i = 1 ; $i <= $maxproductData['maxid'] ; $i++){
+  
+  $currentData = fetchSingle( "SELECT * FROM `bidshistory` WHERE productid = ? ORDER BY bidPrice DESC" , ['type' => 'i', 'value' => $i]);
+
+  foreach($currentData as $data){
+
+    if ( $data['userid'] !== $user["id"] ){
+     
+      $nothighest = true;
+      $product=$data['productid'];
+      
+    }
+    $bid_id = $data['id'];
+  break;
+  }
+
+  foreach($currentData as $data){
+
+      if ( $data['userid'] === $user["id"] ){
+      $userexist=true;
+    
+      } 
+    
+    }
+  }
+}
+
 ?>
 
 <!-- Top navbar -->
@@ -59,7 +95,9 @@ $searchTerm = $_GET['search'] ?? '';
                 <li><a class="justify-between">Profile</a></li>
                 <li><a href="/chats/users.php">Chat</a></li>
                 <li><a href="/src/lib/user/member/change-theme.php" >Switch to ' . $theme . '</a></li>
+                <li><a href="/dashboard/products/review?seller=' . $user['username'] . '">Reviews</a></li>
                 <li><a href="/account/settings/edit">Settings</a></li>
+                
                 <li><a href="/account/logout"> ' . $translations[2][$language] . ' </a></li>
               </ul>
             </details>
@@ -126,6 +164,50 @@ $searchTerm = $_GET['search'] ?? '';
 
   <!-- Right - User actions -->
   <div class="hidden flex-1 justify-end gap-4 md:flex">
+  <div>
+  <!-- message if outbid -->
+  <?php if($userexist && $nothighest ){ ?>
+    <div class="alert shadow-lg flex " id="myDiv">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-info shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+      <div class ="flex[1.2]">
+        <h3 class="font-bold">New message!</h3>
+        <div class="text-xs">You have been outbid</div>
+      </div>
+      <div class="flex[0.8]">
+        <button class="btn btn-sm"><a href="/catalog/product?id=<?php echo $product ?>" > See</a></button>
+        <button id="hideButton" class="btn btn-sm">Close</button>
+      </div>
+    </div>
+    <?php } 
+      if($user){
+      $Data = fetch('SELECT * From notification_read Where userid = ? AND userid2 != ? AND notificationid = ?',['type' => 'i', 'value' => $user['id']],['type' => 'i', 'value' => $user['id']],['type' => 'i', 'value' => $bid_id]);
+
+    ?>
+    <script>
+        const div = document.getElementById('myDiv');
+        const button = document.getElementById('hideButton');
+   
+        <?php  if ($Data['read']===0){ ?>
+
+        button.addEventListener('click', function() {
+          
+           div.style.display = 'none';
+           <?php  insert('UPDATE notification_read SET `read` = 1  Where userid = ? AND userid2 != ? AND notificationid = ?',['type' => 'i', 'value' => $user['id']],['type' => 'i', 'value' => $user['id']],['type' => 'i', 'value' => $bid_id]);  ?>
+        });
+       
+        <?php }else{ ?>
+
+            div.style.display = 'none'; 
+
+        <?php }
+      }
+        ?>
+
+    </script>
+
+   
+  <!--/ message if outbid -->
+</div> 
     <details class="dropdown dropdown-end">
       <summary class="m-1 btn"><?php echo $languageDisplay ?></summary>
       <ul class="mt-2 p-2 shadow menu dropdown-content z-[1] bg-base-200 rounded-box w-52">
@@ -148,6 +230,8 @@ $searchTerm = $_GET['search'] ?? '';
           <li><a class="justify-between">Profile</a></li>
           <li><a href="/chats/users">Chat</a></li>
           <li><a href="/src/lib/user/member/change-theme.php" >Switch to ' . $theme . '</a></li>
+          <li><a href="/dashboard/products/review?seller=' . $user['username'] . '">Reviews</a></li>
+          <li><a href="/account/favorites">Favorites</a></li>      
           <li><a href="/account/settings/edit">Settings</a></li>
           <div class="divider px-4 my-2"></div> 
           <li><a href="/account/logout"> ' . $translations[2][$language] . ' </a></li>
@@ -157,6 +241,7 @@ $searchTerm = $_GET['search'] ?? '';
               <summary class="m-1">Member Dashboard</summary>
               <ul class="mr-4 p-2 shadow menu dropdown-content z-[1] bg-base-200 rounded-box w-52">
                 <li><a href="/dashboard/products/history">Purchase history</a></li>
+                <li><a href="/member/dashboard">Dashboard</a></li>
               </ul>
             </details>
           </li>
@@ -166,6 +251,9 @@ $searchTerm = $_GET['search'] ?? '';
               <ul class="mr-4 p-2 shadow menu dropdown-content z-[1] bg-base-200 rounded-box w-52">
                 <li><a href="/dashboard/products/add">Add product</a></li>
                 <li><a href="/dashboard/products/own">My products</a></li>
+                <li><a href="/seller/dashboard">Dashboard</a></li>
+                <li><a href="/dashboard/products/time/edit">Edit Auction Date</a></li>
+                <li><a href="/seller/add-advertisement">Add advertisement</a></li>
               </ul>
             </details>
           </li>
@@ -174,6 +262,8 @@ $searchTerm = $_GET['search'] ?? '';
               <summary class="m-1">Admin Dashboard</summary>
               <ul class="mr-4 p-2 shadow menu dropdown-content z-[1] bg-base-200 rounded-box w-52">
                 <li><a href="/dashboard/products/delete">Remove products</a></li>
+                <li><a href="/dashboard/reports">Reports</a></li>
+                <li><a href="/admin/dashboard">Dashboard</a></li>
                 <li>
                   <details class="dropdown dropdown-bottom">
                     <summary class="m-1">Translations</summary>
@@ -190,8 +280,14 @@ $searchTerm = $_GET['search'] ?? '';
       </details>
       '
     : '<a href="/account/login" class="btn">Login</a>'; ?>
+    
   </div>
 </div>
+
+
+
+
+  
 
 <!-- Bottom navbar -->
 <div class="hidden navbar bg-base-100 shadow-sm pt-8 md:flex">
@@ -202,7 +298,7 @@ $searchTerm = $_GET['search'] ?? '';
         if ($categories) {
           foreach ($categories as $category) {
             echo '
-            <a href="/catalog/products?category=' . $category['name'] . '" class="group flex flex-col gap-2 items-center">
+            <a href="/catalog/products?category=' . strtolower($category['name']) . '" class="group flex flex-col gap-2 items-center">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 group-hover:-translate-y-1 transition">
                 <path stroke-linecap="round" stroke-linejoin="round" d="' . $category['icon'] . '" />
               </svg>
@@ -211,9 +307,20 @@ $searchTerm = $_GET['search'] ?? '';
             ';
           }
         }
+
+        $advert = fetch("SELECT * FROM advertisements ORDER BY RAND () LIMIT 1");
+
+        if ($advert) {
+          echo '
+            <div class="flex justify-center items-center pt-12"> 
+              <a href="../catalog/product?id='.$advert["productid"].'"><img style="border-radius: 25px;background-position: left top;background-repeat: repeat;padding: 20px;height: 125px;width: 970px;" alt="'.$advert["altText"].'" src="/public/advertisements/'.$advert["imageUrl"].'" width="970" height="125"></a>
+            </div>
+          ';
+        }
       ?>
     </ul>
   </div>
 </div>
+
 
 

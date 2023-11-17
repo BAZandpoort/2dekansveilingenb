@@ -20,59 +20,100 @@ SET time_zone = "+00:00";
 --
 -- Database: `2dekansveilingen`
 --
-
--- --------------------------------------------------------
-
---
--- Tabelstructuur voor tabel `messages`
---
-
 CREATE TABLE `messages` (
   `msg_id` int(11) NOT NULL,
   `incoming_msg_id` int(255) NOT NULL,
   `outgoing_msg_id` int(255) NOT NULL,
   `msg` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- --------------------------------------------------------
+-- Tabelstructuur voor tabel `advertisements`
+--
+
+CREATE TABLE `advertisements` (
+  `id` int(11) NOT NULL,
+  `productid` int(11) NOT NULL,
+  `sellerid` int(11) NOT NULL,
+  `altText` text NOT NULL,
+  `imageUrl` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `messages`
+-- Gegevens worden geëxporteerd voor tabel `advertisements`
 --
 
-INSERT INTO `messages` (`msg_id`, `incoming_msg_id`, `outgoing_msg_id`, `msg`) VALUES
-(4, 31, 52, 'Helloo'),
-(5, 31, 52, 'me gon beat u up'),
-(6, 31, 52, 'yesyes'),
-(7, 31, 52, 'gege'),
-(8, 31, 52, 'awdada'),
-(9, 52, 53, 'hewwo'),
-(10, 53, 52, 'who are u??'),
-(11, 52, 53, 'ur mom'),
-(12, 53, 52, 'huh'),
-(13, 53, 52, 'i have 2 moms?'),
-(14, 52, 53, 'yeess hehehe'),
-(15, 53, 52, 'NOOOO'),
-(16, 53, 52, 'wdw'),
-(17, 53, 52, 'ww'),
-(18, 52, 53, 'wad'),
-(19, 31, 53, 'helooo'),
-(20, 3, 53, 'heahe'),
-(21, 1, 53, 'dwawdw'),
-(22, 52, 53, 'ahaha'),
-(23, 52, 53, 'ha'),
-(24, 52, 53, 'h'),
-(25, 52, 53, 'ha'),
-(26, 52, 53, 'a'),
-(27, 52, 53, 'a'),
-(28, 52, 53, 'a'),
-(29, 53, 52, 'no leave'),
-(30, 52, 53, 'i will not'),
-(31, 53, 52, 'me kill u'),
-(32, 52, 53, 'try it');
+INSERT INTO `advertisements` (`id`, `productid`, `sellerid`, `altText`, `imageUrl`) VALUES
+(10, 73, 52, 'Shrirmmpps', 'Banner_.png--userid-52.jpg'),
+(11, 74, 52, 'Footbals! Tgree!', '5708f2cf0248b_thumb900.webp--userid-52.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `bids`
+--
+
+CREATE TABLE `bids` (
+  `id` int(11) NOT NULL,
+  `productid` int(11) NOT NULL,
+  `userid` int(11) NOT NULL,
+  `bidPrice` decimal(18,2) NOT NULL,
+  `bidOfferedAt` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+--
+-- Gegevens worden geëxporteerd voor tabel `bids`
+--
+
+INSERT INTO `bids` (`id`, `productid`, `userid`, `bidPrice`, `bidOfferedAt`) VALUES
+(1, 26, 52, 555.01, '2023-10-20 15:29:35'),
+(2, 16, 52, 440.24, '2023-10-20 15:53:15'),
+(3, 1, 52, 0.71, '2023-10-23 09:29:30');
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `bidshistory`
+--
+
+CREATE TABLE `bidshistory` (
+  `id` int(11) NOT NULL,
+  `productid` int(11) NOT NULL,
+  `userid` int(11) NOT NULL,
+  `bidPrice` decimal(10,0) NOT NULL,
+  `bidOfferedAt` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `favorites` 
+--
+
+CREATE TABLE `favorites` (
+  `userid` int(11) NOT NULL,
+  `productid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `notification_read`
+--
+
+CREATE TABLE `notification_read` (
+  `id` int(11) NOT NULL,
+  `notificationid` int(11) NOT NULL,
+  `userid` int(11) NOT NULL,
+  `read` tinyint(1) NOT NULL,
+  `userid2` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
 --
 -- Tabelstructuur voor tabel `products`
+-- Tabelstructuur voor tabel `products`
+--
+-- Table structure for table `products`
 --
 
 CREATE TABLE `products` (
@@ -83,9 +124,12 @@ CREATE TABLE `products` (
   `description` text NOT NULL,
   `price` decimal(10,2) NOT NULL,
   `imageUrl` varchar(255) NOT NULL,
-  `endDate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp(),
+  `endDate` datetime DEFAULT NULL,
   `updatedAt` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
+  `hasSelfPickUp` tinyint(1) NOT NULL DEFAULT 1,
+  `hasStandardDelivery` tinyint(1) NOT NULL DEFAULT 1,
+  `hasExpressDelivery` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -148,6 +192,7 @@ INSERT INTO `products` (`id`, `userid`, `categoryid`, `name`, `description`, `pr
 
 --
 -- Tabelstructuur voor tabel `product_categories`
+-- Tabelstructuur voor tabel `product_categories`
 --
 
 CREATE TABLE `product_categories` (
@@ -171,6 +216,35 @@ INSERT INTO `product_categories` (`id`, `name`, `icon`) VALUES
 (8, 'Outdoors', 'M6.115 5.19l.319 1.913A6 6 0 008.11 10.36L9.75 12l-.387.775c-.217.433-.132.956.21 1.298l1.348 1.348c.21.21.329.497.329.795v1.089c0 .426.24.815.622 1.006l.153.076c.433.217.956.132 1.298-.21l.723-.723a8.7 8.7 0 002.288-4.042 1.087 1.087 0 00-.358-1.099l-1.33-1.108c-.251-.21-.582-.299-.905-.245l-1.17.195a1.125 1.125 0 01-.98-.314l-.295-.295a1.125 1.125 0 010-1.591l.13-.132a1.125 1.125 0 011.3-.21l.603.302a.809.809 0 001.086-1.086L14.25 7.5l1.256-.837a4.5 4.5 0 001.528-1.732l.146-.292M6.115 5.19A9 9 0 1017.18 4.64M6.115 5.19A8.965 8.965 0 0112 3c1.929 0 3.716.607 5.18 1.64'),
 (9, 'Industrial', 'M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z'),
 (10, 'Music', 'M4.5 12a7.5 7.5 0 0015 0m-15 0a7.5 7.5 0 1115 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077l1.41-.513m14.095-5.13l1.41-.513M5.106 17.785l1.15-.964m11.49-9.642l1.149-.964M7.501 19.795l.75-1.3m7.5-12.99l.75-1.3m-6.063 16.658l.26-1.477m2.605-14.772l.26-1.477m0 17.726l-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205L12 12m6.894 5.785l-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864l-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495');
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `reports`
+--
+
+CREATE TABLE `reports` (
+  `id` int(11) NOT NULL,
+  `productid` int(11) NOT NULL,
+  `userid` int(11) NOT NULL,
+  `typeOfAbuse` text NOT NULL,
+  `context` text NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `review`
+--
+
+CREATE TABLE `review` (
+  `member` int(11) NOT NULL,
+  `review` text NOT NULL,
+  `sterren` int(11) NOT NULL,
+  `seller` int(11) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -210,7 +284,8 @@ INSERT INTO `translations` (`id`, `location`, `text_en`, `text_nl`, `text_fr`) V
 (17, 'footer', 'Cookie Policy', 'Cookiebeleid', 'Politique de cookies'),
 (18, 'nav', 'Auctions', 'Veilingen', 'Enchères'),
 (19, 'nav', 'Location', 'Locatie', 'Emplacement'),
-(20, 'nav', 'Products', 'Producten', 'Produits');
+(20, 'nav', 'Products', 'Producten', 'Produits'),
+(21, 'nav', 'test', 'test', 'test');
 
 -- --------------------------------------------------------
 
@@ -577,10 +652,22 @@ INSERT INTO `user_role_mapping` (`id`, `userid`, `roleid`) VALUES
 --
 
 --
--- Indexen voor tabel `messages`
+-- Indexen voor tabel `bids`
 --
-ALTER TABLE `messages`
-  ADD PRIMARY KEY (`msg_id`);
+ALTER TABLE `bids`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexen voor tabel `bidshistory`
+--
+ALTER TABLE `bidshistory`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexen voor tabel `notification_read`
+--
+ALTER TABLE `notification_read`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexen voor tabel `products`
@@ -589,6 +676,7 @@ ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
   ADD KEY `products_userid` (`userid`),
   ADD KEY `products_categoryid` (`categoryid`);
+ALTER TABLE `products` ADD FULLTEXT KEY `search` (`name`,`description`);
 
 --
 -- Indexen voor tabel `product_categories`
@@ -598,12 +686,19 @@ ALTER TABLE `product_categories`
   ADD UNIQUE KEY `product_category_name` (`name`);
 
 --
+-- Indexen voor tabel `reports`
+--
+ALTER TABLE `reports`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexen voor tabel `translations`
 --
 ALTER TABLE `translations`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexen voor tabel `users`
 -- Indexen voor tabel `users`
 --
 ALTER TABLE `users`
@@ -612,6 +707,7 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `email` (`email`);
 
 --
+-- Indexen voor tabel `user_profile`
 -- Indexen voor tabel `user_profile`
 --
 ALTER TABLE `user_profile`
@@ -638,34 +734,60 @@ ALTER TABLE `user_role_mapping`
 --
 
 --
--- AUTO_INCREMENT voor een tabel `messages`
+-- AUTO_INCREMENT voor een tabel `advertisements`
 --
-ALTER TABLE `messages`
-  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+ALTER TABLE `advertisements`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT voor een tabel `products`
+-- AUTO_INCREMENT voor een tabel `bids`
 --
-ALTER TABLE `products`
+ALTER TABLE `bids`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT voor een tabel `bidshistory`
+--
+ALTER TABLE `bidshistory`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT voor een tabel `notification_read`
+--
+ALTER TABLE `notification_read`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
+-- AUTO_INCREMENT voor een tabel `products`
+-- AUTO_INCREMENT voor een tabel `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+
+--
+-- AUTO_INCREMENT voor een tabel `product_categories`
 -- AUTO_INCREMENT voor een tabel `product_categories`
 --
 ALTER TABLE `product_categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
+-- AUTO_INCREMENT voor een tabel `reports`
+--
+ALTER TABLE `reports`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT voor een tabel `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT voor een tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT voor een tabel `user_profile`

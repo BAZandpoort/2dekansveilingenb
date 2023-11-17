@@ -11,8 +11,9 @@ $purchaseHistory = fetchSingle('SELECT * FROM user_purchases WHERE id = ?', ["ty
 
 ?>
 
+
  <!-- BEGIN: Display Purchase History -->
-<div class="p-4 overflow-x-auto">
+ <div class="p-4 overflow-x-auto">
   <h1 class="text-2xl font-bold mb-4">Purchase History</h1>
   <?php if (count($purchaseHistory) > 0): ?>
     <table class="table table-zebra w-full">
@@ -21,6 +22,7 @@ $purchaseHistory = fetchSingle('SELECT * FROM user_purchases WHERE id = ?', ["ty
           <th>Item Name</th>
           <th>Price</th>
           <th>Date Purchased</th>
+          <th>product</th>
         </tr>
       </thead>
       <tbody>
@@ -29,6 +31,9 @@ $purchaseHistory = fetchSingle('SELECT * FROM user_purchases WHERE id = ?', ["ty
             <td><?= $purchase['productName'] ?></td>
             <td><?= $purchase['price'] ?>€</td>
             <td><?= date('F j, Y', strtotime($purchase['timeOfPurchase'])) ?></td>
+            <td>
+              <a href="/catalog/product?id=<?= $purchase['productId'] ?>" class="btn btn-primary">View product page</a>
+            </td>   
           </tr>
         <?php endforeach; ?>
       </tbody>
@@ -38,3 +43,9 @@ $purchaseHistory = fetchSingle('SELECT * FROM user_purchases WHERE id = ?', ["ty
     <?php endif; ?>
 </div>
 <!-- END: Display Purchase History -->
+
+
+
+
+
+
