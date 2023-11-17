@@ -100,10 +100,10 @@ $translations = fetch('SELECT id, ' . $language . ' FROM translations');
       ' 
       : null;
       ?>
+      
 
       <?php include PUBLIC_S . '/' . $route['view']; ?>
     </div>
-
     <?php $route['footer'] ? include COMPONENTS . '/footer.php' : null; ?>
   </div>
 </body>
