@@ -2,6 +2,9 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/catalog/products.php';
 
+require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
+require_once LIB . '/catalog/products.php';
+
 if (!isset($_SESSION['user'])) {
     header('Location: /account/login');
     exit();
@@ -21,7 +24,34 @@ if (!$products) {
 echo '
 <div class="flex flex-col gap-8">
 ';
+?>
+<form action="/dashboard/products/delete" method="get" class="flex flex-row justify-center gap-4">
+  <div class="form-control w-full max-w-xs">
+    <input type="text" name="search" placeholder="Search" class="input input-primary input-bordered">
+  </div>
+  <button class="btn btn-primary">Search</button>
+</form>
 
+
+
+
+
+
+<?php 
+/*
+  This code block checks if a search term is set in the GET request. If it is, it searches
+  for products that match the search term using a full-text search query. 
+  If not, it retrieves all products from the database.
+ @param string $_GET['search'] The search term to be used in the full-text search query.
+  @return array The products that match the search term (if provided) or all products (if not provided).
+ */
+if (isset($_GET['search'])) {
+  $searchTerm = $_GET['search'];
+  $query = "SELECT * FROM products WHERE MATCH(name, description) AGAINST(? IN BOOLEAN MODE)";
+  $products = fetchSingle($query, ['type' => 's', 'value' => "$searchTerm*"]);
+} else {
+  $products = getAllProducts();
+}
 foreach ($products as $product) {
   echo '
   <div class="card card-side bg-base-100 shadow-sm max-h-48">

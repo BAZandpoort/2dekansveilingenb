@@ -60,6 +60,7 @@ $searchTerm = $_GET['search'] ?? '';
                 <li><a href="/src/lib/user/member/change-theme.php" >Switch to ' . $theme . '</a></li>
                 <li><a href="/dashboard/products/review?seller=' . $user['username'] . '">Reviews</a></li>
                 <li><a href="/account/settings/edit">Settings</a></li>
+                
                 <li><a href="/account/logout"> ' . $translations[2][$language] . ' </a></li>
               </ul>
             </details>
@@ -148,6 +149,7 @@ $searchTerm = $_GET['search'] ?? '';
           <li><a class="justify-between">Profile</a></li>
           <li><a href="/src/lib/user/member/change-theme.php" >Switch to ' . $theme . '</a></li>
           <li><a href="/dashboard/products/review?seller=' . $user['username'] . '">Reviews</a></li>
+          <li><a href="/account/favorites">Favorites</a></li>      
           <li><a href="/account/settings/edit">Settings</a></li>
           <div class="divider px-4 my-2"></div> 
           <li><a href="/account/logout"> ' . $translations[2][$language] . ' </a></li>
@@ -157,6 +159,7 @@ $searchTerm = $_GET['search'] ?? '';
               <summary class="m-1">Member Dashboard</summary>
               <ul class="mr-4 p-2 shadow menu dropdown-content z-[1] bg-base-200 rounded-box w-52">
                 <li><a href="/dashboard/products/history">Purchase history</a></li>
+                <li><a href="/member/dashboard">Dashboard</a></li>
               </ul>
             </details>
           </li>

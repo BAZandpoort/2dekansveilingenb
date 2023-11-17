@@ -22,7 +22,7 @@ $categories = fetch("SELECT * FROM product_categories");
 
 <h1 class="text-center text-4xl font-bold mb-12">Edit product</h1>
 
-<form action="/src/lib/user/seller/edit-product.php" method="post" class="flex flex-col items-center justify-center gap-4 max-w-2xl mx-auto">
+<form action="/src/lib/user/seller/edit-product.php" method="post" enctype="multipart/form-data" class="flex flex-col items-center justify-center gap-4 max-w-2xl mx-auto">
   <input type="hidden" name="id" value="<?= $product["id"] ?>">
   <div class="flex flex-row justify-center gap-4 w-full">
     <!-- Category -->
@@ -67,6 +67,14 @@ $categories = fetch("SELECT * FROM product_categories");
       <input value="<?= $product["price"] ?>" type="number" step="0.01" min="0.00" name="price" placeholder="20.00" class="input input-bordered w-full" required />
     </div>
   </div>
+  <!-- Image -->
+<div class="form-control flex-1 w-full">
+  <label class="label">
+    <span class="label-text">Image</span>
+  </label>
+  <input name="image" type="file" class="file-input file-input-bordered w-full" />
+</div>
+
 
   <div class="form-control w-full max-w-xs mt-4">
     <button name="edit" class="btn btn-primary">Update</button>

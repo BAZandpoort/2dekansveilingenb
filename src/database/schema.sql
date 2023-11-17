@@ -69,6 +69,17 @@ INSERT INTO `bids` (`id`, `productid`, `userid`, `bidPrice`, `bidOfferedAt`) VAL
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `favorites`
+--
+
+CREATE TABLE `favorites` (
+  `userid` int(11) NOT NULL,
+  `productid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Tabelstructuur voor tabel `products`
 --
 

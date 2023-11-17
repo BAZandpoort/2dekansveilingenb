@@ -149,6 +149,13 @@ $routes = [
     'footer' => false,
     'container' => true,
   ],
+  '/member/dashboard' => [
+    'view' => 'user/member/dashboard.php',
+    'title' => 'Member Dashboard',
+    'nav' => true,
+    'footer' => false,
+    'container' => true,
+  ],
   '/dashboard/reports' => [
     'view' => 'user/admin/reports.php',
     'title' => 'See reports',
@@ -166,6 +173,13 @@ $routes = [
   '/dashboard/products/time/edit' => [
     'view' => 'user/seller/edit-time.php',
     'title' => 'Update timer',
+    'nav' => true,
+    'footer' => true,
+    'container' => true,
+  ],
+  '/account/favorites' => [
+    'view' => 'account/favorites.php',
+    'title' => 'Favorite',
     'nav' => true,
     'footer' => true,
     'container' => true,
