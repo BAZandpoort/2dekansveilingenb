@@ -32,6 +32,35 @@ if (isset($_POST['bid'])) {
     );
   }
 
+  $query = 'INSERT INTO bidshistory (productid, userid, bidPrice) VALUES (?, ?, ?)';
+    $insert1=insert(
+      $query,
+      ['type' => 'i', 'value' => $productid],
+      ['type' => 'i', 'value' => $userid],
+      ['type' => 'd', 'value' => $bid_price],
+    ); 
+
+$maxproductData = fetch("SELECT MAX(productid) AS maxid From `bidshistory`");
+
+
+  $currentData = fetchSingle( "SELECT * FROM `bidshistory` WHERE productid = ? ORDER BY bidPrice DESC" , ['type' => 'i', 'value' => $productid]);
+
+  foreach($currentData as $data){
+   
+  $query = 'INSERT INTO notification_read (notificationid, userid, `read` , userid2) VALUES (?, ?, ?, ?)';
+
+ $insert2= insert(
+    $query,
+    ['type' => 'i', 'value' => $data ["id"]],
+    ['type' => 'i', 'value' => $userid],
+    ['type' => 'd', 'value' => 0],
+    ['type' => 'i', 'value' => $data["userid"]]
+  ); 
+    break;
+}
+
+
+
   
 }
 header('Location: '.$_SERVER['HTTP_REFERER']);
