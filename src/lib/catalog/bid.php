@@ -33,20 +33,35 @@ if (isset($_POST['bid'])) {
     );
   }
 
-  // Fetch product details
-  
-  $query = 'SELECT id, name, price, imageUrl FROM products WHERE id = ?';
-  $product = fetch($query, ['type' => 'i', 'value' => $productid]);
-  
 
-  // Insert into user_purchases
-  $query = 'INSERT INTO user_purchases (timeOfPurchase, productId, price, productName, productImage) VALUES (now(), ?, ?, ?, ?)';
-  insert(
-    $query,
-    ['type' => 'i', 'value' => $productid],
-    ['type' => 'd', 'value' => $price],
-    ['type' => 's', 'value' => $productName],
-    ['type' => 's', 'value' => $productImage],
-  );
+// Fetch product details
+$query = 'SELECT id, name, price, imageUrl FROM products WHERE id = ?';
+$product = fetch($query, ['type' => 'i', 'value' => $productid]);
+
+// Check if the product was found
+if ($product) {
+    // Define the variables
+    $userid = $user['id'];
+    $productid = $product['id'];
+    $price = $product['price'];
+    $productName = $product['name'];
+    $productImage = $product['imageUrl'];
+
+    // Insert into user_purchases
+    $query = 'INSERT INTO user_purchases (id, timeOfPurchase, productId, price, productName, productImage) VALUES (?, now(), ?, ?, ?, ?)';
+    insert(
+        $query,
+        ['type' => 'i', 'value' => $userid],
+        ['type' => 'i', 'value' => $productid],
+        ['type' => 'i', 'value' => $price],
+        ['type' => 's', 'value' => $productName],
+        ['type' => 's', 'value' => $productImage],
+    );
+} else {
+    // Handle the case where the product was not found
+    echo 'Product not found';
+}
+//exit
+header('Location: /catalog/product?id=' . $productid);
 }
 ?>
