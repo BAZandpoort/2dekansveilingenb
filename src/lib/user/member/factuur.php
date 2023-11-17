@@ -4,7 +4,6 @@ require_once LIB . '/util/util.php';
 require_once COMPONENTS . '/fpdf186/fpdf.php';
 require_once DATABASE . '/connect.php';
 
-
 // Start the session
 session_start();
 
@@ -12,6 +11,12 @@ session_start();
 $pdf = new FPDF();
 $pdf->AddPage();
 $pdf->SetFont('Arial', 'B', 16);
+
+// Information about the company
+$pdf->Cell(0, 10, 'Factuur 2dekansveiling B', 0, 1, 'C');
+$pdf->Cell(0, 10, 'Zandpoortvest 9A 2800 Mechelen', 0, 1, 'C');
+$pdf->Cell(0, 10, 'Phone: 012-345-6789 | Email: info@example.com', 0, 1, 'C');
+$pdf->Ln(10); // Add some space
 
 // Get the user ID from the session
 $userId = $_SESSION['user']['id'];
@@ -30,26 +35,17 @@ if (!empty($userDataResult)) {
     if (isset($userData['firstname']) && isset($userData['lastname'])) {
         $pdf->SetFont('Arial', '', 14   ); // Change font for user's name
 
-        // Print the title
-        $pdf->SetFont('Arial', 'B', 20); // Change font and size for the title
-        $pdf->Cell(0, 10, 'Factuur 2dekansveiling B', 0, 1, 'C'); // Center-align the title
-        $pdf->Ln();
-
-        $pdf->Cell(40, 10, 'Beste ' . $userData['firstname'] . ' ' . $userData['lastname'] . ',');
-        $pdf->Ln();
+        $pdf->Cell(0, 10, 'Beste ' . $userData['firstname'] . ' ' . $userData['lastname'] . ',', 0, 1);
     } else {
-        $pdf->Cell(40, 10, 'User name not available');
-        $pdf->Ln();
+        $pdf->Cell(0, 10, 'User name not available', 0, 1);
     }
 } else {
-    $pdf->Cell(40, 10, 'User data not found');
-    $pdf->Ln();
+    $pdf->Cell(0, 10, 'User data not found', 0, 1);
 }
 
 // Print the message "U hebt volgende producten aangekocht"
 $pdf->SetFont('Arial', '', 12); // Restore font for the main message
-$pdf->Cell(40, 10, 'U hebt volgende producten aangekocht:');
-$pdf->Ln();
+$pdf->Cell(0, 10, 'U hebt volgende producten aangekocht:', 0, 1);
 $totalPrice = 0;
 
 // Check if there is any purchase history
@@ -58,7 +54,7 @@ if ($purchaseHistory) {
     $pdf->SetFont('Arial', 'B', 12);
 
     // Create table headers
-    $pdf->Cell(40, 10, 'Item Name', 1);
+    $pdf->Cell(60, 10, 'Item Name', 1);
     $pdf->Cell(40, 10, 'Price', 1);
     $pdf->Cell(40, 10, 'Date Purchased', 1);
     $pdf->Ln();
@@ -73,25 +69,24 @@ if ($purchaseHistory) {
         $totalPrice += $purchase['price'];
 
         // Create table rows
-        $pdf->Cell(40, 10, $purchase['productName'], 1);
+        $pdf->Cell(60, 10, $purchase['productName'], 1);
         $pdf->Cell(40, 10, chr(128) . $purchase['price'], 1);
         $pdf->Cell(40, 10, date('F j, Y', strtotime($purchase['timeOfPurchase'])), 1);
         $pdf->Ln();
     }
 } else {
-    $pdf->Cell(40, 10, 'No purchases found');
+    $pdf->Cell(0, 10, 'No purchases found', 0, 1);
 }
 
 // Print the total price
 $pdf->SetFont('Arial', 'B', 14); // Change font for the total price
-$pdf->Cell(120, 10, 'Total Price:', 1, 0, 'R'); // Align the total price to the right
-$pdf->Cell(20, 10, chr(128) . $totalPrice, 1); // Total price value
-$pdf->Ln();
-$pdf->Ln();
+$pdf->Cell(60, 10, 'Total Price:', 1);
+$pdf->Cell(80, 10, chr(128) . $totalPrice, 1); // Total price value
+$pdf->Ln(10); // Add some space
 
-// Set font for footer
+// Footer
 $pdf->SetFont('Arial', 'I', 12);
-$pdf->Cell(0, 10, 'Betaal deze factuur binnen 14 dagen op rekeningnummer XXXX-XXXX-XXXX', 0, 1, 'C');
+$pdf->Cell(0, 10, 'Betaal deze factuur binnen 14 dagen op rekeningnummer 0123-4567-8901', 0, 1, 'C');
 
 // Output the PDF
 $pdf->Output('D', 'Invoice.pdf');
