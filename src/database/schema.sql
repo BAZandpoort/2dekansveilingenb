@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 06 nov 2023 om 16:21
+-- Gegenereerd op: 10 nov 2023 om 14:30
 -- Serverversie: 10.4.28-MariaDB
 -- PHP-versie: 8.2.4
 
@@ -56,7 +56,6 @@ CREATE TABLE `bids` (
   `bidPrice` decimal(18,2) NOT NULL,
   `bidOfferedAt` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 --
 -- Gegevens worden geëxporteerd voor tabel `bids`
 --
@@ -69,7 +68,21 @@ INSERT INTO `bids` (`id`, `productid`, `userid`, `bidPrice`, `bidOfferedAt`) VAL
 -- --------------------------------------------------------
 
 --
--- Table structure for table `favorites`
+-- Tabelstructuur voor tabel `bidshistory`
+--
+
+CREATE TABLE `bidshistory` (
+  `id` int(11) NOT NULL,
+  `productid` int(11) NOT NULL,
+  `userid` int(11) NOT NULL,
+  `bidPrice` decimal(10,0) NOT NULL,
+  `bidOfferedAt` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `favorites` 
 --
 
 CREATE TABLE `favorites` (
@@ -80,6 +93,21 @@ CREATE TABLE `favorites` (
 -- --------------------------------------------------------
 
 --
+-- Tabelstructuur voor tabel `notification_read`
+--
+
+CREATE TABLE `notification_read` (
+  `id` int(11) NOT NULL,
+  `notificationid` int(11) NOT NULL,
+  `userid` int(11) NOT NULL,
+  `read` tinyint(1) NOT NULL,
+  `userid2` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `products`
 -- Tabelstructuur voor tabel `products`
 --
 
@@ -169,21 +197,34 @@ CREATE TABLE `product_categories` (
   `icon` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Gegevens worden geëxporteerd voor tabel `product_categories`
+-- Tabelstructuur voor tabel `reports`
 --
 
-INSERT INTO `product_categories` (`id`, `name`, `icon`) VALUES
-(1, 'Electronics', 'M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0M3.124 7.5A8.969 8.969 0 015.292 3m13.416 0a8.969 8.969 0 012.168 4.5'),
-(2, 'Home', 'M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z'),
-(3, 'Music', 'M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5'),
-(4, 'Sports', 'M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z'),
-(5, 'Baby', 'M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5'),
-(6, 'Health', 'M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z'),
-(7, 'Garden', 'M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z'),
-(8, 'Industrial', 'M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z'),
-(9, 'Outdoors', 'M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25'),
-(10, 'Grocery', 'M12 12.75c1.148 0 2.278.08 3.383.237 1.037.146 1.866.966 1.866 2.013 0 3.728-2.35 6.75-5.25 6.75S6.75 18.728 6.75 15c0-1.046.83-1.867 1.866-2.013A24.204 24.204 0 0112 12.75zm0 0c2.883 0 5.647.508 8.207 1.44a23.91 23.91 0 01-1.152 6.06M12 12.75c-2.883 0-5.647.508-8.208 1.44.125 2.104.52 4.136 1.153 6.06M12 12.75a2.25 2.25 0 002.248-2.354M12 12.75a2.25 2.25 0 01-2.248-2.354M12 8.25c.995 0 1.971-.08 2.922-.236.403-.066.74-.358.795-.762a3.778 3.778 0 00-.399-2.25M12 8.25c-.995 0-1.97-.08-2.922-.236-.402-.066-.74-.358-.795-.762a3.734 3.734 0 01.4-2.253M12 8.25a2.25 2.25 0 00-2.248 2.146M12 8.25a2.25 2.25 0 012.248 2.146M8.683 5a6.032 6.032 0 01-1.155-1.002c.07-.63.27-1.222.574-1.747m.581 2.749A3.75 3.75 0 0115.318 5m0 0c.427-.283.815-.62 1.155-.999a4.471 4.471 0 00-.575-1.752M4.921 6a24.048 24.048 0 00-.392 3.314c1.668.546 3.416.914 5.223 1.082M19.08 6c.205 1.08.337 2.187.392 3.314a23.882 23.882 0 01-5.223 1.082');
+CREATE TABLE `reports` (
+  `id` int(11) NOT NULL,
+  `productid` int(11) NOT NULL,
+  `userid` int(11) NOT NULL,
+  `typeOfAbuse` text NOT NULL,
+  `context` text NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `review`
+--
+
+CREATE TABLE `review` (
+  `member` int(11) NOT NULL,
+  `review` text NOT NULL,
+  `sterren` int(11) NOT NULL,
+  `seller` int(11) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -200,6 +241,7 @@ CREATE TABLE `translations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Gegevens worden geëxporteerd voor tabel `translations`
 -- Gegevens worden geëxporteerd voor tabel `translations`
 --
 
@@ -529,62 +571,6 @@ CREATE TABLE `user_role_mapping` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `user_role_mapping`
---
-
-INSERT INTO `user_role_mapping` (`id`, `userid`, `roleid`) VALUES
-(1, 36, 3),
-(2, 7, 3),
-(3, 2, 1),
-(4, 35, 1),
-(5, 27, 2),
-(6, 40, 2),
-(7, 13, 2),
-(8, 1, 1),
-(9, 42, 1),
-(10, 22, 3),
-(11, 14, 2),
-(12, 11, 1),
-(13, 48, 1),
-(14, 15, 3),
-(15, 12, 3),
-(16, 17, 1),
-(17, 47, 3),
-(18, 34, 2),
-(19, 44, 3),
-(20, 24, 1),
-(21, 49, 2),
-(22, 16, 2),
-(23, 18, 3),
-(24, 10, 1),
-(25, 32, 3),
-(26, 43, 2),
-(27, 50, 1),
-(28, 46, 1),
-(29, 21, 1),
-(30, 25, 2),
-(31, 29, 2),
-(32, 6, 1),
-(33, 38, 2),
-(34, 9, 3),
-(35, 4, 3),
-(36, 39, 2),
-(37, 31, 2),
-(38, 26, 1),
-(39, 3, 2),
-(40, 8, 2),
-(41, 23, 2),
-(42, 28, 2),
-(43, 19, 2),
-(44, 41, 2),
-(45, 30, 2),
-(46, 33, 2),
-(47, 45, 2),
-(48, 20, 1),
-(49, 5, 2),
-(50, 37, 1);
-
---
 -- Indexen voor geëxporteerde tabellen
 --
 
@@ -598,6 +584,18 @@ ALTER TABLE `advertisements`
 -- Indexen voor tabel `bids`
 --
 ALTER TABLE `bids`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexen voor tabel `bidshistory`
+--
+ALTER TABLE `bidshistory`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexen voor tabel `notification_read`
+--
+ALTER TABLE `notification_read`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -615,6 +613,12 @@ ALTER TABLE `products` ADD FULLTEXT KEY `search` (`name`,`description`);
 ALTER TABLE `product_categories`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `product_category_name` (`name`);
+
+--
+-- Indexen voor tabel `reports`
+--
+ALTER TABLE `reports`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexen voor tabel `translations`
@@ -669,6 +673,19 @@ ALTER TABLE `bids`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT voor een tabel `bidshistory`
+--
+ALTER TABLE `bidshistory`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT voor een tabel `notification_read`
+--
+ALTER TABLE `notification_read`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT voor een tabel `products`
 -- AUTO_INCREMENT voor een tabel `products`
 --
 ALTER TABLE `products`
@@ -676,9 +693,16 @@ ALTER TABLE `products`
 
 --
 -- AUTO_INCREMENT voor een tabel `product_categories`
+-- AUTO_INCREMENT voor een tabel `product_categories`
 --
 ALTER TABLE `product_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT voor een tabel `reports`
+--
+ALTER TABLE `reports`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT voor een tabel `translations`

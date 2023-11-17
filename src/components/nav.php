@@ -26,6 +26,42 @@ if ($user) {
 }
 
 $searchTerm = $_GET['search'] ?? '';
+
+$userexist=false;
+$nothighest=false;
+$bid_id=null;
+
+$maxproductData = fetch("SELECT MAX(productid) AS maxid From `bidshistory`");
+
+
+if($user){
+for( $i = 1 ; $i <= $maxproductData['maxid'] ; $i++){
+  
+  $currentData = fetchSingle( "SELECT * FROM `bidshistory` WHERE productid = ? ORDER BY bidPrice DESC" , ['type' => 'i', 'value' => $i]);
+
+  foreach($currentData as $data){
+
+    if ( $data['userid'] !== $user["id"] ){
+     
+      $nothighest = true;
+      $product=$data['productid'];
+      
+    }
+    $bid_id = $data['id'];
+  break;
+  }
+
+  foreach($currentData as $data){
+
+      if ( $data['userid'] === $user["id"] ){
+      $userexist=true;
+    
+      } 
+    
+    }
+  }
+}
+
 ?>
 
 <!-- Top navbar -->
@@ -127,6 +163,50 @@ $searchTerm = $_GET['search'] ?? '';
 
   <!-- Right - User actions -->
   <div class="hidden flex-1 justify-end gap-4 md:flex">
+  <div>
+  <!-- message if outbid -->
+  <?php if($userexist && $nothighest ){ ?>
+    <div class="alert shadow-lg flex " id="myDiv">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-info shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+      <div class ="flex[1.2]">
+        <h3 class="font-bold">New message!</h3>
+        <div class="text-xs">You have been outbid</div>
+      </div>
+      <div class="flex[0.8]">
+        <button class="btn btn-sm"><a href="/catalog/product?id=<?php echo $product ?>" > See</a></button>
+        <button id="hideButton" class="btn btn-sm">Close</button>
+      </div>
+    </div>
+    <?php } 
+      if($user){
+      $Data = fetch('SELECT * From notification_read Where userid = ? AND userid2 != ? AND notificationid = ?',['type' => 'i', 'value' => $user['id']],['type' => 'i', 'value' => $user['id']],['type' => 'i', 'value' => $bid_id]);
+
+    ?>
+    <script>
+        const div = document.getElementById('myDiv');
+        const button = document.getElementById('hideButton');
+   
+        <?php  if ($Data['read']===0){ ?>
+
+        button.addEventListener('click', function() {
+          
+           div.style.display = 'none';
+           <?php  insert('UPDATE notification_read SET `read` = 1  Where userid = ? AND userid2 != ? AND notificationid = ?',['type' => 'i', 'value' => $user['id']],['type' => 'i', 'value' => $user['id']],['type' => 'i', 'value' => $bid_id]);  ?>
+        });
+       
+        <?php }else{ ?>
+
+            div.style.display = 'none'; 
+
+        <?php }
+      }
+        ?>
+
+    </script>
+
+   
+  <!--/ message if outbid -->
+</div> 
     <details class="dropdown dropdown-end">
       <summary class="m-1 btn"><?php echo $languageDisplay ?></summary>
       <ul class="mt-2 p-2 shadow menu dropdown-content z-[1] bg-base-200 rounded-box w-52">
@@ -198,8 +278,14 @@ $searchTerm = $_GET['search'] ?? '';
       </details>
       '
     : '<a href="/account/login" class="btn">Login</a>'; ?>
+    
   </div>
 </div>
+
+
+
+
+  
 
 <!-- Bottom navbar -->
 <div class="hidden navbar bg-base-100 shadow-sm pt-8 md:flex">
