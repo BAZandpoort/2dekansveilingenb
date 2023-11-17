@@ -113,6 +113,13 @@ $routes = [
     'footer' => false,
     'container' => true,
   ],
+  '/seller/add-advertisement' => [
+    'view' => 'user/seller/add-advertisement.php',
+    'title' => 'Dashboard',
+    'nav' => true,
+    'footer' => true,
+    'container' => false,
+  ],
   // Admin Dashboard routes
   '/dashboard/products/delete' => [
     'view' => 'user/admin/delete-product.php',
