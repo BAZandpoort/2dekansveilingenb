@@ -69,6 +69,11 @@ $sellerData = fetch($query, ['type' => 'i', 'value' => $productId]);
       </div>
       <button onclick="bid()" class="btn btn-outline btn-primary join-item">Place bid</button>
     </div>
+    <br>
+    <div class="button">
+
+      <script src="/public/js/users.js"></script>
+    </div>
   </div>
 </div>
 
