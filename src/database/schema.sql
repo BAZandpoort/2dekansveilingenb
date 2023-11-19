@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 10 nov 2023 om 15:34
--- Serverversie: 10.4.28-MariaDB
--- PHP-versie: 8.2.4
+-- Generation Time: Nov 19, 2023 at 02:23 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `bids`
+-- Table structure for table `bids`
 --
 
 CREATE TABLE `bids` (
@@ -35,17 +35,31 @@ CREATE TABLE `bids` (
   `bidOfferedAt` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Gegevens worden geëxporteerd voor tabel `bids`
+-- Table structure for table `delivery_orders`
 --
 
-INSERT INTO `bids` (`id`, `productid`, `userid`, `bidPrice`, `bidOfferedAt`) VALUES
-(1, 9, 52, 0.52, '2023-11-10 14:01:37');
+CREATE TABLE `delivery_orders` (
+  `id` int(11) NOT NULL,
+  `customerid` int(11) NOT NULL,
+  `productid` int(11) NOT NULL,
+  `deliveryMethod` text NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `delivery_orders`
+--
+
+INSERT INTO `delivery_orders` (`id`, `customerid`, `productid`, `deliveryMethod`, `createdAt`) VALUES
+(1, 53, 10, 'Express', '2023-11-19 13:21:52');
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `favorites`
+-- Table structure for table `favorites`
 --
 
 CREATE TABLE `favorites` (
@@ -56,7 +70,7 @@ CREATE TABLE `favorites` (
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `products`
+-- Table structure for table `products`
 --
 
 CREATE TABLE `products` (
@@ -76,7 +90,7 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `products`
+-- Dumping data for table `products`
 --
 
 INSERT INTO `products` (`id`, `userid`, `categoryid`, `name`, `description`, `price`, `imageUrl`, `endDate`, `updatedAt`, `createdAt`, `supportStandard`, `supportExpress`, `supportPickup`) VALUES
@@ -89,7 +103,7 @@ INSERT INTO `products` (`id`, `userid`, `categoryid`, `name`, `description`, `pr
 (7, 17, 10, 'Sleek Wooden Shoes', 'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients', 160.00, '23.jpg', '2023-11-11 03:19:55', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
 (8, 22, 9, 'Recycled Rubber Gloves', 'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J', 482.00, '15.jpg', '2023-11-11 05:10:46', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
 (9, 20, 3, 'Generic Wooden Bacon', 'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients', 784.00, '16.jpg', '2023-11-10 14:04:00', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(10, 45, 7, 'Ergonomic Metal Keyboard', 'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients', 189.00, '46.jpg', '2023-11-25 13:59:00', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(10, 45, 7, 'Ergonomic Metal Keyboard', 'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients', 189.00, '46.jpg', '2023-11-19 14:19:00', '2023-11-19 13:18:25', '2023-11-10 12:58:34', 1, 1, 1),
 (11, 10, 6, 'Sleek Concrete Chair', 'Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals', 797.00, '3.jpg', '2023-11-11 02:17:56', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
 (12, 24, 8, 'Rustic Frozen Towels', 'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients', 338.00, '33.jpg', '2023-11-11 12:54:19', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
 (13, 43, 7, 'Elegant Wooden Mouse', 'The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design', 86.00, '35.jpg', '2023-11-10 19:38:55', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
@@ -135,7 +149,7 @@ INSERT INTO `products` (`id`, `userid`, `categoryid`, `name`, `description`, `pr
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `product_categories`
+-- Table structure for table `product_categories`
 --
 
 CREATE TABLE `product_categories` (
@@ -145,7 +159,7 @@ CREATE TABLE `product_categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `product_categories`
+-- Dumping data for table `product_categories`
 --
 
 INSERT INTO `product_categories` (`id`, `name`, `icon`) VALUES
@@ -163,7 +177,7 @@ INSERT INTO `product_categories` (`id`, `name`, `icon`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `reports`
+-- Table structure for table `reports`
 --
 
 CREATE TABLE `reports` (
@@ -176,7 +190,7 @@ CREATE TABLE `reports` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `reports`
+-- Dumping data for table `reports`
 --
 
 INSERT INTO `reports` (`id`, `productid`, `userid`, `typeOfAbuse`, `context`, `createdAt`) VALUES
@@ -185,7 +199,7 @@ INSERT INTO `reports` (`id`, `productid`, `userid`, `typeOfAbuse`, `context`, `c
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `review`
+-- Table structure for table `review`
 --
 
 CREATE TABLE `review` (
@@ -199,10 +213,10 @@ CREATE TABLE `review` (
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `succesful_bids`
+-- Table structure for table `successful_bids`
 --
 
-CREATE TABLE `succesful_bids` (
+CREATE TABLE `successful_bids` (
   `id` int(11) NOT NULL,
   `originalBidid` int(11) NOT NULL,
   `bidderid` int(11) NOT NULL,
@@ -212,10 +226,18 @@ CREATE TABLE `succesful_bids` (
   `bidPrice` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `successful_bids`
+--
+
+INSERT INTO `successful_bids` (`id`, `originalBidid`, `bidderid`, `sellerid`, `productid`, `bidAcceptedAt`, `bidPrice`) VALUES
+(1, 1, 52, 0, 9, '2023-11-19 13:16:41', 0.52),
+(2, 2, 53, 0, 10, '2023-11-19 13:19:07', 3430.07);
+
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `translations`
+-- Table structure for table `translations`
 --
 
 CREATE TABLE `translations` (
@@ -227,7 +249,7 @@ CREATE TABLE `translations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `translations`
+-- Dumping data for table `translations`
 --
 
 INSERT INTO `translations` (`id`, `location`, `text_en`, `text_nl`, `text_fr`) VALUES
@@ -256,7 +278,7 @@ INSERT INTO `translations` (`id`, `location`, `text_en`, `text_nl`, `text_fr`) V
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -271,7 +293,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `firstname`, `lastname`, `updatedAt`, `createdAt`) VALUES
@@ -326,12 +348,13 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `firstname`, `lastna
 (49, 'Sim_Considine', 'Frederick78@gmail.com', '$argon2id$v=19$m=65536,t=3,p=4$pJPIpY2mj8SVKcV2BoWJJQ$JuMeSCC2fM8Oorl+uWpisx6lnknOlg4zHU261WLO+l8', 'Luisa', 'Lebsack', '2023-11-10 12:58:34', '2023-11-10 12:58:34'),
 (50, 'Annalise76', 'Shanny.Sporer75@gmail.com', '$argon2id$v=19$m=65536,t=3,p=4$MMsIvPE+zi/LHDYsQb3puQ$+T8kJsl/wLLgRKncyqH+YVRvjzwxa3ac8E0nPTsGVjY', 'Otto', 'Tremblay', '2023-11-10 12:58:34', '2023-11-10 12:58:34'),
 (51, 'Testing Account', 'test@gmail.com', '$argon2id$v=19$m=65536,t=3,p=4$Fsrn7g0oJlrtBqeN688+aQ$I888DW8sXM01Miu0kNJl8u+yq1Lr3pd9Oj6Q5e8xJJc', 'Testing', 'Account', '2023-11-10 12:58:34', '2023-11-10 12:58:34'),
-(52, 'xdfcvgjklm', 'john@johnson.com', '$argon2id$v=19$m=65536,t=4,p=1$MDV3VDFuSVhOZERjZFhpUg$ezaweTPW9LWN75hyEAikL8z/bzgn9hpBQx6OcM2Agq0', 'John', 'Johnson', '2023-11-10 12:59:33', '2023-11-10 12:59:33');
+(52, 'xdfcvgjklm', 'john@johnson.com', '$argon2id$v=19$m=65536,t=4,p=1$MDV3VDFuSVhOZERjZFhpUg$ezaweTPW9LWN75hyEAikL8z/bzgn9hpBQx6OcM2Agq0', 'John', 'Johnson', '2023-11-10 12:59:33', '2023-11-10 12:59:33'),
+(53, 'rkeikkzrlke', 'Er@gmaI.co', '$argon2id$v=19$m=65536,t=4,p=1$UEJwRFouYllQMHVzbnlQNQ$1NiuMYNlj55gdXzEbBEmr5zpw6I/wTd1zL8LTZwK2j0', 'Hel', 'Er', '2023-11-19 13:17:11', '2023-11-19 13:17:11');
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `user_profile`
+-- Table structure for table `user_profile`
 --
 
 CREATE TABLE `user_profile` (
@@ -344,7 +367,7 @@ CREATE TABLE `user_profile` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `user_profile`
+-- Dumping data for table `user_profile`
 --
 
 INSERT INTO `user_profile` (`id`, `userid`, `profilePictureUrl`, `about`, `theme`, `language`) VALUES
@@ -399,12 +422,13 @@ INSERT INTO `user_profile` (`id`, `userid`, `profilePictureUrl`, `about`, `theme
 (49, 41, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/133.jpg', 'Volo spiculum valeo bos dignissimos rerum tutamen solvo tero. Trepide tametsi advenio paens admoneo acies tempore corporis desidero. Amicitia reprehenderit cultura calco calamitas cur assentator tollo.', 'dark', 'text_nl'),
 (50, 8, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/228.jpg', 'Cimentarius tristis deprecator allatus est fugiat subnecto. Ducimus admitto vitae tibi ut cruciamentum. Derelinquo cursim deludo.', 'dark', 'text_fr'),
 (51, 51, 'https://avatars.githubusercontent.com/u/76388079', 'Testing Account', 'light', 'text_en'),
-(52, 52, 'https://avatars.githubusercontent.com/u/64209400?v=4', 'Hello!', 'dark', 'text_en');
+(52, 52, 'https://avatars.githubusercontent.com/u/64209400?v=4', 'Hello!', 'dark', 'text_en'),
+(53, 53, 'https://avatars.githubusercontent.com/u/64209400?v=4', 'Hello!', 'light', 'text_en');
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `user_purchases`
+-- Table structure for table `user_purchases`
 --
 
 CREATE TABLE `user_purchases` (
@@ -417,7 +441,7 @@ CREATE TABLE `user_purchases` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `user_purchases`
+-- Dumping data for table `user_purchases`
 --
 
 INSERT INTO `user_purchases` (`id`, `timeOfPurchase`, `productId`, `price`, `productName`, `productImage`) VALUES
@@ -526,7 +550,7 @@ INSERT INTO `user_purchases` (`id`, `timeOfPurchase`, `productId`, `price`, `pro
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `user_roles`
+-- Table structure for table `user_roles`
 --
 
 CREATE TABLE `user_roles` (
@@ -535,7 +559,7 @@ CREATE TABLE `user_roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `user_roles`
+-- Dumping data for table `user_roles`
 --
 
 INSERT INTO `user_roles` (`id`, `name`) VALUES
@@ -546,7 +570,7 @@ INSERT INTO `user_roles` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `user_role_mapping`
+-- Table structure for table `user_role_mapping`
 --
 
 CREATE TABLE `user_role_mapping` (
@@ -556,7 +580,7 @@ CREATE TABLE `user_role_mapping` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `user_role_mapping`
+-- Dumping data for table `user_role_mapping`
 --
 
 INSERT INTO `user_role_mapping` (`id`, `userid`, `roleid`) VALUES
@@ -612,17 +636,23 @@ INSERT INTO `user_role_mapping` (`id`, `userid`, `roleid`) VALUES
 (50, 42, 1);
 
 --
--- Indexen voor geëxporteerde tabellen
+-- Indexes for dumped tables
 --
 
 --
--- Indexen voor tabel `bids`
+-- Indexes for table `bids`
 --
 ALTER TABLE `bids`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexen voor tabel `products`
+-- Indexes for table `delivery_orders`
+--
+ALTER TABLE `delivery_orders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
@@ -631,32 +661,32 @@ ALTER TABLE `products`
 ALTER TABLE `products` ADD FULLTEXT KEY `search` (`name`,`description`);
 
 --
--- Indexen voor tabel `product_categories`
+-- Indexes for table `product_categories`
 --
 ALTER TABLE `product_categories`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `product_category_name` (`name`);
 
 --
--- Indexen voor tabel `reports`
+-- Indexes for table `reports`
 --
 ALTER TABLE `reports`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexen voor tabel `succesful_bids`
+-- Indexes for table `successful_bids`
 --
-ALTER TABLE `succesful_bids`
+ALTER TABLE `successful_bids`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexen voor tabel `translations`
+-- Indexes for table `translations`
 --
 ALTER TABLE `translations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexen voor tabel `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
@@ -664,21 +694,21 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- Indexen voor tabel `user_profile`
+-- Indexes for table `user_profile`
 --
 ALTER TABLE `user_profile`
   ADD PRIMARY KEY (`id`),
   ADD KEY `profile_userid` (`userid`);
 
 --
--- Indexen voor tabel `user_roles`
+-- Indexes for table `user_roles`
 --
 ALTER TABLE `user_roles`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `name` (`name`);
 
 --
--- Indexen voor tabel `user_role_mapping`
+-- Indexes for table `user_role_mapping`
 --
 ALTER TABLE `user_role_mapping`
   ADD PRIMARY KEY (`id`),
@@ -686,88 +716,94 @@ ALTER TABLE `user_role_mapping`
   ADD KEY `role_mapping_userid` (`userid`);
 
 --
--- AUTO_INCREMENT voor geëxporteerde tabellen
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT voor een tabel `bids`
+-- AUTO_INCREMENT for table `bids`
 --
 ALTER TABLE `bids`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `delivery_orders`
+--
+ALTER TABLE `delivery_orders`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT voor een tabel `products`
+-- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
--- AUTO_INCREMENT voor een tabel `product_categories`
+-- AUTO_INCREMENT for table `product_categories`
 --
 ALTER TABLE `product_categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT voor een tabel `reports`
+-- AUTO_INCREMENT for table `reports`
 --
 ALTER TABLE `reports`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT voor een tabel `succesful_bids`
+-- AUTO_INCREMENT for table `successful_bids`
 --
-ALTER TABLE `succesful_bids`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `successful_bids`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT voor een tabel `translations`
+-- AUTO_INCREMENT for table `translations`
 --
 ALTER TABLE `translations`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT voor een tabel `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
--- AUTO_INCREMENT voor een tabel `user_profile`
+-- AUTO_INCREMENT for table `user_profile`
 --
 ALTER TABLE `user_profile`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
--- AUTO_INCREMENT voor een tabel `user_roles`
+-- AUTO_INCREMENT for table `user_roles`
 --
 ALTER TABLE `user_roles`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT voor een tabel `user_role_mapping`
+-- AUTO_INCREMENT for table `user_role_mapping`
 --
 ALTER TABLE `user_role_mapping`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
--- Beperkingen voor geëxporteerde tabellen
+-- Constraints for dumped tables
 --
 
 --
--- Beperkingen voor tabel `products`
+-- Constraints for table `products`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `products_categoryid` FOREIGN KEY (`categoryid`) REFERENCES `product_categories` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `products_userid` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
--- Beperkingen voor tabel `user_profile`
+-- Constraints for table `user_profile`
 --
 ALTER TABLE `user_profile`
   ADD CONSTRAINT `profile_userid` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
--- Beperkingen voor tabel `user_role_mapping`
+-- Constraints for table `user_role_mapping`
 --
 ALTER TABLE `user_role_mapping`
   ADD CONSTRAINT `role_mapping_roleid` FOREIGN KEY (`roleid`) REFERENCES `user_roles` (`id`) ON DELETE CASCADE,
