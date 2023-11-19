@@ -24,10 +24,10 @@ $bidData = fetch(
   $query,
   ["type" => "i", "value" => $productId],
 );
-var_dump($bidData);
 $lastBid = ($bidData["amount"] > 0) ? $bidData["bidPrice"] : 0.00;
 ?>
 
+<!-- Breadcrumbs -->
 <div class="w-full flex justify-center md:justify-start text-sm breadcrumbs">
   <ul>
     <li><a href="/">Home</a></li>
@@ -35,16 +35,23 @@ $lastBid = ($bidData["amount"] > 0) ? $bidData["bidPrice"] : 0.00;
     <li><a href="/catalog/products">All Products</a></li>
   </ul>
 </div>
+
+<!-- Main content -->
 <div class="flex flex-col md:flex-row gap-4">
+  <!-- Image -->
   <div class="flex-[1.3]">
     <img class="w-full h-full aspect-[3/2] rounded-2xl object-cover" src="/public/images/<?php echo $productData["imageUrl"]  ?>" alt="">
   </div>
+
+  <!-- Bidding -->
   <div id="actions" class="flex flex-[.7] bg-base-100 rounded-2xl p-8 flex-col items-center justify-center">
     <?php
     if (strtotime($productData['endDate'])) {
       echo '<p class="opacity-70 pb-12">Veiling sluit om ' . $time . '</p>';
     }
     ?>
+
+    <!-- Countdown -->
     <div class="pb-24">
       <span id="countdown-wrapper" class="countdown font-mono text-5xl">
         <span id="hours" style="--value:00;"></span>:
@@ -55,6 +62,8 @@ $lastBid = ($bidData["amount"] > 0) ? $bidData["bidPrice"] : 0.00;
         60
       </div>
     </div>
+
+    <!-- Bidding information -->
     <div class="flex flex-row justify-center gap-8 md:gap-24 pb-8">
       <div class="flex flex-col items-center">
         <p class="uppercase text-xs opacity-40 font-bold">Huidig bod</p>
@@ -70,6 +79,7 @@ $lastBid = ($bidData["amount"] > 0) ? $bidData["bidPrice"] : 0.00;
         </p>
       </div>
     </div>
+
     <?php
     if (isset($_SESSION['user']) && !$ended) {
       echo '
@@ -84,170 +94,138 @@ $lastBid = ($bidData["amount"] > 0) ? $bidData["bidPrice"] : 0.00;
             </div>
           </form>
         ';
-    } else {
-      if ($ended) {
-        $finalBid = fetch('SELECT * FROM successful_bids WHERE  productid = ?', ['type' => 'i', 'value' => $productId]);
-        if (!isset($finalBid["bidPrice"])) {
-          $finalBidMessage = "Auction ended with no bids";
-          echo '<p class="text-center text-xl font-semibold">' . $finalBidMessage . '</p>';
-        } else {
-          $finalBidMessage = 'Winning bid was: €' . $finalBid["bidPrice"] . '';
-          echo '<p class="text-center text-xl font-semibold">' . $finalBidMessage . '</p>';
+    } else if ($ended) {
+      $query = "SELECT * FROM successful_bids WHERE  productid = ?";
+      $data = fetch(
+        $query,
+        ['type' => 'i', 'value' => $productId]
+      );
 
-          if ($finalBid['bidderid'] == $_SESSION['user']['id']) {
-
-            $query = 'SELECT COUNT(*) as aantal FROM delivery_orders WHERE productid = ?';
-            $delivery_data = fetch($query, ['type' => 'i', 'value' => $productId]);
-            if ($delivery_data["aantal"] > 0) {
-              echo '-<button class="btn btn-outline btn-warning">Delivery already made</button>';
-            } else {
-              echo '
-                <a href="/catalog/delivery_order?productid=' . $productId . '"><button class="btn btn-outline btn-success">Order delivery</button></a>
-              ';
-            }
-          }
-        }
+      if (!isset($data["bidPrice"])) {
+        echo '
+        <p class="text-center text-xl font-semibold">
+          Auction ended without any bids
+        </p>
+        ';
       } else {
         echo '
-          <a href="/account/login" class="btn btn-primary">
-            Log in to begin bidding
-          </a>';
-      }
-    }
-    ?>
+        <p class="text-center text-xl font-semibold">
+          Winning bid was: €' . $data["bidPrice"] . '
+        </p>
+        ';
 
-    <br>
-    <?php
-
-    // Retrieve the highest bidder
-    $sql = "SELECT userid, bidPrice FROM bids WHERE productid = ? ORDER BY bidOfferedAt DESC LIMIT 1";
-    $stmt = $connection->prepare($sql); // Prepare the SQL statement
-    $stmt->bind_param("i", $productId); // Bind the product ID parameter = binding parameters is a way of preventing SQL injection
-    $stmt->execute(); // Execute the SQL statement
-    $result = $stmt->get_result(); // Get the result set
-    $lastBid = $result->fetch_assoc(); // Fetch the highest bidder data
-    $lastBidderId = $lastBid ? $lastBid['userid'] : null; // Get the highest bidder's user ID
-    $lastBidPrice = $lastBid ? $lastBid['bidPrice'] : null; // Get the highest bid price if it isnt show null = it means that it does not currently hold any value
-
-    // Check if the auction has ended
-    $ended = strtotime($productData['endDate']) < time(); // Check if the end date of the auction has passed
-    $isWinningBidder = $lastBidderId ? ($lastBidderId === $_SESSION["user"]["id"]) : false; // Check if the current user is the winning bidder
-    if ($ended) {
-      if (isset($_SESSION["user"])) {
-        // Check if the user is the winning bidder
-        $isWinningBidder = ($lastBidderId === $_SESSION["user"]["id"]);
-        if ($isWinningBidder) {
-          echo '
-            <form action="/src/lib/user/member/factuur.php" method="post">
-              <input type="hidden" name="product_id" value="' . $productId . '">
-              <input type="hidden" name="amount" value="' . ($lastBidPrice ? $lastBidPrice : '') . '">
-              <button class="btn btn-primary mb-3">Pay Now</button>
-            </form>
-          ';
+        var_dump($bidData);
+        if ($data['bidderid'] == $_SESSION['user']['id']) {
+          $query = 'SELECT COUNT(*) as amount FROM delivery_orders WHERE productid = ?';
+          $data = fetch($query, ['type' => 'i', 'value' => $productId]);
+          
+          if ($data["amount"] > 0) {
+            echo '
+            <button class="btn btn-outline btn-warning">
+              Delivery already made
+            </button>
+            ';
+          } else {
+            echo '
+            <a href="/catalog/delivery_order?productid=' . $productId . '">
+              <button class="btn btn-outline btn-success">
+                Choose delivery method
+              </button>
+            </a>
+            ';
+          }
         }
       }
-    }
-    ?>
-
-    <br>
-
-    <?php
-
-    // Retrieve the highest bidder
-    $sql = "SELECT userid, bidPrice FROM bids WHERE productid = ? ORDER BY bidOfferedAt DESC LIMIT 1";
-    $stmt = $connection->prepare($sql); // Prepare the SQL statement
-    $stmt->bind_param("i", $productId); // Bind the product ID parameter = binding parameters is a way of preventing SQL injection
-    $stmt->execute(); // Execute the SQL statement
-    $result = $stmt->get_result(); // Get the result set
-    $lastBid = $result->fetch_assoc(); // Fetch the highest bidder data
-    $lastBidderId = $lastBid ? $lastBid['userid'] : null; // Get the highest bidder's user ID
-    $lastBidPrice = $lastBid ? $lastBid['bidPrice'] : null; // Get the highest bid price if it isnt show null = it means that it does not currently hold any value
-
-    // Check if the auction has ended
-    $ended = strtotime($productData['endDate']) < time(); // Check if the end date of the auction has passed
-    $isWinningBidder = $lastBidderId ? ($lastBidderId === $_SESSION["user"]["id"]) : false; // Check if the current user is the winning bidder
-    if ($ended) {
-      if (isset($_SESSION["user"])) {
-        // Check if the user is the winning bidder
-        $isWinningBidder = ($lastBidderId === $_SESSION["user"]["id"]);
-        if ($isWinningBidder) {
-          echo '
-            <form action="/src/lib/user/member/factuur.php" method="post">
-              <input type="hidden" name="product_id" value="' . $productId . '">
-              <input type="hidden" name="amount" value="' . ($lastBidPrice ? $lastBidPrice : '') . '">
-              <button class="btn btn-primary mb-3">Pay Now</button>
-            </form>
-          ';
-        }
-      }
-    }
-    ?>
-
-    <br>
-
-    <?php
-    if ($productData["supportStandard"]) {
-      $emojiSD = "✔️";
     } else {
-      $emojiSD = "❌";
-    }
-
-    if ($productData["supportExpress"]) {
-      $emojiED = "✔️";
-    } else {
-      $emojiED = "❌";
-    }
-
-    if ($productData["supportPickup"]) {
-      $emojiPU = "✔️";
-    } else {
-      $emojiPU = "❌";
-    }
-
-    echo '<b>Beschikbare verzendopties</b>
-        <table>
-          <tr>
-            <td>Standard</td>
-            <td>' . $emojiSD . '</td>
-          </tr>
-          <tr>
-            <td>Express</td>
-            <td>' . $emojiED . '</td>
-          </tr>
-          <tr>
-            <td>Pickup</td>
-            <td>' . $emojiPU . '</td>
-          </tr>
-        </table>
-        <br><br>
+      echo '
+      <a href="/account/login" class="btn btn-primary">
+        Log in to begin bidding
+      </a>
       ';
+    }
+
+    // Retrieve the highest bidder
+    $query = "SELECT * FROM bids WHERE productid = ?";
+    $data = fetchSingle(
+      $query,
+      ["type" => "i", "value" => $productId]
+    );
+
+    $lastBidderId = isset($data['userid']) ? $data['userid'] : null; // Get the highest bidder's user ID
+    $lastBidPrice = isset($data['bidPrice']) ? $data['bidPrice'] : null; // Get the highest bid price if it isnt show null = it means that it does not currently hold any value
+
+    // Check if the auction has ended
+    $ended = strtotime($productData['endDate']) < time(); // Check if the end date of the auction has passed
+    $isWinningBidder = $lastBidderId ? ($lastBidderId === $_SESSION["user"]["id"]) : false; // Check if the current user is the winning bidder
+    if ($ended) {
+      if (isset($_SESSION["user"])) {
+        if ($isWinningBidder) {
+          echo '
+          <form action="/src/lib/user/member/factuur.php" method="post">
+            <input type="hidden" name="product_id" value="' . $productId . '">
+            <input type="hidden" name="amount" value="' . ($lastBidPrice ? $lastBidPrice : '') . '">
+            <button class="btn btn-primary mb-3">Pay Now</button>
+          </form>
+          ';
+        }
+      }
+    }
+
+    // Retrieve the highest bidder
+    $sql = "SELECT * FROM bids WHERE productid = ?";
+    $data = fetch(
+      $sql,
+      ["type" => "i", "value" => $productId]
+    );
+
+    $lastBidderId = $data ? $data['userid'] : null; // Get the highest bidder's user ID
+    $lastBidPrice = $data ? $data['bidPrice'] : null; // Get the highest bid price if it isnt show null = it means that it does not currently hold any value
+
+    // Check if the auction has ended
+    $ended = strtotime($productData['endDate']) < time(); // Check if the end date of the auction has passed
+    $isWinningBidder = $lastBidderId ? ($lastBidderId === (isset($_SESSION["user"]["id"]) ? $_SESSION["user"]["id"] : 0)) : false; // Check if the current user is the winning bidder
+    if ($ended) {
+      if (isset($_SESSION["user"])) {
+        // Check if the user is the winning bidder
+        $isWinningBidder = ($lastBidderId === $_SESSION["user"]["id"]);
+        if ($isWinningBidder) {
+          echo '
+            <form action="/src/lib/user/member/factuur.php" method="post">
+              <input type="hidden" name="product_id" value="' . $productId . '">
+              <input type="hidden" name="amount" value="' . ($lastBidPrice ? $lastBidPrice : '') . '">
+              <button class="btn btn-primary mb-3">Pay Now</button>
+            </form>
+          ';
+        }
+      }
+    }
 
     if (isset($_SESSION["user"])) {
-
       echo '
-          <a href="/catalog/report?productid=' . $productId . '"><button class="btn btn-outline btn-error">Report abuse</button></a>
+          <a class="pt-4" href="/catalog/report?productid=' . $productId . '">
+            <button class="btn btn-outline btn-error">Report abuse</button>
+          </a>
         ';
     } else {
       echo '
-          <button class="btn btn-outline btn-error" onclick="my_modal_2.showModal()">Report abuse</button>
+          <button class="btn btn-outline btn-error mt-4" onclick="my_modal_2.showModal()">Report abuse</button>
           <dialog id="my_modal_2" class="modal">
             <div class="modal-box">
               <h3 class="font-bold text-lg">Account required for this action</h3>
               <p class="py-4"><a href="/account/login"><b><u>Log in</u></b></a> to report abuse</p>
             </div>
             <form method="dialog" class="modal-backdrop">
-              <button>close</button>
+              <button>Close</button>
             </form>
           </dialog>
         ';
     }
-
-
     ?>
 
   </div>
 </div>
 
+<!-- Product details -->
 <div class="flex justify-center gap-4 mt-4">
   <div class="flex flex-col md:flex-[1.3] gap-4">
     <h1 class="text-2xl font-semibold">
@@ -258,12 +236,36 @@ $lastBid = ($bidData["amount"] > 0) ? $bidData["bidPrice"] : 0.00;
     </p>
     <br>
   </div>
-  <div class="flex-[.7] p-8"></div>
+  <div class="flex-[.7] p-8">
+    <?php 
+    $standardDelivery = $productData["supportStandard"] ? "Yes" : "No";
+    $expressDelivery = $productData["supportExpress"] ? "Yes" : "No";
+    $pickupDelivery = $productData["supportPickup"] ? "Yes" : "No";
+
+    echo '
+    <div class="">
+      <b>Beschikbare verzendopties</b>
+      <table>
+        <tr>
+          <td>Standard</td>
+          <td>' . $standardDelivery . '</td>
+        </tr>
+        <tr>
+          <td>Express</td>
+          <td>' . $expressDelivery . '</td>
+        </tr>
+        <tr>
+          <td>Pickup</td>
+          <td>' . $pickupDelivery . '</td>
+        </tr>
+      </table>
+    </div>
+    ';
+    ?>
+  </div>
 </div>
 
 <?php
-//make a revieuw system of the product and make it so that u can only review once and that u can only review if u have bought the product and that the other people the revieuws  can see but not add to it if they havent bought the product
-
 // Fetch seller information
 $sellerId = $_GET['id'];
 $userId = $_SESSION['user']['id'];
@@ -374,11 +376,6 @@ if (count($sellerReviews) > 0) {
     <p>This product has no reviews yet.</p>
   <?php endif; ?>
 </div>
-
-
-
-
-
 
 <form action="/src/lib/user/seller/update-timer.php" method="post" enctype="multipart/form-data" class="flex flex-col items-center justify-center gap-4 max-w-2xl mx-auto">
   <div class="flex flex-row justify-center gap-4 w-full">
