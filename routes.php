@@ -83,6 +83,13 @@ $routes = [
     'footer' => true,
     'container' => true,
   ],
+  '/catalog/delivery_order' => [
+    'view' => 'catalog/delivery_order.php',
+    'title' => 'Delivery order',
+    'nav' => true,
+    'footer' => true,
+    'container' => true,
+  ],
   // Member Dashboard routes
   '/dashboard/products/history' => [
     'view' => 'user/member/purchases.php',
