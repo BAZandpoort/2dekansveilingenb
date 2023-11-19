@@ -14,7 +14,6 @@ $ended = strtotime($productData['endDate']) < time();
 
 $time = substr($productData['endDate'], 0, 16);
 
-
 $query = 'SELECT * FROM users,user_profile
           WHERE users.id=user_profile.userid
           AND users.id = ?';

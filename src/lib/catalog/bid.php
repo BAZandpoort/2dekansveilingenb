@@ -7,15 +7,15 @@ session_start();
 $user = $_SESSION['user'];
 
 if (isset($_POST['bid'])) {
-  $bidId = $user['id'];
+  var_dump($_POST);
+  $userId = $user['id'];
   $productId = $_POST['productid'];
   $bidPrice = $_POST['amount'];
 
-  $query = 'SELECT *, COUNT(*) AS amount FROM bids WHERE productid = ? AND userid = ?';
+  $query = 'SELECT *, COUNT(*) AS amount FROM bids WHERE productid = ?';
   $result = fetch(
     $query,
-    ["type" => "i", "value" => $productId],
-    ["type" => "i", "value" => $bidId]
+    ["type" => "i", "value" => $productId]
   );
   $bidId = $result["id"];
   var_dump($result);
@@ -29,10 +29,11 @@ if (isset($_POST['bid'])) {
       ['type' => 'd', 'value' => $bidPrice],
     );
   } else {
-    $query = 'UPDATE bids SET bidPrice = ? WHERE id = ?';
+    $query = 'UPDATE bids SET bidPrice = ?, userid = ? WHERE id = ?';
     insert(
       $query,
       ['type' => 'd', 'value' => $bidPrice],
+      ['type' => 'i', 'value' => $userId],
       ['type' => 'i', 'value' => $bidId],
     );
   }
