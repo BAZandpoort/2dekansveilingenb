@@ -79,11 +79,13 @@ if (isset($_SESSION["user"])){
                 <p class="absolute top-3 left-2 opacity-40">€</p>
               </div>
               <button name="bid" class="btn btn-outline btn-primary join-item ">Place bid</button>
+              <button name="bid" class="btn btn-outline btn-primary join-item ">Place bid</button>
             </div>
           </form>
         ';
       } else {
         if ($ended) {
+          echo '<p class="text-center text-xl font-semibold mb-3">Winning bid was: €' . $lastBid . '</p>';
           echo '<p class="text-center text-xl font-semibold mb-3">Winning bid was: €' . $lastBid . '</p>';
         } else {
           echo '
