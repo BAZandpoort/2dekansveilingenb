@@ -20,14 +20,13 @@ $query = 'SELECT * FROM users,user_profile
           AND users.id = ?';
 $sellerData = fetch($query, ['type' => 'i', 'value' => $productId]);
 
-if (isset($_SESSION["user"])) {
-  $query = "SELECT *, COUNT(*) AS amount FROM bids WHERE productid = ? AND userid = ?";
-  $bidData = fetch($query, ["type" => "i", "value" => $productId], ["type" => "i", "value" => $_SESSION["user"]["id"]]);
-  $lastBid = ($bidData["amount"] > 0) ? $bidData["bidPrice"] : 0.00;
-} else {
-  $lastBid = 0;
-
-}
+$query = "SELECT *, COUNT(*) AS amount FROM bids WHERE productid = ?";
+$bidData = fetch(
+  $query,
+  ["type" => "i", "value" => $productId],
+);
+var_dump($bidData);
+$lastBid = ($bidData["amount"] > 0) ? $bidData["bidPrice"] : 0.00;
 ?>
 
 <div class="w-full flex justify-center md:justify-start text-sm breadcrumbs">
@@ -46,8 +45,6 @@ if (isset($_SESSION["user"])) {
     if (strtotime($productData['endDate'])) {
       echo '<p class="opacity-70 pb-12">Veiling sluit om ' . $time . '</p>';
     }
-
-
     ?>
     <div class="pb-24">
       <span id="countdown-wrapper" class="countdown font-mono text-5xl">
@@ -152,8 +149,8 @@ if (isset($_SESSION["user"])) {
       }
     }
     ?>
-      
-<br>
+
+    <br>
 
     <?php
 
@@ -186,8 +183,8 @@ if (isset($_SESSION["user"])) {
       }
     }
     ?>
-      
-<br>
+
+    <br>
 
     <?php
     if ($productData["supportStandard"]) {
@@ -227,7 +224,7 @@ if (isset($_SESSION["user"])) {
       ';
 
     if (isset($_SESSION["user"])) {
-      
+
       echo '
           <a href="/catalog/report?productid=' . $productId . '"><button class="btn btn-outline btn-error">Report abuse</button></a>
         ';
@@ -330,9 +327,9 @@ if (count($sellerReviews) > 0) {
 
 <div class="flex flex-col">
   <h1 class="text-2xl font-bold mb-4">Rate the product</h1>
-  <?php if (!$hasBoughtProduct): ?>
+  <?php if (!$hasBoughtProduct) : ?>
     <p>You can only review a product that you have bought.</p>
-  <?php else: ?>
+  <?php else : ?>
     <form method="POST" class="flex flex-col gap-4">
       <div class="rating rating-lg flex gap-4">
         <input type="radio" name="rating" value="1" class="mask mask-star-2 bg-orange-400" />
@@ -342,11 +339,11 @@ if (count($sellerReviews) > 0) {
         <input type="radio" name="rating" value="5" class="mask mask-star-2 bg-orange-400" checked />
       </div>
       <textarea name="review" class="textarea textarea-success" placeholder="Leave a review"></textarea>
-      <?php if (isset($errorMessage)): ?>
+      <?php if (isset($errorMessage)) : ?>
         <p class="text-red-500">
           <?= $errorMessage ?>
         </p>
-      <?php else: ?>
+      <?php else : ?>
         <button type="submit" class="btn btn-outline btn-warning">Submit Review</button>
       <?php endif; ?>
     </form>
@@ -355,12 +352,12 @@ if (count($sellerReviews) > 0) {
 
 <div class="flex flex-col">
   <h1 class="text-2xl font-bold mb-4">Product Reviews</h1>
-  <?php if (count($sellerReviews) > 0): ?>
+  <?php if (count($sellerReviews) > 0) : ?>
     <p>Average Rating:
       <?= number_format($averageRating, 1) ?>
     </p>
     <div class="flex flex-col gap-4">
-      <?php foreach ($sellerReviews as $review): ?>
+      <?php foreach ($sellerReviews as $review) : ?>
         <div class="border border-gray-300 p-4">
           <p class="font-bold">
             <?= $review['review'] ?>
@@ -374,7 +371,7 @@ if (count($sellerReviews) > 0) {
         </div>
       <?php endforeach; ?>
     </div>
-  <?php else: ?>
+  <?php else : ?>
     <p>This product has no reviews yet.</p>
   <?php endif; ?>
 </div>
@@ -384,8 +381,7 @@ if (count($sellerReviews) > 0) {
 
 
 
-<form action="/src/lib/user/seller/update-timer.php" method="post" enctype="multipart/form-data"
-  class="flex flex-col items-center justify-center gap-4 max-w-2xl mx-auto">
+<form action="/src/lib/user/seller/update-timer.php" method="post" enctype="multipart/form-data" class="flex flex-col items-center justify-center gap-4 max-w-2xl mx-auto">
   <div class="flex flex-row justify-center gap-4 w-full">
     <!-- Auction End Date -->
     <div class="form-control flex-1 w-full">
