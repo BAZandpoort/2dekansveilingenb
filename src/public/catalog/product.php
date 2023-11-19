@@ -39,7 +39,7 @@ if (isset($_SESSION["user"])){
 </div>
 <div class="flex flex-col md:flex-row gap-4">
   <div class="flex-[1.3]">
-    <img class="w-full h-full aspect-[3/2] rounded-2xl" src="/public/images/<?php echo $productData["imageUrl"]  ?>" alt="">
+    <img class="w-full h-full aspect-[3/2] rounded-2xl object-cover" src="/public/images/<?php echo $productData["imageUrl"]  ?>" alt="">
   </div>
   <div id="actions" class="flex flex-[.7] bg-base-100 rounded-2xl p-8 flex-col items-center justify-center">
     <?php
@@ -79,13 +79,11 @@ if (isset($_SESSION["user"])){
                 <p class="absolute top-3 left-2 opacity-40">€</p>
               </div>
               <button name="bid" class="btn btn-outline btn-primary join-item ">Place bid</button>
-              <button name="bid" class="btn btn-outline btn-primary join-item ">Place bid</button>
             </div>
           </form>
         ';
       } else {
         if ($ended) {
-          echo '<p class="text-center text-xl font-semibold mb-3">Winning bid was: €' . $lastBid . '</p>';
           echo '<p class="text-center text-xl font-semibold mb-3">Winning bid was: €' . $lastBid . '</p>';
         } else {
           echo '
@@ -121,7 +119,7 @@ if (isset($_SESSION["user"])){
             <form action="/src/lib/user/member/factuur.php" method="post">
               <input type="hidden" name="product_id" value="' . $productId . '">
               <input type="hidden" name="amount" value="' . ($lastBidPrice ? $lastBidPrice : '') . '">
-              <button type="submit" class="btn btn-primary mb-3">Pay Now</button>
+              <button class="btn btn-primary mb-3">Pay Now</button>
             </form>
           ';
         }
