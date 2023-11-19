@@ -1,11 +1,16 @@
 <?php
 session_start();
 
+if (!isset($_SESSION['user'])) {
+  header('Location: /');
+  exit();
+}
+
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/util/util.php';
 
 if (isset($_POST['create'])) {
-  $userid = $_SESSION['user']['id'];
+  $userid = $_SESSION["user"]["id"];
   $categoryid = $_POST['category'];
   $title = $_POST['title'];
   $description = $_POST['description'];
@@ -55,7 +60,7 @@ function addProduct(
   $baseImageName = basename($imageName, ".jpg") . '--userid-' . $userid . ".jpg";
   $targetFile = $targetDir . $baseImageName;
   move_uploaded_file($imageTmpName, $targetFile);
-
+  // Before the insert query
   $insertData = insert(
     $query,
     ['type' => 'i', 'value' => $userid],

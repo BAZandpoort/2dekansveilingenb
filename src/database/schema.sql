@@ -2,6 +2,7 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
+
 -- Host: 127.0.0.1
 -- Generation Time: Nov 19, 2023 at 02:23 PM
 -- Server version: 10.4.28-MariaDB
@@ -20,11 +21,36 @@ SET time_zone = "+00:00";
 --
 -- Database: `2dekansveilingen`
 --
+CREATE TABLE `messages` (
+  `msg_id` int(11) NOT NULL,
+  `incoming_msg_id` int(255) NOT NULL,
+  `outgoing_msg_id` int(255) NOT NULL,
+  `msg` varchar(1000) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- --------------------------------------------------------
+-- Tabelstructuur voor tabel `advertisements`
+--
+
+CREATE TABLE `advertisements` (
+  `id` int(11) NOT NULL,
+  `productid` int(11) NOT NULL,
+  `sellerid` int(11) NOT NULL,
+  `altText` text NOT NULL,
+  `imageUrl` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `advertisements`
+--
+
+INSERT INTO `advertisements` (`id`, `productid`, `sellerid`, `altText`, `imageUrl`) VALUES
+(10, 73, 52, 'Shrirmmpps', 'Banner_.png--userid-52.jpg'),
+(11, 74, 52, 'Footbals! Tgree!', '5708f2cf0248b_thumb900.webp--userid-52.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bids`
+-- Tabelstructuur voor tabel `bids`
 --
 
 CREATE TABLE `bids` (
@@ -55,11 +81,33 @@ CREATE TABLE `delivery_orders` (
 
 INSERT INTO `delivery_orders` (`id`, `customerid`, `productid`, `deliveryMethod`, `createdAt`) VALUES
 (1, 53, 10, 'Express', '2023-11-19 13:21:52');
+--
+-- Gegevens worden geëxporteerd voor tabel `bids`
+--
+
+INSERT INTO `bids` (`id`, `productid`, `userid`, `bidPrice`, `bidOfferedAt`) VALUES
+(1, 26, 52, 555.01, '2023-10-20 15:29:35'),
+(2, 16, 52, 440.24, '2023-10-20 15:53:15'),
+(3, 1, 52, 0.71, '2023-10-23 09:29:30');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `favorites`
+-- Tabelstructuur voor tabel `bidshistory`
+--
+
+CREATE TABLE `bidshistory` (
+  `id` int(11) NOT NULL,
+  `productid` int(11) NOT NULL,
+  `userid` int(11) NOT NULL,
+  `bidPrice` decimal(10,0) NOT NULL,
+  `bidOfferedAt` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `favorites` 
 --
 
 CREATE TABLE `favorites` (
@@ -69,6 +117,23 @@ CREATE TABLE `favorites` (
 
 -- --------------------------------------------------------
 
+--
+-- Tabelstructuur voor tabel `notification_read`
+--
+
+CREATE TABLE `notification_read` (
+  `id` int(11) NOT NULL,
+  `notificationid` int(11) NOT NULL,
+  `userid` int(11) NOT NULL,
+  `read` tinyint(1) NOT NULL,
+  `userid2` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `products`
+-- Tabelstructuur voor tabel `products`
 --
 -- Table structure for table `products`
 --
@@ -149,7 +214,8 @@ INSERT INTO `products` (`id`, `userid`, `categoryid`, `name`, `description`, `pr
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_categories`
+-- Tabelstructuur voor tabel `product_categories`
+-- Tabelstructuur voor tabel `product_categories`
 --
 
 CREATE TABLE `product_categories` (
@@ -177,7 +243,7 @@ INSERT INTO `product_categories` (`id`, `name`, `icon`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `reports`
+-- Tabelstructuur voor tabel `reports`
 --
 
 CREATE TABLE `reports` (
@@ -199,7 +265,7 @@ INSERT INTO `reports` (`id`, `productid`, `userid`, `typeOfAbuse`, `context`, `c
 -- --------------------------------------------------------
 
 --
--- Table structure for table `review`
+-- Tabelstructuur voor tabel `review`
 --
 
 CREATE TABLE `review` (
@@ -237,7 +303,31 @@ INSERT INTO `successful_bids` (`id`, `originalBidid`, `bidderid`, `sellerid`, `p
 -- --------------------------------------------------------
 
 --
--- Table structure for table `translations`
+-- Table structure for table `successful_bids`
+--
+
+CREATE TABLE `successful_bids` (
+  `id` int(11) NOT NULL,
+  `originalBidid` int(11) NOT NULL,
+  `bidderid` int(11) NOT NULL,
+  `sellerid` int(11) NOT NULL,
+  `productid` int(11) NOT NULL,
+  `bidAcceptedAt` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `bidPrice` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `successful_bids`
+--
+
+INSERT INTO `successful_bids` (`id`, `originalBidid`, `bidderid`, `sellerid`, `productid`, `bidAcceptedAt`, `bidPrice`) VALUES
+(1, 1, 52, 0, 9, '2023-11-19 13:16:41', 0.52),
+(2, 2, 53, 0, 10, '2023-11-19 13:19:07', 3430.07);
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `translations`
 --
 
 CREATE TABLE `translations` (
@@ -249,7 +339,7 @@ CREATE TABLE `translations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `translations`
+-- Gegevens worden geëxporteerd voor tabel `translations`
 --
 
 INSERT INTO `translations` (`id`, `location`, `text_en`, `text_nl`, `text_fr`) VALUES
@@ -278,7 +368,7 @@ INSERT INTO `translations` (`id`, `location`, `text_en`, `text_nl`, `text_fr`) V
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Tabelstructuur voor tabel `users`
 --
 
 CREATE TABLE `users` (
@@ -354,7 +444,7 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `firstname`, `lastna
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_profile`
+-- Tabelstructuur voor tabel `user_profile`
 --
 
 CREATE TABLE `user_profile` (
@@ -428,7 +518,7 @@ INSERT INTO `user_profile` (`id`, `userid`, `profilePictureUrl`, `about`, `theme
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_purchases`
+-- Tabelstructuur voor tabel `user_purchases`
 --
 
 CREATE TABLE `user_purchases` (
@@ -550,7 +640,7 @@ INSERT INTO `user_purchases` (`id`, `timeOfPurchase`, `productId`, `price`, `pro
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_roles`
+-- Tabelstructuur voor tabel `user_roles`
 --
 
 CREATE TABLE `user_roles` (
@@ -570,7 +660,7 @@ INSERT INTO `user_roles` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_role_mapping`
+-- Tabelstructuur voor tabel `user_role_mapping`
 --
 
 CREATE TABLE `user_role_mapping` (
@@ -636,11 +726,123 @@ INSERT INTO `user_role_mapping` (`id`, `userid`, `roleid`) VALUES
 (50, 42, 1);
 
 --
--- Indexes for dumped tables
+-- Dumping data for table `user_role_mapping`
+--
+
+INSERT INTO `user_role_mapping` (`id`, `userid`, `roleid`) VALUES
+(1, 41, 1),
+(2, 5, 2),
+(3, 39, 1),
+(4, 36, 3),
+(5, 12, 3),
+(6, 17, 2),
+(7, 24, 2),
+(8, 10, 2),
+(9, 50, 1),
+(10, 6, 1),
+(11, 20, 1),
+(12, 11, 1),
+(13, 47, 2),
+(14, 34, 2),
+(15, 40, 1),
+(16, 9, 3),
+(17, 13, 3),
+(18, 23, 2),
+(19, 28, 2),
+(20, 4, 3),
+(21, 2, 1),
+(22, 3, 3),
+(23, 15, 2),
+(24, 35, 1),
+(25, 25, 2),
+(26, 16, 3),
+(27, 38, 1),
+(28, 32, 2),
+(29, 1, 1),
+(30, 45, 3),
+(31, 14, 1),
+(32, 37, 3),
+(33, 49, 2),
+(34, 7, 1),
+(35, 48, 3),
+(36, 31, 1),
+(37, 44, 3),
+(38, 46, 3),
+(39, 33, 1),
+(40, 43, 3),
+(41, 29, 3),
+(42, 18, 1),
+(43, 30, 3),
+(44, 8, 2),
+(45, 26, 2),
+(46, 19, 3),
+(47, 22, 3),
+(48, 21, 2),
+(49, 27, 1),
+(50, 42, 1);
+
+--
+-- Gegevens worden geëxporteerd voor tabel `user_role_mapping`
+--
+
+INSERT INTO `user_role_mapping` (`id`, `userid`, `roleid`) VALUES
+(1, 7, 3),
+(2, 1, 3),
+(3, 5, 2),
+(4, 49, 3),
+(5, 34, 2),
+(6, 48, 3),
+(7, 12, 1),
+(8, 4, 2),
+(9, 3, 2),
+(10, 23, 3),
+(11, 16, 3),
+(12, 47, 2),
+(13, 10, 3),
+(14, 29, 1),
+(15, 30, 3),
+(16, 50, 1),
+(17, 6, 2),
+(18, 14, 3),
+(19, 21, 3),
+(20, 18, 2),
+(21, 42, 1),
+(22, 27, 1),
+(23, 2, 1),
+(24, 17, 3),
+(25, 46, 3),
+(26, 15, 1),
+(27, 25, 2),
+(28, 24, 1),
+(29, 26, 3),
+(30, 8, 2),
+(31, 13, 3),
+(32, 45, 1),
+(33, 35, 1),
+(34, 37, 3),
+(35, 41, 2),
+(36, 22, 3),
+(37, 20, 2),
+(38, 11, 3),
+(39, 44, 1),
+(40, 38, 2),
+(41, 9, 2),
+(42, 33, 3),
+(43, 36, 2),
+(44, 28, 2),
+(45, 19, 2),
+(46, 32, 1),
+(47, 31, 2),
+(48, 39, 1),
+(49, 40, 2),
+(50, 43, 2);
+
+--
+-- Indexen voor geëxporteerde tabellen
 --
 
 --
--- Indexes for table `bids`
+-- Indexen voor tabel `bids`
 --
 ALTER TABLE `bids`
   ADD PRIMARY KEY (`id`);
@@ -652,7 +854,25 @@ ALTER TABLE `delivery_orders`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `products`
+-- Indexes for table `delivery_orders`
+--
+ALTER TABLE `delivery_orders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexen voor tabel `bidshistory`
+--
+ALTER TABLE `bidshistory`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexen voor tabel `notification_read`
+--
+ALTER TABLE `notification_read`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexen voor tabel `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
@@ -661,16 +881,23 @@ ALTER TABLE `products`
 ALTER TABLE `products` ADD FULLTEXT KEY `search` (`name`,`description`);
 
 --
--- Indexes for table `product_categories`
+-- Indexen voor tabel `product_categories`
 --
 ALTER TABLE `product_categories`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `product_category_name` (`name`);
 
 --
--- Indexes for table `reports`
+-- Indexen voor tabel `reports`
 --
 ALTER TABLE `reports`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `successful_bids`
+
+--
+ALTER TABLE `successful_bids`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -680,13 +907,14 @@ ALTER TABLE `successful_bids`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `translations`
+-- Indexen voor tabel `translations`
 --
 ALTER TABLE `translations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Indexen voor tabel `users`
+-- Indexen voor tabel `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
@@ -694,21 +922,22 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- Indexes for table `user_profile`
+-- Indexen voor tabel `user_profile`
+-- Indexen voor tabel `user_profile`
 --
 ALTER TABLE `user_profile`
   ADD PRIMARY KEY (`id`),
   ADD KEY `profile_userid` (`userid`);
 
 --
--- Indexes for table `user_roles`
+-- Indexen voor tabel `user_roles`
 --
 ALTER TABLE `user_roles`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `name` (`name`);
 
 --
--- Indexes for table `user_role_mapping`
+-- Indexen voor tabel `user_role_mapping`
 --
 ALTER TABLE `user_role_mapping`
   ADD PRIMARY KEY (`id`),
@@ -716,11 +945,17 @@ ALTER TABLE `user_role_mapping`
   ADD KEY `role_mapping_userid` (`userid`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT voor geëxporteerde tabellen
 --
 
 --
--- AUTO_INCREMENT for table `bids`
+-- AUTO_INCREMENT voor een tabel `advertisements`
+--
+ALTER TABLE `advertisements`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT voor een tabel `bids`
 --
 ALTER TABLE `bids`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
@@ -732,19 +967,27 @@ ALTER TABLE `delivery_orders`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `products`
+-- AUTO_INCREMENT voor een tabel `notification_read`
+--
+ALTER TABLE `notification_read`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+
+--
+-- AUTO_INCREMENT voor een tabel `products`
+-- AUTO_INCREMENT voor een tabel `products`
 --
 ALTER TABLE `products`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
--- AUTO_INCREMENT for table `product_categories`
+-- AUTO_INCREMENT voor een tabel `product_categories`
+-- AUTO_INCREMENT voor een tabel `product_categories`
 --
 ALTER TABLE `product_categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `reports`
+-- AUTO_INCREMENT voor een tabel `reports`
 --
 ALTER TABLE `reports`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
@@ -756,54 +999,54 @@ ALTER TABLE `successful_bids`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `translations`
+-- AUTO_INCREMENT voor een tabel `translations`
 --
 ALTER TABLE `translations`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT voor een tabel `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
--- AUTO_INCREMENT for table `user_profile`
+-- AUTO_INCREMENT voor een tabel `user_profile`
 --
 ALTER TABLE `user_profile`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
--- AUTO_INCREMENT for table `user_roles`
+-- AUTO_INCREMENT voor een tabel `user_roles`
 --
 ALTER TABLE `user_roles`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `user_role_mapping`
+-- AUTO_INCREMENT voor een tabel `user_role_mapping`
 --
 ALTER TABLE `user_role_mapping`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
--- Constraints for dumped tables
+-- Beperkingen voor geëxporteerde tabellen
 --
 
 --
--- Constraints for table `products`
+-- Beperkingen voor tabel `products`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `products_categoryid` FOREIGN KEY (`categoryid`) REFERENCES `product_categories` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `products_userid` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `user_profile`
+-- Beperkingen voor tabel `user_profile`
 --
 ALTER TABLE `user_profile`
   ADD CONSTRAINT `profile_userid` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `user_role_mapping`
+-- Beperkingen voor tabel `user_role_mapping`
 --
 ALTER TABLE `user_role_mapping`
   ADD CONSTRAINT `role_mapping_roleid` FOREIGN KEY (`roleid`) REFERENCES `user_roles` (`id`) ON DELETE CASCADE,

@@ -53,6 +53,22 @@ $routes = [
     'footer' => true,
     'container' => true,
   ],
+  // chat routes
+  '/chats/users' => [
+    'view' => 'chats/users.php',
+    'title' => 'chat',
+    'nav' => true,
+    'footer' => true,
+    'container' => true,
+  ],
+  '/chats/chat' => [
+    'view' => 'chats/chat.php',
+    'title' => 'chat',
+    'nav' => true,
+    'footer' => true,
+    'container' => true,
+  ],
+  // product share
   '/products/share' => [
     'view' => 'catalog/share.php',
     'title' => 'Products',
@@ -119,6 +135,13 @@ $routes = [
     'nav' => true,
     'footer' => false,
     'container' => true,
+  ],
+  '/seller/add-advertisement' => [
+    'view' => 'user/seller/add-advertisement.php',
+    'title' => 'Dashboard',
+    'nav' => true,
+    'footer' => true,
+    'container' => false,
   ],
   // Admin Dashboard routes
   '/dashboard/products/delete' => [

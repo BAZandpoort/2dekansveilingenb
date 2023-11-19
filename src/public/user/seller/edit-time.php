@@ -3,12 +3,22 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/catalog/products.php';
 require_once COMPONENTS . '/product-card.php';
 
+
+// Initialize an empty array to store the products
 $products = [];
+
+// Check if the 'search' parameter is set in the GET request
 if (isset($_GET['search'])) {
+    // Get the search term from the GET request
     $searchTerm = $_GET['search'];
+
+    // Prepare the SQL query to search for products based on the name or description
     $query = "SELECT * FROM products WHERE MATCH(name, description) AGAINST(? IN BOOLEAN MODE)";
+
+    // Execute the query and fetch the products matching the search term
     $products = fetch($query, ['type' => 's', 'value' => "$searchTerm*"]);
 } else {
+    // If the 'search' parameter is not set, get all products
     $products = getAllProducts();
 }
 
@@ -31,15 +41,21 @@ echo '
         <div class="flex flex-wrap justify-between gap-8">
 ';
 
+
+// Iterate over each product in the $products array
 foreach ($products as $index => $product) {
+    // Check if the index is greater than 0 and divisible by 4
     if ($index > 0 && $index % 4 === 0) {
+        // If true, close the previous flex container and start a new one
         echo '
             </div>
             <div class="flex flex-col md:flex-row flex-wrap justify-between gap-8">
         ';
     }
 
+    // Start a new flex container for each product
     echo '<div class="flex flex-col">';
+    // Call the productCard function and pass the $product as an argument
     productCard($product, true);
     ?>
 
