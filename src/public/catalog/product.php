@@ -39,7 +39,7 @@ if (isset($_SESSION["user"])){
 </div>
 <div class="flex flex-col md:flex-row gap-4">
   <div class="flex-[1.3]">
-    <img class="w-full h-full aspect-[3/2] rounded-2xl" src="/public/images/<?php echo $productData["imageUrl"]  ?>" alt="">
+    <img class="w-full h-full aspect-[3/2] rounded-2xl object-cover" src="/public/images/<?php echo $productData["imageUrl"]  ?>" alt="">
   </div>
   <div id="actions" class="flex flex-[.7] bg-base-100 rounded-2xl p-8 flex-col items-center justify-center">
     <?php
@@ -96,21 +96,37 @@ if (isset($_SESSION["user"])){
     
     <br>
     <?php
-      $sql = "SELECT userid FROM bids WHERE productid = ?";
-      $winningBidderId = ['userid'];
-    
-  if ($ended) {
-    if (isset($_SESSION["user"]) && $winningBidderId ) {
-      echo '
-      <form action="/src/lib/user/member/factuur.php"  method="post">
-        <input type="hidden" name="product_id" value="' . $productId . '">
-        <input type="hidden" name="amount" value="' . $lastBid . '">
-        <button type="submit" class="btn btn-primary mb-3">Pay Now</button>
-      </form>
-      ';
+
+    // Retrieve the highest bidder
+    $sql = "SELECT userid, bidPrice FROM bids WHERE productid = ? ORDER BY bidOfferedAt DESC LIMIT 1";
+    $stmt = $connection->prepare($sql); // Prepare the SQL statement
+    $stmt->bind_param("i", $productId); // Bind the product ID parameter = binding parameters is a way of preventing SQL injection
+    $stmt->execute(); // Execute the SQL statement
+    $result = $stmt->get_result(); // Get the result set
+    $lastBid = $result->fetch_assoc(); // Fetch the highest bidder data
+    $lastBidderId = $lastBid ? $lastBid['userid'] : null; // Get the highest bidder's user ID
+    $lastBidPrice = $lastBid ? $lastBid['bidPrice'] : null; // Get the highest bid price if it isnt show null = it means that it does not currently hold any value
+
+    // Check if the auction has ended
+    $ended = strtotime($productData['endDate']) < time(); // Check if the end date of the auction has passed
+    $isWinningBidder = $lastBidderId ? ($lastBidderId === $_SESSION["user"]["id"]) : false; // Check if the current user is the winning bidder
+    if ($ended) {
+      if (isset($_SESSION["user"])) {
+        // Check if the user is the winning bidder
+        $isWinningBidder = ($lastBidderId === $_SESSION["user"]["id"]);
+        if ($isWinningBidder) {
+          echo '
+            <form action="/src/lib/user/member/factuur.php" method="post">
+              <input type="hidden" name="product_id" value="' . $productId . '">
+              <input type="hidden" name="amount" value="' . ($lastBidPrice ? $lastBidPrice : '') . '">
+              <button class="btn btn-primary mb-3">Pay Now</button>
+            </form>
+          ';
+        }
+      }
     }
-  } 
-?>
+    ?>
+      
 <br>
 
     <?php
