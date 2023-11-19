@@ -78,13 +78,13 @@ if (isset($_SESSION["user"])) {
     if (isset($_SESSION['user']) && !$ended) {
       echo '
           <form action="/src/lib/catalog/bid.php" method="post">
+          <input type="hidden" name="productid" value="' . $productId . '">
             <div class="join">
               <div class="relative">
-                <input type="hidden" name="productid" value="' . $productId . '">
                 <input name="amount" type="number" min="' . $lastBid + 0.01 . '" step="0.01" placeholder="Your bid" class="input input-bordered w-full max-w-xs join-item pl-5 relative" required/>
                 <p class="absolute top-3 left-2 opacity-40">€</p>
               </div>
-              <button name="bid" class="btn btn-outline btn-primary join-item ">Place bid</button>
+              <button name="bid" class="btn btn-outline btn-primary join-item">Place bid</button>
             </div>
           </form>
         ';
