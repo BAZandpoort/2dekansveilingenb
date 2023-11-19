@@ -64,6 +64,7 @@ $lastBid = ($bidData["amount"] > 0) ? $bidData["bidPrice"] : 0.00;
     </div>
 
     <!-- Bidding information -->
+    <?php ?>
     <div class="flex flex-row justify-center gap-8 md:gap-24 pb-8">
       <div class="flex flex-col items-center">
         <p class="uppercase text-xs opacity-40 font-bold">Huidig bod</p>
@@ -109,19 +110,18 @@ $lastBid = ($bidData["amount"] > 0) ? $bidData["bidPrice"] : 0.00;
         ';
       } else {
         echo '
-        <p class="text-center text-xl font-semibold">
+        <p class="text-center text-xl font-semibold pb-2">
           Winning bid was: €' . $data["bidPrice"] . '
         </p>
         ';
 
-        var_dump($bidData);
         if ($data['bidderid'] == $_SESSION['user']['id']) {
           $query = 'SELECT COUNT(*) as amount FROM delivery_orders WHERE productid = ?';
           $data = fetch($query, ['type' => 'i', 'value' => $productId]);
           
           if ($data["amount"] > 0) {
             echo '
-            <button class="btn btn-outline btn-warning">
+            <button class="btn btn-outline btn-disabled">
               Delivery already made
             </button>
             ';
