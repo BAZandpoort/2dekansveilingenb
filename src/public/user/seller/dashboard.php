@@ -47,12 +47,12 @@ $products = fetchSingle($query, ['type' => 'i', 'value' => $userId]);
 								<div class="flex items-center space-x-3">
 									<div class="avatar">
 										<div class="mask rounded-lg w-12 h-12">
-											<img src="/public/images/<?= $product["imageUrl"] ?>" />
+											<img src="/public/images/<?= $product["image"] ?>" />
 										</div>
 									</div>
 									<div>
 										<div class="font-bold"><?= $product["name"] ?></div>
-										<div class="text-sm opacity-50">Ends at <?= $product["endDate"] ?></div>
+										<div class="text-sm opacity-50">Ends at <?= $product["enddate"] ?></div>
 									</div>
 								</div>
 							</td>
