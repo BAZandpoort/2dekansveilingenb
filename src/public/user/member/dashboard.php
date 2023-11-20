@@ -87,11 +87,11 @@ $userid = $_SESSION['user']['id'];
                     <div class="flex items-center space-x-3">
                       <div class="avatar">
                         <div class="mask mask-squircle w-12 h-12">
-                          <img src="/public/images/' . $row['productImage'] . '" alt="Avatar Tailwind CSS Component" />
+                          <img src="/public/images/<?= $row['productImage']?>" alt="Avatar Tailwind CSS Component" />
                         </div>
                       </div>
                       <div>
-                        <div class="font-bold"><?= $purchase['productName'] ?></div>
+                        <div class="font-bold"><?= $purchase['name'] ?></div>
                       </div>
                     </div>
                   <td><?= $purchase['price'] ?></td>
@@ -151,7 +151,7 @@ $userid = $_SESSION['user']['id'];
                     <div class="flex items-center space-x-3">
                       <div class="avatar">
                         <div class="mask mask-squircle w-12 h-12">
-                          <img src="/public/images/' . $favorite['imageUrl'] . '" alt="Product Image" />
+                          <img src="/public/images/<?= $favorite['image']?>" alt="Product Image" />
                         </div>
                       </div>
                       <div>

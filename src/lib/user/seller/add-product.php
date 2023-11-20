@@ -50,7 +50,7 @@ function addProduct(
   $expressDelivery,
   $pickUp
 ) {
-  $query = 'INSERT INTO products (userid, categoryid, name, description, price, imageUrl, endDate, supportStandard, supportExpress, supportPickup)
+  $query = 'INSERT INTO products (userid, categoryid, name, description, price, image, endDate, deliveryStandard, deliveryExpress, deliveryPickup)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
 
   $imageName = $file['name'];
