@@ -5,6 +5,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/util/util.php';
 
 if (isset($_POST['send'])) {
+  var_dump($_POST);
   $senderid = $_SESSION['user']['id'];
   $typeOfAbuse = $_POST['typeOfAbuse'];
   $context = $_POST['context'];
@@ -28,7 +29,7 @@ function sendReport(
   $typeOfAbuse,
   $context
 ) {
-  $query = 'INSERT INTO reports (productid, userid, typeOfAbuse, context)
+  $query = 'INSERT INTO reports (productid, userid, type, context)
             VALUES (?, ?, ?, ?)';
 
   $insertData = insert(

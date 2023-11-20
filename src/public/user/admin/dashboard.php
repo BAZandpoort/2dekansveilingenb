@@ -96,7 +96,7 @@ $new_products = fetch("SELECT products.*,product_categories.name AS categoryname
                   <td class="px-4 py-3">
                     <div class="flex items-center text-sm">
                       <div class="relative hidden w-14 h-8 mr-3 md:block">
-                        <img class="rounded-full h-12" width="80px" src="<?php echo '/public/images/' . $product['imageUrl'] ?>" />
+                        <img class="rounded-full h-12" width="80px" src="<?php echo '/public/images/' . $product['image'] ?>" />
                         <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
                       </div>
                       <div>
