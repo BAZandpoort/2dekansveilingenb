@@ -11,7 +11,7 @@ foreach ($favorites as $favorite) {
 	echo '
 		<div class="card card-side bg-base-100 shadow-sm max-h-48">
       <figure class="max-w-sm">
-        <img src="/public/images/' . $favorite['imageUrl'] . '" alt="Product"/>
+        <img src="/public/images/' . $favorite['image'] . '" alt="Product"/>
       </figure>
       <div class="card-body">
         <h2 class="card-title">' . $favorite['name'] . '</h2>

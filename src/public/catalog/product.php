@@ -10,9 +10,9 @@ require_once LIB . '/util/util.php';
 $productId = $_GET['id'];
 $query = 'SELECT * FROM products WHERE id = ?';
 $productData = fetch($query, ['type' => 'i', 'value' => $productId]);
-$ended = strtotime($productData['endDate']) < time();
+$ended = strtotime($productData['enddate']) < time();
 
-$time = substr($productData['endDate'], 0, 16);
+$time = substr($productData['enddate'], 0, 16);
 
 $query = 'SELECT * FROM users,user_profile
           WHERE users.id=user_profile.userid
@@ -40,13 +40,13 @@ $lastBid = ($bidData["amount"] > 0) ? $bidData["bidPrice"] : 0.00;
 <div class="flex flex-col md:flex-row gap-4">
   <!-- Image -->
   <div class="flex-[1.3]">
-    <img class="w-full h-full aspect-[3/2] rounded-2xl object-cover" src="/public/images/<?php echo $productData["imageUrl"]  ?>" alt="">
+    <img class="w-full h-full aspect-[3/2] rounded-2xl object-cover" src="/public/images/<?php echo $productData["image"]  ?>" alt="">
   </div>
 
   <!-- Bidding -->
   <div id="actions" class="flex flex-[.7] bg-base-100 rounded-2xl p-8 flex-col items-center justify-center">
     <?php
-    if (strtotime($productData['endDate'])) {
+    if (strtotime($productData['enddate'])) {
       echo '<p class="opacity-70 pb-12">Veiling sluit om ' . $time . '</p>';
     }
     ?>
@@ -155,7 +155,7 @@ $lastBid = ($bidData["amount"] > 0) ? $bidData["bidPrice"] : 0.00;
     $lastBidPrice = isset($data['bidPrice']) ? $data['bidPrice'] : null; // Get the highest bid price if it isnt show null = it means that it does not currently hold any value
 
     // Check if the auction has ended
-    $ended = strtotime($productData['endDate']) < time(); // Check if the end date of the auction has passed
+    $ended = strtotime($productData['enddate']) < time(); // Check if the end date of the auction has passed
     $isWinningBidder = $lastBidderId ? ($lastBidderId === $_SESSION["user"]["id"]) : false; // Check if the current user is the winning bidder
     if ($ended) {
       if (isset($_SESSION["user"])) {
@@ -182,7 +182,7 @@ $lastBid = ($bidData["amount"] > 0) ? $bidData["bidPrice"] : 0.00;
     $lastBidPrice = $data ? $data['bidPrice'] : null; // Get the highest bid price if it isnt show null = it means that it does not currently hold any value
 
     // Check if the auction has ended
-    $ended = strtotime($productData['endDate']) < time(); // Check if the end date of the auction has passed
+    $ended = strtotime($productData['enddate']) < time(); // Check if the end date of the auction has passed
     $isWinningBidder = $lastBidderId ? ($lastBidderId === (isset($_SESSION["user"]["id"]) ? $_SESSION["user"]["id"] : 0)) : false; // Check if the current user is the winning bidder
     if ($ended) {
       if (isset($_SESSION["user"])) {
@@ -238,9 +238,9 @@ $lastBid = ($bidData["amount"] > 0) ? $bidData["bidPrice"] : 0.00;
   </div>
   <div class="flex-[.7] p-8">
     <?php 
-    $standardDelivery = $productData["supportStandard"] ? "Yes" : "No";
-    $expressDelivery = $productData["supportExpress"] ? "Yes" : "No";
-    $pickupDelivery = $productData["supportPickup"] ? "Yes" : "No";
+    $standardDelivery = $productData["deliveryStandard"] ? "Yes" : "No";
+    $expressDelivery = $productData["deliveryExpress"] ? "Yes" : "No";
+    $pickupDelivery = $productData["deliveryPickup"] ? "Yes" : "No";
 
     echo '
     <div class="">
@@ -272,9 +272,9 @@ $userId = $_SESSION['user']['id'];
 
 // Check if user has bought the product
 $hasBoughtProduct = false;
-$purchaseHistory = fetchSingle('SELECT * FROM user_purchases WHERE id = ?', ["type" => "i", "value" => $userId]);
+$purchaseHistory = fetchSingle('SELECT * FROM orders WHERE id = ?', ["type" => "i", "value" => $userId]);
 foreach ($purchaseHistory as $purchase) {
-  if ($purchase['productId'] == $sellerId) {
+  if ($purchase['productid'] == $sellerId) {
     $hasBoughtProduct = true;
     break;
   }
@@ -292,7 +292,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Check if user has already reviewed the seller
     $insertReview = fetchSingle(
-      'SELECT * FROM review WHERE member = ? AND seller = ?',
+      'SELECT * FROM reviews WHERE member = ? AND seller = ?',
       ["type" => "i", "value" => $userId],
       ["type" => "i", "value" => $sellerId]
     );
@@ -302,7 +302,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
       // Insert review into database
       $insertReview = insert(
-        'INSERT INTO review (member, review, sterren, seller, date) VALUES (?, ?, ?, ?, ?)',
+        'INSERT INTO reviews (member, review, sterren, seller, date) VALUES (?, ?, ?, ?, ?)',
         ["type" => "i", "value" => $userId],
         ["type" => "s", "value" => $review],
         ["type" => "i", "value" => $rating],
@@ -314,7 +314,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Fetch seller reviews
-$sellerReviews = fetchSingle('SELECT * FROM review WHERE seller = ?', ["type" => "i", "value" => $sellerId]);
+$sellerReviews = fetchSingle('SELECT * FROM reviews WHERE sellerid = ?', ["type" => "i", "value" => $sellerId]);
 // Calculate average rating
 $averageRating = 0;
 if (count($sellerReviews) > 0) {
@@ -395,5 +395,5 @@ if (count($sellerReviews) > 0) {
 
 
 <script>
-  productCountdown("<?php echo $productData['endDate']; ?>")
+  productCountdown("<?php echo $productData['enddate']; ?>")
 </script>
