@@ -25,7 +25,7 @@ require_once DATABASE . '/connect.php';
                         }
                     ?>
                     <a href="/chats/users" class="back-icon"><i class="fas fa-arrow-left"></i></a>
-                    <img src="<?php echo $row['profilePictureUrl'] ?>" alt="#">
+                    <img src="<?php echo $row['profilepicture'] ?>" alt="#">
                     <div class="details">
                         <span><?php echo $row['firstname'] . " " . $row['lastname'] ?></span>
                         <p>Online now</p>

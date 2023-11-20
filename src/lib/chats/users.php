@@ -40,7 +40,7 @@ if (mysqli_num_rows($sql) == 1)
 
         $output .= '<a href="/chats/chat?userid=' . $row['userid'] . '">
                         <div class="content">
-                            <img src="' . $row['profilePictureUrl'] . '">
+                            <img src="' . $row['profilepicture'] . '">
                             <div class="details">
                             <span>' . $row['firstname'] . " " . $row['lastname'] .'</span>
                             <p>'. $you . $msg .'</p>

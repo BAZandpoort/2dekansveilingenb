@@ -27,7 +27,7 @@ if (!isset($_SESSION['user'])) {
                         }
                     ?>
                     <div class="content">
-                        <img src="<?php echo $row['profilePictureUrl'] ?>">
+                        <img src="<?php echo $row['profilepicture'] ?>">
                         <div class="details">
                             <span><?php echo $row['firstname'] . " " . $row['lastname'] ?></span>
                             <p class="status-dot">Online now</p>
