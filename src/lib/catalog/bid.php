@@ -7,10 +7,17 @@ session_start();
 $user = $_SESSION['user'];
 
 if (isset($_POST['bid'])) {
-  var_dump($_POST);
   $userId = $user['id'];
   $productId = $_POST['productid'];
   $bidPrice = $_POST['amount'];
+
+  $query = 'INSERT INTO bids_history (productid, bidder, price) VALUES (?, ?, ?)';
+  insert(
+    $query,
+    ['type' => 'i', 'value' => $productId],
+    ['type' => 'i', 'value' => $userId],
+    ['type' => 'd', 'value' => $bidPrice],
+  );
 
   $query = 'SELECT *, COUNT(*) AS amount FROM bids WHERE productid = ?';
   $result = fetch(
@@ -18,7 +25,6 @@ if (isset($_POST['bid'])) {
     ["type" => "i", "value" => $productId]
   );
   $bidId = $result["id"];
-  var_dump($result);
 
   if ($result["amount"] === 0) {
     $query = 'INSERT INTO bids (productid, bidder, price) VALUES (?, ?, ?)';
@@ -36,6 +42,22 @@ if (isset($_POST['bid'])) {
       ['type' => 'i', 'value' => $userId],
       ['type' => 'i', 'value' => $bidId],
     );
+
+    $query = 'SELECT * FROM bids_history WHERE productid = ? ORDER BY price DESC';
+    $data = fetchSingle(
+      $query,
+      ["type" => "i", "value" => $productId]
+    );
+
+    if ($data[1]["bidder"] !== $userId) {
+      $query = 'INSERT INTO notifications (bidid, userid, userid2) VALUES (?, ?, ?)';
+      insert(
+        $query,
+        ['type' => 'i', 'value' => $data[0]["id"]],
+        ['type' => 'i', 'value' => $userId],
+        ['type' => 'i', 'value' => $data[1]["bidder"]],
+      );
+    }
   }
 }
 
