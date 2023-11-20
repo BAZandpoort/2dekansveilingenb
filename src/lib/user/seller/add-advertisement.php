@@ -27,7 +27,7 @@ function addAdvertisement(
   $altText,
   $file,
 ) {
-  $query = 'INSERT INTO advertisements (productid, sellerid, altText, imageUrl)
+  $query = 'INSERT INTO advertisements (productid, sellerid, description, image)
             VALUES (?, ?, ?, ?)';
 
   $imageName = $file['name'];

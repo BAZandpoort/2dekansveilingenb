@@ -317,7 +317,7 @@ if ($user) {
       if ($advert) {
         echo '
             <div class="flex justify-center items-center pt-12"> 
-              <a href="../catalog/product?id=' . $advert["productid"] . '"><img style="border-radius: 25px;background-position: left top;background-repeat: repeat;padding: 20px;height: 125px;width: 970px;" alt="' . $advert["altText"] . '" src="/public/advertisements/' . $advert["imageUrl"] . '" width="970" height="125"></a>
+              <a href="../catalog/product?id=' . $advert["productid"] . '"><img style="border-radius: 25px;background-position: left top;background-repeat: repeat;padding: 20px;height: 125px;width: 970px;" alt="' . $advert["description"] . '" src="/public/advertisements/' . $advert["image"] . '" width="970" height="125"></a>
             </div>
           ';
       }
