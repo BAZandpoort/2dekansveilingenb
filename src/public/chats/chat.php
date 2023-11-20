@@ -15,7 +15,7 @@ require_once DATABASE . '/connect.php';
                         $userssid = $_SESSION['user']['id'];
                         $userid = mysqli_real_escape_string($connection, $_GET['userid']);
                         $row = [];
-                        $sql = mysqli_query($connection, "SELECT * FROM users JOIN user_profile ON users.id = user_profile.userid WHERE users.id = {$userid}");
+                        $sql = mysqli_query($connection, "SELECT * FROM users JOIN user_profile ON users.id = user_profile.userid  WHERE users.id = {$userid}");
                         if ($sql) {
                             if (mysqli_num_rows($sql) > 0) {
                                 $row = mysqli_fetch_assoc($sql);
@@ -24,7 +24,6 @@ require_once DATABASE . '/connect.php';
                             echo "Error: " . mysqli_error($connection);
                         }
                     ?>
-                    <a href="/chats/users" class="back-icon"><i class="fas fa-arrow-left"></i></a>
                     <img src="<?php echo $row['profilePictureUrl'] ?>" alt="#">
                     <div class="details">
                         <span><?php echo $row['firstname'] . " " . $row['lastname'] ?></span>
