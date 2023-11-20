@@ -76,7 +76,7 @@ $new_products = fetch("SELECT products.*,product_categories.name AS categoryname
 
     <!-- New products -->
     <div class="mt-4">
-      <h2 class="text-2xl mb-2">Most recent registrations</h2>
+      <h2 class="text-2xl mb-2">Most recent products created</h2>
       <div class="w-full overflow-hidden rounded-lg shadow-xs">
         <div class=" overflow-x-auto">
           <table class="table">

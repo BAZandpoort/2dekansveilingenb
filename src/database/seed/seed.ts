@@ -4,7 +4,7 @@ import userProfiles from './data/user-profile';
 import userRoleMapping from './data/user-role-mapping';
 import productCategories from './data/product-categories';
 import products from './data/products';
-import userPurchases from './data/user-purchases';
+import orders from './data/orders';
 
 const dbConfig = {
     host: 'localhost',
@@ -20,7 +20,7 @@ async function seedDatabase() {
     const userData = await users();
     const userProfilesData = await userProfiles();
     const userRoleMapppingData = await userRoleMapping();
-    const userPurchaseData = await userPurchases();
+    const orderData = await orders();
 
     const connection = await mysql.createConnection(dbConfig);
 
@@ -31,7 +31,7 @@ async function seedDatabase() {
         await connection.execute('TRUNCATE TABLE user_profile');
         await connection.execute('TRUNCATE TABLE user_roles');
         await connection.execute('TRUNCATE TABLE user_role_mapping');
-        await connection.execute('TRUNCATE TABLE user_purchases');
+        await connection.execute('TRUNCATE TABLE orders');
         await connection.execute('TRUNCATE TABLE products');
         await connection.execute('TRUNCATE TABLE product_categories');
         await connection.execute('TRUNCATE TABLE users');
@@ -54,7 +54,7 @@ async function seedDatabase() {
 
         userProfilesData.forEach(async (userProfile) => {
             await connection.execute(
-              'INSERT INTO user_profile (userid, profilePictureUrl, about, theme, language) VALUES (?, ?, ?, ?, ?)',
+              'INSERT INTO user_profile (userid, profilepicture, about, theme, language) VALUES (?, ?, ?, ?, ?)',
               Object.values(userProfile),
             );
         });
@@ -78,19 +78,19 @@ async function seedDatabase() {
 
         productData.forEach(async (product) => {
             await connection.execute(
-              'INSERT INTO products (userid, categoryid, name, description, price, imageUrl, endDate) VALUES (?, ?, ?, ?, ?, ?, ?)',
+              'INSERT INTO products (userid, categoryid, name, description, price, image, endDate) VALUES (?, ?, ?, ?, ?, ?, ?)',
               Object.values(product),
             );
         });
         console.log('Inserted products.');
 
-        userPurchaseData.forEach(async (userPurchase) => {
+        orderData.forEach(async (order) => {
             await connection.execute(
-              'INSERT INTO user_purchases (id, timeOfPurchase, productId, price, productName, productImage) VALUES (?, ?, ?, ?, ?, ?)',
-              Object.values(userPurchase),
+              'INSERT INTO orders (productid, buyerid, deliverymethod) VALUES (?, ?, ?)',
+              Object.values(order),
             );
         });
-        console.log('Inserted user purchases.');
+        console.log('Inserted orders.');
 
         await connection.commit();
 

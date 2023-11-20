@@ -31,7 +31,7 @@ $userexist=false;
 $nothighest=false;
 $bid_id=null;
 
-$maxproductData = fetch("SELECT MAX(productid) AS maxid From `bidshistory`");
+$maxproductData = fetch("SELECT MAX(productid) AS maxid From `bids_history`");
 
 
 if($user){
@@ -252,7 +252,6 @@ for( $i = 1 ; $i <= $maxproductData['maxid'] ; $i++){
                 <li><a href="/dashboard/products/add">Add product</a></li>
                 <li><a href="/dashboard/products/own">My products</a></li>
                 <li><a href="/seller/dashboard">Dashboard</a></li>
-                <li><a href="/dashboard/products/time/edit">Edit Auction Date</a></li>
                 <li><a href="/seller/add-advertisement">Add advertisement</a></li>
               </ul>
             </details>
@@ -263,6 +262,7 @@ for( $i = 1 ; $i <= $maxproductData['maxid'] ; $i++){
               <ul class="mr-4 p-2 shadow menu dropdown-content z-[1] bg-base-200 rounded-box w-52">
                 <li><a href="/dashboard/products/delete">Remove products</a></li>
                 <li><a href="/dashboard/reports">Reports</a></li>
+                <li><a href="/dashboard/products/time/edit">Edit Auction Date</a></li>
                 <li><a href="/admin/dashboard">Dashboard</a></li>
                 <li>
                   <details class="dropdown dropdown-bottom">
