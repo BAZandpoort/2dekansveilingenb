@@ -254,6 +254,7 @@ for( $i = 1 ; $i <= $maxproductData['maxid'] ; $i++){
                 <li><a href="/seller/dashboard">Dashboard</a></li>
                 <li><a href="/dashboard/products/time/edit">Edit Auction Date</a></li>
                 <li><a href="/seller/add-advertisement">Add advertisement</a></li>
+                <li><a href="/seller/add-address">Add address</a></li>
               </ul>
             </details>
           </li>

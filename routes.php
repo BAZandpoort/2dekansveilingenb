@@ -143,6 +143,13 @@ $routes = [
     'footer' => true,
     'container' => false,
   ],
+  '/seller/add-address' => [
+    'view' => 'user/seller/add-address.php',
+    'title' => 'Dashboard',
+    'nav' => true,
+    'footer' => true,
+    'container' => false,
+  ],
   // Admin Dashboard routes
   '/dashboard/products/delete' => [
     'view' => 'user/admin/delete-product.php',
