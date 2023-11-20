@@ -20,16 +20,16 @@ if (isset($_POST['bid'])) {
   $bidId = $result["id"];
   var_dump($result);
 
-  if ($result["amount"] == 0) {
-    $query = 'INSERT INTO bids (productid, userid, bidPrice) VALUES (?, ?, ?)';
+  if ($result["amount"] === 0) {
+    $query = 'INSERT INTO bids (productid, bidder, price) VALUES (?, ?, ?)';
     insert(
       $query,
       ['type' => 'i', 'value' => $productId],
-      ['type' => 'i', 'value' => $bidId],
+      ['type' => 'i', 'value' => $userId],
       ['type' => 'd', 'value' => $bidPrice],
     );
   } else {
-    $query = 'UPDATE bids SET bidPrice = ?, userid = ? WHERE id = ?';
+    $query = 'UPDATE bids SET price = ?, bidder = ? WHERE id = ?';
     insert(
       $query,
       ['type' => 'd', 'value' => $bidPrice],

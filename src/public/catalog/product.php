@@ -24,7 +24,7 @@ $bidData = fetch(
   $query,
   ["type" => "i", "value" => $productId],
 );
-$lastBid = ($bidData["amount"] > 0) ? $bidData["bidPrice"] : 0.00;
+$lastBid = ($bidData["amount"] > 0) ? $bidData["price"] : 0.00;
 ?>
 
 <!-- Breadcrumbs -->
@@ -102,7 +102,7 @@ $lastBid = ($bidData["amount"] > 0) ? $bidData["bidPrice"] : 0.00;
         ['type' => 'i', 'value' => $productId]
       );
 
-      if (!isset($data["bidPrice"])) {
+      if (!isset($data["price"])) {
         echo '
         <p class="text-center text-xl font-semibold">
           Auction ended without any bids
@@ -111,7 +111,7 @@ $lastBid = ($bidData["amount"] > 0) ? $bidData["bidPrice"] : 0.00;
       } else {
         echo '
         <p class="text-center text-xl font-semibold pb-2">
-          Winning bid was: €' . $data["bidPrice"] . '
+          Winning bid was: €' . $data["price"] . '
         </p>
         ';
 
@@ -151,8 +151,8 @@ $lastBid = ($bidData["amount"] > 0) ? $bidData["bidPrice"] : 0.00;
       ["type" => "i", "value" => $productId]
     );
 
-    $lastBidderId = isset($data['userid']) ? $data['userid'] : null; // Get the highest bidder's user ID
-    $lastBidPrice = isset($data['bidPrice']) ? $data['bidPrice'] : null; // Get the highest bid price if it isnt show null = it means that it does not currently hold any value
+    $lastBidderId = isset($data['bidder']) ? $data['bidder'] : null; // Get the highest bidder's user ID
+    $lastBidPrice = isset($data['price']) ? $data['price'] : null; // Get the highest bid price if it isnt show null = it means that it does not currently hold any value
 
     // Check if the auction has ended
     $ended = strtotime($productData['enddate']) < time(); // Check if the end date of the auction has passed
@@ -178,8 +178,8 @@ $lastBid = ($bidData["amount"] > 0) ? $bidData["bidPrice"] : 0.00;
       ["type" => "i", "value" => $productId]
     );
 
-    $lastBidderId = $data ? $data['userid'] : null; // Get the highest bidder's user ID
-    $lastBidPrice = $data ? $data['bidPrice'] : null; // Get the highest bid price if it isnt show null = it means that it does not currently hold any value
+    $lastBidderId = $data ? $data['bidder'] : null; // Get the highest bidder's user ID
+    $lastBidPrice = $data ? $data['price'] : null; // Get the highest bid price if it isnt show null = it means that it does not currently hold any value
 
     // Check if the auction has ended
     $ended = strtotime($productData['enddate']) < time(); // Check if the end date of the auction has passed
