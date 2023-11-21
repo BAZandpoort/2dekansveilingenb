@@ -39,14 +39,14 @@ require_once LIB . '/util/util.php';
     <label class="label">
         <span class="label-text">Postal Code</span>
     </label>
-    <input type="text" id="postalcode" name="postalcode" placeholder="Postal Code" class="input input-bordered w-full" required maxlength="4" />
+    <input type="number" id="postalcode" name="postalcode" placeholder="Postal Code" class="input input-bordered w-full" required maxlength="4" />
 </div>
 
       <div class="form-control md:flex-1">
         <label class="label">
-          <span class="label-text">Town</span>
+          <span class="label-text">City</span>
         </label>
-        <input type="text" id="town" name="town" placeholder="Town" class="input input-bordered w-full" required />
+        <input type="text" id="city" name="city" placeholder="City" class="input input-bordered w-full" required />
       </div>
     </div>
 
