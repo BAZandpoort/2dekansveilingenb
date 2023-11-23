@@ -55,7 +55,7 @@ $routes = [
   ],
   // chat routes
   '/chats/users' => [
-    'view' => 'chats/users.php',
+    'view' => '/chats/users.php',
     'title' => 'chat',
     'nav' => true,
     'footer' => true,
