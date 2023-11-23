@@ -7,31 +7,49 @@ $products = []; // Initialize an empty array to store the products
 $categoryname = $_GET['category'] ?? null; // Get the value of the 'category' parameter from the URL query string, if it exists
 
 if ($categoryname) {
-  $categoryId = fetchSingle('SELECT * FROM product_categories WHERE name = ?', ['type' => 's', 'value' => $categoryname])[0]['id']; // Fetch the category ID from the 'product_categories' table based on the category name
-  $minPrice = fetchSingle('SELECT MIN(price) FROM products WHERE categoryid = ?', ['type' => 'i', 'value' => $categoryId])[0]['MIN(price)']; // Fetch the minimum price of products in the specified category
+  // If a category name is provided, fetch the category ID from the database based on the name
+  $categoryId = fetchSingle('SELECT * FROM product_categories WHERE name = ?', ['type' => 's', 'value' => $categoryname])[0]['id'];
+  // Fetch the minimum price of products in the specified category
+  $minPrice = fetchSingle('SELECT MIN(price) FROM products WHERE categoryid = ?', ['type' => 'i', 'value' => $categoryId])[0]['MIN(price)'];
 } else {
-  $minPrice = fetchSingle('SELECT MIN(price) FROM products')[0]['MIN(price)']; // Fetch the overall minimum price of all products
+  // If no category name is provided, fetch the minimum price of all products
+  $minPrice = fetchSingle('SELECT MIN(price) FROM products')[0]['MIN(price)'];
 }
 
 if ($categoryname) {
-  $categoryId = fetchSingle('SELECT * FROM product_categories WHERE name = ?', ['type' => 's', 'value' => $categoryname])[0]['id']; // Fetch the category ID from the 'product_categories' table based on the category name
-  $maxPrice = fetchSingle('SELECT MAX(price) FROM products WHERE categoryid = ?', ['type' => 'i', 'value' => $categoryId])[0]['MAX(price)']; // Fetch the maximum price of products in the specified category
+  // If a category name is provided, fetch the category ID from the database based on the name
+  $categoryId = fetchSingle('SELECT * FROM product_categories WHERE name = ?', ['type' => 's', 'value' => $categoryname])[0]['id'];
+  // Fetch the maximum price of products in the specified category
+  $maxPrice = fetchSingle('SELECT MAX(price) FROM products WHERE categoryid = ?', ['type' => 'i', 'value' => $categoryId])[0]['MAX(price)'];
 } else {
-  $maxPrice = fetchSingle('SELECT MAX(price) FROM products')[0]['MAX(price)']; // Fetch the overall maximum price of all products
+  // If no category name is provided, fetch the maximum price of all products
+  $maxPrice = fetchSingle('SELECT MAX(price) FROM products')[0]['MAX(price)'];
 }
 
 if (isset($_GET['search'])) {
-  $searchTerm = $_GET['search']; // Get the value of the 'search' parameter from the URL query string
-  $query = "SELECT * FROM products WHERE MATCH(name, description) AGAINST(? IN BOOLEAN MODE)"; // Construct a full-text search query to search for products based on name and description
-  $products = fetchSingle($query, ['type' => 's', 'value' => "$searchTerm*"]); // Fetch the products matching the search term
+  // If the 'search' parameter is set in the URL query string
+  $searchTerm = $_GET['search'];
+  // Construct a query to search for products based on the provided search term
+  $query = "SELECT * FROM products WHERE MATCH(name, description) AGAINST(? IN BOOLEAN MODE)";
+  // Fetch the products matching the search term
+  $products = fetchSingle($query, ['type' => 's', 'value' => "$searchTerm*"]);
+
 } else if (isset($_GET['minPrice']) && isset($_GET['maxPrice'])) {
-  $query = "SELECT * FROM products WHERE price BETWEEN ? AND ?"; // Construct a query to fetch products within a price range
-  $products = fetchSingle($query, ['type' => 'i', 'value' => $_GET['minPrice']], ['type' => 'i', 'value' => $_GET['maxPrice']]); // Fetch the products within the specified price range
+  // If both 'minPrice' and 'maxPrice' parameters are set in the URL query string
+  // Construct a query to fetch products within the specified price range
+  $query = "SELECT * FROM products WHERE price BETWEEN ? AND ?";
+  // Fetch the products within the specified price range
+  $products = fetchSingle($query, ['type' => 'i', 'value' => $_GET['minPrice']], ['type' => 'i', 'value' => $_GET['maxPrice']]);
 } else if ($categoryname) {
-  $categoryId = fetchSingle('SELECT * FROM product_categories WHERE name = ?', ['type' => 's', 'value' => $categoryname])[0]['id']; // Fetch the category ID from the 'product_categories' table based on the category name
-  $products = fetchSingle('SELECT * FROM products WHERE categoryid = ?', ['type' => 'i', 'value' => $categoryId]); // Fetch the products belonging to the specified category
+  // If a category name is provided
+  // Fetch the category ID from the database based on the name
+  $categoryId = fetchSingle('SELECT * FROM product_categories WHERE name = ?', ['type' => 's', 'value' => $categoryname])[0]['id'];
+  // Fetch the products belonging to the specified category
+  $products = fetchSingle('SELECT * FROM products WHERE categoryid = ?', ['type' => 'i', 'value' => $categoryId]);
 } else {
-  $products = getAllProducts(); // Fetch all products
+  // If no specific search or filter criteria are provided
+  // Fetch all products
+  $products = getAllProducts();
 }
 
 echo '
@@ -79,14 +97,18 @@ echo '
     <div class="flex flex-wrap justify-between gap-8">
 ';
 
+// Loop through each product in the $products array
 foreach ($products as $index => $product) {
+  // Check if the index is greater than 0 and is divisible by 4
   if ($index > 0 && $index % 4 === 0) {
+    // If true, close the current row and start a new row for the next set of products
     echo '
       </div>
       <div class="flex flex-col md:flex-row flex-wrap justify-between gap-8">
     ';
   }
 
+  // Call the productCard function and pass the current product as an argument
   productCard($product, true);
   
 }
@@ -98,17 +120,33 @@ echo '
 ?>
 
 <script defer>
+  // Get the range input elements
   const rangeOne = document.getElementById('priceMin');
   const rangeTwo = document.getElementById('priceMax');
 
+  // Get the range label elements
   const rangeOneLabel = document.getElementById('priceMinLabel');
   const rangeTwoLabel = document.getElementById('priceMaxLabel');
 
+  /**
+   * Add event listener to the first range input
+   *
+   * @param {Event} e - The event object
+   * @returns {void}
+   */
   rangeOne.addEventListener('input', (e) => {
+    // Update the label text with the selected value
     rangeOneLabel.textContent = `€${e.target.value}`;
   });
 
+  /**
+   * Add event listener to the second range input
+   *
+   * @param {Event} e - The event object
+   * @returns {void}
+   */
   rangeTwo.addEventListener('input', (e) => {
+    // Update the label text with the selected value
     rangeTwoLabel.textContent = `€${e.target.value}`;
   });
 </script>

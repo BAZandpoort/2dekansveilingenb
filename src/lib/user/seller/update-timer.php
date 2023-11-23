@@ -15,9 +15,9 @@ if (isset($_POST['change'])) {
   // Execute the query and store the success status
   $success = insert(
     $query,
-    ['type' => 's', 'value' => $endDate],
-    ['type' => 'i', 'value' => $id]
-  );
+    ['type' => 's', 'value' => $endDate], // Bind the 'endDate' value as a string parameter
+    ['type' => 'i', 'value' => $id] // Bind the 'id' value as an integer parameter
+);
 
   // Check if the update was successful
   if ($success) {

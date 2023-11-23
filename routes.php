@@ -53,6 +53,22 @@ $routes = [
     'footer' => true,
     'container' => true,
   ],
+  // chat routes
+  '/chats/users' => [
+    'view' => 'chats/users.php',
+    'title' => 'chat',
+    'nav' => true,
+    'footer' => true,
+    'container' => true,
+  ],
+  '/chats/chat' => [
+    'view' => 'chats/chat.php',
+    'title' => 'chat',
+    'nav' => true,
+    'footer' => true,
+    'container' => true,
+  ],
+  // product share
   '/products/share' => [
     'view' => 'catalog/share.php',
     'title' => 'Products',
@@ -63,6 +79,13 @@ $routes = [
   '/catalog/report' => [
     'view' => 'catalog/report.php',
     'title' => 'Report Abuse',
+    'nav' => true,
+    'footer' => true,
+    'container' => true,
+  ],
+  '/catalog/delivery_order' => [
+    'view' => 'catalog/delivery_order.php',
+    'title' => 'Delivery order',
     'nav' => true,
     'footer' => true,
     'container' => true,
@@ -112,6 +135,27 @@ $routes = [
     'nav' => true,
     'footer' => false,
     'container' => true,
+  ],
+  '/seller/add-advertisement' => [
+    'view' => 'user/seller/add-advertisement.php',
+    'title' => 'Dashboard',
+    'nav' => true,
+    'footer' => true,
+    'container' => false,
+  ],
+  '/seller/add-address' => [
+    'view' => 'user/seller/add-address.php',
+    'title' => 'Dashboard',
+    'nav' => true,
+    'footer' => true,
+    'container' => false,
+  ],
+  '/seller/hide-address' => [
+    'view' => 'user/seller/hide-address.php',
+    'title' => 'Dashboard', 
+    'nav' => true,
+    'footer' => false,
+    'container' => false,
   ],
   // Admin Dashboard routes
   '/dashboard/products/delete' => [
