@@ -1,12 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
-
 -- Host: 127.0.0.1
--- Generation Time: Nov 19, 2023 at 02:23 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Gegenereerd op: 21 nov 2023 om 12:03
+-- Serverversie: 10.4.25-MariaDB
+-- PHP-versie: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -21,13 +20,34 @@ SET time_zone = "+00:00";
 --
 -- Database: `2dekansveilingen`
 --
-CREATE TABLE `messages` (
-  `msg_id` int(11) NOT NULL,
-  `incoming_msg_id` int(255) NOT NULL,
-  `outgoing_msg_id` int(255) NOT NULL,
-  `msg` varchar(1000) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 -- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `add-address`
+--
+
+CREATE TABLE `add-address` (
+  `userid` int(11) NOT NULL,
+  `streetName` text NOT NULL,
+  `houseNumber` int(11) DEFAULT NULL,
+  `postalcode` int(11) NOT NULL,
+  `city` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `add-address`
+--
+
+INSERT INTO `add-address` (`userid`, `streetName`, `houseNumber`, `postalcode`, `city`) VALUES
+(0, 'sas', 22, 20, 'ssas'),
+(51, 'sas', 22, 2505, '25sas'),
+(51, 'sas', 222, 202, 'sas'),
+(51, 'dd', 666, 66, 'xqx');
+
+-- --------------------------------------------------------
+
+--
 -- Tabelstructuur voor tabel `advertisements`
 --
 
@@ -37,7 +57,7 @@ CREATE TABLE `advertisements` (
   `sellerid` int(11) NOT NULL,
   `altText` text NOT NULL,
   `imageUrl` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `advertisements`
@@ -59,36 +79,14 @@ CREATE TABLE `bids` (
   `userid` int(11) NOT NULL,
   `bidPrice` decimal(18,2) NOT NULL,
   `bidOfferedAt` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `delivery_orders`
---
-
-CREATE TABLE `delivery_orders` (
-  `id` int(11) NOT NULL,
-  `customerid` int(11) NOT NULL,
-  `productid` int(11) NOT NULL,
-  `deliveryMethod` text NOT NULL,
-  `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `delivery_orders`
---
-
-INSERT INTO `delivery_orders` (`id`, `customerid`, `productid`, `deliveryMethod`, `createdAt`) VALUES
-(1, 53, 10, 'Express', '2023-11-19 13:21:52');
 --
 -- Gegevens worden geëxporteerd voor tabel `bids`
 --
 
 INSERT INTO `bids` (`id`, `productid`, `userid`, `bidPrice`, `bidOfferedAt`) VALUES
-(1, 26, 52, 555.01, '2023-10-20 15:29:35'),
-(2, 16, 52, 440.24, '2023-10-20 15:53:15'),
-(3, 1, 52, 0.71, '2023-10-23 09:29:30');
+(3, 1, 52, '0.71', '2023-10-23 09:29:30');
 
 -- --------------------------------------------------------
 
@@ -102,18 +100,52 @@ CREATE TABLE `bidshistory` (
   `userid` int(11) NOT NULL,
   `bidPrice` decimal(10,0) NOT NULL,
   `bidOfferedAt` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `favorites` 
+-- Tabelstructuur voor tabel `delivery_orders`
+--
+
+CREATE TABLE `delivery_orders` (
+  `id` int(11) NOT NULL,
+  `customerid` int(11) NOT NULL,
+  `productid` int(11) NOT NULL,
+  `deliveryMethod` text NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `delivery_orders`
+--
+
+INSERT INTO `delivery_orders` (`id`, `customerid`, `productid`, `deliveryMethod`, `createdAt`) VALUES
+(1, 53, 10, 'Express', '2023-11-19 13:21:52');
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `favorites`
 --
 
 CREATE TABLE `favorites` (
   `userid` int(11) NOT NULL,
   `productid` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `messages`
+--
+
+CREATE TABLE `messages` (
+  `msg_id` int(11) NOT NULL,
+  `incoming_msg_id` int(255) NOT NULL,
+  `outgoing_msg_id` int(255) NOT NULL,
+  `msg` varchar(1000) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -127,15 +159,12 @@ CREATE TABLE `notification_read` (
   `userid` int(11) NOT NULL,
   `read` tinyint(1) NOT NULL,
   `userid2` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
 -- Tabelstructuur voor tabel `products`
--- Tabelstructuur voor tabel `products`
---
--- Table structure for table `products`
 --
 
 CREATE TABLE `products` (
@@ -152,69 +181,68 @@ CREATE TABLE `products` (
   `supportStandard` tinyint(1) NOT NULL DEFAULT 1,
   `supportExpress` tinyint(1) NOT NULL DEFAULT 1,
   `supportPickup` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `products`
+-- Gegevens worden geëxporteerd voor tabel `products`
 --
 
 INSERT INTO `products` (`id`, `userid`, `categoryid`, `name`, `description`, `price`, `imageUrl`, `endDate`, `updatedAt`, `createdAt`, `supportStandard`, `supportExpress`, `supportPickup`) VALUES
-(1, 47, 9, 'Incredible Bronze Fish', 'The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design', 576.00, '17.jpg', '2023-11-24 14:00:00', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(2, 46, 8, 'Handmade Soft Shoes', 'Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals', 368.00, '10.jpg', '2023-11-10 13:35:11', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(3, 9, 4, 'Awesome Soft Ball', 'Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals', 406.00, '18.jpg', '2023-11-10 15:40:03', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(4, 11, 6, 'Gorgeous Frozen Car', 'Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals', 400.00, '1.jpg', '2023-11-10 17:25:07', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(5, 26, 6, 'Rustic Steel Computer', 'The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive', 472.00, '22.jpg', '2023-11-10 17:46:01', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(6, 32, 7, 'Handcrafted Concrete Mouse', 'New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016', 935.00, '8.jpg', '2023-11-10 23:27:49', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(7, 17, 10, 'Sleek Wooden Shoes', 'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients', 160.00, '23.jpg', '2023-11-11 03:19:55', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(8, 22, 9, 'Recycled Rubber Gloves', 'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J', 482.00, '15.jpg', '2023-11-11 05:10:46', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(9, 20, 3, 'Generic Wooden Bacon', 'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients', 784.00, '16.jpg', '2023-11-10 14:04:00', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(10, 45, 7, 'Ergonomic Metal Keyboard', 'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients', 189.00, '46.jpg', '2023-11-19 14:19:00', '2023-11-19 13:18:25', '2023-11-10 12:58:34', 1, 1, 1),
-(11, 10, 6, 'Sleek Concrete Chair', 'Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals', 797.00, '3.jpg', '2023-11-11 02:17:56', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(12, 24, 8, 'Rustic Frozen Towels', 'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients', 338.00, '33.jpg', '2023-11-11 12:54:19', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(13, 43, 7, 'Elegant Wooden Mouse', 'The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design', 86.00, '35.jpg', '2023-11-10 19:38:55', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(14, 27, 4, 'Bespoke Plastic Sausages', 'New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016', 879.00, '11.jpg', '2023-11-10 16:38:01', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(15, 30, 9, 'Small Plastic Fish', 'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients', 642.00, '49.jpg', '2023-11-11 06:11:51', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(16, 37, 4, 'Ergonomic Cotton Sausages', 'The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design', 855.00, '29.jpg', '2023-11-11 00:02:14', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(17, 4, 1, 'Ergonomic Steel Salad', 'The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality', 783.00, '45.jpg', '2023-11-10 20:24:04', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(18, 16, 10, 'Generic Metal Tuna', 'The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive', 435.00, '27.jpg', '2023-11-10 22:41:29', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(19, 13, 2, 'Ergonomic Rubber Hat', 'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J', 421.00, '14.jpg', '2023-11-10 22:13:38', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(20, 41, 7, 'Elegant Soft Shirt', 'Boston\'s most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles', 403.00, '36.jpg', '2023-11-11 07:17:15', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(21, 18, 5, 'Licensed Rubber Pants', 'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J', 325.00, '43.jpg', '2023-11-10 17:11:22', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(22, 42, 3, 'Intelligent Granite Hat', 'New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart', 778.00, '38.jpg', '2023-11-11 08:02:35', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(23, 5, 4, 'Generic Plastic Bike', 'Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support', 362.00, '30.jpg', '2023-11-10 21:20:22', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(24, 33, 10, 'Rustic Rubber Table', 'The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive', 852.00, '32.jpg', '2023-11-11 08:36:58', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(25, 31, 9, 'Handmade Frozen Computer', 'Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals', 861.00, '4.jpg', '2023-11-11 11:27:59', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(26, 38, 7, 'Tasty Granite Keyboard', 'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J', 324.00, '37.jpg', '2023-11-10 19:35:52', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(27, 35, 5, 'Practical Concrete Ball', 'Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals', 909.00, '39.jpg', '2023-11-10 20:09:57', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(28, 2, 2, 'Elegant Cotton Towels', 'The Football Is Good For Training And Recreational Purposes', 247.00, '44.jpg', '2023-11-11 05:24:53', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(29, 39, 3, 'Intelligent Concrete Sausages', 'The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design', 24.00, '5.jpg', '2023-11-11 09:02:32', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(30, 36, 1, 'Ergonomic Soft Pants', 'Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals', 136.00, '7.jpg', '2023-11-11 08:20:54', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(31, 8, 3, 'Tasty Frozen Computer', 'New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart', 740.00, '47.jpg', '2023-11-11 09:26:34', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(32, 23, 10, 'Intelligent Soft Chair', 'The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive', 287.00, '40.jpg', '2023-11-10 19:38:27', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(33, 49, 7, 'Elegant Rubber Bike', 'The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive', 953.00, '26.jpg', '2023-11-11 11:41:00', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(34, 44, 8, 'Awesome Concrete Keyboard', 'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients', 344.00, '20.jpg', '2023-11-11 01:38:06', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(35, 19, 4, 'Generic Soft Tuna', 'The Football Is Good For Training And Recreational Purposes', 120.00, '6.jpg', '2023-11-10 13:10:40', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(36, 14, 6, 'Awesome Steel Sausages', 'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients', 359.00, '31.jpg', '2023-11-10 23:32:08', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(37, 3, 7, 'Practical Steel Ball', 'Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support', 529.00, '9.jpg', '2023-11-11 11:15:41', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(38, 25, 5, 'Ergonomic Rubber Fish', 'Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals', 736.00, '21.jpg', '2023-11-10 21:15:13', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(39, 6, 3, 'Licensed Concrete Sausages', 'The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design', 634.00, '13.jpg', '2023-11-11 07:56:46', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(40, 34, 9, 'Bespoke Metal Table', 'The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design', 136.00, '2.jpg', '2023-11-11 02:30:06', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(41, 12, 9, 'Practical Soft Gloves', 'Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals', 566.00, '19.jpg', '2023-11-10 14:39:36', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(42, 28, 2, 'Handmade Soft Chips', 'The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive', 670.00, '25.jpg', '2023-11-11 03:07:41', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(43, 15, 9, 'Recycled Metal Chicken', 'The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive', 667.00, '48.jpg', '2023-11-11 09:22:00', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(44, 29, 1, 'Generic Bronze Bike', 'Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support', 209.00, '24.jpg', '2023-11-10 21:02:42', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(45, 48, 8, 'Modern Fresh Car', 'New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart', 609.00, '42.jpg', '2023-11-11 00:55:05', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(46, 1, 10, 'Electronic Soft Shirt', 'The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality', 646.00, '34.jpg', '2023-11-11 06:28:28', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(47, 40, 5, 'Electronic Plastic Computer', 'Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals', 603.00, '28.jpg', '2023-11-10 14:47:19', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(48, 21, 3, 'Rustic Frozen Shoes', 'New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart', 599.00, '12.jpg', '2023-11-10 15:27:31', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(49, 7, 7, 'Ergonomic Concrete Bacon', 'Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support', 663.00, '50.jpg', '2023-11-11 09:29:01', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(50, 50, 2, 'Practical Wooden Chips', 'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J', 84.00, '41.jpg', '2023-11-10 22:31:57', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
-(52, 52, 4, 'fungus two', 'ymumm', 530.01, 'Hortus_Haren_18-05-2019._(actm.)_03--userid-52.jpg', '2023-12-01 15:00:00', '2023-11-10 14:00:32', '2023-11-10 14:00:32', 1, 0, 1);
+(1, 47, 9, 'Incredible Bronze Fish', 'The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design', '576.00', '17.jpg', '2023-11-24 14:00:00', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(2, 46, 8, 'Handmade Soft Shoes', 'Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals', '368.00', '10.jpg', '2023-11-10 13:35:11', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(3, 9, 4, 'Awesome Soft Ball', 'Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals', '406.00', '18.jpg', '2023-11-10 15:40:03', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(4, 11, 6, 'Gorgeous Frozen Car', 'Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals', '400.00', '1.jpg', '2023-11-10 17:25:07', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(5, 26, 6, 'Rustic Steel Computer', 'The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive', '472.00', '22.jpg', '2023-11-10 17:46:01', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(6, 32, 7, 'Handcrafted Concrete Mouse', 'New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016', '935.00', '8.jpg', '2023-11-10 23:27:49', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(7, 17, 10, 'Sleek Wooden Shoes', 'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients', '160.00', '23.jpg', '2023-11-11 03:19:55', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(8, 22, 9, 'Recycled Rubber Gloves', 'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J', '482.00', '15.jpg', '2023-11-11 05:10:46', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(9, 20, 3, 'Generic Wooden Bacon', 'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients', '784.00', '16.jpg', '2023-11-10 14:04:00', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(10, 45, 7, 'Ergonomic Metal Keyboard', 'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients', '189.00', '46.jpg', '2023-11-19 14:19:00', '2023-11-19 13:18:25', '2023-11-10 12:58:34', 1, 1, 1),
+(11, 10, 6, 'Sleek Concrete Chair', 'Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals', '797.00', '3.jpg', '2023-11-11 02:17:56', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(12, 24, 8, 'Rustic Frozen Towels', 'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients', '338.00', '33.jpg', '2023-11-11 12:54:19', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(13, 43, 7, 'Elegant Wooden Mouse', 'The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design', '86.00', '35.jpg', '2023-11-10 19:38:55', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(14, 27, 4, 'Bespoke Plastic Sausages', 'New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016', '879.00', '11.jpg', '2023-11-10 16:38:01', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(15, 30, 9, 'Small Plastic Fish', 'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients', '642.00', '49.jpg', '2023-11-11 06:11:51', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(16, 37, 4, 'Ergonomic Cotton Sausages', 'The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design', '855.00', '29.jpg', '2023-11-11 00:02:14', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(17, 4, 1, 'Ergonomic Steel Salad', 'The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality', '783.00', '45.jpg', '2023-11-10 20:24:04', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(18, 16, 10, 'Generic Metal Tuna', 'The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive', '435.00', '27.jpg', '2023-11-10 22:41:29', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(19, 13, 2, 'Ergonomic Rubber Hat', 'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J', '421.00', '14.jpg', '2023-11-10 22:13:38', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(20, 41, 7, 'Elegant Soft Shirt', 'Boston\'s most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles', '403.00', '36.jpg', '2023-11-11 07:17:15', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(21, 18, 5, 'Licensed Rubber Pants', 'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J', '325.00', '43.jpg', '2023-11-10 17:11:22', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(22, 42, 3, 'Intelligent Granite Hat', 'New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart', '778.00', '38.jpg', '2023-11-11 08:02:35', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(23, 5, 4, 'Generic Plastic Bike', 'Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support', '362.00', '30.jpg', '2023-11-10 21:20:22', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(24, 33, 10, 'Rustic Rubber Table', 'The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive', '852.00', '32.jpg', '2023-11-11 08:36:58', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(25, 31, 9, 'Handmade Frozen Computer', 'Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals', '861.00', '4.jpg', '2023-11-11 11:27:59', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(26, 38, 7, 'Tasty Granite Keyboard', 'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J', '324.00', '37.jpg', '2023-11-10 19:35:52', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(27, 35, 5, 'Practical Concrete Ball', 'Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals', '909.00', '39.jpg', '2023-11-10 20:09:57', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(28, 2, 2, 'Elegant Cotton Towels', 'The Football Is Good For Training And Recreational Purposes', '247.00', '44.jpg', '2023-11-11 05:24:53', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(29, 39, 3, 'Intelligent Concrete Sausages', 'The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design', '24.00', '5.jpg', '2023-11-11 09:02:32', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(30, 36, 1, 'Ergonomic Soft Pants', 'Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals', '136.00', '7.jpg', '2023-11-11 08:20:54', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(31, 8, 3, 'Tasty Frozen Computer', 'New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart', '740.00', '47.jpg', '2023-11-11 09:26:34', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(32, 23, 10, 'Intelligent Soft Chair', 'The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive', '287.00', '40.jpg', '2023-11-10 19:38:27', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(33, 49, 7, 'Elegant Rubber Bike', 'The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive', '953.00', '26.jpg', '2023-11-11 11:41:00', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(34, 44, 8, 'Awesome Concrete Keyboard', 'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients', '344.00', '20.jpg', '2023-11-11 01:38:06', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(35, 19, 4, 'Generic Soft Tuna', 'The Football Is Good For Training And Recreational Purposes', '120.00', '6.jpg', '2023-11-10 13:10:40', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(36, 14, 6, 'Awesome Steel Sausages', 'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients', '359.00', '31.jpg', '2023-11-10 23:32:08', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(37, 3, 7, 'Practical Steel Ball', 'Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support', '529.00', '9.jpg', '2023-11-11 11:15:41', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(38, 25, 5, 'Ergonomic Rubber Fish', 'Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals', '736.00', '21.jpg', '2023-11-10 21:15:13', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(39, 6, 3, 'Licensed Concrete Sausages', 'The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design', '634.00', '13.jpg', '2023-11-11 07:56:46', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(40, 34, 9, 'Bespoke Metal Table', 'The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design', '136.00', '2.jpg', '2023-11-11 02:30:06', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(41, 12, 9, 'Practical Soft Gloves', 'Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals', '566.00', '19.jpg', '2023-11-10 14:39:36', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(42, 28, 2, 'Handmade Soft Chips', 'The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive', '670.00', '25.jpg', '2023-11-11 03:07:41', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(43, 15, 9, 'Recycled Metal Chicken', 'The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive', '667.00', '48.jpg', '2023-11-11 09:22:00', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(44, 29, 1, 'Generic Bronze Bike', 'Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support', '209.00', '24.jpg', '2023-11-10 21:02:42', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(45, 48, 8, 'Modern Fresh Car', 'New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart', '609.00', '42.jpg', '2023-11-11 00:55:05', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(46, 1, 10, 'Electronic Soft Shirt', 'The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality', '646.00', '34.jpg', '2023-11-11 06:28:28', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(47, 40, 5, 'Electronic Plastic Computer', 'Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals', '603.00', '28.jpg', '2023-11-10 14:47:19', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(48, 21, 3, 'Rustic Frozen Shoes', 'New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart', '599.00', '12.jpg', '2023-11-10 15:27:31', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(49, 7, 7, 'Ergonomic Concrete Bacon', 'Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support', '663.00', '50.jpg', '2023-11-11 09:29:01', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(50, 50, 2, 'Practical Wooden Chips', 'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J', '84.00', '41.jpg', '2023-11-10 22:31:57', '2023-11-10 13:53:28', '2023-11-10 12:58:34', 1, 1, 1),
+(52, 52, 4, 'fungus two', 'ymumm', '530.01', 'Hortus_Haren_18-05-2019._(actm.)_03--userid-52.jpg', '2023-12-01 15:00:00', '2023-11-10 14:00:32', '2023-11-10 14:00:32', 1, 0, 1);
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `product_categories`
 -- Tabelstructuur voor tabel `product_categories`
 --
 
@@ -222,10 +250,10 @@ CREATE TABLE `product_categories` (
   `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `icon` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `product_categories`
+-- Gegevens worden geëxporteerd voor tabel `product_categories`
 --
 
 INSERT INTO `product_categories` (`id`, `name`, `icon`) VALUES
@@ -253,10 +281,10 @@ CREATE TABLE `reports` (
   `typeOfAbuse` text NOT NULL,
   `context` text NOT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `reports`
+-- Gegevens worden geëxporteerd voor tabel `reports`
 --
 
 INSERT INTO `reports` (`id`, `productid`, `userid`, `typeOfAbuse`, `context`, `createdAt`) VALUES
@@ -274,12 +302,12 @@ CREATE TABLE `review` (
   `sterren` int(11) NOT NULL,
   `seller` int(11) NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `successful_bids`
+-- Tabelstructuur voor tabel `successful_bids`
 --
 
 CREATE TABLE `successful_bids` (
@@ -290,39 +318,19 @@ CREATE TABLE `successful_bids` (
   `productid` int(11) NOT NULL,
   `bidAcceptedAt` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `bidPrice` decimal(10,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `successful_bids`
---
-
-INSERT INTO `successful_bids` (`id`, `originalBidid`, `bidderid`, `sellerid`, `productid`, `bidAcceptedAt`, `bidPrice`) VALUES
-(1, 1, 52, 0, 9, '2023-11-19 13:16:41', 0.52),
-(2, 2, 53, 0, 10, '2023-11-19 13:19:07', 3430.07);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `successful_bids`
---
-
-CREATE TABLE `successful_bids` (
-  `id` int(11) NOT NULL,
-  `originalBidid` int(11) NOT NULL,
-  `bidderid` int(11) NOT NULL,
-  `sellerid` int(11) NOT NULL,
-  `productid` int(11) NOT NULL,
-  `bidAcceptedAt` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `bidPrice` decimal(10,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `successful_bids`
+-- Gegevens worden geëxporteerd voor tabel `successful_bids`
 --
 
 INSERT INTO `successful_bids` (`id`, `originalBidid`, `bidderid`, `sellerid`, `productid`, `bidAcceptedAt`, `bidPrice`) VALUES
-(1, 1, 52, 0, 9, '2023-11-19 13:16:41', 0.52),
-(2, 2, 53, 0, 10, '2023-11-19 13:19:07', 3430.07);
+(1, 1, 52, 0, 9, '2023-11-19 13:16:41', '0.52'),
+(2, 2, 53, 0, 10, '2023-11-19 13:19:07', '3430.07'),
+(1, 1, 52, 0, 9, '2023-11-19 13:16:41', '0.52'),
+(2, 2, 53, 0, 10, '2023-11-19 13:19:07', '3430.07'),
+(0, 2, 52, 0, 16, '2023-11-20 13:58:57', '440.24'),
+(0, 1, 52, 0, 26, '2023-11-20 13:58:58', '555.01');
 
 -- --------------------------------------------------------
 
@@ -336,7 +344,7 @@ CREATE TABLE `translations` (
   `text_en` text NOT NULL DEFAULT 'UNAVAILABLE',
   `text_nl` text NOT NULL DEFAULT 'ONBESCHIKBAAR',
   `text_fr` text NOT NULL DEFAULT 'INDISPONIBLE'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `translations`
@@ -380,10 +388,10 @@ CREATE TABLE `users` (
   `lastname` varchar(50) NOT NULL,
   `updatedAt` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `users`
+-- Gegevens worden geëxporteerd voor tabel `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `firstname`, `lastname`, `updatedAt`, `createdAt`) VALUES
@@ -439,7 +447,8 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `firstname`, `lastna
 (50, 'Annalise76', 'Shanny.Sporer75@gmail.com', '$argon2id$v=19$m=65536,t=3,p=4$MMsIvPE+zi/LHDYsQb3puQ$+T8kJsl/wLLgRKncyqH+YVRvjzwxa3ac8E0nPTsGVjY', 'Otto', 'Tremblay', '2023-11-10 12:58:34', '2023-11-10 12:58:34'),
 (51, 'Testing Account', 'test@gmail.com', '$argon2id$v=19$m=65536,t=3,p=4$Fsrn7g0oJlrtBqeN688+aQ$I888DW8sXM01Miu0kNJl8u+yq1Lr3pd9Oj6Q5e8xJJc', 'Testing', 'Account', '2023-11-10 12:58:34', '2023-11-10 12:58:34'),
 (52, 'xdfcvgjklm', 'john@johnson.com', '$argon2id$v=19$m=65536,t=4,p=1$MDV3VDFuSVhOZERjZFhpUg$ezaweTPW9LWN75hyEAikL8z/bzgn9hpBQx6OcM2Agq0', 'John', 'Johnson', '2023-11-10 12:59:33', '2023-11-10 12:59:33'),
-(53, 'rkeikkzrlke', 'Er@gmaI.co', '$argon2id$v=19$m=65536,t=4,p=1$UEJwRFouYllQMHVzbnlQNQ$1NiuMYNlj55gdXzEbBEmr5zpw6I/wTd1zL8LTZwK2j0', 'Hel', 'Er', '2023-11-19 13:17:11', '2023-11-19 13:17:11');
+(53, 'rkeikkzrlke', 'Er@gmaI.co', '$argon2id$v=19$m=65536,t=4,p=1$UEJwRFouYllQMHVzbnlQNQ$1NiuMYNlj55gdXzEbBEmr5zpw6I/wTd1zL8LTZwK2j0', 'Hel', 'Er', '2023-11-19 13:17:11', '2023-11-19 13:17:11'),
+(0, 'user@user.com', 'user@user.com', '$argon2id$v=19$m=65536,t=4,p=1$N3BCY3pGY25WcVJuei5ISA$dw13Ecuwy6/aiJ/+zIOeDwY/BpJc5/buLpea4duIvoA', 'user@user.com', 'user@user.com', '2023-11-20 14:10:00', '2023-11-20 14:10:00');
 
 -- --------------------------------------------------------
 
@@ -454,10 +463,10 @@ CREATE TABLE `user_profile` (
   `about` text NOT NULL,
   `theme` text NOT NULL DEFAULT 'light',
   `language` text NOT NULL DEFAULT 'text_en'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `user_profile`
+-- Gegevens worden geëxporteerd voor tabel `user_profile`
 --
 
 INSERT INTO `user_profile` (`id`, `userid`, `profilePictureUrl`, `about`, `theme`, `language`) VALUES
@@ -511,9 +520,10 @@ INSERT INTO `user_profile` (`id`, `userid`, `profilePictureUrl`, `about`, `theme
 (48, 35, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/44.jpg', 'Vel ventosus civitas maiores cupio testimonium. Culpa agnitio solus aptus degusto valde. Claro excepturi cilicium infit calco infit taceo commodi totidem deficio.', 'light', 'text_fr'),
 (49, 41, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/133.jpg', 'Volo spiculum valeo bos dignissimos rerum tutamen solvo tero. Trepide tametsi advenio paens admoneo acies tempore corporis desidero. Amicitia reprehenderit cultura calco calamitas cur assentator tollo.', 'dark', 'text_nl'),
 (50, 8, 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/228.jpg', 'Cimentarius tristis deprecator allatus est fugiat subnecto. Ducimus admitto vitae tibi ut cruciamentum. Derelinquo cursim deludo.', 'dark', 'text_fr'),
-(51, 51, 'https://avatars.githubusercontent.com/u/76388079', 'Testing Account', 'light', 'text_en'),
+(51, 51, 'https://avatars.githubusercontent.com/u/76388079', 'Testing Account', 'dark', 'text_en'),
 (52, 52, 'https://avatars.githubusercontent.com/u/64209400?v=4', 'Hello!', 'dark', 'text_en'),
-(53, 53, 'https://avatars.githubusercontent.com/u/64209400?v=4', 'Hello!', 'light', 'text_en');
+(53, 53, 'https://avatars.githubusercontent.com/u/64209400?v=4', 'Hello!', 'light', 'text_en'),
+(0, 0, 'https://avatars.githubusercontent.com/u/64209400?v=4', 'Hello!', 'dark', 'text_en');
 
 -- --------------------------------------------------------
 
@@ -528,10 +538,10 @@ CREATE TABLE `user_purchases` (
   `price` int(11) NOT NULL,
   `productName` text NOT NULL,
   `productImage` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `user_purchases`
+-- Gegevens worden geëxporteerd voor tabel `user_purchases`
 --
 
 INSERT INTO `user_purchases` (`id`, `timeOfPurchase`, `productId`, `price`, `productName`, `productImage`) VALUES
@@ -646,10 +656,10 @@ INSERT INTO `user_purchases` (`id`, `timeOfPurchase`, `productId`, `price`, `pro
 CREATE TABLE `user_roles` (
   `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `user_roles`
+-- Gegevens worden geëxporteerd voor tabel `user_roles`
 --
 
 INSERT INTO `user_roles` (`id`, `name`) VALUES
@@ -667,125 +677,113 @@ CREATE TABLE `user_role_mapping` (
   `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
   `roleid` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `user_role_mapping`
---
-
-INSERT INTO `user_role_mapping` (`id`, `userid`, `roleid`) VALUES
-(1, 41, 1),
-(2, 5, 2),
-(3, 39, 1),
-(4, 36, 3),
-(5, 12, 3),
-(6, 17, 2),
-(7, 24, 2),
-(8, 10, 2),
-(9, 50, 1),
-(10, 6, 1),
-(11, 20, 1),
-(12, 11, 1),
-(13, 47, 2),
-(14, 34, 2),
-(15, 40, 1),
-(16, 9, 3),
-(17, 13, 3),
-(18, 23, 2),
-(19, 28, 2),
-(20, 4, 3),
-(21, 2, 1),
-(22, 3, 3),
-(23, 15, 2),
-(24, 35, 1),
-(25, 25, 2),
-(26, 16, 3),
-(27, 38, 1),
-(28, 32, 2),
-(29, 1, 1),
-(30, 45, 3),
-(31, 14, 1),
-(32, 37, 3),
-(33, 49, 2),
-(34, 7, 1),
-(35, 48, 3),
-(36, 31, 1),
-(37, 44, 3),
-(38, 46, 3),
-(39, 33, 1),
-(40, 43, 3),
-(41, 29, 3),
-(42, 18, 1),
-(43, 30, 3),
-(44, 8, 2),
-(45, 26, 2),
-(46, 19, 3),
-(47, 22, 3),
-(48, 21, 2),
-(49, 27, 1),
-(50, 42, 1);
-
---
--- Dumping data for table `user_role_mapping`
---
-
-INSERT INTO `user_role_mapping` (`id`, `userid`, `roleid`) VALUES
-(1, 41, 1),
-(2, 5, 2),
-(3, 39, 1),
-(4, 36, 3),
-(5, 12, 3),
-(6, 17, 2),
-(7, 24, 2),
-(8, 10, 2),
-(9, 50, 1),
-(10, 6, 1),
-(11, 20, 1),
-(12, 11, 1),
-(13, 47, 2),
-(14, 34, 2),
-(15, 40, 1),
-(16, 9, 3),
-(17, 13, 3),
-(18, 23, 2),
-(19, 28, 2),
-(20, 4, 3),
-(21, 2, 1),
-(22, 3, 3),
-(23, 15, 2),
-(24, 35, 1),
-(25, 25, 2),
-(26, 16, 3),
-(27, 38, 1),
-(28, 32, 2),
-(29, 1, 1),
-(30, 45, 3),
-(31, 14, 1),
-(32, 37, 3),
-(33, 49, 2),
-(34, 7, 1),
-(35, 48, 3),
-(36, 31, 1),
-(37, 44, 3),
-(38, 46, 3),
-(39, 33, 1),
-(40, 43, 3),
-(41, 29, 3),
-(42, 18, 1),
-(43, 30, 3),
-(44, 8, 2),
-(45, 26, 2),
-(46, 19, 3),
-(47, 22, 3),
-(48, 21, 2),
-(49, 27, 1),
-(50, 42, 1);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `user_role_mapping`
 --
 
 INSERT INTO `user_role_mapping` (`id`, `userid`, `roleid`) VALUES
+(1, 41, 1),
+(2, 5, 2),
+(3, 39, 1),
+(4, 36, 3),
+(5, 12, 3),
+(6, 17, 2),
+(7, 24, 2),
+(8, 10, 2),
+(9, 50, 1),
+(10, 6, 1),
+(11, 20, 1),
+(12, 11, 1),
+(13, 47, 2),
+(14, 34, 2),
+(15, 40, 1),
+(16, 9, 3),
+(17, 13, 3),
+(18, 23, 2),
+(19, 28, 2),
+(20, 4, 3),
+(21, 2, 1),
+(22, 3, 3),
+(23, 15, 2),
+(24, 35, 1),
+(25, 25, 2),
+(26, 16, 3),
+(27, 38, 1),
+(28, 32, 2),
+(29, 1, 1),
+(30, 45, 3),
+(31, 14, 1),
+(32, 37, 3),
+(33, 49, 2),
+(34, 7, 1),
+(35, 48, 3),
+(36, 31, 1),
+(37, 44, 3),
+(38, 46, 3),
+(39, 33, 1),
+(40, 43, 3),
+(41, 29, 3),
+(42, 18, 1),
+(43, 30, 3),
+(44, 8, 2),
+(45, 26, 2),
+(46, 19, 3),
+(47, 22, 3),
+(48, 21, 2),
+(49, 27, 1),
+(50, 42, 1),
+(1, 41, 1),
+(2, 5, 2),
+(3, 39, 1),
+(4, 36, 3),
+(5, 12, 3),
+(6, 17, 2),
+(7, 24, 2),
+(8, 10, 2),
+(9, 50, 1),
+(10, 6, 1),
+(11, 20, 1),
+(12, 11, 1),
+(13, 47, 2),
+(14, 34, 2),
+(15, 40, 1),
+(16, 9, 3),
+(17, 13, 3),
+(18, 23, 2),
+(19, 28, 2),
+(20, 4, 3),
+(21, 2, 1),
+(22, 3, 3),
+(23, 15, 2),
+(24, 35, 1),
+(25, 25, 2),
+(26, 16, 3),
+(27, 38, 1),
+(28, 32, 2),
+(29, 1, 1),
+(30, 45, 3),
+(31, 14, 1),
+(32, 37, 3),
+(33, 49, 2),
+(34, 7, 1),
+(35, 48, 3),
+(36, 31, 1),
+(37, 44, 3),
+(38, 46, 3),
+(39, 33, 1),
+(40, 43, 3),
+(41, 29, 3),
+(42, 18, 1),
+(43, 30, 3),
+(44, 8, 2),
+(45, 26, 2),
+(46, 19, 3),
+(47, 22, 3),
+(48, 21, 2),
+(49, 27, 1),
+(50, 42, 1),
 (1, 7, 3),
 (2, 1, 3),
 (3, 5, 2),
@@ -848,21 +846,15 @@ ALTER TABLE `bids`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `delivery_orders`
---
-ALTER TABLE `delivery_orders`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `delivery_orders`
---
-ALTER TABLE `delivery_orders`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexen voor tabel `bidshistory`
 --
 ALTER TABLE `bidshistory`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexen voor tabel `delivery_orders`
+--
+ALTER TABLE `delivery_orders`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -892,165 +884,6 @@ ALTER TABLE `product_categories`
 --
 ALTER TABLE `reports`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `successful_bids`
-
---
-ALTER TABLE `successful_bids`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `successful_bids`
---
-ALTER TABLE `successful_bids`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexen voor tabel `translations`
---
-ALTER TABLE `translations`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexen voor tabel `users`
--- Indexen voor tabel `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `username` (`username`),
-  ADD UNIQUE KEY `email` (`email`);
-
---
--- Indexen voor tabel `user_profile`
--- Indexen voor tabel `user_profile`
---
-ALTER TABLE `user_profile`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `profile_userid` (`userid`);
-
---
--- Indexen voor tabel `user_roles`
---
-ALTER TABLE `user_roles`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `name` (`name`);
-
---
--- Indexen voor tabel `user_role_mapping`
---
-ALTER TABLE `user_role_mapping`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `role_mapping_roleid` (`roleid`),
-  ADD KEY `role_mapping_userid` (`userid`);
-
---
--- AUTO_INCREMENT voor geëxporteerde tabellen
---
-
---
--- AUTO_INCREMENT voor een tabel `advertisements`
---
-ALTER TABLE `advertisements`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
---
--- AUTO_INCREMENT voor een tabel `bids`
---
-ALTER TABLE `bids`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `delivery_orders`
---
-ALTER TABLE `delivery_orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT voor een tabel `notification_read`
---
-ALTER TABLE `notification_read`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
-
---
--- AUTO_INCREMENT voor een tabel `products`
--- AUTO_INCREMENT voor een tabel `products`
---
-ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
-
---
--- AUTO_INCREMENT voor een tabel `product_categories`
--- AUTO_INCREMENT voor een tabel `product_categories`
---
-ALTER TABLE `product_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT voor een tabel `reports`
---
-ALTER TABLE `reports`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `successful_bids`
---
-ALTER TABLE `successful_bids`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT voor een tabel `translations`
---
-ALTER TABLE `translations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
-
---
--- AUTO_INCREMENT voor een tabel `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
-
---
--- AUTO_INCREMENT voor een tabel `user_profile`
---
-ALTER TABLE `user_profile`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
-
---
--- AUTO_INCREMENT voor een tabel `user_roles`
---
-ALTER TABLE `user_roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT voor een tabel `user_role_mapping`
---
-ALTER TABLE `user_role_mapping`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
-
---
--- Beperkingen voor geëxporteerde tabellen
---
-
---
--- Beperkingen voor tabel `products`
---
-ALTER TABLE `products`
-  ADD CONSTRAINT `products_categoryid` FOREIGN KEY (`categoryid`) REFERENCES `product_categories` (`id`) ON DELETE SET NULL,
-  ADD CONSTRAINT `products_userid` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-
---
--- Beperkingen voor tabel `user_profile`
---
-ALTER TABLE `user_profile`
-  ADD CONSTRAINT `profile_userid` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-
---
--- Beperkingen voor tabel `user_role_mapping`
---
-ALTER TABLE `user_role_mapping`
-  ADD CONSTRAINT `role_mapping_roleid` FOREIGN KEY (`roleid`) REFERENCES `user_roles` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `role_mapping_userid` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

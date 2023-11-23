@@ -4,8 +4,7 @@ require_once LIB . '/catalog/products.php';
 require_once COMPONENTS . '/product-card.php';
 
 $products = []; // Initialize an empty array to store the products
-
-$categoryname = $_GET['category'] ?? null; // Get the value of the 'category' parameter from the URL query string, if it exists, otherwise set it to null
+$categoryname = $_GET['category'] ?? null; // Get the value of the 'category' parameter from the URL query string, if it exists
 
 if ($categoryname) {
   // If a category name is provided, fetch the category ID from the database based on the name
