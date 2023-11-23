@@ -24,14 +24,50 @@ if (isset($_SESSION['user'])) {
           </label>
           <input type="text" name="firstname" placeholder="John" class="input input-bordered w-full" required />
         </div>
-        
-        <div class="form-control md:flex-1">
-          <label class="label">
-            <span class="label-text">Lastname</span>
-          </label>
-          <input type="text" name="lastname" placeholder="Doe" class="input input-bordered w-full" required />
-        </div>
       </div>
+
+        <div class="flex flex-col gap-4 md:flex-row">
+          <div class="form-control md:flex-1">
+            <label class="label">
+              <span class="label-text">Lastname</span>
+            </label>
+            <input type="text" name="lastname" placeholder="Doe" class="input input-bordered w-full" required />
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-4 md:flex-row">
+          <div class="form-control md:flex-1">
+            <label class="label">
+              <span class="label-text">Straat</span>
+            </label>
+            <input type="text" name="straat" placeholder="Street" class="input input-bordered w-full" required />
+          </div>
+        </div>
+
+          <div class="form-control md:flex-1">
+            <label class="label">
+              <span class="label-text">Huisnummer</span>
+            </label>
+            <input type="number" name="huisnummer" placeholder="House number" class="input input-bordered w-full" required />
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-4 md:flex-row">
+          <div class="form-control md:flex-1">
+            <label class="label">
+              <span class="label-text">Postcode</span>
+            </label>
+            <input type="number" name="postcode" placeholder="Postal code" class="input input-bordered w-full" required />
+          </div>
+
+          <div class="form-control md:flex-1">
+            <label class="label">
+              <span class="label-text">Gemeente</span>
+            </label>
+            <input type="text" name="gemeente" placeholder="City" class="input input-bordered w-full" required />
+          </div>
+        </div>
+
       
       <div class="flex flex-col gap-4 md:flex-row">
         <div class="form-control md:flex-1">
@@ -49,6 +85,7 @@ if (isset($_SESSION['user'])) {
         </div>
       </div>
       
+      
       <div class="flex flex-col gap-4 md:flex-row">
         <div class="form-control md:flex-1">
           <label class="label">
@@ -64,8 +101,6 @@ if (isset($_SESSION['user'])) {
           <input type="password" name="passwordConfirm" placeholder="Confirm..." class="input input-bordered w-full" required />
         </div>
       </div>
-    </div>
-
     <button name="register" class="btn btn-primary">Register</button>
   </form>
 

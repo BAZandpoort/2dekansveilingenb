@@ -384,23 +384,6 @@ if (count($sellerReviews) > 0) {
 
 
 
-<form action="/src/lib/user/seller/update-timer.php" method="post" enctype="multipart/form-data"
-  class="flex flex-col items-center justify-center gap-4 max-w-2xl mx-auto">
-  <div class="flex flex-row justify-center gap-4 w-full">
-    <!-- Auction End Date -->
-    <div class="form-control flex-1 w-full">
-      <label class="label">
-        <span class="label-text">Auction End Date</span>
-      </label>
-      <input type="datetime-local" name="endDate" placeholder="20.00" class="input input-bordered w-full" required />
-      <input type="hidden" name="id" value="<?php echo $productData['id']; ?>" />
-    </div>
-  </div>
-  <div class="form-control w-full max-w-xs mt-4">
-    <button name="change" class="btn btn-primary">change</button>
-  </div>
-</form>
-
 
 <script>
   productCountdown("<?php echo $productData['endDate']; ?>")

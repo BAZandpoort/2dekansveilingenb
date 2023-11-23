@@ -97,6 +97,9 @@ for( $i = 1 ; $i <= $maxproductData['maxid'] ; $i++){
                 <li><a href="/src/lib/user/member/change-theme.php" >Switch to ' . $theme . '</a></li>
                 <li><a href="/dashboard/products/review?seller=' . $user['username'] . '">Reviews</a></li>
                 <li><a href="/account/settings/edit">Settings</a></li>
+                <li><a href="/seller/add-address">Add address</a></li>
+                <li><a href="/seller/hide-address">Hide address</a></li>
+
                 
                 <li><a href="/account/logout"> ' . $translations[2][$language] . ' </a></li>
               </ul>
@@ -233,6 +236,10 @@ for( $i = 1 ; $i <= $maxproductData['maxid'] ; $i++){
           <li><a href="/dashboard/products/review?seller=' . $user['username'] . '">Reviews</a></li>
           <li><a href="/account/favorites">Favorites</a></li>      
           <li><a href="/account/settings/edit">Settings</a></li>
+          <li><a href="/seller/add-address">Add address</a></li>
+          <li><a href="/seller/hide-address">Hide address</a></li>
+
+
           <div class="divider px-4 my-2"></div> 
           <li><a href="/account/logout"> ' . $translations[2][$language] . ' </a></li>
           <div class="divider px-4 mb-2">TEMP</div>
@@ -254,6 +261,8 @@ for( $i = 1 ; $i <= $maxproductData['maxid'] ; $i++){
                 <li><a href="/seller/dashboard">Dashboard</a></li>
                 <li><a href="/dashboard/products/time/edit">Edit Auction Date</a></li>
                 <li><a href="/seller/add-advertisement">Add advertisement</a></li>
+                <li><a href="/seller/hide-address">Hide address</a></li>
+
               </ul>
             </details>
           </li>
