@@ -1,12 +1,16 @@
-usersList = document.querySelector(".button");
+const searchBar = document.querySelector(".users .search input");
+usersList = document.querySelector(".users .users-list");
 
-const urlParams = new URLSearchParams(window.location.search);
-const productId = urlParams.get('id');
-
-setInterval(()=>{
+searchBar.onkeyup = ()=>{
+    let searchTerm = searchBar.value;
+    if (searchTerm != "") {
+        searchBar.classList.add("active");
+    } else {
+        searchBar.classList.remove("active");
+    }
     let xhr = new XMLHttpRequest();
-    xhr.open("GET", "/src/lib/chats/users.php?id=" + productId, true);
-    xhr.onload = () => {
+    xhr.open("POST", "/src/lib/chats/search.php", true);
+    xhr.onload = ()=>{
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
                 let data = xhr.response;
@@ -14,5 +18,22 @@ setInterval(()=>{
             }
         }
     }
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.send("searchTerm=" + searchTerm);
+}
+
+setInterval(()=>{
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", "/src/lib/chats/users.php", true);
+    xhr.onload = ()=>{
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                let data = xhr.response;
+                if (!searchBar.classList.contains("active")) {
+                    usersList.innerHTML = data;
+                }
+            }
+        }
+    }
     xhr.send();
-}, 500);
+    }, 500);

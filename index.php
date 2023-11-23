@@ -30,6 +30,14 @@ if ($error) {
       </svg>
       <span>' . (ERROR_MAPPING[$error] ?? 'Something went wrong!') . '</span>
     </div>
+    <script>
+    setTimeout(function() {
+      var alerts = document.querySelectorAll(".alert");
+      alerts.forEach(function(alert) {
+        alert.style.display = "none";
+      });
+    }, 5000);
+  </script>
   ';
 }
 
@@ -41,12 +49,23 @@ if ($succes) {
     </svg>
     <span>' . (SUCCES_MAPPING[$succes] ?? 'We think it worked!') . '</span>
   </div>
+  <script>
+    setTimeout(function() {
+      var alerts = document.querySelectorAll(".alert");
+      alerts.forEach(function(alert) {
+        alert.style.display = "none";
+      });
+    }, 2000);
+  </script>
   ';
+
 }
+
 
 $containerClasses = $route['container'] ? 'container mx-auto px-2 pt-4 pb-12 md:pt-12 md:pb-24 md:px-0' : '';
 $language = isset($_SESSION["user"]) ? $_SESSION["user"]["language"] : $_SESSION["guest"]["language"] ?? 'text_en';
 $translations = fetch('SELECT id, ' . $language . ' FROM translations');
+
 ?>
 
 <!DOCTYPE html>
@@ -57,7 +76,7 @@ $translations = fetch('SELECT id, ' . $language . ' FROM translations');
 
   <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.3/dist/full.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.tailwindcss.com"></script>
-  
+
   <script src="https://kit.fontawesome.com/58a210823e.js" crossorigin="anonymous"></script>
 
   <script src="/public/js/countdown.js"></script>
@@ -65,7 +84,9 @@ $translations = fetch('SELECT id, ' . $language . ' FROM translations');
   <script src="/public/js/bid.js"></script>
 
   <link rel="stylesheet" href="/public/css/theme.css">
-  <title>2dekans veilingen - <?php echo $route['title']; ?></title>
+  <title>2dekans veilingen -
+    <?php echo $route['title']; ?>
+  </title>
 </head>
 
 <body>
@@ -74,19 +95,20 @@ $translations = fetch('SELECT id, ' . $language . ' FROM translations');
 
     <div class="relative <?php echo $containerClasses ?>">
       <?php
-      echo strlen($alert) > 0 
-      ? '
-      <div class="absolute px-4 flex justify-center w-full md:w-auto left-1/2 transform -translate-x-1/2 top-8">
+      echo strlen($alert) > 0
+        ? '
+      <div class="absolute px-4 flex justify-center w-full md:w-auto left-1/2 transform -translate-x-1/2 top-8 z-50">
         ' . $alert . '
       </div>
-      ' 
-      : null;
+      '
+        : null;
       ?>
+      
 
       <?php include PUBLIC_S . '/' . $route['view']; ?>
     </div>
-
     <?php $route['footer'] ? include COMPONENTS . '/footer.php' : null; ?>
   </div>
 </body>
+
 </html>
