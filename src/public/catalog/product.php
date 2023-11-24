@@ -44,7 +44,16 @@ $lastBid = ($bidData["amount"] > 0) ? $bidData["price"] : 0.00;
   </div>
 
   <!-- Bidding -->
-  <div id="actions" class="flex flex-[.7] bg-base-100 rounded-2xl p-8 flex-col items-center justify-center">
+  <div id="actions" class="relative flex flex-[.7] bg-base-100 rounded-2xl p-8 flex-col items-center justify-center">
+    <?php
+    $link = '/chats/chat?userid=' . $productData['userid'];
+    ?>
+    <a class="btn absolute right-5 bottom-5" href="<?= $link ?>">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
+      </svg>
+      Chat
+    </a>
     <?php
     if (strtotime($productData['enddate'])) {
       echo '<p class="opacity-70 pb-12">Veiling sluit om ' . $time . '</p>';
@@ -295,7 +304,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Check if user has already reviewed the seller
     $insertReview = fetchSingle(
-      'SELECT * FROM reviews WHERE member = ? AND seller = ?',
+      'SELECT * FROM reviews WHERE userid = ? AND sellerid = ?',
       ["type" => "i", "value" => $userId],
       ["type" => "i", "value" => $sellerId]
     );
@@ -305,12 +314,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
       // Insert review into database
       $insertReview = insert(
-        'INSERT INTO reviews (member, review, sterren, seller, date) VALUES (?, ?, ?, ?, ?)',
+        'INSERT INTO reviews (userid, stars, description, sellerid) VALUES (?, ?, ?, ?)',
         ["type" => "i", "value" => $userId],
-        ["type" => "s", "value" => $review],
         ["type" => "i", "value" => $rating],
+        ["type" => "s", "value" => $review],
         ["type" => "i", "value" => $sellerId],
-        ["type" => "s", "value" => date('Y-m-d')]
       );
     }
   }
@@ -322,7 +330,7 @@ $sellerReviews = fetchSingle('SELECT * FROM reviews WHERE sellerid = ?', ["type"
 $averageRating = 0;
 if (count($sellerReviews) > 0) {
   foreach ($sellerReviews as $review) {
-    $averageRating += $review['sterren'];
+    $averageRating += $review['stars'];
   }
   $averageRating /= count($sellerReviews);
 }
@@ -364,13 +372,13 @@ if (count($sellerReviews) > 0) {
       <?php foreach ($sellerReviews as $review) : ?>
         <div class="border border-gray-300 p-4">
           <p class="font-bold">
-            <?= $review['review'] ?>
+            <?= $review['description'] ?>
           </p>
           <p>
-            <?= $review['sterren'] ?>
+            <?= $review['stars'] ?>
           </p>
           <p>
-            <?= date('F j, Y', strtotime($review['date'])) ?>
+            <?= date('F j, Y', strtotime($review['createdAt'])) ?>
           </p>
         </div>
       <?php endforeach; ?>
