@@ -14,6 +14,4 @@ if (isset($_POST["favorieten"])) {
    
    header('Location: ' . $referer);
   }
-
-
 ?>
