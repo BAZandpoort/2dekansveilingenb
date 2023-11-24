@@ -96,7 +96,7 @@ $lastBid = ($bidData["amount"] > 0) ? $bidData["price"] : 0.00;
           </form>
         ';
     } else if ($ended) {
-      $query = "SELECT * FROM successful_bids WHERE  productid = ?";
+      $query = "SELECT * FROM bids WHERE  productid = ?";
       $data = fetch(
         $query,
         ['type' => 'i', 'value' => $productId]
@@ -115,8 +115,11 @@ $lastBid = ($bidData["amount"] > 0) ? $bidData["price"] : 0.00;
         </p>
         ';
 
-        if ($data['bidderid'] == $_SESSION['user']['id']) {
-          $query = 'SELECT COUNT(*) as amount FROM delivery_orders WHERE productid = ?';
+        $query = 'SELECT * FROM bids WHERE productid = ?';
+        $data = fetch($query, ['type' => 'i', 'value' => $productId]);
+
+        if ($data['bidder'] == $_SESSION['user']['id']) {
+          $query = 'SELECT COUNT(*) as amount FROM orders WHERE productid = ?';
           $data = fetch($query, ['type' => 'i', 'value' => $productId]);
           
           if ($data["amount"] > 0) {
@@ -155,21 +158,21 @@ $lastBid = ($bidData["amount"] > 0) ? $bidData["price"] : 0.00;
     $lastBidPrice = isset($data['price']) ? $data['price'] : null; // Get the highest bid price if it isnt show null = it means that it does not currently hold any value
 
     // Check if the auction has ended
-    $ended = strtotime($productData['enddate']) < time(); // Check if the end date of the auction has passed
-    $isWinningBidder = $lastBidderId ? ($lastBidderId === $_SESSION["user"]["id"]) : false; // Check if the current user is the winning bidder
-    if ($ended) {
-      if (isset($_SESSION["user"])) {
-        if ($isWinningBidder) {
-          echo '
-          <form action="/src/lib/user/member/factuur.php" method="post">
-            <input type="hidden" name="product_id" value="' . $productId . '">
-            <input type="hidden" name="amount" value="' . ($lastBidPrice ? $lastBidPrice : '') . '">
-            <button class="btn btn-primary mb-3">Pay Now</button>
-          </form>
-          ';
-        }
-      }
-    }
+    // $ended = strtotime($productData['enddate']) < time(); // Check if the end date of the auction has passed
+    // $isWinningBidder = $lastBidderId ? ($lastBidderId === $_SESSION["user"]["id"]) : false; // Check if the current user is the winning bidder
+    // if ($ended) {
+    //   if (isset($_SESSION["user"])) {
+    //     if ($isWinningBidder) {
+    //       echo '
+    //       <form action="/src/lib/user/member/factuur.php" method="post">
+    //         <input type="hidden" name="product_id" value="' . $productId . '">
+    //         <input type="hidden" name="amount" value="' . ($lastBidPrice ? $lastBidPrice : '') . '">
+    //         <button class="btn btn-primary mb-3">Pay Now</button>
+    //       </form>
+    //       ';
+    //     }
+    //   }
+    // }
 
     // Retrieve the highest bidder
     $sql = "SELECT * FROM bids WHERE productid = ?";
@@ -182,23 +185,23 @@ $lastBid = ($bidData["amount"] > 0) ? $bidData["price"] : 0.00;
     $lastBidPrice = $data ? $data['price'] : null; // Get the highest bid price if it isnt show null = it means that it does not currently hold any value
 
     // Check if the auction has ended
-    $ended = strtotime($productData['enddate']) < time(); // Check if the end date of the auction has passed
-    $isWinningBidder = $lastBidderId ? ($lastBidderId === (isset($_SESSION["user"]["id"]) ? $_SESSION["user"]["id"] : 0)) : false; // Check if the current user is the winning bidder
-    if ($ended) {
-      if (isset($_SESSION["user"])) {
-        // Check if the user is the winning bidder
-        $isWinningBidder = ($lastBidderId === $_SESSION["user"]["id"]);
-        if ($isWinningBidder) {
-          echo '
-            <form action="/src/lib/user/member/factuur.php" method="post">
-              <input type="hidden" name="product_id" value="' . $productId . '">
-              <input type="hidden" name="amount" value="' . ($lastBidPrice ? $lastBidPrice : '') . '">
-              <button class="btn btn-primary mb-3">Pay Now</button>
-            </form>
-          ';
-        }
-      }
-    }
+    // $ended = strtotime($productData['enddate']) < time(); // Check if the end date of the auction has passed
+    // $isWinningBidder = $lastBidderId ? ($lastBidderId === (isset($_SESSION["user"]["id"]) ? $_SESSION["user"]["id"] : 0)) : false; // Check if the current user is the winning bidder
+    // if ($ended) {
+    //   if (isset($_SESSION["user"])) {
+    //     // Check if the user is the winning bidder
+    //     $isWinningBidder = ($lastBidderId === $_SESSION["user"]["id"]);
+    //     if ($isWinningBidder) {
+    //       echo '
+    //         <form action="/src/lib/user/member/factuur.php" method="post">
+    //           <input type="hidden" name="product_id" value="' . $productId . '">
+    //           <input type="hidden" name="amount" value="' . ($lastBidPrice ? $lastBidPrice : '') . '">
+    //           <button class="btn btn-primary mb-3">Pay Now</button>
+    //         </form>
+    //       ';
+    //     }
+    //   }
+    // }
 
     if (isset($_SESSION["user"])) {
       echo '
