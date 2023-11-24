@@ -16,6 +16,7 @@ if ($user) {
 
   $language = $user['language'];
   $languageDisplay = $languageMap[$language];
+
 } else {
   if (!isset($_SESSION['guest']['language'])) {
     $_SESSION['guest']['language'] = 'text_en';
@@ -27,32 +28,50 @@ if ($user) {
 
 $searchTerm = $_GET['search'] ?? '';
 
-$userexist = false;
-$nothighest = false;
-$bid_id = null;
-
-$maxproductData = fetch('SELECT MAX(productid) AS maxid From `bids_history`');
-
+// Outbid notification
+$notification = false;
+$productOutbidded = -1;
+$data = [];
 if ($user) {
-  for ($i = 1; $i <= $maxproductData['maxid']; $i++) {
-    $currentData = fetchSingle(
-      'SELECT * FROM `bids_history` WHERE productid = ? ORDER BY price DESC',
-      ['type' => 'i', 'value' => $i],
-    );
+  $data = fetch('SELECT * FROM notifications WHERE oldbidder = ? AND `read` = 0', ['type' => 'i', 'value' => $user['id']]);
+}
 
-    foreach ($currentData as $data) {
-      if ($data['bidder'] !== $user['id']) {
-        $nothighest = true;
-        $product = $data['productid'];
-      }
+if (!empty($data)) {
+  $notification = true;
 
-      $bid_id = $data['id'];
-      break;
-    }
+  $query = "SELECT productid FROM bids_history WHERE id = ?";
+  $result = fetch($query, ["type" => "i", "value" => $data['bidid']]);
 
-    foreach ($currentData as $data) {
-      if ($data['bidder'] === $user['id']) {
-        $userexist = true;
+  $notificationLink = $result['productid'];
+} else {
+  // MOVE: Notification should be added when placing a bid
+  $data = fetch('SELECT * FROM bids_history');
+  if ($user) {
+    foreach ($data as $bid) {
+
+      if ($bid['bidder'] === $user['id']) {
+        $productId = $bid['productid'];
+        $productBids = fetchSingle(
+          'SELECT * FROM bids_history WHERE productid = ? ORDER BY price DESC',
+          ['type' => 'i', 'value' => $productId],
+        );
+        
+        if ($bid['bidder'] === $productBids[0]['bidder']) {
+          continue;
+        }
+
+        $query = "SELECT * FROM notifications WHERE oldbidder = ? AND bidid = ?";
+        $result = fetch(
+          $query,
+          ["type" => "i", "value" => $user['id']],
+          ["type" => "i", "value" => $productBids[0]['id']]
+        );
+
+        if ($bid['price'] < $productBids[0]['price'] && $result['read'] === 0) {
+          $notification = true;
+          $notificationLink = $bid['productid'];
+          break;
+        }
       }
     }
   }
@@ -165,71 +184,23 @@ if ($user) {
         </svg>
       </button>
       </input>
-      <!-- <button name="search" class="btn btn-primary">Zoeken</button> -->
     </form>
   </div>
 
   <!-- Right - User actions -->
   <div class="hidden flex-1 justify-end gap-4 md:flex">
     <div>
-      <!-- message if outbid -->
-      <?php
-      if ($userexist && $nothighest) { ?>
-        <div class="alert shadow-lg flex " id="myDiv">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-info shrink-0 w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-          <div class="flex[1.2]">
-            <h3 class="font-bold">New message!</h3>
-            <div class="text-xs">You have been outbid</div>
+      <!-- Outbid notification -->
+      <?php if ($notification || isset($data['id'])): ?>
+        <a href="/catalog/product?id=<?php echo $notificationLink; ?>">
+          <div role="alert" class="alert alert-warning">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span>You have been outbid. Click to see.</span>
           </div>
-          <div class="flex[0.8]">
-            <button class="btn btn-sm"><a href="/catalog/product?id=<?php echo $product; ?>"> See</a></button>
-            <button id="hideButton" class="btn btn-sm">Close</button>
-          </div>
-        </div>
-      <?php }
-      if ($user) {
-
-        $query =
-          'SELECT * From notifications Where userid2 = ? AND userid != ? AND bidid = ?';
-        $Data = fetch(
-          $query,
-          ['type' => 'i', 'value' => $user['id']],
-          ['type' => 'i', 'value' => $user['id']],
-          ['type' => 'i', 'value' => $bid_id],
-        );
-        ?>
-        <script>
-          const div = document.getElementById('myDiv');
-          const button = document.getElementById('hideButton');
-
-          <?php if ($Data['read'] === 0) { ?>
-
-            button.addEventListener('click', function() {
-
-              div.style.display = 'none';
-              <?php
-              
-              insert(
-                'UPDATE notifications SET `read` = 1  Where userid2 = ? AND userid != ? AND bidid = ?',
-                ['type' => 'i', 'value' => $user['id']],
-                ['type' => 'i', 'value' => $user['id']],
-                ['type' => 'i', 'value' => $bid_id],
-              ); ?>
-            });
-
-          <?php } else { ?>
-
-            div.style.display = 'none';
-
-          <?php }
-      }
-      ?>
-        </script>
-
-
-        <!--/ message if outbid -->
+        </a>
+      <?php endif; ?>
     </div>
     <details class="dropdown dropdown-end">
       <summary class="m-1 btn"><?php echo $languageDisplay; ?></summary>

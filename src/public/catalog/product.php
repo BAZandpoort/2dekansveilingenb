@@ -7,6 +7,8 @@ if (!isset($_GET['id'])) {
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/util/util.php';
 
+var_dump($_SESSION['user']['id']);
+
 $productId = $_GET['id'];
 $query = 'SELECT * FROM products WHERE id = ?';
 $productData = fetch($query, ['type' => 'i', 'value' => $productId]);
@@ -25,6 +27,31 @@ $bidData = fetch(
   ["type" => "i", "value" => $productId],
 );
 $lastBid = ($bidData["amount"] > 0) ? $bidData["price"] : 0.00;
+
+$query = "SELECT * FROM notifications WHERE oldbidder = ? AND `read` = 0";
+$data = fetch(
+  $query,
+  ["type" => "i", "value" => $_SESSION['user']['id']]
+);
+$bidId = isset($data['bidid']) ? $data['bidid'] : null;
+
+if (isset($data['id'])) {
+  $query = "SELECT productid FROM bids_history WHERE id = ?";
+  $data = fetch(
+    $query,
+    ["type" => "i", "value" => $data['id']]
+  );
+  $notificationProductId = $data['productid'];
+}
+
+if (isset($notificationProductId) && $productId == $notificationProductId) {
+  $query = "UPDATE notifications SET `read` = ? WHERE bidid = ?";
+  $data = insert(
+    $query,
+    ["type" => "i", "value" => 1],
+    ["type" => "i", "value" => $bidId]
+  );
+}
 ?>
 
 <!-- Breadcrumbs -->
