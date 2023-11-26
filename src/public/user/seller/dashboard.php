@@ -82,7 +82,52 @@ $products = fetchSingle($query, ['type' => 'i', 'value' => $userId]);
 <h2 class="text-4xl mb-4 text-center">Your latest reviews</h2>
 
 <div class="p-4 flex flex-wrap items-center justify-around">
-	<div class="card w-96 bg-base-100">
+	<?php
+	$query = "SELECT * FROM reviews WHERE sellerid = ?";
+	$reviews = fetchSingle(
+		$query,
+		['type' => 'i', 'value' => $userId]
+	);
+	?>
+	<?php if (!$reviews): ?>
+		<p class="text-center">No reviews found</p>
+	<?php else: ?>
+		<?php foreach ($reviews as $review): ?>
+			<?php
+			$query = "SELECT * FROM users WHERE id = ?";
+			$user = fetchSingle(
+				$query,
+				['type' => 'i', 'value' => $review['userid']]
+			);
+			?>
+			<div class="card w-96 bg-base-100">
+				<div class="card-body">
+					<h2 class="card-title justify-between">
+						<div class="flex flex-row items-center gap-2">
+							<div class="avatar">
+								<div class="w-10 rounded-full">
+									<img src="/public/images/<?= $user[0]['image'] ?>" />
+								</div>
+							</div>
+							<?= $user[0]['firstname'] . ' ' . $user[0]['lastname'] ?>
+						</div>
+						<div class="rating-sm">
+							<?php for ($i = 0; $i < $review['stars']; $i++): ?>
+								<input class="mask mask-star-2 bg-orange-400" />
+							<?php endfor; ?>
+							<?php for ($i = 0; $i < 5 - $review['stars']; $i++): ?>
+								<input class="mask mask-star-2 bg-orange-200" />
+							<?php endfor; ?>
+						</div>
+					</h2>
+					<p>
+						<?= $review['description'] ?>
+					</p>
+				</div>
+			</div>
+		<?php endforeach; ?>
+	<?php endif; ?>
+	<!-- <div class="card w-96 bg-base-100">
 		<div class="card-body">
 			<h2 class="card-title justify-between">
 				<div class="flex flex-row items-center gap-2">
@@ -105,7 +150,7 @@ $products = fetchSingle($query, ['type' => 'i', 'value' => $userId]);
 				Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit beatae ipsa voluptatibus perferendis quos eaque nemo error tempora harum quas, laudantium tenetur, neque, facere exercitationem!
 			</p>
 		</div>
-	</div>
+	</div> -->
 </div>
 
 <script>

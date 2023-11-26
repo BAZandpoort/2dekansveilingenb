@@ -76,6 +76,12 @@ if (!empty($data)) {
     }
   }
 }
+
+if ($user) {
+  $query = "SELECT * FROM user_profile WHERE userid = ?";
+  $userData = fetchSingle($query, ['type' => 'i', 'value' => $user['id']]);
+  $profileImage = $userData[0]['profilepicture'];
+}
 ?>
 
 <!-- Top navbar -->
@@ -217,7 +223,7 @@ if (!empty($data)) {
       <details class="dropdown dropdown-end">
         <summary class="m-1 btn btn-ghost btn-circle avatar">
           <div class="w-10 rounded-full">
-            <img src="https://avatars.githubusercontent.com/u/64209400?v=4" />
+            <img src="/public/images/' . $profileImage . '" />
           </div>
         </summary>
         <ul class="mt-2 p-2 shadow menu dropdown-content z-[1] bg-base-200 rounded-box w-52">

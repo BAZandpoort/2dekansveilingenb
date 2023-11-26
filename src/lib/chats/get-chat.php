@@ -23,7 +23,7 @@ if (mysqli_num_rows($query) > 0) {
                         </div>';
         } else {
             $output .= '<div class="chat incoming">
-                            <img src="' . $row['profilePictureUrl'] . '">
+                            <img src="/public/images/' . $row['profilePictureUrl'] . '">
                             <div class="details">
                                 <p>' . $row['msg'] . '</p>
                             </div>
