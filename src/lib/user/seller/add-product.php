@@ -28,12 +28,12 @@ $pickUp = isset($_POST["pickup"]);
 $query = 'INSERT INTO products (userid, categoryid, name, description, price, image, endDate, deliveryStandard, deliveryExpress, deliveryPickup)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
 
-$imageName = $file['name'];
+$extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+$imageName = uniqid() . '.' . $extension;
 $imageTmpName = $file['tmp_name'];
 
 $targetDir = PUBLIC_R . "/images/";
-$baseImageName = basename($imageName, ".jpg") . '--userid-' . $userid . ".jpg";
-$targetFile = $targetDir . $baseImageName;
+$targetFile = $targetDir . $imageName;
 move_uploaded_file($imageTmpName, $targetFile);
 
 insert(
@@ -43,7 +43,7 @@ insert(
   ['type' => 's', 'value' => $title],
   ['type' => 's', 'value' => $description],
   ['type' => 'd', 'value' => $price],
-  ['type' => 's', 'value' => $baseImageName],
+  ['type' => 's', 'value' => $imageName],
   ['type' => 's', 'value' => $endDate],
   ['type' => 'i', 'value' => $standardDelivery],
   ['type' => 'i', 'value' => $expressDelivery],
