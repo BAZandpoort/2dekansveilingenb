@@ -119,6 +119,13 @@ if (isset($notificationProductId) && $productId == $notificationProductId) {
 
     <?php
     if (isset($_SESSION['user']) && !$ended) {
+      $query = "SELECT * FROM products WHERE id = ?";
+      $data = fetch(
+        $query,
+        ["type" => "i", "value" => $productId]
+      );
+
+      if ($data['userid'] !== $_SESSION['user']['id']) {
       echo '
           <form action="/src/lib/catalog/bid.php" method="post">
           <input type="hidden" name="productid" value="' . $productId . '">
@@ -131,6 +138,7 @@ if (isset($notificationProductId) && $productId == $notificationProductId) {
             </div>
           </form>
         ';
+      }
     } else if ($ended) {
       $query = "SELECT * FROM bids WHERE  productid = ?";
       $data = fetch(
@@ -240,11 +248,25 @@ if (isset($notificationProductId) && $productId == $notificationProductId) {
     // }
 
     if (isset($_SESSION["user"])) {
+      $query = "SELECT * FROM products WHERE id = ?";
+      $data = fetch(
+        $query,
+        ["type" => "i", "value" => $productId]
+      );
+
+      if ($data['userid'] == $_SESSION['user']['id']) {
+        echo '
+          <a class="pt-4" href="/seller/dashboard/edit?id=' . $productId . '">
+            <button class="btn btn-outline btn-warning">Edit product</button>
+          </a>
+        ';
+      } else {
       echo '
           <a class="pt-4" href="/catalog/report?productid=' . $productId . '">
             <button class="btn btn-outline btn-error">Report abuse</button>
           </a>
         ';
+      }
     } else {
       echo '
           <button class="btn btn-outline btn-error mt-4" onclick="my_modal_2.showModal()">Report abuse</button>
