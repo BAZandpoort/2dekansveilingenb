@@ -185,7 +185,7 @@ $userid = $_SESSION['user']['id'];
                 <th><a class="link text-sm">See all</a></th>
               </tr>
             </thead>
-            <tbody>
+            <!-- <tbody>
               <tr>
                 <td>
                   <div class="flex items-center space-x-3">
@@ -208,27 +208,53 @@ $userid = $_SESSION['user']['id'];
                   <button class="btn btn-ghost btn-xs">Epress</button>
                 </th>
               </tr>
-              <tr>
+            </tbody> -->
+
+            <tbody>
+              <?php
+
+              $purchases = getPurchases($userid);
+
+              if (!$purchases) :?>
+                  <tr class="mb-4">
+                  <td>
+                    <div class="flex items-center space-x-3">
+                      
+                      <div>
+                        <div class="font-bold">Geen producten</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    
+                  </td>
+                  <td></td>
+                </tr>
+                <?php else: ?>
+                <?php foreach ($purchases as $purchase) :?>
+                <?php
+                if (strlen($purchase['description']) > 20) {
+                  $purchase['description'] = substr_replace($purchase['description'], '...', 21);
+                }
+                ?>
+                <tr class="mb-4">
                 <td>
                   <div class="flex items-center space-x-3">
                     <div class="avatar">
                       <div class="mask mask-squircle w-12 h-12">
-                        <img src="/tailwind-css-component-profile-3@56w.png" alt="Avatar Tailwind CSS Component" />
+                        <img src="/public/images/<?= $purchase['image']?>" alt="Product Image" />
                       </div>
                     </div>
                     <div>
-                      <div class="font-bold">Brice Swyre</div>
+                      <div class="font-bold"><?= $purchase['name'] ?></div>
                     </div>
                   </div>
                 </td>
-                <td>
-                  <span class="badge badge-ghost badge-sm">Baby</span>
-                </td>
-                <td>$885.23</td>
-                <th>
-                  <button class="btn btn-ghost btn-xs">Standard</button>
-                </th>
+                <td><?= $purchase['description'] ?></td>
+                <td><?= $purchase['price'] ?></td>
               </tr>
+              <?php endforeach; ?>
+              <?php endif; ?>
             </tbody>
           </table>
         </div>
