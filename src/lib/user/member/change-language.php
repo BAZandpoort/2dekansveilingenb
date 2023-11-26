@@ -25,4 +25,4 @@ insert(
 );
 
 $_SESSION['user']['language'] = $language;
-header('Location: /');
+header('Location: ' . $_SERVER['HTTP_REFERER']);
