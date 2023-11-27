@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 20, 2023 at 02:49 AM
+-- Generation Time: Nov 27, 2023 at 01:18 AM
 -- Server version: 10.6.12-MariaDB-0ubuntu0.22.04.1
 -- PHP Version: 8.1.2-1ubuntu2.14
 
@@ -97,8 +97,8 @@ CREATE TABLE `messages` (
 CREATE TABLE `notifications` (
   `id` int(11) NOT NULL,
   `bidid` int(11) NOT NULL,
-  `userid` int(11) NOT NULL,
-  `userid2` int(11) NOT NULL,
+  `oldbidder` int(11) NOT NULL,
+  `newbidder` int(11) NOT NULL,
   `read` tinyint(4) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -202,20 +202,6 @@ INSERT INTO `translations` (`id`, `location`, `text_en`, `text_nl`, `text_fr`) V
 (1, '***DISCLAIMER***', 'DO NOT DELETE ANY RECORDS IN THIS TABLE', 'DONT DELETE ANY', 'AT ALL'),
 (2, 'nav', '2nd-chance auctions', '2dekans veilingen', '2ème-chance enchères'),
 (3, 'nav', 'Log out', 'Log uit', 'Se déconnecter'),
-(4, 'footer', 'Services', 'Diensten', 'Service'),
-(5, 'footer', 'Branding', 'Branding', 'Marque'),
-(6, 'footer', 'Design', 'Ontwerp', 'Design'),
-(7, 'footer', 'Marketing', 'Marketing', 'Marketing'),
-(8, 'footer', 'Advertisement', 'Advertentie', 'Publicité'),
-(9, 'footer', 'Business', 'Bedrijf', 'Enterprise'),
-(10, 'footer', 'About us', 'Over ons', 'A propos de nous'),
-(11, 'footer', 'Contact', 'Contact', 'Contact'),
-(12, 'footer', 'Vacancies', 'Vacatures', 'Postes vacants'),
-(13, 'footer', 'Press kit', 'Perskit', 'Kit de presse'),
-(14, 'footer', 'Legal', 'Juridisch', 'Juridique'),
-(15, 'footer', 'Terms', 'Gebruiksvoorwaarden', 'Conditions d\'utilisation'),
-(16, 'footer', 'Privacy Policy', 'Privacybeleid', 'Politique de confidentialité'),
-(17, 'footer', 'Cookie Policy', 'Cookiebeleid', 'Politique de cookies'),
 (18, 'nav', 'Auctions', 'Veilingen', 'Enchères'),
 (19, 'nav', 'Location', 'Locatie', 'Emplacement'),
 (20, 'nav', 'Products', 'Producten', 'Produits');
@@ -314,9 +300,9 @@ ALTER TABLE `favorites`
 --
 ALTER TABLE `notifications`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `notifications_bidid` (`bidid`),
-  ADD KEY `notifications_userid` (`userid`),
-  ADD KEY `notifications_userid2` (`userid2`);
+  ADD KEY `notifications_oldbidder` (`oldbidder`),
+  ADD KEY `notifications_newbidder` (`newbidder`),
+  ADD KEY `notifications_bidid` (`bidid`);
 
 --
 -- Indexes for table `orders`
@@ -513,9 +499,9 @@ ALTER TABLE `favorites`
 -- Constraints for table `notifications`
 --
 ALTER TABLE `notifications`
-  ADD CONSTRAINT `notifications_bidid` FOREIGN KEY (`bidid`) REFERENCES `bids` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `notifications_userid` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `notifications_userid2` FOREIGN KEY (`userid2`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `notifications_bidid` FOREIGN KEY (`bidid`) REFERENCES `bids_history` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `notifications_userid` FOREIGN KEY (`oldbidder`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `notifications_userid2` FOREIGN KEY (`newbidder`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `orders`
