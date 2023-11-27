@@ -7,6 +7,8 @@ if (!isset($_GET['id'])) {
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/util/util.php';
 
+var_dump($_SESSION['user']['id']);
+
 $productId = $_GET['id'];
 $query = 'SELECT * FROM products WHERE id = ?';
 $productData = fetch($query, ['type' => 'i', 'value' => $productId]);
@@ -25,6 +27,31 @@ $bidData = fetch(
   ["type" => "i", "value" => $productId],
 );
 $lastBid = ($bidData["amount"] > 0) ? $bidData["price"] : 0.00;
+
+$query = "SELECT * FROM notifications WHERE oldbidder = ? AND `read` = 0";
+$data = fetch(
+  $query,
+  ["type" => "i", "value" => $_SESSION['user']['id']]
+);
+$bidId = isset($data['bidid']) ? $data['bidid'] : null;
+
+if (isset($data['id'])) {
+  $query = "SELECT productid FROM bids_history WHERE id = ?";
+  $data = fetch(
+    $query,
+    ["type" => "i", "value" => $data['id']]
+  );
+  $notificationProductId = $data['productid'];
+}
+
+if (isset($notificationProductId) && $productId == $notificationProductId) {
+  $query = "UPDATE notifications SET `read` = ? WHERE bidid = ?";
+  $data = insert(
+    $query,
+    ["type" => "i", "value" => 1],
+    ["type" => "i", "value" => $bidId]
+  );
+}
 ?>
 
 <!-- Breadcrumbs -->
@@ -93,6 +120,13 @@ $lastBid = ($bidData["amount"] > 0) ? $bidData["price"] : 0.00;
 
     <?php
     if (isset($_SESSION['user']) && !$ended) {
+      $query = "SELECT * FROM products WHERE id = ?";
+      $data = fetch(
+        $query,
+        ["type" => "i", "value" => $productId]
+      );
+
+      if ($data['userid'] !== $_SESSION['user']['id']) {
       echo '
           <form action="/src/lib/catalog/bid.php" method="post">
           <input type="hidden" name="productid" value="' . $productId . '">
@@ -105,6 +139,7 @@ $lastBid = ($bidData["amount"] > 0) ? $bidData["price"] : 0.00;
             </div>
           </form>
         ';
+      }
     } else if ($ended) {
       $query = "SELECT * FROM bids WHERE  productid = ?";
       $data = fetch(
@@ -214,11 +249,25 @@ $lastBid = ($bidData["amount"] > 0) ? $bidData["price"] : 0.00;
     // }
 
     if (isset($_SESSION["user"])) {
+      $query = "SELECT * FROM products WHERE id = ?";
+      $data = fetch(
+        $query,
+        ["type" => "i", "value" => $productId]
+      );
+
+      if ($data['userid'] == $_SESSION['user']['id']) {
+        echo '
+          <a class="pt-4" href="/seller/dashboard/edit?id=' . $productId . '">
+            <button class="btn btn-outline btn-warning">Edit product</button>
+          </a>
+        ';
+      } else {
       echo '
           <a class="pt-4" href="/catalog/report?productid=' . $productId . '">
             <button class="btn btn-outline btn-error">Report abuse</button>
           </a>
         ';
+      }
     } else {
       echo '
           <button class="btn btn-outline btn-error mt-4" onclick="my_modal_2.showModal()">Report abuse</button>

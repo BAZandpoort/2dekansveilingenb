@@ -93,21 +93,21 @@ function insert($query, ...$params) {
 }
 
 // The following code SHOULD check for expired auctions and then add the highest bid from that auction into the successful_bids table WHEN ITS DONE.
-$expired_auctions = fetch('SELECT * FROM products WHERE endDate < NOW()');
-foreach ($expired_auctions as $expired_auction) {
-  $successful_bid = fetch('SELECT * FROM bids WHERE productid = ? ORDER BY price DESC LIMIT 1',['type' => 'i','value' => $expired_auction["id"]]);
-  if (isset($successful_bid["id"])) {
-    // TODO: Add table for 'closed auctions'
-    // $query = 'INSERT INTO successful_bids (originalBidid, bidderid, productid, bidPrice) VALUES (?, ?, ?, ?)';
-    // insert(
-    //   $query,
-    //   ['type' => 'i', 'value' => $successful_bid["id"]],
-    //   ['type' => 'i', 'value' => $successful_bid["bidder"]],
-    //   ['type' => 'i', 'value' => $successful_bid["productid"]],
-    //   ['type' => 'd', 'value' => ''.$successful_bid["price"].''],
-    // );
+// $expired_auctions = fetch('SELECT * FROM products WHERE endDate < NOW()');
+// foreach ($expired_auctions as $expired_auction) {
+//   $successful_bid = fetch('SELECT * FROM bids WHERE productid = ? ORDER BY price DESC LIMIT 1',['type' => 'i','value' => $expired_auction["id"]]);
+//   if (isset($successful_bid["id"])) {
+//     // TODO: Add table for 'closed auctions'
+//     $query = 'INSERT INTO successful_bids (originalBidid, bidderid, productid, bidPrice) VALUES (?, ?, ?, ?)';
+//     insert(
+//       $query,
+//       ['type' => 'i', 'value' => $successful_bid["id"]],
+//       ['type' => 'i', 'value' => $successful_bid["bidder"]],
+//       ['type' => 'i', 'value' => $successful_bid["productid"]],
+//       ['type' => 'd', 'value' => ''.$successful_bid["price"].''],
+//     );
 
-    // $query = "DELETE FROM bids WHERE productid = ?";
-    // $deleteData = insert($query, ['type' => 'i', 'value' => $successful_bid["productid"]]);
-  }
-}
+//     $query = "DELETE FROM bids WHERE productid = ?";
+//     $deleteData = insert($query, ['type' => 'i', 'value' => $successful_bid["productid"]]);
+//   }
+// }
