@@ -1,16 +1,12 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once DATABASE . '/connect.php';
-
 if (!isset($_SESSION['user'])) {
     header('Location: /account/login');
     return;
 }
-
 ?>
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
-
 <body>
     <div class="box">
         <div class="wrapper">
@@ -44,12 +40,12 @@ if (!isset($_SESSION['user'])) {
             </section>
         </div>
     </div>
-    <script src="/public/js/users.js"></script>
+    <!-- <script src="/public/js/get-user-chats.js"></script> -->
+    <script src="/public/js/chat/user-chats.js"></script>
+    <script src="/public/js/chat/search.js"></script>
 </body>
-
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins');
-
 *
 {
     margin: 0;
@@ -58,12 +54,10 @@ if (!isset($_SESSION['user'])) {
     text-decoration: none;
     font-family: 'Poppins', sans-serif;
 }
-
 .box
 {
     padding-left: 35%;
 }
-
 .wrapper
 {
     background: #fff;
@@ -71,12 +65,10 @@ if (!isset($_SESSION['user'])) {
     border-radius: 16px;
     box-shadow: 0 0 128px 0 rgba(0,0,0,0.1), 0 32px 64px -48px rgba(0,0,0,0.5);
 }
-
 .users
 {
     padding: 25px 30px;
 }
-
 .users header, .users-list a
 {
     display: flex;
@@ -85,37 +77,31 @@ if (!isset($_SESSION['user'])) {
     justify-content: space-between;
     border-bottom: 1px solid #e6e6e6;
 }
-
 .wrapper img
 {
     object-fit: cover;
     border-radius: 50%;
 }
-
 :is(.users, .users-list) .content
 {
     display: flex;
     align-items: center;
 }
-
 .users header .content img
 {
     height: 50px;
     width: 50px;    
 }
-
 :is(.users, .users-list) .details
 {
     margin-left: 15px;
     color: #000;
 }
-
 :is(.users, .users-list) .details span
 {
     font-size: 18px;
     font-weight: 500; 
 }
-
 .users .search
 {
     margin: 20px 0;
@@ -123,12 +109,10 @@ if (!isset($_SESSION['user'])) {
     align-items: center;
     justify-content: space-between;
 }
-
 .users .search .text
 {
     font-size: 18px;
 }
-
 .users .search input
 {
     position: absolute;
@@ -140,7 +124,6 @@ if (!isset($_SESSION['user'])) {
     border-radius: 5px 0 0 5px;
     outline: none;
 }
-
 .users .search button
 {
     width: 47px;
@@ -153,13 +136,11 @@ if (!isset($_SESSION['user'])) {
     font-size: 17px;
     border-radius: 0 5px 5px 0;
 }
-
 .users-list 
 {
     max-height: 350px;
     overflow-y: auto;
 }
-
 .users-list::-webkit-scrollbar
 {
     width: 5px;
@@ -171,7 +152,6 @@ if (!isset($_SESSION['user'])) {
     padding-bottom: 10px;
     padding-right: 15px;
     border-bottom-color: #f1f1f1;
-
 }
 
 .users-list a:last-child

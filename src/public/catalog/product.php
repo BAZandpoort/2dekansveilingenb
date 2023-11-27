@@ -54,6 +54,7 @@ $lastBid = ($bidData["amount"] > 0) ? $bidData["price"] : 0.00;
       </svg>
       Chat
     </a>
+
     <?php
     if (strtotime($productData['enddate'])) {
       echo '<p class="opacity-70 pb-12">Veiling sluit om ' . $time . '</p>';
