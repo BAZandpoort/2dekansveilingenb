@@ -1,5 +1,5 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
@@ -20,6 +20,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `2dekansveilingen`
 --
+
 
 -- --------------------------------------------------------
 
@@ -192,7 +193,7 @@ CREATE TABLE `translations` (
   `text_en` text NOT NULL DEFAULT 'UNAVAILABLE',
   `text_nl` text NOT NULL DEFAULT 'ONBESCHIKBAAR',
   `text_fr` text NOT NULL DEFAULT 'INDISPONIBLE'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `translations`
@@ -273,7 +274,7 @@ CREATE TABLE `user_role_mapping` (
   `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
   `roleid` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables

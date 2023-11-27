@@ -16,6 +16,7 @@ require_once DATABASE . '/connect.php';
                         $userid = mysqli_real_escape_string($connection, $_GET['userid']);
                         $row = [];
                         $sql = mysqli_query($connection, "SELECT * FROM users JOIN user_profile ON users.id = user_profile.userid  WHERE users.id = {$userid}");
+                        $sql = mysqli_query($connection, "SELECT * FROM users JOIN user_profile ON users.id = user_profile.userid  WHERE users.id = {$userid}");
                         if ($sql) {
                             if (mysqli_num_rows($sql) > 0) {
                                 $row = mysqli_fetch_assoc($sql);

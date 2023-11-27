@@ -95,6 +95,9 @@ if ($user) {
             $user['username'] .
             '">Reviews</a></li>
                 <li><a href="/account/settings/edit">Settings</a></li>
+                <li><a href="/seller/add-address">Add address</a></li>
+                <li><a href="/seller/hide-address">Hide address</a></li>
+
                 
                 <li><a href="/account/logout"> ' .
             $translations[2][$language] .
@@ -260,6 +263,10 @@ if ($user) {
         '">Reviews</a></li>
           <li><a href="/account/favorites">Favorites</a></li>      
           <li><a href="/account/settings/edit">Settings</a></li>
+          <li><a href="/seller/add-address">Add address</a></li>
+          <li><a href="/seller/hide-address">Hide address</a></li>
+
+
           <div class="divider px-4 my-2"></div> 
           <li><a href="/account/logout"> ' .
         $translations[2][$language] .
@@ -282,6 +289,8 @@ if ($user) {
                 <li><a href="/dashboard/products/own">My products</a></li>
                 <li><a href="/seller/dashboard">Dashboard</a></li>
                 <li><a href="/seller/add-advertisement">Add advertisement</a></li>
+                <li><a href="/seller/hide-address">Hide address</a></li>
+
               </ul>
             </details>
           </li>
