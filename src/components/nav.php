@@ -45,10 +45,9 @@ if (!empty($data)) {
   $notificationLink = $result['productid'];
 } else {
   // MOVE: Notification should be added when placing a bid
-  $data = fetch('SELECT * FROM bids_history');
+  $data = fetchSingle('SELECT * FROM bids_history');
   if ($user) {
     foreach ($data as $bid) {
-
       if ($bid['bidder'] === $user['id']) {
         $productId = $bid['productid'];
         $productBids = fetchSingle(

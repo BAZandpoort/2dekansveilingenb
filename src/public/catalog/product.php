@@ -7,7 +7,6 @@ if (!isset($_GET['id'])) {
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/util/util.php';
 
-var_dump($_SESSION['user']['id']);
 
 $productId = $_GET['id'];
 $query = 'SELECT * FROM products WHERE id = ?';
