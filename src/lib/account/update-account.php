@@ -30,15 +30,15 @@ function updateProfile($userId, $formData) {
   
   $query = 'SELECT * FROM users WHERE id = ?';
   $data = fetch($query, ['type' => 'i', 'value' => $userId]);
-  
+
   if (
     $data['username'] === $newUsername &&
     $data['email'] === $newEmail &&
     $data['firstname'] === $newFirstname &&
     $data['lastname'] === $newLastname &&
-    $newProfilePicture['size'] === 0
+    $_FILES === []
   ) {
-    header('Location: /account/settings/edit?error=noChanges');
+    // header('Location: /account/settings/edit?error=noChanges');  
     exit();
   }
   
@@ -63,8 +63,7 @@ function updateProfile($userId, $formData) {
 
   $targetDir = PUBLIC_R . "/images/";
   $targetFile = $targetDir . $imageName;
-  move_uploaded_file($imageTmpName, $targetFile);
-
+  $upload = move_uploaded_file($imageTmpName, $targetFile);
 
   $updateProfilePicture = insert(
     $query,
@@ -72,7 +71,7 @@ function updateProfile($userId, $formData) {
     ['type' => 'i', 'value' => $userId],
   );
   
-  if ($updateUser && $updateProfilePicture) {
+  if ($upload && $updateUser && $updateProfilePicture) {
     header('Location: /account/settings/edit?success=accountUpdate');
     exit();
   }
