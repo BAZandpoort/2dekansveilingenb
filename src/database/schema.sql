@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 27, 2023 at 01:18 AM
+-- Generation Time: Nov 30, 2023 at 12:39 AM
 -- Server version: 10.6.12-MariaDB-0ubuntu0.22.04.1
 -- PHP Version: 8.1.2-1ubuntu2.14
 
@@ -20,7 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `2dekansveilingen`
 --
-
 
 -- --------------------------------------------------------
 
@@ -193,7 +192,7 @@ CREATE TABLE `translations` (
   `text_en` text NOT NULL DEFAULT 'UNAVAILABLE',
   `text_nl` text NOT NULL DEFAULT 'ONBESCHIKBAAR',
   `text_fr` text NOT NULL DEFAULT 'INDISPONIBLE'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `translations`
@@ -260,7 +259,7 @@ CREATE TABLE `user_role_mapping` (
   `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
   `roleid` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -479,14 +478,14 @@ ALTER TABLE `user_role_mapping`
 -- Constraints for table `advertisements`
 --
 ALTER TABLE `advertisements`
-  ADD CONSTRAINT `advertisements_productid` FOREIGN KEY (`productid`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `advertisements_productid` FOREIGN KEY (`productid`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   ADD CONSTRAINT `advertisements_userid` FOREIGN KEY (`sellerid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `bids`
 --
 ALTER TABLE `bids`
-  ADD CONSTRAINT `bids_productid` FOREIGN KEY (`productid`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `bids_productid` FOREIGN KEY (`productid`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   ADD CONSTRAINT `bids_userid` FOREIGN KEY (`bidder`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
@@ -515,8 +514,8 @@ ALTER TABLE `orders`
 -- Constraints for table `products`
 --
 ALTER TABLE `products`
-  ADD CONSTRAINT `products_categoryid` FOREIGN KEY (`categoryid`) REFERENCES `product_categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `products_userid` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `products_categoryid` FOREIGN KEY (`categoryid`) REFERENCES `product_categories` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `products_userid` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `reports`
