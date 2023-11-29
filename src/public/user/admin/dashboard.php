@@ -6,7 +6,7 @@ $users_exists = fetch($query);
 $users = $users_exists["MAX(id)"];
 
 $new_users = fetch("SELECT * FROM `users` ORDER BY `createdAt` DESC Limit 6;");
-$new_products = fetch("SELECT products.*,product_categories.name AS categoryname FROM products JOIN product_categories ON products.id = product_categories.id ORDER BY `createdAt` DESC Limit 6;");
+$new_products = fetch("SELECT products.*, product_categories.name AS categoryname FROM products JOIN product_categories ON products.categoryid = product_categories.id ORDER BY `createdAt` DESC LIMIT 6;");
 
 ?>
 
