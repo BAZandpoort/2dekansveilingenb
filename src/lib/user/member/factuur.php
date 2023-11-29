@@ -8,7 +8,7 @@ require_once DATABASE . '/connect.php';
 // Start the session
 session_start();
 
-if (!isset($_POST['send'])) {
+if (!isset($_POST['send']) && !isset($_POST['history'])) {
     header('Location: /');
     exit();
 }
@@ -17,12 +17,13 @@ $customerid = $_SESSION['user']['id'];
 $productid = $_POST['productid'];
 $deliveryMethod = $_POST['deliveryMethod'];
 
-
-$insertData = sendReport(
-    $customerid,
-    $productid,
-    $deliveryMethod
-);
+if (!isset($_POST['history'])) {
+    $insertData = sendReport(
+        $customerid,
+        $productid,
+        $deliveryMethod
+    );
+}
 
 function sendReport(
     $customerid,

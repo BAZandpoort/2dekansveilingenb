@@ -33,22 +33,28 @@ $purchaseHistory = fetchSingle(
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($purchaseHistory as $purchase) : ?>
+        <?php foreach ($purchaseHistory as $purchase) : var_dump($purchase) ?>
           <tr>
-            <td><?= $purchase['name'] ?></td>
-            <td><?= $purchase['price'] ?>€</td>
-            <td><?= date('F j, Y', strtotime($purchase['createdAt']))
-                // This code is using the PHP `date()` function to format the `timeOfPurchase` value from an array called `$purchase`.
-                // The `strtotime()` function is used to convert the `timeOfPurchase` value into a Unix timestamp, which is a numeric representation of a date and time.
-                // The `date()` function is then used to format the Unix timestamp into a human-readable date format.
+            <form action="/src/lib/user/member/factuur.php" method="post">
+              <input type="hidden" name="productid" value="<?= $purchase['id'] ?>">
+              <input type="hidden" name="deliveryMethod" value="<?= $purchase['deliverymethod'] ?>">
+              <td><?= $purchase['name'] ?></td>
+              <td><?= $purchase['price'] ?>€</td>
+              <td><?= date('F j, Y', strtotime($purchase['createdAt']))
+                  // This code is using the PHP `date()` function to format the `timeOfPurchase` value from an array called `$purchase`.
+                  // The `strtotime()` function is used to convert the `timeOfPurchase` value into a Unix timestamp, which is a numeric representation of a date and time.
+                  // The `date()` function is then used to format the Unix timestamp into a human-readable date format.
 
-                ?></td>
-            <td>
-              <a href="/catalog/product?id=<?= $purchase['productid'] ?>" class="btn btn-primary">View product page</a>
-            </td>
-            <td>
-              <a href="/src/lib/user/member/factuur.php" class="btn btn-primary">Download factuur</a>
-            </td>
+                  ?></td>
+              <td>
+                <a href="/catalog/product?id=<?= $purchase['productid'] ?>" class="btn btn-primary">View product page</a>
+              </td>
+              <td>
+                <button name="history" class="btn btn-primary">
+                  Download factuur
+                </button>
+              </td>
+            </form>
           </tr>
         <?php endforeach; ?>
       </tbody>
