@@ -4,14 +4,7 @@ import userProfiles from './data/user-profile';
 import userRoleMapping from './data/user-role-mapping';
 import productCategories from './data/product-categories';
 import products from './data/products';
-import orders from './data/orders';
-
-const dbConfig = {
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: '2dekansveilingen',
-};
+import { dbConfig } from '../config';
 
 
 async function seedDatabase() {
@@ -20,7 +13,6 @@ async function seedDatabase() {
     const userData = await users();
     const userProfilesData = await userProfiles();
     const userRoleMapppingData = await userRoleMapping();
-    const orderData = await orders();
 
     const connection = await mysql.createConnection(dbConfig);
 
@@ -31,7 +23,6 @@ async function seedDatabase() {
         await connection.execute('TRUNCATE TABLE user_profile');
         await connection.execute('TRUNCATE TABLE user_roles');
         await connection.execute('TRUNCATE TABLE user_role_mapping');
-        await connection.execute('TRUNCATE TABLE orders');
         await connection.execute('TRUNCATE TABLE products');
         await connection.execute('TRUNCATE TABLE product_categories');
         await connection.execute('TRUNCATE TABLE users');
@@ -83,14 +74,6 @@ async function seedDatabase() {
             );
         });
         console.log('Inserted products.');
-
-        orderData.forEach(async (order) => {
-            await connection.execute(
-              'INSERT INTO orders (productid, buyerid, deliverymethod) VALUES (?, ?, ?)',
-              Object.values(order),
-            );
-        });
-        console.log('Inserted orders.');
 
         await connection.commit();
 

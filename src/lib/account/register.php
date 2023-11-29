@@ -76,20 +76,20 @@ function insertUser($username, $password, $email, $firstname, $lastname, $straat
   $userProfileData = insert(
     'INSERT INTO user_profile (userid, profilepicture, about, theme, language) VALUES (?, ?, ?, ?, ?)',
     ['type' => 'i', 'value' => $userId],
-    ['type' => 's', 'value' => 'https://avatars.githubusercontent.com/u/64209400?v=4'],
+    ['type' => 's', 'value' => 'test.jpg'],
     ['type' => 's', 'value' => 'Hello!'],
     ['type' => 's', 'value' => 'light'],
     ['type' => 's', 'value' => 'text_en'],
   );
 
-  $userAddressData = insert(
-    'INSERT INTO adres (userid, $straat, $huisnummer, $postcode, $gemeente) VALUES (?, ?, ?, ?, ?)',
-    ['type' => 'i', 'value' => $userId],
-    ['type' => 's', 'value' => $straat],
-    ['type' => 's', 'value' => $huisnummer],
-    ['type' => 's', 'value' => $postcode],
-    ['type' => 's', 'value' => $gemeente],
-  );
+  // $userAddressData = insert(
+  //   'INSERT INTO adres (userid, $straat, $huisnummer, $postcode, $gemeente) VALUES (?, ?, ?, ?, ?)',
+  //   ['type' => 'i', 'value' => $userId],
+  //   ['type' => 's', 'value' => $straat],
+  //   ['type' => 's', 'value' => $huisnummer],
+  //   ['type' => 's', 'value' => $postcode],
+  //   ['type' => 's', 'value' => $gemeente],
+  // );
 
-  return $userData && $userProfileData && $userAddressData;
+  return $userData && $userProfileData;
 }

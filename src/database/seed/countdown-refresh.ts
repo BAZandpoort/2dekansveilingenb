@@ -1,12 +1,6 @@
 import * as mysql from 'mysql2/promise';
 import endDates from './data/product-end-dates';
-
-const dbConfig = {
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: '2dekansveilingen',
-};
+import { dbConfig } from '../config';
 
 
 async function refreshDates() {
@@ -26,7 +20,7 @@ async function refreshDates() {
 
         await connection.commit();
 
-        console.log('Database seeded successfully.');
+        console.log('Dates refreshed successfully.');
     } catch (error) {
         console.error('Error seeding database:', error);
     } finally {
