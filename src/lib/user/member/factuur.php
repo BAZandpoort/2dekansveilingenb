@@ -92,5 +92,3 @@ if ($purchaseHistory) {
 }
 
 $pdf->Output('D', 'Invoice.pdf');
-
-header('Location: ' . $_SERVER['HTTP_REFERER']);

@@ -333,13 +333,22 @@ $userId = $_SESSION['user']['id'];
 
 // Check if user has bought the product
 $hasBoughtProduct = false;
-$purchaseHistory = fetchSingle('SELECT * FROM orders WHERE id = ?', ["type" => "i", "value" => $userId]);
+$purchaseHistory = fetchSingle('SELECT * FROM orders WHERE buyerid = ?', ["type" => "i", "value" => $userId]);
 foreach ($purchaseHistory as $purchase) {
   if ($purchase['productid'] == $sellerId) {
     $hasBoughtProduct = true;
     break;
   }
 }
+
+// THIS IS PRODUCT ID
+$query = "SELECT * FROM products where id = ?";
+$productData = fetch(
+  $query,
+  ["type" => "i", "value" => $sellerId]
+);
+
+$sellerId = $productData['userid'];
 
 $sellerInfo = fetchSingle('SELECT * FROM users WHERE id = ?', ["type" => "i", "value" => $sellerId]);
 // Handle form submission
@@ -362,6 +371,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $errorMessage = "You have already reviewed this seller.";
     } else {
       // Insert review into database
+      var_dump($sellerId);
       $insertReview = insert(
         'INSERT INTO reviews (userid, stars, description, sellerid) VALUES (?, ?, ?, ?)',
         ["type" => "i", "value" => $userId],

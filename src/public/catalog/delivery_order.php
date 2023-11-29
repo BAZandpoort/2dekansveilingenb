@@ -71,6 +71,8 @@ if (
     </div>
 
     <div class="form-control w-full max-w-xs mt-4">
-        <button name="send" class="btn btn-primary">Receipt</button>
+        <button name="send" class="btn btn-primary">
+            Receipt
+        </button>
     </div>
 </form>
