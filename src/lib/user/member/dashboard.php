@@ -20,13 +20,13 @@ function purchasedCount()
   $userid = $_SESSION['user']['id'];
 
   $data = fetch(
-    'SELECT COUNT(id) as aantal FROM orders WHERE id =?',
+    'SELECT COUNT(id) as count FROM orders WHERE buyerid =?',
     [
       'type' => 'i',
       'value' => $userid,
     ],
   );
-  echo $data['aantal'];
+  echo $data['count'];
 }
 
 function getPurchases($userid)

@@ -32,12 +32,6 @@ $userid = $_SESSION['user']['id'];
       </div>
 
       <div class="stat w-60 h-60">
-        <div class="stat-title text-center font-bold text-xl">Ordered Products</div>
-        <div class="stat-value text-center">0</div>
-        <div class="stat-desc">Your count of ordered products</div>
-      </div>
-
-      <div class="stat w-60 h-60">
         <div class="stat-title text-center font-bold text-xl">Purchased Products</div>
         <div class="stat-value text-center"><?= purchasedCount(); ?></div>
         <div class="stat-desc">Your count of purchased products</div>
@@ -182,7 +176,7 @@ $userid = $_SESSION['user']['id'];
                 <th class="text-sm">Ordered Products</th>
                 <th></th>
                 <th></th>
-                <th><a class="link text-sm">See all</a></th>
+                <th></th>
               </tr>
             </thead>
             <!-- <tbody>
