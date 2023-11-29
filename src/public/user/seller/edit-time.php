@@ -24,11 +24,6 @@ if (isset($_GET['search'])) {
 
 echo '
 <div class="w-full flex flex-col md:flex-row gap-4 p-8 md:pr-40">
-    <div class="hidden md:block md:flex-[.4] bg-base-300 rounded-2xl">
-    </div>
-
-    <div class="hidden md:flex divider divider-horizontal"></div> 
-
     <div class="flex flex-row flex-wrap gap-8 flex-[1.6]">
         <div class="w-full flex text-sm breadcrumbs">
             <ul>
