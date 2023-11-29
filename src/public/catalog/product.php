@@ -27,18 +27,20 @@ $bidData = fetch(
 );
 $lastBid = ($bidData["amount"] > 0) ? $bidData["price"] : 0.00;
 
-$query = "SELECT * FROM notifications WHERE oldbidder = ? AND `read` = 0";
-$data = fetch(
-  $query,
-  ["type" => "i", "value" => $_SESSION['user']['id']]
-);
-$bidId = isset($data['bidid']) ? $data['bidid'] : null;
+if (isset($_SESSION['user'])) {
+  $query = "SELECT * FROM notifications WHERE oldbidder = ? AND `read` = 0";
+  $data = fetch(
+    $query,
+    ["type" => "i", "value" => $_SESSION['user']['id']]
+  );
+  $bidId = isset($data['bidid']) ? $data['bidid'] : null;
+}
 
 if (isset($data['id'])) {
   $query = "SELECT productid FROM bids_history WHERE id = ?";
   $data = fetch(
     $query,
-    ["type" => "i", "value" => $data['id']]
+    ["type" => "i", "value" => $bidId]
   );
   $notificationProductId = $data['productid'];
 }
@@ -329,7 +331,7 @@ if (isset($notificationProductId) && $productId == $notificationProductId) {
 <?php
 // Fetch seller information
 $sellerId = $_GET['id'];
-$userId = $_SESSION['user']['id'];
+$userId = isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : null;
 
 // Check if user has bought the product
 $hasBoughtProduct = false;

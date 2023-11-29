@@ -37,6 +37,7 @@ if ($result["amount"] === 0) {
     ['type' => 'i', 'value' => $userId],
     ['type' => 'd', 'value' => $bidPrice],
   );
+  
 } else {
   $query = 'UPDATE bids SET price = ?, bidder = ? WHERE id = ?';
   insert(
@@ -52,6 +53,7 @@ if ($result["amount"] === 0) {
     ["type" => "i", "value" => $productId]
   );
 
+
   if ($data[1]["bidder"] !== $userId) {
     $query = 'SELECT * FROM notifications WHERE bidid = ? AND oldbidder = ? AND newbidder = ?';
     $result = fetch(
@@ -61,7 +63,7 @@ if ($result["amount"] === 0) {
       ["type" => "i", "value" => $data[0]["bidder"]],
     );
 
-    if (!isset($result["id"])) {
+    if (isset($result["id"])) {
       $query = 'UPDATE notifications SET bidid = ?, oldbidder = ?, newbidder = ?, `read` = 0';
       insert(
         $query,
@@ -81,6 +83,7 @@ if ($result["amount"] === 0) {
       ['type' => 'i', 'value' => $data[1]["bidder"]],
       ['type' => 'i', 'value' => $userId],
     );
+
   }
 }
 
