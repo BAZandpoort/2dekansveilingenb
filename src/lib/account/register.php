@@ -18,10 +18,6 @@ function register($formData) {
   $username = $formData['username'];
   $password = $formData['password'];
   $passwordConfirm = $formData['passwordConfirm'];
-  $straat = $formData['straat'];
-  $huisnummer = $formData['huisnummer'];
-  $postcode = $formData['postcode'];
-  $gemeente = $formData['gemeente'];
   
   $data = fetch('SELECT * FROM users WHERE email = ?', [
     'type' => 's',
@@ -49,7 +45,7 @@ function register($formData) {
   }
   
   $password = password_hash($password, PASSWORD_ARGON2ID);
-  $initialized = insertUser($username, $password, $email, $firstname, $lastname,  $straat, $huisnummer, $postcode, $gemeente);
+  $initialized = insertUser($username, $password, $email, $firstname, $lastname);
 
   if (!$initialized) {
     header('Location: /account/register?error=server');
@@ -60,7 +56,7 @@ function register($formData) {
   exit();
 }
 
-function insertUser($username, $password, $email, $firstname, $lastname, $straat, $huisnummer, $postcode, $gemeente) {
+function insertUser($username, $password, $email, $firstname, $lastname) {
   global $connection;
   $userData = insert(
     'INSERT INTO users (username, password, email, firstname, lastname) VALUES (?, ?, ?, ?, ?)',
@@ -82,14 +78,11 @@ function insertUser($username, $password, $email, $firstname, $lastname, $straat
     ['type' => 's', 'value' => 'text_en'],
   );
 
-  // $userAddressData = insert(
-  //   'INSERT INTO adres (userid, $straat, $huisnummer, $postcode, $gemeente) VALUES (?, ?, ?, ?, ?)',
-  //   ['type' => 'i', 'value' => $userId],
-  //   ['type' => 's', 'value' => $straat],
-  //   ['type' => 's', 'value' => $huisnummer],
-  //   ['type' => 's', 'value' => $postcode],
-  //   ['type' => 's', 'value' => $gemeente],
-  // );
+  $userRoleMapping = insert(
+    'INSERT INTO user_role_mapping (userid, roleid) VALUES (?, ?)',
+    ['type' => 'i', 'value' => $userId],
+    ['type' => 'i', 'value' => 2],
+  );
 
-  return $userData && $userProfileData;
+  return $userData && $userProfileData && $userRoleMapping;
 }
