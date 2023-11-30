@@ -37,7 +37,6 @@ function addAdvertisement(
   $baseImageName = basename($imageName, ".jpg") . '--userid-' . $userid . ".jpg";
   $targetFile = $targetDir . $baseImageName;
   move_uploaded_file($imageTmpName, $targetFile);
-  var_dump($userid, $productid, $altText, $baseImageName);
   echo "<br><br>";
   $insertData = insert(
     $query,

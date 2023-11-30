@@ -11,8 +11,6 @@ $categories = fetch("SELECT * FROM product_categories");
 
 $minDate = date("Y-m-d\TH:i", strtotime("+1 hour"));
 $maxDate = date("Y-m-d\TH:i", strtotime("+2 days"));
-var_dump($minDate);
-var_dump($maxDate);
 $endDateExplenation = "The auction end date must be at least 1 hour in the future and at most 2 days in the future.";
 ?>
 

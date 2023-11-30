@@ -33,7 +33,7 @@ $purchaseHistory = fetchSingle(
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($purchaseHistory as $purchase) : var_dump($purchase) ?>
+        <?php foreach ($purchaseHistory as $purchase) : ?>
           <tr>
             <form action="/src/lib/user/member/factuur.php" method="post">
               <input type="hidden" name="productid" value="<?= $purchase['id'] ?>">

@@ -373,7 +373,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $errorMessage = "You have already reviewed this seller.";
     } else {
       // Insert review into database
-      var_dump($sellerId);
       $insertReview = insert(
         'INSERT INTO reviews (userid, stars, description, sellerid) VALUES (?, ?, ?, ?)',
         ["type" => "i", "value" => $userId],
