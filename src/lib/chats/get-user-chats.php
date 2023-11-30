@@ -24,7 +24,7 @@ $sql = mysqli_query($connection, "SELECT *
 
 $output = "";
 
-if (mysqli_num_rows($sql) == 1)
+if (mysqli_num_rows($sql) == 0)
 {
     $output .= "No users available to chat"; 
 } elseif (mysqli_num_rows($sql) > 0)
