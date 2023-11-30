@@ -12,6 +12,21 @@ $route = array_key_exists($uri, $routes) ? $routes[$uri] : $routes['/404'];
 
 $userid = isset($_SESSION['user']) ? $_SESSION['user']['id'] : null;
 
+$isLoggedIn = isset($_SESSION['user']);
+$hasAccess = ($isLoggedIn && (in_array($_SESSION['user']['role'], $route['auth']) || $route['auth'] === [])) ?? false;
+
+if (!$isLoggedIn) {
+  if ($route['auth'] !== []) {
+    header('Location: /');
+    exit;
+  }
+} else {
+  if (!$hasAccess) {
+    header('Location: /');
+    exit;
+  }
+} 
+
 $data = fetch('SELECT * FROM user_profile WHERE userid = ?', [
   'type' => 'i',
   'value' => $userid,
@@ -93,7 +108,7 @@ $translations = fetch('SELECT id, ' . $language . ' FROM translations');
   <div class="min-h-screen">
     <?php DEBUG ? include COMPONENTS . '/debug.php' : null; ?>
     <?php $route['nav'] ? include COMPONENTS . '/nav.php' : null; ?>
-
+    
     <div class="relative <?php echo $containerClasses ?>">
       <?php
       echo strlen($alert) > 0
