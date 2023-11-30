@@ -1,43 +1,37 @@
 const searchBar = document.querySelector(".users .search input");
-usersList = document.querySelector(".users .users-list");
+const usersList = document.querySelector(".users .users-list");
 
-searchBar.onkeyup = ()=>{
+searchBar.onkeyup = async () => {
     let searchTerm = searchBar.value;
-    if (searchTerm != "") {
-        searchBar.classList.add("active");
-    } else {
-        searchBar.classList.remove("active");
+    searchBar.classList.toggle("active", searchTerm !== "");
+
+    const response = await fetch("/src/lib/chats/search.php", {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `searchTerm=${searchTerm}`
+    });
+
+    if (response.ok) {
+        let data = await response.text();
+        usersList.innerHTML = data;
     }
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", "/src/lib/chats/search.php", true);
-    xhr.onload = ()=>{
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                let data = xhr.response;
-                usersList.innerHTML = data;
-            }
-        }
-    }
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.send("searchTerm=" + searchTerm);
 }
 
-function fetchChats() {
-    let xhr = new XMLHttpRequest();
-    xhr.open("GET", "/src/lib/chats/get-user-chats.php", true);
-    xhr.onload = ()=>{
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                let data = xhr.response;
-                if (!searchBar.classList.contains("active")) {
-                    usersList.innerHTML = data;
-                }
-            }
-        }
+async function fetchChats() {
+    const response = await fetch("/src/lib/chats/get-user-chats.php");
+
+    if (response.ok && !searchBar.classList.contains("active")) {
+        let data = await response.text();
+        usersList.innerHTML = data;
     }
-    xhr.send();
 }
 
 fetchChats();
 
-setInterval(fetchChats, 5000);
+// Recursive setTimeout for polling
+(function poll() {
+    setTimeout(async () => {
+        await fetchChats();
+        poll();
+    }, 5000);
+})();

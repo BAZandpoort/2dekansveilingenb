@@ -4,11 +4,11 @@ function bid() {
   const biddersElement = document.getElementById('bidders');
   const bidInputElement = document.getElementById('bidInput');
 
-  let currentBid = Number(currentBidElement.innerHTML.split('€')[1]);
-  let suggestedBid = Number(suggestedBidElement.innerHTML.split('€')[1]);
-  let bidders = Number(biddersElement.innerHTML);
+  const currentBid = parseFloat(currentBidElement.innerHTML.split('€')[1]);
+  const suggestedBid = parseFloat(suggestedBidElement.innerHTML.split('€')[1]);
+  const bidders = parseInt(biddersElement.innerHTML);
 
-  let input = bidInputElement.value;
+  const input = parseFloat(bidInputElement.value);
 
   if (isNaN(input)) {
     alert('Please enter a number');
@@ -21,9 +21,9 @@ function bid() {
   }
 
   if (input > suggestedBid) {
-    suggestedBidElement.innerHTML = '€' + input;
+    suggestedBidElement.innerHTML = `€${input}`;
   }
 
-  currentBidElement.innerHTML = '€' + input;
+  currentBidElement.innerHTML = `€${input}`;
   biddersElement.innerHTML = bidders + 1;
 }

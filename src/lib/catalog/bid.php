@@ -14,6 +14,15 @@ $userId = $user['id'];
 $productId = $_POST['productid'];
 $bidPrice = $_POST['amount'];
 
+
+// Server-side validation
+if (!is_numeric($bidPrice) || $bidPrice <= 0) {
+  // Redirect back with an error message
+  $_SESSION['error'] = "Invalid bid amount. Please enter a positive number.";
+  header('Location: ' . $_SERVER['HTTP_REFERER']);
+  exit();
+}
+
 $query = 'INSERT INTO bids_history (productid, bidder, price) VALUES (?, ?, ?)';
 insert(
   $query,
