@@ -6,6 +6,24 @@ require_once LIB . '/util/util.php';
 
 session_start();
 
+
+// $ip, $screen_resolution, $user_agent, $accept_language, $accept_encoding
+$browserFingerprint = generateFingerprint(
+  $_SERVER['REMOTE_ADDR'],
+  '1920x1080', // TODO: get screen resolution
+  $_SERVER['HTTP_USER_AGENT'],
+  $_SERVER['HTTP_ACCEPT_LANGUAGE'],
+  $_SERVER['HTTP_ACCEPT_ENCODING']
+);
+
+if (!isset($_SESSION['fingerprint'])) {
+  $_SESSION['fingerprint'] = $browserFingerprint;
+} else if ($_SESSION['fingerprint'] !== $browserFingerprint) {
+  $_SESSION['fingerprint'] = $browserFingerprint;
+  session_destroy();
+}
+
+
 $uri = explode('?', $_SERVER['REQUEST_URI'])[0];
 
 $route = array_key_exists($uri, $routes) ? $routes[$uri] : $routes['/404'];

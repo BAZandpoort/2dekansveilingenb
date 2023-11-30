@@ -92,6 +92,13 @@ function insert($query, ...$params) {
   return true;
 }
 
+
+
+function generateFingerprint($ip, $screen_resolution, $user_agent, $accept_language, $accept_encoding) {
+  return hash('sha256', $ip . $screen_resolution . $user_agent . $accept_language . $accept_encoding);
+}
+
+
 // The following code SHOULD check for expired auctions and then add the highest bid from that auction into the successful_bids table WHEN ITS DONE.
 // $expired_auctions = fetch('SELECT * FROM products WHERE endDate < NOW()');
 // foreach ($expired_auctions as $expired_auction) {
