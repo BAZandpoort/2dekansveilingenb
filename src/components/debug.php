@@ -21,5 +21,25 @@
             </ul>
         </li>
         <?php endif; ?>
+        <li>Session Info:
+            <ul class="list-disc ml-4">
+                <li>Session ID: <?php echo session_id(); ?></li>
+                <li>Session Name: <?php echo session_name(); ?></li>
+                <li>Session Status: <?php echo session_status(); ?></li>
+                <?php if (isset($_SESSION['fingerprint'])): ?>
+                  <li>Session Fingerprint: <?php echo $_SESSION['fingerprint']; ?></li>
+                <?php endif; ?>
+                <?php
+                  $browserFingerprint = generateFingerprint(
+                    $_SERVER['REMOTE_ADDR'],
+                    '1920x1080', // TODO: get screen resolution
+                    $_SERVER['HTTP_USER_AGENT'],
+                    $_SERVER['HTTP_ACCEPT_LANGUAGE'],
+                    $_SERVER['HTTP_ACCEPT_ENCODING']
+                  );
+                  echo '<li>Browser Fingerprint: ' . $browserFingerprint . '</li>';
+                    ?>
+
+            </ul>
     </ul>
 </div>
