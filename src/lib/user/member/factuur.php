@@ -43,53 +43,51 @@ function sendReport(
     return $insertData;
 }
 
-// Create a new PDF
-$pdf = new FPDF();
-$pdf->AddPage();
-$pdf->SetFont('Arial', 'B', 16);
-
-
 $userId = $_SESSION['user']['id'];
 
 $purchaseHistory = fetchSingle(
-    'SELECT * FROM orders WHERE buyerid = ? AND productid = ?',
-    ["type" => "i", "value" => $userId],
-    ["type" => "i", "value" => $productid]
+    'SELECT * FROM orders WHERE buyerid = ?',
+    ["type" => "i", "value" => $userId]
 );
-$userDataResult = fetchSingle('SELECT * FROM users WHERE id = ?', ["type" => "i", "value" => $userId]);
+require('invoice.php');
 
-// Check if the result is not empty
-if (!empty($userDataResult)) {
-    $userData = $userDataResult[0]; // Get the first row from the result
+$pdf = new PDF_Invoice( 'P', 'mm', 'A4' );
+$pdf->AddPage();
+$pdf->addSociete( "2dekansveilingen",
+                  "BAZandpoort\n" .
+                  "2800 Mechelen\n");
+$pdf->addDate(date('d-m-Y'));
+$pdf->addClient($userId);
+$cols=array("PRODUCTID"    => 23,
+            "NAME"  => 30,
+            "DESCRIPTION"  => 78,
+            "QUANTITY"     => 22,
+            "TOTAL" => 30);
+$pdf->addCols($cols);
+$cols=array("PRODUCTID"    => "L",
+            "DESCRIPTION"  => "L",
+            "NAME"  => "L",
+            "QUANTITY"     => "C",
+            "TOTAL" => "R");
+$pdf->addLineFormat($cols);
+$pdf->addLineFormat($cols);
 
-    // Print user's first name and last name
-    if (isset($userData['firstname']) && isset($userData['lastname'])) {
-        $pdf->Cell(40, 10, 'Beste ' . $userData['firstname'] . ' ' . $userData['lastname'] . ',');
-        $pdf->Ln();
-    } else {
-        $pdf->Cell(40, 10, 'User name not available');
-        $pdf->Ln();
-    }
-} else {
-    $pdf->Cell(40, 10, 'User data not found');
-    $pdf->Ln();
-}
-//now print U hebt op timeOfPurchase volgende producten aangekocht
-$pdf->Cell(40, 10, 'U hebt op ' . date('d-m-Y') . ' volgende producten aangekocht:');
-$pdf->Ln();
 if ($purchaseHistory) {
-    foreach ($purchaseHistory as $purchase) {
+    foreach($purchaseHistory as $purchase) {
         $query = 'SELECT * FROM products WHERE id = ?';
         $productData = fetchSingle($query, ["type" => "i", "value" => $purchase['productid']]);
 
-        $pdf->Cell(40, 10, 'Item Name: ' . $productData[0]['name']);
-        $pdf->Ln();
-        $pdf->Cell(40, 10, 'Price: ' . $productData[0]['price']);
-        $pdf->Ln();
-        $pdf->Ln();
+        $y = 109;
+        $line = array( "PRODUCTID"    => $productData[0]['id'],
+                       "DESCRIPTION"  => $productData[0]['description'],
+                       "NAME"  => $productData[0]['name'],
+                       "QUANTITY"     => "1",
+                       "TOTAL" => $productData[0]['price'] . ' EUR');
+        $size = $pdf->addLine($y, $line);
+        $y += $size + 2;
     }
-} else {
-    $pdf->Cell(40, 10, 'No purchases found');
 }
 
 $pdf->Output('D', 'Invoice.pdf');
+?>
+
