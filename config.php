@@ -3,9 +3,9 @@ define('DEBUG', true);
 
 // Database credentials
 define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'root');
+define('DB_USERNAME', 'root'); // cedricverlindensql1
 define('DB_PASSWORD', '');
-define('DB_NAME', '2dekansveilingen');
+define('DB_NAME', '2dekansveilingen'); // cedricverlindensql1
 
 // Import aliases
 define('ROOT', $_SERVER['DOCUMENT_ROOT']);

@@ -1,6 +1,6 @@
 export const dbConfig = {
   host: 'localhost',
   user: 'root', // cedricverlindensql1
-  password: '', // jiZkplxKnt
+  password: '',
   database: '2dekansveilingen', //cedricverlindensql1
 };
