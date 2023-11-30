@@ -43,7 +43,7 @@ define('ERROR_MAPPING', [
 ]);
 
 // Success mapping
-define('SUCCES_MAPPING', [
+define('SUCCESS_MAPPING', [
   'register' => 'You have been succesfully registered',
   'accountUpdate' => 'Your account has been updated',
   'deleteProduct' => 'Product has been deleted',
