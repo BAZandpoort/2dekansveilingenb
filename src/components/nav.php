@@ -2,8 +2,6 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/util/util.php';
 
-$user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
-
 $languageDisplay = '';
 $languageMap = [
   'text_en' => 'English',
@@ -11,20 +9,10 @@ $languageMap = [
   'text_fr' => 'Français',
 ];
 
-if ($user) {
-  $theme = $user['theme'] === 'dark' ? 'light' : 'dark';
+$language = getUserLanguage();
+$languageDisplay = $languageMap[$language];
 
-  $language = $user['language'];
-  $languageDisplay = $languageMap[$language];
-
-} else {
-  if (!isset($_SESSION['guest']['language'])) {
-    $_SESSION['guest']['language'] = 'text_en';
-  }
-
-  $language = $_SESSION['guest']['language'];
-  $languageDisplay = $languageMap[$language];
-}
+$theme = getUserTheme() === 'customDark' ? 'light' : 'dark';
 
 $searchTerm = $_GET['search'] ?? '';
 
@@ -105,27 +93,16 @@ if ($user) {
             <details>
               <summary class="text-lg">
               <div class="w-8">
-                <img class="rounded-full" src="https://avatars.githubusercontent.com/u/64209400?v=4" />
+                <img class="rounded-full" src="/public/images/test.jpg" />
               </div>
               Account
               </summary>
               <ul>
-                <!-- <li><a class="justify-between">Profile</a></li> -->
                 <li><a href="/chats/users.php">Chat</a></li>
-                <li><a href="/src/lib/user/member/change-theme.php" >Switch to ' .
-            $theme .
-            '</a></li>
-                <li><a href="/dashboard/products/review?seller=' .
-            $user['username'] .
-            '">Reviews</a></li>
+                <li><a href="/src/lib/user/member/change-theme.php" >Switch to ' . $theme . '</a></li>
+                <li><a href="/dashboard/products/review?seller=' . $user['username'] . '">Reviews</a></li>
                 <li><a href="/account/settings/edit">Settings</a></li>
-                <li><a href="/seller/add-address">Add address</a></li>
-                <li><a href="/seller/hide-address">Hide address</a></li>
-
-                
-                <li><a href="/account/logout"> ' .
-            $translations[2][$language] .
-            ' </a></li>
+                <li><a href="/account/logout"> ' . $translations[2][$language] . ' </a></li>
               </ul>
             </details>
           </li>
@@ -155,19 +132,12 @@ if ($user) {
               if ($categories) {
                 foreach ($categories as $category) {
                   echo '
-                    <li>
-                      <a href="/catalog/products?category=' .
-                    $category['name'] .
-                    '" class="text-lg">
-                        <i class="fa-solid ' .
-                    $category['icon'] .
-                    ' group-hover:-translate-y-1 transition"></i>
-                        <span class="label-text">' .
-                    $category['name'] .
-                    '</span>
-                      </a>
-                    </li>
-                    ';
+                  <li>
+                    <a href="/catalog/products?category=' . $category['name'] . '" class="text-lg">
+                      <i class="fa-solid ' . $category['icon'] . ' group-hover:-translate-y-1 transition"></i>
+                      <span class="label-text">' . $category['name'] . '</span>
+                    </a>
+                  </li>';
                 }
               }
               ?>
@@ -177,9 +147,9 @@ if ($user) {
       </ul>
     </div>
 
-    <a href="/" class="hidden btn btn-ghost normal-case text-xl md:flex"><?php echo $translations[1][
-      $language
-    ]; ?></a>
+    <a href="/" class="hidden btn btn-ghost no-animation normal-case text-xl md:flex">
+      <?php echo $translations[1][$language]; ?>
+    </a>
   </div>
 
   <!-- Center - search -->
@@ -231,12 +201,8 @@ if ($user) {
         <ul class="mt-2 p-2 shadow menu dropdown-content z-[1] bg-base-200 rounded-box w-52">
           <!-- <li><a class="justify-between">Profile</a></li> -->
           <li><a href="/chats/users">Chat</a></li>
-          <li><a href="/src/lib/user/member/change-theme.php" >Switch to ' .
-        $theme .
-        '</a></li>
-          <li><a href="/dashboard/products/review?seller=' .
-        $user['username'] .
-        '">Reviews</a></li>
+          <li><a href="/src/lib/user/member/change-theme.php" >Switch to ' . $theme . '</a></li>
+          <li><a href="/dashboard/products/review?seller=' . $user['username'] . '">Reviews</a></li>
           <li><a href="/account/favorites">Favorites</a></li>      
           <li><a href="/account/settings/edit">Settings</a></li>
           <li><a href="/seller/add-address">Add address</a></li>
@@ -244,9 +210,7 @@ if ($user) {
 
 
           <div class="divider px-4 my-2"></div> 
-          <li><a href="/account/logout"> ' .
-        $translations[2][$language] .
-        ' </a></li>
+          <li><a href="/account/logout"> ' . $translations[2][$language] . ' </a></li>
           <div class="divider px-4 mb-2">TEMP</div>
           <li>
             <details class="dropdown dropdown-left">
@@ -298,11 +262,6 @@ if ($user) {
   </div>
 </div>
 
-
-
-
-
-
 <!-- Bottom navbar -->
 <div class="hidden navbar bg-base-100 shadow-sm pt-8 md:flex">
   <div class="navbar-center flex w-full">
@@ -312,41 +271,29 @@ if ($user) {
       if ($categories) {
         foreach ($categories as $category) {
           echo '
-            <a href="/catalog/products?category=' .
-            strtolower($category['name']) .
-            '" class="group flex flex-col gap-2 items-center">
+            <a href="/catalog/products?category=' . strtolower($category['name']) . '" class="group flex flex-col gap-2 items-center">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 group-hover:-translate-y-1 transition">
-                <path stroke-linecap="round" stroke-linejoin="round" d="' .
-            $category['icon'] .
-            '" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="' . $category['icon'] . '" />
               </svg>
-              <span class="label-text">' .
-            $category['name'] .
-            '</span>
-            </a>
-            ';
+              <span class="label-text">' . $category['name'] . '</span>
+            </a>';
         }
       }
 
       $advert = fetch('SELECT * FROM advertisements ORDER BY RAND () LIMIT 1');
-
       if ($advert) {
         echo '
-            <div class="flex justify-center items-center pt-12"> 
-              <a href="../catalog/product?id=' .
-          $advert['productid'] .
-          '"><img style="border-radius: 25px;background-position: left top;background-repeat: repeat;padding: 20px;height: 125px;width: 970px;" alt="' .
-          $advert['description'] .
-          '" src="/public/advertisements/' .
-          $advert['image'] .
-          '" width="970" height="125"></a>
-            </div>
-          ';
+        <div class="flex justify-center items-center pt-12"> 
+          <a href="../catalog/product?id=' . $advert['productid'] . '">
+            <img style="border-radius: 25px;background-position: left top;background-repeat: repeat;padding: 20px;height: 125px;width: 970px;"
+              alt="' . $advert['description'] .'"µ
+              src="/public/advertisements/' .$advert['image'] . '" width="970" height="125">
+          </a>
+        </div>';
       }
       ?>
     </ul>
   </div>
-
 </div>
 
 <!-- PREDICTED LINES 150 -->

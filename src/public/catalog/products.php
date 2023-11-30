@@ -76,7 +76,7 @@ echo '
           </div>
         </div>
 
-        <button class="btn btn-primary">Filter</button>
+        <button class="btn btn-primary no-animation">Filter</button>
       </form>
     </div>
   </div>

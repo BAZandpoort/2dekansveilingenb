@@ -114,7 +114,7 @@ function handleSessionFingerprint() {
   }
 }
 
-function handleAuthorization($userRole, $routeRoles) {
+function handleAuthorization($routeRoles) {
   if (!isset($_SESSION['user'])) {
     if (!empty($routeRoles)) {
       header('Location: /');
@@ -122,6 +122,7 @@ function handleAuthorization($userRole, $routeRoles) {
     }
   }
 
+  $userRole = $_SESSION['user']['role'] ?? null;
   $access = in_array($userRole, $routeRoles) || empty($routeRoles);
   if (!$access) {
     header('Location: /');

@@ -16,7 +16,7 @@ $user = $_SESSION['user'] ?? false;
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $route = handleRoute($uri, $routes);
 
-handleAuthorization($user['role'], $route['auth']);
+handleAuthorization($route['auth']);
 
 $theme = getUserTheme();
 $alert = handleAlert($_GET);
