@@ -91,6 +91,7 @@ $translations = fetch('SELECT id, ' . $language . ' FROM translations');
 
 <body>
   <div class="min-h-screen">
+    <?php DEBUG ? include COMPONENTS . '/debug.php' : null; ?>
     <?php $route['nav'] ? include COMPONENTS . '/nav.php' : null; ?>
 
     <div class="relative <?php echo $containerClasses ?>">
