@@ -1,11 +1,12 @@
+const searchBar = document.querySelector('.users .search input');
+
 async function fetchChats() {
-  const searchBar = document.querySelector('.users .search input');
   const usersList = document.querySelector('.users .users-list');
 
   try {
-    let response = await fetch('/src/lib/chats/get-user-chats.php');
+    const response = await fetch('/src/lib/chats/get-user-chats.php');
     if (response.ok) {
-      let data = await response.text();
+      const data = await response.text();
       if (!searchBar.classList.contains('active')) {
         usersList.innerHTML = data;
       }
@@ -17,5 +18,10 @@ async function fetchChats() {
 
 fetchChats();
 
-setInterval(fetchChats, 5000);
-
+// Recursive setTimeout for polling
+(function poll() {
+  setTimeout(async () => {
+    await fetchChats();
+    poll();
+  }, 5000);
+})();

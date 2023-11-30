@@ -9,6 +9,42 @@ require LIB . '/util/util.php';
 
 session_start();
 
+
+// $ip, $screen_resolution, $user_agent, $accept_language, $accept_encoding
+$browserFingerprint = generateFingerprint(
+  $_SERVER['REMOTE_ADDR'],
+  '1920x1080', // TODO: get screen resolution
+  $_SERVER['HTTP_USER_AGENT'],
+  $_SERVER['HTTP_ACCEPT_LANGUAGE'],
+  $_SERVER['HTTP_ACCEPT_ENCODING']
+);
+
+if (!isset($_SESSION['fingerprint'])) {
+  $_SESSION['fingerprint'] = $browserFingerprint;
+} else if ($_SESSION['fingerprint'] !== $browserFingerprint) {
+  $_SESSION['fingerprint'] = $browserFingerprint;
+  session_destroy();
+}
+
+
+
+// $ip, $screen_resolution, $user_agent, $accept_language, $accept_encoding
+$browserFingerprint = generateFingerprint(
+  $_SERVER['REMOTE_ADDR'],
+  '1920x1080', // TODO: get screen resolution
+  $_SERVER['HTTP_USER_AGENT'],
+  $_SERVER['HTTP_ACCEPT_LANGUAGE'],
+  $_SERVER['HTTP_ACCEPT_ENCODING']
+);
+
+if (!isset($_SESSION['fingerprint'])) {
+  $_SESSION['fingerprint'] = $browserFingerprint;
+} else if ($_SESSION['fingerprint'] !== $browserFingerprint) {
+  $_SESSION['fingerprint'] = $browserFingerprint;
+  session_destroy();
+}
+
+
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $route = handleRoute($uri, $routes);
 
