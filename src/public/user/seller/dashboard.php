@@ -76,6 +76,7 @@ $products = fetchSingle($query, ['type' => 'i', 'value' => $userId]);
 	<div class="w-full text-center mt-8">
 		<?= (empty($products)) ? null : '<button name="delete" class="btn btn-error">Delete</button>' ?>
 		<a class="btn btn-primary" href="/dashboard/products/add">Add Product</a>
+		<a class="btn btn-primary ml-4" href="/seller/add-advertisement">Add Advertisement</a>
 	</div>
 </form>
 
