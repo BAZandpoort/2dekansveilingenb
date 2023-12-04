@@ -69,6 +69,24 @@ if ($user) {
   $userData = fetchSingle($query, ['type' => 'i', 'value' => $user['id']]);
   $profileImage = $userData[0]['profilepicture'];
 }
+
+$admin = '';
+if ($user && $user['role'] === 'admin') {
+  $admin = '
+  <div class="divider px-4 mb-2">ADMIN</div>
+  <li><a href="/admin/dashboard">Dashboard</a></li>
+  <li><a href="/dashboard/reports">Reports</a></li>
+  <li>
+    <details class="dropdown dropdown-left">
+      <summary class="m-1">Translations</summary>
+      <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-200 rounded-box w-52">
+        <li><a href="/dashboard/translations">View translations</a></li>
+        <li><a href="/dashboard/translations/add">Add translations</a></li>
+      </ul>
+    </details>
+  </li>
+  ';
+}
 ?>
 
 <!-- Top navbar -->
@@ -98,9 +116,7 @@ if ($user) {
               Account
               </summary>
               <ul>
-                <li><a href="/chats/users.php">Chat</a></li>
-                <li><a href="/src/lib/user/member/change-theme.php" >Switch to ' . $theme . '</a></li>
-                <li><a href="/dashboard/products/review?seller=' . $user['username'] . '">Reviews</a></li>
+                <li><a href="/src/lib/user/member/change-theme.php" >Switch to ' . $theme . ' mode</a></li>
                 <li><a href="/account/settings/edit">Settings</a></li>
                 <li><a href="/account/logout"> ' . $translations[2][$language] . ' </a></li>
               </ul>
@@ -120,6 +136,11 @@ if ($user) {
               </form>
             </ul>
           </details>
+        </li>
+        <li>
+          <a class="text-lg" href="/chats/users">
+            Messages
+          </a>
         </li>
 
         <!-- Categories -->
@@ -181,7 +202,12 @@ if ($user) {
       <?php endif; ?>
     </div>
     <details class="dropdown dropdown-end">
-      <summary class="m-1 btn"><?php echo $languageDisplay; ?></summary>
+      <summary class="m-1 btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 21l5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 016-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 01-3.827-5.802" />
+        </svg>
+        <?php echo $languageDisplay; ?>
+      </summary>
       <ul class="mt-2 p-2 shadow menu dropdown-content z-[1] bg-base-200 rounded-box w-52">
         <form action="/src/lib/user/member/change-language.php" method="post">
           <li><input type="submit" name="text_en" value='English'></li>
@@ -190,6 +216,12 @@ if ($user) {
         </form>
       </ul>
     </details>
+    <a class="btn" href="/chats/users">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
+      </svg>
+      Messages
+    </a>
     <?php echo isset($_SESSION['user'])
       ? '
       <details class="dropdown dropdown-end">
@@ -200,60 +232,14 @@ if ($user) {
         </summary>
         <ul class="mt-2 p-2 shadow menu dropdown-content z-[1] bg-base-200 rounded-box w-52">
           <!-- <li><a class="justify-between">Profile</a></li> -->
-          <li><a href="/chats/users">Chat</a></li>
-          <li><a href="/src/lib/user/member/change-theme.php" >Switch to ' . $theme . '</a></li>
-          <li><a href="/dashboard/products/review?seller=' . $user['username'] . '">Reviews</a></li>
-          <li><a href="/account/favorites">Favorites</a></li>      
-          <li><a href="/account/settings/edit">Settings</a></li>
-          <li><a href="/seller/add-address">Add address</a></li>
-          <li><a href="/seller/hide-address">Hide address</a></li>
+          <li><a href="/member/dashboard">Account Overview</a></li>
+          <li><a href="/src/lib/user/member/change-theme.php">Switch to ' . $theme . ' mode</a></li>
+          <li><a href="/seller/dashboard">Storefront</a></li>
 
+          ' . $admin . '
 
           <div class="divider px-4 my-2"></div> 
           <li><a href="/account/logout"> ' . $translations[2][$language] . ' </a></li>
-          <div class="divider px-4 mb-2">TEMP</div>
-          <li>
-            <details class="dropdown dropdown-left">
-              <summary class="m-1">Member Dashboard</summary>
-              <ul class="mr-4 p-2 shadow menu dropdown-content z-[1] bg-base-200 rounded-box w-52">
-                <li><a href="/dashboard/products/history">Purchase history</a></li>
-                <li><a href="/member/dashboard">Dashboard</a></li>
-              </ul>
-            </details>
-          </li>
-          <li>
-            <details class="dropdown dropdown-left">
-              <summary class="m-1">Seller Dashboard</summary>
-              <ul class="mr-4 p-2 shadow menu dropdown-content z-[1] bg-base-200 rounded-box w-52">
-                <li><a href="/dashboard/products/add">Add product</a></li>
-                <li><a href="/dashboard/products/own">My products</a></li>
-                <li><a href="/seller/dashboard">Dashboard</a></li>
-                <li><a href="/seller/add-advertisement">Add advertisement</a></li>
-                <li><a href="/seller/hide-address">Hide address</a></li>
-
-              </ul>
-            </details>
-          </li>
-          <li>
-            <details class="dropdown dropdown-left">
-              <summary class="m-1">Admin Dashboard</summary>
-              <ul class="mr-4 p-2 shadow menu dropdown-content z-[1] bg-base-200 rounded-box w-52">
-                <li><a href="/dashboard/products/delete">Remove products</a></li>
-                <li><a href="/dashboard/reports">Reports</a></li>
-                <li><a href="/dashboard/products/time/edit">Edit Auction Date</a></li>
-                <li><a href="/admin/dashboard">Dashboard</a></li>
-                <li>
-                  <details class="dropdown dropdown-bottom">
-                    <summary class="m-1">Translations</summary>
-                    <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-200 rounded-box w-52">
-                      <li><a href="/dashboard/translations">View translations</a></li>
-                      <li><a href="/dashboard/translations/add">Add translations</a></li>
-                    </ul>
-                  </details>
-                </li>
-              </ul>
-            </details>
-          </li>
         </ul>
       </details>
       '
