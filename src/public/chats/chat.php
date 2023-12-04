@@ -25,7 +25,7 @@ require_once DATABASE . '/connect.php';
                             echo "Error: " . mysqli_error($connection);
                         }
                     ?>
-                    <img src="<?php echo $row['profilepicture'] ?>" alt="#">
+                    <img src="/public/images/<?php echo $row['profilepicture'] ?>" alt="#">
                     <div class="details">
                         <span><?php echo $row['firstname'] . " " . $row['lastname'] ?></span>
                         <p>Online now</p>
