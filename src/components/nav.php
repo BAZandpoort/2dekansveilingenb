@@ -1,6 +1,7 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/util/util.php';
+require_once LIB . '/util/translations.php';
 
 $languageDisplay = '';
 $languageMap = [
@@ -75,13 +76,13 @@ if ($user && $user['role'] === 'admin') {
   $admin = '
   <div class="divider px-4 mb-2">ADMIN</div>
   <li><a href="/admin/dashboard">Dashboard</a></li>
-  <li><a href="/dashboard/reports">Reports</a></li>
+  <li><a href="/dashboard/reports">' . translate($user, 'Reports') . '</a></li>
   <li>
     <details class="dropdown dropdown-left">
-      <summary class="m-1">Translations</summary>
+      <summary class="m-1">' . translate($user, 'Translations') . '</summary>
       <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-200 rounded-box w-52">
-        <li><a href="/dashboard/translations">View translations</a></li>
-        <li><a href="/dashboard/translations/add">Add translations</a></li>
+        <li><a href="/dashboard/translations">' . translate($user, 'View translations') . '</a></li>
+        <li><a href="/dashboard/translations/add">' . translate($user, 'Add translations') . '</a></li>
       </ul>
     </details>
   </li>
@@ -118,7 +119,7 @@ if ($user && $user['role'] === 'admin') {
               <ul>
                 <li><a href="/src/lib/user/member/change-theme.php" >Switch to ' . $theme . ' mode</a></li>
                 <li><a href="/account/settings/edit">Settings</a></li>
-                <li><a href="/account/logout"> ' . $translations[2][$language] . ' </a></li>
+                <li><a href="/account/logout"> ' . translate($user, 'Log out') . ' </a></li>
               </ul>
             </details>
           </li>
@@ -139,7 +140,7 @@ if ($user && $user['role'] === 'admin') {
         </li>
         <li>
           <a class="text-lg" href="/chats/users">
-            Messages
+            <?= translate($user, 'Messages') ?>
           </a>
         </li>
 
@@ -169,14 +170,14 @@ if ($user && $user['role'] === 'admin') {
     </div>
 
     <a href="/" class="hidden btn btn-ghost no-animation normal-case text-xl md:flex">
-      <?php echo $translations[1][$language]; ?>
+      <?php echo translate($user, '2nd-chance auctions'); ?>
     </a>
   </div>
 
   <!-- Center - search -->
   <div class="w-full md:flex-1">
     <form action="/catalog/products" method="get" class="form-control w-full relative">
-      <input name="search" type="text" placeholder="Search" value="<?= $searchTerm ?>" class="input input-bordered w-full" required>
+      <input name="search" type="text" placeholder="<?= translate($user, 'Search') ?>" value="<?= $searchTerm ?>" class="input input-bordered w-full" required>
       <button>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 absolute right-4 top-3 opacity-60">
           <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
@@ -220,7 +221,7 @@ if ($user && $user['role'] === 'admin') {
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
         <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
       </svg>
-      Messages
+      <?= translate($user, 'Messages') ?>
     </a>
     <?php echo isset($_SESSION['user'])
       ? '
@@ -232,14 +233,14 @@ if ($user && $user['role'] === 'admin') {
         </summary>
         <ul class="mt-2 p-2 shadow menu dropdown-content z-[1] bg-base-200 rounded-box w-52">
           <!-- <li><a class="justify-between">Profile</a></li> -->
-          <li><a href="/member/dashboard">Account Overview</a></li>
-          <li><a href="/src/lib/user/member/change-theme.php">Switch to ' . $theme . ' mode</a></li>
-          <li><a href="/seller/dashboard">Storefront</a></li>
+          <li><a href="/member/dashboard">' . translate($user, 'Account Overview') . '</a></li>
+          <li><a href="/src/lib/user/member/change-theme.php">' . translate($user, 'Switch to ' . $theme . ' mode') . '</a></li>
+          <li><a href="/seller/dashboard">' . translate($user, 'Storefront') . '</a></li>
 
           ' . $admin . '
 
           <div class="divider px-4 my-2"></div> 
-          <li><a href="/account/logout"> ' . $translations[2][$language] . ' </a></li>
+          <li><a href="/account/logout"> ' . translate($user, 'Log out') . ' </a></li>
         </ul>
       </details>
       '
