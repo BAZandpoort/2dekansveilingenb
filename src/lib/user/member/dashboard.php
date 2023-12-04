@@ -5,7 +5,7 @@ function favoriteCount()
   $userid = $_SESSION['user']['id'];
 
   $data = fetch(
-    'SELECT COUNT(DISTINCT userid) as aantal FROM favorites WHERE userid = ?',
+    'SELECT COUNT(DISTINCT productid) as aantal FROM favorites WHERE userid = ?',
     [
       'type' => 'i',
       'value' => $userid,
