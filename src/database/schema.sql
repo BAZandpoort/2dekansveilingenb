@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 30, 2023 at 12:39 AM
+-- Generation Time: Dec 04, 2023 at 11:31 PM
 -- Server version: 10.6.12-MariaDB-0ubuntu0.22.04.1
 -- PHP Version: 8.1.2-1ubuntu2.14
 
@@ -198,13 +198,22 @@ CREATE TABLE `translations` (
 -- Dumping data for table `translations`
 --
 
-INSERT INTO `translations` (`id`, `location`, `text_en`, `text_nl`, `text_fr`) VALUES
-(1, '***DISCLAIMER***', 'DO NOT DELETE ANY RECORDS IN THIS TABLE', 'DONT DELETE ANY', 'AT ALL'),
-(2, 'nav', '2nd-chance auctions', '2dekans veilingen', '2ème-chance enchères'),
-(3, 'nav', 'Log out', 'Log uit', 'Se déconnecter'),
-(18, 'nav', 'Auctions', 'Veilingen', 'Enchères'),
-(19, 'nav', 'Location', 'Locatie', 'Emplacement'),
-(20, 'nav', 'Products', 'Producten', 'Produits');
+INSERT INTO `translations` (`location`, `text_en`, `text_nl`, `text_fr`) VALUES
+('nav', '2nd-chance auctions', '2dekansveilingen', '2ème-chance enchères'),
+('nav', 'Log out', 'Log uit', 'Se déconnecter'),
+('nav', 'Auctions', 'Veilingen', 'Enchères'),
+('nav', 'Location', 'Locatie', 'Emplacement'),
+('nav', 'Products', 'Producten', 'Produits'),
+('nav', 'Messages', 'Berichten', 'Messages'),
+('nav', 'Search', 'Zoeken', 'Recherche'),
+('nav', 'Account Overview', 'Account Overzicht', 'Aperçu du compte'),
+('nav', 'Switch to dark mode', 'Schakel over naar de donkere modus', 'Passer en mode sombre'),
+('nav', 'Switch to light mode', 'Schakel over naar de lichte modus', 'Passer en mode lumière'),
+('nav', 'Storefront', 'Winkel', 'Vitrine'),
+('nav', 'Reports', 'Rapporten', 'Rapports'),
+('nav', 'Translations', 'Vertalingen', 'Traductions'),
+('nav', 'View translations', 'Vertalingen bekijken', 'Voir les traductions'),
+('nav', 'Add translations', 'Vertalingen toevoegen', 'Ajouter des traductions');
 
 -- --------------------------------------------------------
 
@@ -444,7 +453,7 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT for table `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `users`
