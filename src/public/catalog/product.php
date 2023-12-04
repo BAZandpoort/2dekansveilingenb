@@ -118,6 +118,7 @@ if (isset($notificationProductId) && $productId == $notificationProductId) {
         </p>
       </div>
     </div>
+    <p class="hidden text-center text-xl font-semibold" id="reload-text">Please reload your page!</p>
 
     <?php
     if (isset($_SESSION['user']) && !$ended) {
@@ -129,7 +130,7 @@ if (isset($notificationProductId) && $productId == $notificationProductId) {
 
       if ($data['userid'] !== $_SESSION['user']['id']) {
       echo '
-          <form action="/src/lib/catalog/bid.php" method="post">
+          <form action="/src/lib/catalog/bid.php" method="post" id="bid-form">
           <input type="hidden" name="productid" value="' . $productId . '">
             <div class="join">
               <div class="relative">
