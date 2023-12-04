@@ -10,7 +10,7 @@ export default async function userRoleMapping(): Promise<UserRoleMapping[]> {
   const userids = Array.from(Array(50).keys()).map((i) => i + 1);
   for (let i = 0; i < 50; i++) {
     const userid = faker.helpers.arrayElement(userids);
-    const roleid = faker.helpers.arrayElement([1, 2, 3]);
+    const roleid = 1;
 
     userids.splice(userids.indexOf(userid), 1);
     result.push({

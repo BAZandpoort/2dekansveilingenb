@@ -31,7 +31,7 @@ async function seedDatabase() {
 
         await connection.execute(
             'INSERT INTO user_roles (name) VALUES (?), (?), (?)',
-            ['guest', 'member', 'admin'],
+            ['member', 'admin'],
         );
         console.log('Inserted user roles.');
 
