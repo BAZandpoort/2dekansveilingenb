@@ -30,7 +30,7 @@ async function seedDatabase() {
         console.log('Truncated all tables.');
 
         await connection.execute(
-            'INSERT INTO user_roles (name) VALUES (?), (?), (?)',
+            'INSERT INTO user_roles (name) VALUES (?), (?)',
             ['member', 'admin'],
         );
         console.log('Inserted user roles.');
