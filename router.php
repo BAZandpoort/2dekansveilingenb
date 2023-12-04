@@ -27,6 +27,6 @@ function authorized($user, $route) {
 
 function abort($code = 404) {
   http_response_code($code);
-  include_once PUBLIC_S . '/errors/' . $code . '.php';
+  header('Location: /404');
   exit();
 }
