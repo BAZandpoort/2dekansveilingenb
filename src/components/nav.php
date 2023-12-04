@@ -232,7 +232,7 @@ if ($user && $user['role'] === 'admin') {
           </div>
         </summary>
         <ul class="mt-2 p-2 shadow menu dropdown-content z-[1] bg-base-200 rounded-box w-52">
-          <!-- <li><a class="justify-between">Profile</a></li> -->
+          <li><a href="/user/profile" class="justify-between">' . translate($user, 'Public profile') . '</a></li>
           <li><a href="/member/dashboard">' . translate($user, 'Account Overview') . '</a></li>
           <li><a href="/src/lib/user/member/change-theme.php">' . translate($user, 'Switch to ' . $theme . ' mode') . '</a></li>
           <li><a href="/seller/dashboard">' . translate($user, 'Storefront') . '</a></li>

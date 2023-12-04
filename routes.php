@@ -9,6 +9,14 @@ $routes = [
     'container' => true,
     'auth' => [],
   ],
+  '/user/profile' => [
+    'view' => 'user/member/profile.php',
+    'title' => 'Profile',
+    'nav' => true,
+    'footer' => true,
+    'container' => true,
+    'auth' => ['member', 'admin'],
+  ],
   // Account routes
   '/account/login' => [
     'view' => 'account/login.php',
