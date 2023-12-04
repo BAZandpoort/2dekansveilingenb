@@ -119,19 +119,10 @@ $routes = [
     'container' => true,
     'auth' => ['member', 'admin'],
   ],
-
   // Seller Dashboard routes
   '/dashboard/products/add' => [
     'view' => 'user/seller/add-product.php',
     'title' => 'Add Products',
-    'nav' => true,
-    'footer' => false,
-    'container' => true,
-    'auth' => ['member', 'admin'],
-  ],
-  '/dashboard/products/own' => [
-    'view' => 'user/seller/products.php',
-    'title' => 'My Products',
     'nav' => true,
     'footer' => false,
     'container' => true,
