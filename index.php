@@ -20,7 +20,6 @@ handleAuthorization($route['auth']);
 
 $theme = getUserTheme();
 $alert = handleAlert($_GET);
-$translations = translate(getUserLanguage());
 
 $container = $route['container'] ? 'container mx-auto px-2 pt-4 pb-12 md:pt-12 md:pb-24 md:px-0' : '';
 ?>
