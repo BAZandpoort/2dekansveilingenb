@@ -33,6 +33,7 @@ function login($formData) {
     return;
   }
   
+  var_dump($auth);
   $_SESSION['user'] = USER_STRUCTURE;
   $_SESSION['user']['id'] = $auth['users_id'];
   $_SESSION['user']['email'] = $auth['email'];
@@ -40,6 +41,7 @@ function login($formData) {
   $_SESSION['user']['theme'] = $auth['theme'];
   $_SESSION['user']['language'] = $auth['language'];
   $_SESSION['user']['role'] = $auth['name'];
+  $_SESSION['user']['image'] = $auth['profilepicture'];
   
   header('Location: /');
   exit();
