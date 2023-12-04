@@ -81,7 +81,7 @@ function insertUser($username, $password, $email, $firstname, $lastname) {
   $userRoleMapping = insert(
     'INSERT INTO user_role_mapping (userid, roleid) VALUES (?, ?)',
     ['type' => 'i', 'value' => $userId],
-    ['type' => 'i', 'value' => 2],
+    ['type' => 'i', 'value' => 1],
   );
 
   return $userData && $userProfileData && $userRoleMapping;
