@@ -12,7 +12,7 @@ $userid = $_SESSION['user']['id'];
       <h1 class="text-xl font-bold text-center b-8" style="margin: 10px 0;">Profile</h1>
       <div class="avatar left-11" style="margin: 10px 0;">
         <div class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-          <img src="https://avatars.githubusercontent.com/u/64209400?v=4" />
+          <img src="/public/images/<?= $_SESSION['user']['image'] ?>" />
         </div>
       </div>
       <div class="text-center">
