@@ -20,7 +20,7 @@ function authorized($user, $route) {
     }
   } else {
     if (!$hasAccess) {
-      http_response_code(401);
+      http_response_code(403);
       header('Location: /');
       exit;
     }
