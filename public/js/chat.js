@@ -54,4 +54,4 @@ setInterval(async () => {
     } catch (error) {
         console.error('There was a problem with the request:', error);
     }
-}, 500);
+}, 1000);
