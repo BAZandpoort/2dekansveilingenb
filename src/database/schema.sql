@@ -198,22 +198,22 @@ CREATE TABLE `translations` (
 -- Dumping data for table `translations`
 --
 
-INSERT INTO `translations` (`location`, `text_en`, `text_nl`, `text_fr`) VALUES
-('nav', '2nd-chance auctions', '2dekansveilingen', '2ème-chance enchères'),
-('nav', 'Log out', 'Log uit', 'Se déconnecter'),
-('nav', 'Auctions', 'Veilingen', 'Enchères'),
-('nav', 'Location', 'Locatie', 'Emplacement'),
-('nav', 'Products', 'Producten', 'Produits'),
-('nav', 'Messages', 'Berichten', 'Messages'),
-('nav', 'Search', 'Zoeken', 'Recherche'),
-('nav', 'Account Overview', 'Account Overzicht', 'Aperçu du compte'),
-('nav', 'Switch to dark mode', 'Schakel over naar de donkere modus', 'Passer en mode sombre'),
-('nav', 'Switch to light mode', 'Schakel over naar de lichte modus', 'Passer en mode lumière'),
-('nav', 'Storefront', 'Winkel', 'Vitrine'),
-('nav', 'Reports', 'Rapporten', 'Rapports'),
-('nav', 'Translations', 'Vertalingen', 'Traductions'),
-('nav', 'View translations', 'Vertalingen bekijken', 'Voir les traductions'),
-('nav', 'Add translations', 'Vertalingen toevoegen', 'Ajouter des traductions');
+INSERT INTO `translations` (`id`, `location`, `text_en`, `text_nl`, `text_fr`) VALUES
+(1, 'nav', '2nd-chance auctions', '2dekansveilingen', '2ème-chance enchères'),
+(2, 'nav', 'Log out', 'Log uit', 'Se déconnecter'),
+(3, 'nav', 'Auctions', 'Veilingen', 'Enchères'),
+(4, 'nav', 'Location', 'Locatie', 'Emplacement'),
+(5, 'nav', 'Products', 'Producten', 'Produits'),
+(6, 'nav', 'Messages', 'Berichten', 'Messages'),
+(7, 'nav', 'Search', 'Zoeken', 'Recherche'),
+(8, 'nav', 'Account Overview', 'Account Overzicht', 'Aperçu du compte'),
+(9, 'nav', 'Switch to dark mode', 'Schakel over naar de donkere modus', 'Passer en mode sombre'),
+(10, 'nav', 'Switch to light mode', 'Schakel over naar de lichte modus', 'Passer en mode lumière'),
+(11, 'nav', 'Storefront', 'Winkel', 'Vitrine'),
+(12, 'nav', 'Reports', 'Rapporten', 'Rapports'),
+(13, 'nav', 'Translations', 'Vertalingen', 'Traductions'),
+(14, 'nav', 'View translations', 'Vertalingen bekijken', 'Voir les traductions'),
+(15, 'nav', 'Add translations', 'Vertalingen toevoegen', 'Ajouter des traductions');
 
 -- --------------------------------------------------------
 
