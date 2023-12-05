@@ -11,7 +11,7 @@ $categories = fetch("SELECT * FROM product_categories");
 
 $minDate = date("Y-m-d\TH:i", strtotime("+1 hour"));
 $maxDate = date("Y-m-d\TH:i", strtotime("+2 days"));
-$endDateExplenation = "The auction end date must be at least 1 hour in the future and at most 2 days in the future.";
+$endDateExplanation = "The auction end date must be at least 1 hour in the future and at most 2 days in the future.";
 ?>
 
 <h1 class="text-center text-4xl font-bold mb-12">Add a new product</h1>
@@ -82,7 +82,7 @@ $endDateExplenation = "The auction end date must be at least 1 hour in the futur
     <!-- Auction End Date -->
     <div id="auctionWrapper" class="form-control flex-1 w-full justify-center">
       <label class="label">
-        <div class="tooltip" data-tip="<?= $endDateExplenation ?>">
+        <div class="tooltip" data-tip="<?= $endDateExplanation ?>">
           <span class="label-text">Auction End Date</span>
         </div>
       </label>
