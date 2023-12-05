@@ -10,7 +10,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/util/util.php';
 
 if (!isset($_POST['create'])) {
-  header('Location: /');
+  header('Location: ' . $_SERVER['HTTP_REFERER']);
   exit();
 }
 
