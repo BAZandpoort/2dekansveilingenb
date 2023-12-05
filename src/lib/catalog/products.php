@@ -44,7 +44,7 @@ function popularCategories($categoryLimit) {
 
 function userProducts($userid) {
   $query = 'SELECT * FROM products WHERE userid = ?';
-  $products = fetch($query, ['type' => 'i', 'value' => $userid]);
+  $products = fetchSingle($query, ['type' => 'i', 'value' => $userid]);
 
   if (empty($products)) {
     return false;

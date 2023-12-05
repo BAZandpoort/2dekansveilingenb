@@ -68,7 +68,7 @@ if ($error) {
                             <div class="collapse bg-base-50">
                                 <input type="checkbox" class="peer" /> 
                                 <div class="collapse-title bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content">
-                                    <b>'.$report["typeOfAbuse"].'</b>
+                                    <b>'.$report["type"].'</b>
                                 </div>
                                 <div class="collapse-content bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content"> 
                                     <p>Context: <i>'.$report["context"].'</i></p>

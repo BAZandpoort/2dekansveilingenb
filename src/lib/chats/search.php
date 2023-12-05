@@ -14,7 +14,15 @@ $output = "";
 $sql = mysqli_query($connection, "SELECT *
 FROM users
 JOIN user_profile ON users.id = user_profile.userid
-WHERE NOT userid = {$outgoing_id} AND (users.firstname LIKE '%{$searchTerm}%' OR users.lastname LIKE '%{$searchTerm}%')");
+WHERE (users.id = $userssid OR users.id IN (
+        SELECT DISTINCT outgoing_msg_id FROM messages WHERE incoming_msg_id = $userssid AND outgoing_msg_id IS NOT NULL
+    )
+    OR users.id IN (
+        SELECT DISTINCT incoming_msg_id FROM messages WHERE outgoing_msg_id = $userssid AND incoming_msg_id IS NOT NULL
+    )
+) AND users.id != $outgoing_id AND (users.firstname LIKE '%{$searchTerm}%' OR users.lastname LIKE '%{$searchTerm}%') 
+ORDER BY (SELECT MAX(msg_id) FROM messages WHERE (incoming_msg_id = users.id OR outgoing_msg_id = users.id) AND (outgoing_msg_id = $outgoing_id OR incoming_msg_id = $outgoing_id)) DESC
+");
 if (mysqli_num_rows($sql) > 0) {
     while ($row = mysqli_fetch_assoc($sql)) {
         $sql2 = "SELECT * FROM messages WHERE (incoming_msg_id = {$row['userid']} OR outgoing_msg_id = {$row['userid']}) 
@@ -33,10 +41,10 @@ if (mysqli_num_rows($sql) > 0) {
         if ($row2 !== null && is_array($row2) && array_key_exists('outgoing_msg_id', $row2)) {
             $you = ($outgoing_id == $row2['outgoing_msg_id']) ? "You: " : "";
         }
-        
+
         $output .= '<a href="/chats/chat?userid=' . $row['userid'] . '">
                         <div class="content">
-                            <img src="' . $row['profilePictureUrl'] . '">
+                            <img src="/public/images/' . $row['profilepicture'] . '">
                             <div class="details">
                             <span>' . $row['firstname'] . " " . $row['lastname'] .'</span>
                             <p>'. $you . $msg .'</p>
@@ -49,5 +57,4 @@ if (mysqli_num_rows($sql) > 0) {
     $output .= "No users found related to your search term";
 }
 echo $output;
-
 ?>

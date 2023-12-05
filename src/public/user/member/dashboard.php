@@ -12,7 +12,7 @@ $userid = $_SESSION['user']['id'];
       <h1 class="text-xl font-bold text-center b-8" style="margin: 10px 0;">Profile</h1>
       <div class="avatar left-11" style="margin: 10px 0;">
         <div class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-          <img src="https://avatars.githubusercontent.com/u/64209400?v=4" />
+          <img src="/public/images/<?= $_SESSION['user']['image'] ?>" />
         </div>
       </div>
       <div class="text-center">
@@ -29,12 +29,6 @@ $userid = $_SESSION['user']['id'];
         <div class="stat-title text-center text-xl font-bold">Favorite Products</div>
         <div class="stat-value text-center"><?= favoriteCount(); ?></div>
         <div class="stat-desc">Your count of favorite products</div>
-      </div>
-
-      <div class="stat w-60 h-60">
-        <div class="stat-title text-center font-bold text-xl">Ordered Products</div>
-        <div class="stat-value text-center">0</div>
-        <div class="stat-desc">Your count of ordered products</div>
       </div>
 
       <div class="stat w-60 h-60">
@@ -87,11 +81,11 @@ $userid = $_SESSION['user']['id'];
                     <div class="flex items-center space-x-3">
                       <div class="avatar">
                         <div class="mask mask-squircle w-12 h-12">
-                          <img src="/public/images/' . $row['productImage'] . '" alt="Avatar Tailwind CSS Component" />
+                          <img src="/public/images/<?= $row['productImage']?>" alt="Avatar Tailwind CSS Component" />
                         </div>
                       </div>
                       <div>
-                        <div class="font-bold"><?= $purchase['productName'] ?></div>
+                        <div class="font-bold"><?= $purchase['name'] ?></div>
                       </div>
                     </div>
                   <td><?= $purchase['price'] ?></td>
@@ -151,7 +145,7 @@ $userid = $_SESSION['user']['id'];
                     <div class="flex items-center space-x-3">
                       <div class="avatar">
                         <div class="mask mask-squircle w-12 h-12">
-                          <img src="/public/images/' . $favorite['imageUrl'] . '" alt="Product Image" />
+                          <img src="/public/images/<?= $favorite['image']?>" alt="Product Image" />
                         </div>
                       </div>
                       <div>
@@ -182,10 +176,10 @@ $userid = $_SESSION['user']['id'];
                 <th class="text-sm">Ordered Products</th>
                 <th></th>
                 <th></th>
-                <th><a class="link text-sm">See all</a></th>
+                <th></th>
               </tr>
             </thead>
-            <tbody>
+            <!-- <tbody>
               <tr>
                 <td>
                   <div class="flex items-center space-x-3">
@@ -208,27 +202,53 @@ $userid = $_SESSION['user']['id'];
                   <button class="btn btn-ghost btn-xs">Epress</button>
                 </th>
               </tr>
-              <tr>
+            </tbody> -->
+
+            <tbody>
+              <?php
+
+              $purchases = getPurchases($userid);
+
+              if (!$purchases) :?>
+                  <tr class="mb-4">
+                  <td>
+                    <div class="flex items-center space-x-3">
+                      
+                      <div>
+                        <div class="font-bold">Geen producten</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    
+                  </td>
+                  <td></td>
+                </tr>
+                <?php else: ?>
+                <?php foreach ($purchases as $purchase) :?>
+                <?php
+                if (strlen($purchase['description']) > 20) {
+                  $purchase['description'] = substr_replace($purchase['description'], '...', 21);
+                }
+                ?>
+                <tr class="mb-4">
                 <td>
                   <div class="flex items-center space-x-3">
                     <div class="avatar">
                       <div class="mask mask-squircle w-12 h-12">
-                        <img src="/tailwind-css-component-profile-3@56w.png" alt="Avatar Tailwind CSS Component" />
+                        <img src="/public/images/<?= $purchase['image']?>" alt="Product Image" />
                       </div>
                     </div>
                     <div>
-                      <div class="font-bold">Brice Swyre</div>
+                      <div class="font-bold"><?= $purchase['name'] ?></div>
                     </div>
                   </div>
                 </td>
-                <td>
-                  <span class="badge badge-ghost badge-sm">Baby</span>
-                </td>
-                <td>$885.23</td>
-                <th>
-                  <button class="btn btn-ghost btn-xs">Standard</button>
-                </th>
+                <td><?= $purchase['description'] ?></td>
+                <td><?= $purchase['price'] ?></td>
               </tr>
+              <?php endforeach; ?>
+              <?php endif; ?>
             </tbody>
           </table>
         </div>

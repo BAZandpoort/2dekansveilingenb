@@ -2,8 +2,6 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/util/util.php';
 
-
-
 function productCard($product, $shareable = false) {
   $share = $shareable
     ? '<div class="dropdown dropdown-end absolute top-5 right-4">
@@ -36,7 +34,7 @@ function productCard($product, $shareable = false) {
   echo '
       <div id="product-' . $product['id'] . '" href="/" class="group card card-compact transition hover:opacity-90 md:flex-1 bg-base-100 shadow-xl">
         <figure>
-          <img class="w-full" src="/public/images/' . $product["imageUrl"] . '" alt="Shoes" />
+          <img class="w-full" src="/public/images/' . $product["image"] . '" alt="Shoes" />
         </figure>
 
         
@@ -58,7 +56,7 @@ function productCard($product, $shareable = false) {
       </div>
 
   <script>
-    productCardCountdown("' . $product['id'] . '", "' . $product['endDate'] . '");
+    productCardCountdown("' . $product['id'] . '", "' . $product['enddate'] . '");
   </script>
   ';
 }

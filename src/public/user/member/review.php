@@ -1,6 +1,4 @@
 <?php
-  
-
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once DATABASE . '/connect.php';
 require_once LIB . '/util/util.php';
@@ -9,7 +7,7 @@ require_once LIB . '/util/util.php';
 $userId = $_SESSION['user']['id'];
 
 // Fetch the purchase history of the user
-$purchaseHistory = fetchSingle('SELECT * FROM user_purchases WHERE id = ?', ["type" => "i", "value" => $userId]);
+$purchaseHistory = fetchSingle('SELECT * FROM orders WHERE id = ?', ["type" => "i", "value" => $userId]);
 
 // Get the seller ID from the URL parameter
 $sellerId = $_GET['seller'];
@@ -18,7 +16,7 @@ $sellerId = $_GET['seller'];
 $sellerInfo = fetchSingle('SELECT * FROM users WHERE id = ?', ["type" => "i", "value" => $sellerId]);
 
 // Fetch the seller reviews
-$sellerReviews = fetchSingle('SELECT * FROM review WHERE seller = ?', ["type" => "i", "value" => $sellerId]);
+$sellerReviews = fetchSingle('SELECT * FROM reviews WHERE sellerid = ?', ["type" => "i", "value" => $sellerId]);
 
 // Calculate the average rating of the seller
 $averageRating = 0;
@@ -39,7 +37,7 @@ if (count($sellerReviews) > 0) {
     <div class="grid grid-cols-5 gap-4">
       <?php foreach ($purchaseHistory as $purchase): ?>
         <div>
-          <a href="/catalog/product?id=<?= $purchase['productId'] ?>" class="btn btn-primary">View product page</a>
+          <a href="/catalog/product?id=<?= $purchase['productid'] ?>" class="btn btn-primary">View product page</a>
         </div>
         <div>
           <form method="POST" action="/src/lib/user/member/add-review.php">

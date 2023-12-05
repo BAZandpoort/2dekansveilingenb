@@ -26,23 +26,26 @@ function updateProfile($userId, $formData) {
   $newEmail = $formData['email'];
   $newFirstname = $formData['firstname'];
   $newLastname = $formData['lastname'];
+  $newProfilePicture = $_FILES['profilePicture'];
   
   $query = 'SELECT * FROM users WHERE id = ?';
   $data = fetch($query, ['type' => 'i', 'value' => $userId]);
-  
+
   if (
     $data['username'] === $newUsername &&
     $data['email'] === $newEmail &&
     $data['firstname'] === $newFirstname &&
-    $data['lastname'] === $newLastname
+    $data['lastname'] === $newLastname &&
+    $_FILES === []
   ) {
-    header('Location: /account/settings/edit?error=noChanges');
+    // header('Location: /account/settings/edit?error=noChanges');  
     exit();
   }
   
+  // Update user
   $query =
     'UPDATE users SET username = ?, email = ?, firstname = ?, lastname = ? WHERE id = ?';
-  $update = insert(
+  $updateUser = insert(
     $query,
     ['type' => 's', 'value' => $newUsername],
     ['type' => 's', 'value' => $newEmail],
@@ -50,8 +53,25 @@ function updateProfile($userId, $formData) {
     ['type' => 's', 'value' => $newLastname],
     ['type' => 's', 'value' => $userId],
   );
+
+  // Update profile picture
+  $query = "UPDATE user_profile SET profilepicture = ? WHERE userid = ?";
+
+  $extension = pathinfo($newProfilePicture['name'], PATHINFO_EXTENSION);
+  $imageName = uniqid() . '.' . $extension;
+  $imageTmpName = $newProfilePicture['tmp_name'];
+
+  $targetDir = PUBLIC_R . "/images/";
+  $targetFile = $targetDir . $imageName;
+  $upload = move_uploaded_file($imageTmpName, $targetFile);
+
+  $updateProfilePicture = insert(
+    $query,
+    ['type' => 's', 'value' => $imageName],
+    ['type' => 'i', 'value' => $userId],
+  );
   
-  if ($update) {
+  if ($upload && $updateUser && $updateProfilePicture) {
     header('Location: /account/settings/edit?success=accountUpdate');
     exit();
   }

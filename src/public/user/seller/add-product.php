@@ -8,6 +8,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/util/util.php';
 
 $categories = fetch("SELECT * FROM product_categories");
+
+$minDate = date("Y-m-d\TH:i", strtotime("+1 hour"));
+$maxDate = date("Y-m-d\TH:i", strtotime("+2 days"));
+$endDateExplanation = "The auction end date must be at least 1 hour in the future and at most 2 days in the future.";
 ?>
 
 <h1 class="text-center text-4xl font-bold mb-12">Add a new product</h1>
@@ -36,7 +40,7 @@ $categories = fetch("SELECT * FROM product_categories");
       <input type="text" name="title" placeholder="Big Mac" class="input input-bordered w-full" required />
     </div>
   </div>
-  
+
   <!-- Description -->
   <div class="form-control w-full">
     <label class="label">
@@ -46,26 +50,24 @@ $categories = fetch("SELECT * FROM product_categories");
   </div>
 
   <!-- Delivery methods -->
-  <h2 class="text-center text-2xl font-bold mb-0">Which delivery methods do you support?</h2>
-  <div class="flex flex-col">
-  <div class="form-control w-52">
-    <label class="cursor-pointer label">
-      <span class="label-text">Standard delivery</span> 
-      <input type="checkbox" id="standardDelivery" name="standardDelivery" onclick="checkForDelivery()" class="toggle toggle-primary" checked />
+  <div class="form-control w-full">
+    <label class="label">
+      <span class="label-text">What delivery methods do you support?</span>
     </label>
-  </div>
-  <div class="form-control w-52">
-    <label class="cursor-pointer label">
-      <span class="label-text">Express delivery</span> 
-      <input type="checkbox" id="expressDelivery" name="expressDelivery" onclick="checkForDelivery()" class="toggle toggle-secondary" checked />
-    </label>
-  </div>
-  <div class="form-control w-52">
-    <label class="cursor-pointer label">
-      <span class="label-text">Pickup</span> 
-      <input type="checkbox" id="pickUp" name="pickUp" onclick="checkForDelivery()" class="toggle toggle-accent" checked />
-    </label>
-  </div>
+    <div class="flex flex-row justify-between">
+      <label class="label cursor-pointer gap-4">
+        <span class="label-text">Standard</span>
+        <input name="standard" type="checkbox" checked="checked" class="checkbox" />
+      </label>
+      <label class="label cursor-pointer gap-4">
+        <span class="label-text">Express</span>
+        <input name="express" type="checkbox" class="checkbox" />
+      </label>
+      <label class="label cursor-pointer gap-4">
+        <span class="label-text">Pickup</span>
+        <input name="pickup" type="checkbox" class="checkbox" />
+      </label>
+    </div>
   </div>
 
   <div class="flex flex-row justify-center gap-4 w-full">
@@ -78,20 +80,13 @@ $categories = fetch("SELECT * FROM product_categories");
     </div>
 
     <!-- Auction End Date -->
-    <div id="auctionWrapper" class="form-control flex-1 flex-row w-full justify-center gap-4">
-      <div id="endDate" class="hidden">
-        <label class="label">
+    <div id="auctionWrapper" class="form-control flex-1 w-full justify-center">
+      <label class="label">
+        <div class="tooltip" data-tip="<?= $endDateExplanation ?>">
           <span class="label-text">Auction End Date</span>
-        </label>
-        <input type="datetime-local" name="endDate" placeholder="20.00" class="input input-bordered w-full" required />
-      </div>
-
-      <div class="flex flex-row gap-4 justify-center items-center mt-10">
-        <input type="checkbox" name="auction" id="auction" onclick="showInput()" class="checkbox checkbox-lg" />
-        <label id="auctionLabel" class="label">
-          <span class="label-text">Is this an auction?</span>
-        </label>
-      </div>
+        </div>
+      </label>
+      <input type="datetime-local" name="endDate" min="<?= $minDate ?>" max="<?= $maxDate ?>" class="input input-bordered w-full" required />
     </div>
   </div>
 
@@ -107,35 +102,3 @@ $categories = fetch("SELECT * FROM product_categories");
     <button name="create" id="create" class="btn btn-primary">Create</button>
   </div>
 </form>
-
-<script>
-  function showInput() {
-    var auctionWrapper = document.getElementById("auctionWrapper");
-    var checkBox = document.getElementById("auction");
-    var checkBoxLabel = document.getElementById("auctionLabel");
-    var input = document.getElementById("endDate");
-
-    if (checkBox.checked == true) {
-      input.classList.remove("hidden");
-      checkBoxLabel.classList.add("hidden");
-    } else {
-      input.classList.add("hidden");
-      checkBoxLabel.classList.remove("hidden");
-    }
-  }
-
-  function checkForDelivery() {
-    var checkBoxSD = document.getElementById("standardDelivery");
-    var checkBoxED = document.getElementById("expressDelivery");
-    var checkBoxPU = document.getElementById("pickUp");
-
-
-    if (checkBoxSD.checked == false && checkBoxED.checked == false && checkBoxPU.checked == false) {
-      document.getElementById("create").disabled = true;
-      document.getElementById("create").textContent = "Please select at least one delivery option";
-    } else {
-      document.getElementById("create").disabled = false;
-      document.getElementById("create").textContent = "Create";
-    }
-  }
-</script>

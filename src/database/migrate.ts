@@ -1,13 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as mysql from 'mysql2/promise';
-
-const dbConfig = {
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: '2dekansveilingen',
-};
+import { dbConfig } from './config';
 
 async function migrateDatabase() {
   const connection = await mysql.createConnection(dbConfig);

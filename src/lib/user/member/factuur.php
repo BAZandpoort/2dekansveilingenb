@@ -8,50 +8,86 @@ require_once DATABASE . '/connect.php';
 // Start the session
 session_start();
 
-// Create a new PDF
-$pdf = new FPDF();
-$pdf->AddPage();
-$pdf->SetFont('Arial', 'B', 16);
+if (!isset($_POST['send']) && !isset($_POST['history'])) {
+    header('Location: /');
+    exit();
+}
 
+$customerid = $_SESSION['user']['id'];
+$productid = $_POST['productid'];
+$deliveryMethod = $_POST['deliveryMethod'];
 
+if (!isset($_POST['history'])) {
+    $insertData = sendReport(
+        $customerid,
+        $productid,
+        $deliveryMethod
+    );
+}
+
+function sendReport(
+    $customerid,
+    $productid,
+    $deliveryMethod
+) {
+    $query = 'INSERT INTO orders (productid, buyerid, deliverymethod)
+            VALUES (?, ?, ?)';
+
+    $insertData = insert(
+        $query,
+        ['type' => 'i', 'value' => $productid],
+        ['type' => 'i', 'value' => $customerid],
+        ['type' => 's', 'value' => $deliveryMethod]
+    );
+
+    return $insertData;
+}
 
 $userId = $_SESSION['user']['id'];
 
+$purchaseHistory = fetchSingle(
+    'SELECT * FROM orders WHERE buyerid = ?',
+    ["type" => "i", "value" => $userId]
+);
+require('invoice.php');
 
-$purchaseHistory = fetchSingle('SELECT * FROM user_purchases WHERE id = ?', ["type" => "i", "value" => $userId]);
-$userDataResult = fetchSingle('SELECT * FROM users WHERE id = ?', ["type" => "i", "value" => $userId]);
+$pdf = new PDF_Invoice( 'P', 'mm', 'A4' );
+$pdf->AddPage();
+$pdf->addSociete( "2dekansveilingen",
+                  "BAZandpoort\n" .
+                  "2800 Mechelen\n");
+$pdf->addDate(date('d-m-Y'));
+$pdf->addClient($userId);
+$cols=array("PRODUCTID"    => 23,
+            "NAME"  => 30,
+            "DESCRIPTION"  => 78,
+            "QUANTITY"     => 22,
+            "TOTAL" => 30);
+$pdf->addCols($cols);
+$cols=array("PRODUCTID"    => "L",
+            "DESCRIPTION"  => "L",
+            "NAME"  => "L",
+            "QUANTITY"     => "C",
+            "TOTAL" => "R");
+$pdf->addLineFormat($cols);
+$pdf->addLineFormat($cols);
 
-// Check if the result is not empty
-if (!empty($userDataResult)) {
-    $userData = $userDataResult[0]; // Get the first row from the result
-
-    // Print user's first name and last name
-    if (isset($userData['firstname']) && isset($userData['lastname'])) {
-        $pdf->Cell(40, 10, 'Beste ' . $userData['firstname'] . ' ' . $userData['lastname'] . ',');
-        $pdf->Ln();
-    } else {
-        $pdf->Cell(40, 10, 'User name not available');
-        $pdf->Ln();
-    }
-} else {
-    $pdf->Cell(40, 10, 'User data not found');
-    $pdf->Ln();
-}
-//now print U hebt op timeOfPurchase volgende producten aangekocht
-$pdf->Cell(40, 10, 'U hebt op ' . date('d-m-Y') . ' volgende producten aangekocht:');
-$pdf->Ln();
 if ($purchaseHistory) {
-    foreach ($purchaseHistory as $purchase) {
-        $pdf->Cell(40, 10, 'Item Name: ' . $purchase['productName']);
-        $pdf->Ln();
-        $pdf->Cell(40, 10, 'Price: ' . $purchase['price']);
-        $pdf->Ln(); 
-        $pdf->Ln();  
-        
+    foreach($purchaseHistory as $purchase) {
+        $query = 'SELECT * FROM products WHERE id = ?';
+        $productData = fetchSingle($query, ["type" => "i", "value" => $purchase['productid']]);
+
+        $y = 109;
+        $line = array( "PRODUCTID"    => $productData[0]['id'],
+                       "DESCRIPTION"  => $productData[0]['description'],
+                       "NAME"  => $productData[0]['name'],
+                       "QUANTITY"     => "1",
+                       "TOTAL" => $productData[0]['price'] . ' EUR');
+        $size = $pdf->addLine($y, $line);
+        $y += $size + 2;
     }
-} else {
-    $pdf->Cell(40, 10, 'No purchases found');
 }
 
 $pdf->Output('D', 'Invoice.pdf');
 ?>
+

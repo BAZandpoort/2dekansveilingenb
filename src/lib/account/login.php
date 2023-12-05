@@ -33,22 +33,26 @@ function login($formData) {
     return;
   }
   
+  var_dump($auth);
   $_SESSION['user'] = USER_STRUCTURE;
-  $_SESSION['user']['id'] = $auth['id'];
+  $_SESSION['user']['id'] = $auth['users_id'];
   $_SESSION['user']['email'] = $auth['email'];
   $_SESSION['user']['username'] = $auth['username'];
   $_SESSION['user']['theme'] = $auth['theme'];
   $_SESSION['user']['language'] = $auth['language'];
+  $_SESSION['user']['role'] = $auth['name'];
+  $_SESSION['user']['image'] = $auth['profilepicture'];
   
   header('Location: /');
   exit();
 }
 
 function authenticate($email, $password) {
-  var_dump($email, $password);
   $data = fetch(
-    'SELECT * FROM user_profile
-    JOIN users ON users.id = user_profile.userid 
+    'SELECT *, users.id AS users_id FROM user_profile
+    JOIN users ON users.id = user_profile.userid
+    JOIN user_role_mapping ON users.id = user_role_mapping.userid
+    JOIN user_roles ON user_role_mapping.roleid = user_roles.id
     WHERE users.email = ?',
     [
       'type' => 's',

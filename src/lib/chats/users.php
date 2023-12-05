@@ -6,13 +6,19 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once DATABASE . '/connect.php';
 require_once LIB . '/util/util.php';
 
-
 $userssid = $_SESSION['user']['id'];
 $outgoing_id = $userssid;
 
+$product_id = $_GET['id'];
+
 $sql = mysqli_query($connection, "SELECT *
 FROM users
-JOIN user_profile ON users.id = user_profile.userid WHERE NOT userid = {$outgoing_id}");
+JOIN user_profile ON users.id = user_profile.userid
+JOIN products ON products.userid = users.id
+WHERE products.id = {$product_id}");
+
+$row = mysqli_fetch_assoc($sql);
+
 $output = "";
 
 if (mysqli_num_rows($sql) == 1)
@@ -40,7 +46,7 @@ if (mysqli_num_rows($sql) == 1)
 
         $output .= '<a href="/chats/chat?userid=' . $row['userid'] . '">
                         <div class="content">
-                            <img src="' . $row['profilePictureUrl'] . '">
+                            <img src="/public/images/' . $row['profilepicture'] . '">
                             <div class="details">
                             <span>' . $row['firstname'] . " " . $row['lastname'] .'</span>
                             <p>'. $you . $msg .'</p>

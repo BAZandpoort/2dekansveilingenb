@@ -3,51 +3,55 @@ inputField = form.querySelector(".input-field"),
 sendBtn = form.querySelector("button"),
 chatBox = document.querySelector(".chat-box");
 
-form.onsubmit = (e)=>{
-    e.preventDefault();
-}
-
-sendBtn.onclick = ()=> {
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", "/src/lib/chats/insert-chat.php", true);
-    xhr.onload = ()=>{
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                inputField.value = "";
-                scrollToBottom();
-            }
-        }
-    }
-    let formData = new FormData(form);
-    xhr.send(formData);
-}
-
-chatBox.onmouseenter = ()=>{
-    chatBox.classList.add("active");
-}
-
-chatBox.onmouseleave = ()=>{
-    chatBox.classList.remove("active");
-}
-
-setInterval(()=>{
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", "/src/lib/chats/get-chat.php", true);
-    xhr.onload = ()=>{
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                let data = xhr.response;
-                chatBox.innerHTML = data;
-                if (!chatBox.classList.contains("active")) {
-                    scrollToBottom();
-                }
-            }
-        }
-    }
-    let formData = new FormData(form);
-    xhr.send(formData);
-}, 500);
-
 function scrollToBottom() {
     chatBox.scrollTop = chatBox.scrollHeight;
 }
+
+form.onsubmit = (e) => {
+    e.preventDefault();
+}
+
+const sendRequest = async (url, formData) => {
+    const response = await fetch(url, {
+        method: 'POST',
+        body: formData
+    });
+
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    } else {
+        return await response.text();
+    }
+}
+
+sendBtn.onclick = async () => {
+    const formData = new FormData(form);
+    try {
+        await sendRequest("/src/lib/chats/insert-chat.php", formData);
+        inputField.value = "";
+        scrollToBottom();
+    } catch (error) {
+        console.error('There was a problem with the request:', error);
+    }
+}
+
+chatBox.onmouseenter = () => {
+    chatBox.classList.add("active");
+}
+
+chatBox.onmouseleave = () => {
+    chatBox.classList.remove("active");
+}
+
+setInterval(async () => {
+    const formData = new FormData(form);
+    try {
+        const data = await sendRequest("/src/lib/chats/get-chat.php", formData);
+        chatBox.innerHTML = data;
+        if (!chatBox.classList.contains("active")) {
+            scrollToBottom();
+        }
+    } catch (error) {
+        console.error('There was a problem with the request:', error);
+    }
+}, 1000);

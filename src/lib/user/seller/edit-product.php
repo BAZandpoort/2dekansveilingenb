@@ -20,7 +20,7 @@ if (isset($_POST['edit'])) {
 
     if (move_uploaded_file($file['tmp_name'], $targetFile)) {
  
-      $imageUpdateQuery = "UPDATE products SET imageUrl = ? WHERE id = ?";
+      $imageUpdateQuery = "UPDATE products SET image = ? WHERE id = ?";
       $insertData = insert($imageUpdateQuery, ['type' => 's', 'value' => $baseImageName], ['type' => 'i', 'value' => $id]);
 
   

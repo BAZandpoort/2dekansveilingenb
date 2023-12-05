@@ -7,6 +7,15 @@ $routes = [
     'nav' => true,
     'footer' => true,
     'container' => true,
+    'auth' => [],
+  ],
+  '/user/profile' => [
+    'view' => 'user/member/profile.php',
+    'title' => 'Profile',
+    'nav' => true,
+    'footer' => true,
+    'container' => true,
+    'auth' => ['member', 'admin'],
   ],
   // Account routes
   '/account/login' => [
@@ -15,6 +24,7 @@ $routes = [
     'nav' => false,
     'footer' => false,
     'container' => false,
+    'auth' => [],
   ],
   '/account/register' => [
     'view' => 'account/register.php',
@@ -22,6 +32,7 @@ $routes = [
     'nav' => false,
     'footer' => false,
     'container' => false,
+    'auth' => [],
   ],
   '/account/logout' => [
     'view' => 'account/logout.php',
@@ -29,6 +40,7 @@ $routes = [
     'nav' => false,
     'footer' => false,
     'container' => true,
+    'auth' => ['member', 'admin'],
   ],
   '/account/settings/edit' => [
     'view' => 'account/settings.php',
@@ -36,6 +48,7 @@ $routes = [
     'nav' => true,
     'footer' => true,
     'container' => true,
+    'auth' => ['member', 'admin'],
   ],
 
   // Catalog routes
@@ -45,6 +58,7 @@ $routes = [
     'nav' => true,
     'footer' => true,
     'container' => false,
+    'auth' => [],
   ],
   '/catalog/product' => [
     'view' => 'catalog/product.php',
@@ -52,6 +66,7 @@ $routes = [
     'nav' => true,
     'footer' => true,
     'container' => true,
+    'auth' => [],
   ],
   // chat routes
   '/chats/users' => [
@@ -60,6 +75,7 @@ $routes = [
     'nav' => true,
     'footer' => true,
     'container' => true,
+    'auth' => ['member', 'admin'],
   ],
   '/chats/chat' => [
     'view' => 'chats/chat.php',
@@ -67,6 +83,7 @@ $routes = [
     'nav' => true,
     'footer' => true,
     'container' => true,
+    'auth' => ['member', 'admin'],
   ],
   // product share
   '/products/share' => [
@@ -75,6 +92,7 @@ $routes = [
     'nav' => false,
     'footer' => false,
     'container' => true,
+    'auth' => ['member', 'admin'],
   ],
   '/catalog/report' => [
     'view' => 'catalog/report.php',
@@ -82,6 +100,7 @@ $routes = [
     'nav' => true,
     'footer' => true,
     'container' => true,
+    'auth' => ['member', 'admin'],
   ],
   '/catalog/delivery_order' => [
     'view' => 'catalog/delivery_order.php',
@@ -89,6 +108,7 @@ $routes = [
     'nav' => true,
     'footer' => true,
     'container' => true,
+    'auth' => ['member', 'admin'],
   ],
   // Member Dashboard routes
   '/dashboard/products/history' => [
@@ -97,6 +117,7 @@ $routes = [
     'nav' => true,
     'footer' => false,
     'container' => true,
+    'auth' => ['member', 'admin'],
   ],
   '/dashboard/products/review' => [
     'view' => 'user/member/review.php',
@@ -104,8 +125,8 @@ $routes = [
     'nav' => true,
     'footer' => false,
     'container' => true,
+    'auth' => ['member', 'admin'],
   ],
-
   // Seller Dashboard routes
   '/dashboard/products/add' => [
     'view' => 'user/seller/add-product.php',
@@ -113,13 +134,7 @@ $routes = [
     'nav' => true,
     'footer' => false,
     'container' => true,
-  ],
-  '/dashboard/products/own' => [
-    'view' => 'user/seller/products.php',
-    'title' => 'My Products',
-    'nav' => true,
-    'footer' => false,
-    'container' => true,
+    'auth' => ['member', 'admin'],
   ],
   '/seller/dashboard' => [
     'view' => 'user/seller/dashboard.php',
@@ -127,6 +142,7 @@ $routes = [
     'nav' => true,
     'footer' => true,
     'container' => true,
+    'auth' => ['member', 'admin'],
   ],
   '/seller/dashboard/edit' => [
     'view' => 'user/seller/edit-product.php',
@@ -135,6 +151,7 @@ $routes = [
     'nav' => true,
     'footer' => false,
     'container' => true,
+    'auth' => ['member', 'admin'],
   ],
   '/seller/add-advertisement' => [
     'view' => 'user/seller/add-advertisement.php',
@@ -142,6 +159,7 @@ $routes = [
     'nav' => true,
     'footer' => true,
     'container' => false,
+    'auth' => ['member', 'admin'],
   ],
   '/seller/add-address' => [
     'view' => 'user/seller/add-address.php',
@@ -149,6 +167,7 @@ $routes = [
     'nav' => true,
     'footer' => true,
     'container' => false,
+    'auth' => ['member', 'admin'],
   ],
   '/seller/hide-address' => [
     'view' => 'user/seller/hide-address.php',
@@ -156,6 +175,7 @@ $routes = [
     'nav' => true,
     'footer' => false,
     'container' => false,
+    'auth' => ['member', 'admin'],
   ],
   // Admin Dashboard routes
   '/dashboard/products/delete' => [
@@ -164,6 +184,7 @@ $routes = [
     'nav' => true,
     'footer' => true,
     'container' => true,
+    'auth' => ['admin'],
   ],
   '/dashboard/translations' => [
     'view' => 'user/admin/translations.php',
@@ -171,6 +192,7 @@ $routes = [
     'nav' => true,
     'footer' => false,
     'container' => true,
+    'auth' => ['admin'],
   ],
   '/dashboard/translations/edit' => [
     'view' => 'user/admin/edit-translation.php',
@@ -178,6 +200,7 @@ $routes = [
     'nav' => true,
     'footer' => false,
     'container' => true,
+    'auth' => ['admin'],
   ],
   '/dashboard/translations/add' => [
     'view' => 'user/admin/add-translation.php',
@@ -185,6 +208,7 @@ $routes = [
     'nav' => true,
     'footer' => false,
     'container' => true,
+    'auth' => ['admin'],
   ],
   '/member/dashboard' => [
     'view' => 'user/member/dashboard.php',
@@ -192,6 +216,7 @@ $routes = [
     'nav' => true,
     'footer' => false,
     'container' => true,
+    'auth' => ['member', 'admin'],
   ],
   '/dashboard/reports' => [
     'view' => 'user/admin/reports.php',
@@ -199,6 +224,7 @@ $routes = [
     'nav' => true,
     'footer' => false,
     'container' => true,
+    'auth' => ['admin'],
   ],
   '/admin/dashboard' => [
     'view' => 'user/admin/dashboard.php',
@@ -206,6 +232,7 @@ $routes = [
     'nav' => false,
     'footer' => false,
     'container' => true,
+    'auth' => ['admin'],
   ],
   '/dashboard/products/time/edit' => [
     'view' => 'user/seller/edit-time.php',
@@ -213,6 +240,7 @@ $routes = [
     'nav' => true,
     'footer' => true,
     'container' => true,
+    'auth' => ['admin'],
   ],
   '/account/favorites' => [
     'view' => 'account/favorites.php',
@@ -220,6 +248,7 @@ $routes = [
     'nav' => true,
     'footer' => true,
     'container' => true,
+    'auth' => ['member', 'admin'],
   ],
   // Error routes
   '/404' => [
@@ -228,5 +257,6 @@ $routes = [
     'nav' => false,
     'footer' => false,
     'container' => false,
+    'auth' => ['member', 'admin'],
   ],
 ];

@@ -6,7 +6,7 @@ $users_exists = fetch($query);
 $users = $users_exists["MAX(id)"];
 
 $new_users = fetch("SELECT * FROM `users` ORDER BY `createdAt` DESC Limit 6;");
-$new_products = fetch("SELECT products.*,product_categories.name AS categoryname FROM products JOIN product_categories ON products.id = product_categories.id ORDER BY `createdAt` DESC Limit 6;");
+$new_products = fetch("SELECT products.*, product_categories.name AS categoryname FROM products JOIN product_categories ON products.categoryid = product_categories.id ORDER BY `createdAt` DESC LIMIT 6;");
 
 ?>
 
@@ -76,7 +76,7 @@ $new_products = fetch("SELECT products.*,product_categories.name AS categoryname
 
     <!-- New products -->
     <div class="mt-4">
-      <h2 class="text-2xl mb-2">Most recent registrations</h2>
+      <h2 class="text-2xl mb-2">Most recent products created</h2>
       <div class="w-full overflow-hidden rounded-lg shadow-xs">
         <div class=" overflow-x-auto">
           <table class="table">
@@ -96,7 +96,7 @@ $new_products = fetch("SELECT products.*,product_categories.name AS categoryname
                   <td class="px-4 py-3">
                     <div class="flex items-center text-sm">
                       <div class="relative hidden w-14 h-8 mr-3 md:block">
-                        <img class="rounded-full h-12" width="80px" src="<?php echo '/public/images/' . $product['imageUrl'] ?>" />
+                        <img class="rounded-full h-12" width="80px" src="<?php echo '/public/images/' . $product['image'] ?>" />
                         <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
                       </div>
                       <div>

@@ -24,11 +24,11 @@ $data = fetch($query, ['type' => 'i', 'value' => $userId]);
 
   <h1 class="md:text-center text-4xl font-bold mb-8">Edit your account details</h1>
 
-  <form action="/src/lib/account/update-account.php" method="post" class="flex flex-col gap-8 w-full md:max-w-2xl">
+  <form action="/src/lib/account/update-account.php" method="post" enctype="multipart/form-data" class="flex flex-col gap-8 w-full md:max-w-2xl">
     <div class="flex flex-col gap-4">
       
       <div class="flex flex-col gap-4 md:flex-row">
-        <!-- Usernale -->
+        <!-- Username -->
         <div class="form-control md:flex-1">
           <label class="label">
             <span class="label-text">Username</span>
@@ -61,6 +61,14 @@ $data = fetch($query, ['type' => 'i', 'value' => $userId]);
           </label>
           <input type="text" name="lastname" value="<?php echo $data['lastname']; ?>" class="input input-bordered w-full" required />
         </div>
+      </div>
+
+      <div class="flex flex-col">
+        <!-- Profile picture -->
+        <label class="label">
+          <span class="label-text">Profile Picture</span>
+        </label>
+        <input name="profilePicture" type="file" class="file-input file-input-bordered w-full" />
       </div>
     </div>
 

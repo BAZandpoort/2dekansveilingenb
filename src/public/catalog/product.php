@@ -7,29 +7,55 @@ if (!isset($_GET['id'])) {
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/util/util.php';
 
+
 $productId = $_GET['id'];
 $query = 'SELECT * FROM products WHERE id = ?';
 $productData = fetch($query, ['type' => 'i', 'value' => $productId]);
-$ended = strtotime($productData['endDate']) < time();
+$ended = strtotime($productData['enddate']) < time();
 
-$time = substr($productData['endDate'], 0, 16);
-
+$time = substr($productData['enddate'], 0, 16);
 
 $query = 'SELECT * FROM users,user_profile
           WHERE users.id=user_profile.userid
           AND users.id = ?';
 $sellerData = fetch($query, ['type' => 'i', 'value' => $productId]);
 
-if (isset($_SESSION["user"])) {
-  $query = "SELECT *, COUNT(*) AS amount FROM bids WHERE productid = ? AND userid = ?";
-  $bidData = fetch($query, ["type" => "i", "value" => $productId], ["type" => "i", "value" => $_SESSION["user"]["id"]]);
-  $lastBid = ($bidData["amount"] > 0) ? $bidData["bidPrice"] : 0.00;
-} else {
-  $lastBid = 0;
+$query = "SELECT *, COUNT(*) AS amount FROM bids WHERE productid = ?";
+$bidData = fetch(
+  $query,
+  ["type" => "i", "value" => $productId],
+);
+$lastBid = ($bidData["amount"] > 0) ? $bidData["price"] : 0.00;
 
+if (isset($_SESSION['user'])) {
+  $query = "SELECT * FROM notifications WHERE oldbidder = ? AND `read` = 0";
+  $data = fetch(
+    $query,
+    ["type" => "i", "value" => $_SESSION['user']['id']]
+  );
+  $bidId = isset($data['bidid']) ? $data['bidid'] : null;
+}
+
+if (isset($data['id'])) {
+  $query = "SELECT productid FROM bids_history WHERE id = ?";
+  $data = fetch(
+    $query,
+    ["type" => "i", "value" => $bidId]
+  );
+  $notificationProductId = $data['productid'];
+}
+
+if (isset($notificationProductId) && $productId == $notificationProductId) {
+  $query = "UPDATE notifications SET `read` = ? WHERE bidid = ?";
+  $data = insert(
+    $query,
+    ["type" => "i", "value" => 1],
+    ["type" => "i", "value" => $bidId]
+  );
 }
 ?>
 
+<!-- Breadcrumbs -->
 <div class="w-full flex justify-center md:justify-start text-sm breadcrumbs">
   <ul>
     <li><a href="/">Home</a></li>
@@ -37,18 +63,40 @@ if (isset($_SESSION["user"])) {
     <li><a href="/catalog/products">All Products</a></li>
   </ul>
 </div>
+
+<!-- Main content -->
 <div class="flex flex-col md:flex-row gap-4">
+  <!-- Image -->
   <div class="flex-[1.3]">
-    <img class="w-full h-full aspect-[3/2] rounded-2xl object-cover" src="/public/images/<?php echo $productData["imageUrl"]  ?>" alt="">
+    <img class="w-full h-full aspect-[3/2] rounded-2xl object-cover" src="/public/images/<?php echo $productData["image"]  ?>" alt="">
   </div>
-  <div id="actions" class="flex flex-[.7] bg-base-100 rounded-2xl p-8 flex-col items-center justify-center">
+
+  <!-- Bidding -->
+  <div id="actions" class="relative flex flex-[.7] bg-base-100 rounded-2xl p-8 flex-col items-center justify-center">
     <?php
-    if (strtotime($productData['endDate'])) {
+    $link = '/chats/chat?userid=' . $productData['userid'];
+    ?>
+    <a class="btn absolute left-5 bottom-5" href="/user/profile?id=<?= $sellerData['id'] ?>">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+
+      Seller Profile
+    </a>
+    <a class="btn absolute right-5 bottom-5" href="<?= $link ?>">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
+      </svg>
+      Chat
+    </a>
+
+    <?php
+    if (strtotime($productData['enddate'])) {
       echo '<p class="opacity-70 pb-12">Veiling sluit om ' . $time . '</p>';
     }
-
-
     ?>
+
+    <!-- Countdown -->
     <div class="pb-24">
       <span id="countdown-wrapper" class="countdown font-mono text-5xl">
         <span id="hours" style="--value:00;"></span>:
@@ -59,6 +107,9 @@ if (isset($_SESSION["user"])) {
         60
       </div>
     </div>
+
+    <!-- Bidding information -->
+    <?php ?>
     <div class="flex flex-row justify-center gap-8 md:gap-24 pb-8">
       <div class="flex flex-col items-center">
         <p class="uppercase text-xs opacity-40 font-bold">Huidig bod</p>
@@ -74,184 +125,178 @@ if (isset($_SESSION["user"])) {
         </p>
       </div>
     </div>
+    <p class="hidden text-center text-xl font-semibold" id="reload-text">Please reload your page!</p>
+
     <?php
     if (isset($_SESSION['user']) && !$ended) {
+      $query = "SELECT * FROM products WHERE id = ?";
+      $data = fetch(
+        $query,
+        ["type" => "i", "value" => $productId]
+      );
+
+      if ($data['userid'] !== $_SESSION['user']['id']) {
       echo '
-          <form action="/src/lib/catalog/bid.php" method="post">
+          <form action="/src/lib/catalog/bid.php" method="post" id="bid-form">
+          <input type="hidden" name="productid" value="' . $productId . '">
             <div class="join">
               <div class="relative">
-                <input type="hidden" name="productid" value="' . $productId . '">
                 <input name="amount" type="number" min="' . $lastBid + 0.01 . '" step="0.01" placeholder="Your bid" class="input input-bordered w-full max-w-xs join-item pl-5 relative" required/>
                 <p class="absolute top-3 left-2 opacity-40">€</p>
               </div>
-              <button name="bid" class="btn btn-outline btn-primary join-item ">Place bid</button>
+              <button name="bid" class="btn btn-outline btn-primary join-item">Place bid</button>
             </div>
           </form>
         ';
-    } else {
-      if ($ended) {
-        $finalBid = fetch('SELECT * FROM successful_bids WHERE  productid = ?', ['type' => 'i', 'value' => $productId]);
-        if (!isset($finalBid["bidPrice"])) {
-          $finalBidMessage = "Auction ended with no bids";
-          echo '<p class="text-center text-xl font-semibold">' . $finalBidMessage . '</p>';
-        } else {
-          $finalBidMessage = 'Winning bid was: €' . $finalBid["bidPrice"] . '';
-          echo '<p class="text-center text-xl font-semibold">' . $finalBidMessage . '</p>';
+      }
+    } else if ($ended) {
+      $query = "SELECT * FROM bids WHERE  productid = ?";
+      $data = fetch(
+        $query,
+        ['type' => 'i', 'value' => $productId]
+      );
 
-          if ($finalBid['bidderid'] == $_SESSION['user']['id']) {
-
-            $query = 'SELECT COUNT(*) as aantal FROM delivery_orders WHERE productid = ?';
-            $delivery_data = fetch($query, ['type' => 'i', 'value' => $productId]);
-            if ($delivery_data["aantal"] > 0) {
-              echo '-<button class="btn btn-outline btn-warning">Delivery already made</button>';
-            } else {
-              echo '
-                <a href="/catalog/delivery_order?productid=' . $productId . '"><button class="btn btn-outline btn-success">Order delivery</button></a>
-              ';
-            }
-          }
-        }
+      if (!isset($data["price"])) {
+        echo '
+        <p class="text-center text-xl font-semibold">
+          Auction ended without any bids
+        </p>
+        ';
       } else {
         echo '
-          <a href="/account/login" class="btn btn-primary">
-            Log in to begin bidding
-          </a>';
-      }
-    }
-    ?>
+        <p class="text-center text-xl font-semibold pb-2">
+          Winning bid was: €' . $data["price"] . '
+        </p>
+        ';
 
-    <br>
-    <?php
+        $query = 'SELECT * FROM bids WHERE productid = ?';
+        $data = fetch($query, ['type' => 'i', 'value' => $productId]);
 
-    // Retrieve the highest bidder
-    $sql = "SELECT userid, bidPrice FROM bids WHERE productid = ? ORDER BY bidOfferedAt DESC LIMIT 1";
-    $stmt = $connection->prepare($sql); // Prepare the SQL statement
-    $stmt->bind_param("i", $productId); // Bind the product ID parameter = binding parameters is a way of preventing SQL injection
-    $stmt->execute(); // Execute the SQL statement
-    $result = $stmt->get_result(); // Get the result set
-    $lastBid = $result->fetch_assoc(); // Fetch the highest bidder data
-    $lastBidderId = $lastBid ? $lastBid['userid'] : null; // Get the highest bidder's user ID
-    $lastBidPrice = $lastBid ? $lastBid['bidPrice'] : null; // Get the highest bid price if it isnt show null = it means that it does not currently hold any value
-
-    // Check if the auction has ended
-    $ended = strtotime($productData['endDate']) < time(); // Check if the end date of the auction has passed
-    $isWinningBidder = $lastBidderId ? ($lastBidderId === $_SESSION["user"]["id"]) : false; // Check if the current user is the winning bidder
-    if ($ended) {
-      if (isset($_SESSION["user"])) {
-        // Check if the user is the winning bidder
-        $isWinningBidder = ($lastBidderId === $_SESSION["user"]["id"]);
-        if ($isWinningBidder) {
-          echo '
-            <form action="/src/lib/user/member/factuur.php" method="post">
-              <input type="hidden" name="product_id" value="' . $productId . '">
-              <input type="hidden" name="amount" value="' . ($lastBidPrice ? $lastBidPrice : '') . '">
-              <button class="btn btn-primary mb-3">Pay Now</button>
-            </form>
-          ';
+        if ($data['bidder'] == $_SESSION['user']['id']) {
+          $query = 'SELECT COUNT(*) as amount FROM orders WHERE productid = ?';
+          $data = fetch($query, ['type' => 'i', 'value' => $productId]);
+          
+          if ($data["amount"] > 0) {
+            echo '
+            <button class="btn btn-outline btn-disabled">
+              Delivery already made
+            </button>
+            ';
+          } else {
+            echo '
+            <a href="/catalog/delivery_order?productid=' . $productId . '">
+              <button class="btn btn-outline btn-success">
+                Choose delivery method
+              </button>
+            </a>
+            ';
+          }
         }
       }
-    }
-    ?>
-      
-<br>
-
-    <?php
-
-    // Retrieve the highest bidder
-    $sql = "SELECT userid, bidPrice FROM bids WHERE productid = ? ORDER BY bidOfferedAt DESC LIMIT 1";
-    $stmt = $connection->prepare($sql); // Prepare the SQL statement
-    $stmt->bind_param("i", $productId); // Bind the product ID parameter = binding parameters is a way of preventing SQL injection
-    $stmt->execute(); // Execute the SQL statement
-    $result = $stmt->get_result(); // Get the result set
-    $lastBid = $result->fetch_assoc(); // Fetch the highest bidder data
-    $lastBidderId = $lastBid ? $lastBid['userid'] : null; // Get the highest bidder's user ID
-    $lastBidPrice = $lastBid ? $lastBid['bidPrice'] : null; // Get the highest bid price if it isnt show null = it means that it does not currently hold any value
-
-    // Check if the auction has ended
-    $ended = strtotime($productData['endDate']) < time(); // Check if the end date of the auction has passed
-    $isWinningBidder = $lastBidderId ? ($lastBidderId === $_SESSION["user"]["id"]) : false; // Check if the current user is the winning bidder
-    if ($ended) {
-      if (isset($_SESSION["user"])) {
-        // Check if the user is the winning bidder
-        $isWinningBidder = ($lastBidderId === $_SESSION["user"]["id"]);
-        if ($isWinningBidder) {
-          echo '
-            <form action="/src/lib/user/member/factuur.php" method="post">
-              <input type="hidden" name="product_id" value="' . $productId . '">
-              <input type="hidden" name="amount" value="' . ($lastBidPrice ? $lastBidPrice : '') . '">
-              <button class="btn btn-primary mb-3">Pay Now</button>
-            </form>
-          ';
-        }
-      }
-    }
-    ?>
-      
-<br>
-
-    <?php
-    if ($productData["supportStandard"]) {
-      $emojiSD = "✔️";
     } else {
-      $emojiSD = "❌";
-    }
-
-    if ($productData["supportExpress"]) {
-      $emojiED = "✔️";
-    } else {
-      $emojiED = "❌";
-    }
-
-    if ($productData["supportPickup"]) {
-      $emojiPU = "✔️";
-    } else {
-      $emojiPU = "❌";
-    }
-
-    echo '<b>Beschikbare verzendopties</b>
-        <table>
-          <tr>
-            <td>Standard</td>
-            <td>' . $emojiSD . '</td>
-          </tr>
-          <tr>
-            <td>Express</td>
-            <td>' . $emojiED . '</td>
-          </tr>
-          <tr>
-            <td>Pickup</td>
-            <td>' . $emojiPU . '</td>
-          </tr>
-        </table>
-        <br><br>
+      echo '
+      <a href="/account/login" class="btn btn-primary">
+        Log in to begin bidding
+      </a>
       ';
+    }
+
+    // Retrieve the highest bidder
+    $query = "SELECT * FROM bids WHERE productid = ?";
+    $data = fetchSingle(
+      $query,
+      ["type" => "i", "value" => $productId]
+    );
+
+    $lastBidderId = isset($data['bidder']) ? $data['bidder'] : null; // Get the highest bidder's user ID
+    $lastBidPrice = isset($data['price']) ? $data['price'] : null; // Get the highest bid price if it isnt show null = it means that it does not currently hold any value
+
+    // Check if the auction has ended
+    // $ended = strtotime($productData['enddate']) < time(); // Check if the end date of the auction has passed
+    // $isWinningBidder = $lastBidderId ? ($lastBidderId === $_SESSION["user"]["id"]) : false; // Check if the current user is the winning bidder
+    // if ($ended) {
+    //   if (isset($_SESSION["user"])) {
+    //     if ($isWinningBidder) {
+    //       echo '
+    //       <form action="/src/lib/user/member/factuur.php" method="post">
+    //         <input type="hidden" name="product_id" value="' . $productId . '">
+    //         <input type="hidden" name="amount" value="' . ($lastBidPrice ? $lastBidPrice : '') . '">
+    //         <button class="btn btn-primary mb-3">Pay Now</button>
+    //       </form>
+    //       ';
+    //     }
+    //   }
+    // }
+
+    // Retrieve the highest bidder
+    $sql = "SELECT * FROM bids WHERE productid = ?";
+    $data = fetch(
+      $sql,
+      ["type" => "i", "value" => $productId]
+    );
+
+    $lastBidderId = $data ? $data['bidder'] : null; // Get the highest bidder's user ID
+    $lastBidPrice = $data ? $data['price'] : null; // Get the highest bid price if it isnt show null = it means that it does not currently hold any value
+
+    // Check if the auction has ended
+    // $ended = strtotime($productData['enddate']) < time(); // Check if the end date of the auction has passed
+    // $isWinningBidder = $lastBidderId ? ($lastBidderId === (isset($_SESSION["user"]["id"]) ? $_SESSION["user"]["id"] : 0)) : false; // Check if the current user is the winning bidder
+    // if ($ended) {
+    //   if (isset($_SESSION["user"])) {
+    //     // Check if the user is the winning bidder
+    //     $isWinningBidder = ($lastBidderId === $_SESSION["user"]["id"]);
+    //     if ($isWinningBidder) {
+    //       echo '
+    //         <form action="/src/lib/user/member/factuur.php" method="post">
+    //           <input type="hidden" name="product_id" value="' . $productId . '">
+    //           <input type="hidden" name="amount" value="' . ($lastBidPrice ? $lastBidPrice : '') . '">
+    //           <button class="btn btn-primary mb-3">Pay Now</button>
+    //         </form>
+    //       ';
+    //     }
+    //   }
+    // }
 
     if (isset($_SESSION["user"])) {
-      
-      echo '
-          <a href="/catalog/report?productid=' . $productId . '"><button class="btn btn-outline btn-error">Report abuse</button></a>
+      $query = "SELECT * FROM products WHERE id = ?";
+      $data = fetch(
+        $query,
+        ["type" => "i", "value" => $productId]
+      );
+
+      if ($data['userid'] == $_SESSION['user']['id']) {
+        echo '
+          <a class="pt-4" href="/seller/dashboard/edit?id=' . $productId . '">
+            <button class="btn btn-outline btn-warning">Edit product</button>
+          </a>
         ';
+      } else {
+      echo '
+          <a class="pt-4" href="/catalog/report?productid=' . $productId . '">
+            <button class="btn btn-outline btn-error">Report abuse</button>
+          </a>
+        ';
+      }
     } else {
       echo '
-          <button class="btn btn-outline btn-error" onclick="my_modal_2.showModal()">Report abuse</button>
+          <button class="btn btn-outline btn-error mt-4" onclick="my_modal_2.showModal()">Report abuse</button>
           <dialog id="my_modal_2" class="modal">
             <div class="modal-box">
               <h3 class="font-bold text-lg">Account required for this action</h3>
               <p class="py-4"><a href="/account/login"><b><u>Log in</u></b></a> to report abuse</p>
             </div>
             <form method="dialog" class="modal-backdrop">
-              <button>close</button>
+              <button>Close</button>
             </form>
           </dialog>
         ';
     }
-
-
     ?>
 
   </div>
 </div>
 
+<!-- Product details -->
 <div class="flex justify-center gap-4 mt-4">
   <div class="flex flex-col md:flex-[1.3] gap-4">
     <h1 class="text-2xl font-semibold">
@@ -262,25 +307,58 @@ if (isset($_SESSION["user"])) {
     </p>
     <br>
   </div>
-  <div class="flex-[.7] p-8"></div>
+  <div class="flex-[.7] p-8">
+    <?php 
+    $standardDelivery = $productData["deliveryStandard"] ? "Yes" : "No";
+    $expressDelivery = $productData["deliveryExpress"] ? "Yes" : "No";
+    $pickupDelivery = $productData["deliveryPickup"] ? "Yes" : "No";
+
+    echo '
+    <div>
+      <b>Beschikbare verzendopties</b>
+      <table>
+        <tr>
+          <td>Standard</td>
+          <td>' . $standardDelivery . '</td>
+        </tr>
+        <tr>
+          <td>Express</td>
+          <td>' . $expressDelivery . '</td>
+        </tr>
+        <tr>
+          <td>Pickup</td>
+          <td>' . $pickupDelivery . '</td>
+        </tr>
+      </table>
+    </div>
+    ';
+    ?>
+  </div>
 </div>
 
 <?php
-//make a revieuw system of the product and make it so that u can only review once and that u can only review if u have bought the product and that the other people the revieuws  can see but not add to it if they havent bought the product
-
 // Fetch seller information
 $sellerId = $_GET['id'];
-$userId = $_SESSION['user']['id'];
+$userId = isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : null;
 
 // Check if user has bought the product
 $hasBoughtProduct = false;
-$purchaseHistory = fetchSingle('SELECT * FROM user_purchases WHERE id = ?', ["type" => "i", "value" => $userId]);
+$purchaseHistory = fetchSingle('SELECT * FROM orders WHERE buyerid = ?', ["type" => "i", "value" => $userId]);
 foreach ($purchaseHistory as $purchase) {
-  if ($purchase['productId'] == $sellerId) {
+  if ($purchase['productid'] == $sellerId) {
     $hasBoughtProduct = true;
     break;
   }
 }
+
+// THIS IS PRODUCT ID
+$query = "SELECT * FROM products where id = ?";
+$productData = fetch(
+  $query,
+  ["type" => "i", "value" => $sellerId]
+);
+
+$sellerId = $productData['userid'];
 
 $sellerInfo = fetchSingle('SELECT * FROM users WHERE id = ?', ["type" => "i", "value" => $sellerId]);
 // Handle form submission
@@ -294,7 +372,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Check if user has already reviewed the seller
     $insertReview = fetchSingle(
-      'SELECT * FROM review WHERE member = ? AND seller = ?',
+      'SELECT * FROM reviews WHERE userid = ? AND sellerid = ?',
       ["type" => "i", "value" => $userId],
       ["type" => "i", "value" => $sellerId]
     );
@@ -304,24 +382,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
       // Insert review into database
       $insertReview = insert(
-        'INSERT INTO review (member, review, sterren, seller, date) VALUES (?, ?, ?, ?, ?)',
+        'INSERT INTO reviews (userid, stars, description, sellerid) VALUES (?, ?, ?, ?)',
         ["type" => "i", "value" => $userId],
-        ["type" => "s", "value" => $review],
         ["type" => "i", "value" => $rating],
+        ["type" => "s", "value" => $review],
         ["type" => "i", "value" => $sellerId],
-        ["type" => "s", "value" => date('Y-m-d')]
       );
     }
   }
 }
 
 // Fetch seller reviews
-$sellerReviews = fetchSingle('SELECT * FROM review WHERE seller = ?', ["type" => "i", "value" => $sellerId]);
+$sellerReviews = fetchSingle('SELECT * FROM reviews WHERE sellerid = ?', ["type" => "i", "value" => $sellerId]);
 // Calculate average rating
 $averageRating = 0;
 if (count($sellerReviews) > 0) {
   foreach ($sellerReviews as $review) {
-    $averageRating += $review['sterren'];
+    $averageRating += $review['stars'];
   }
   $averageRating /= count($sellerReviews);
 }
@@ -330,9 +407,9 @@ if (count($sellerReviews) > 0) {
 
 <div class="flex flex-col">
   <h1 class="text-2xl font-bold mb-4">Rate the product</h1>
-  <?php if (!$hasBoughtProduct): ?>
+  <?php if (!$hasBoughtProduct) : ?>
     <p>You can only review a product that you have bought.</p>
-  <?php else: ?>
+  <?php else : ?>
     <form method="POST" class="flex flex-col gap-4">
       <div class="rating rating-lg flex gap-4">
         <input type="radio" name="rating" value="1" class="mask mask-star-2 bg-orange-400" />
@@ -342,11 +419,11 @@ if (count($sellerReviews) > 0) {
         <input type="radio" name="rating" value="5" class="mask mask-star-2 bg-orange-400" checked />
       </div>
       <textarea name="review" class="textarea textarea-success" placeholder="Leave a review"></textarea>
-      <?php if (isset($errorMessage)): ?>
+      <?php if (isset($errorMessage)) : ?>
         <p class="text-red-500">
           <?= $errorMessage ?>
         </p>
-      <?php else: ?>
+      <?php else : ?>
         <button type="submit" class="btn btn-outline btn-warning">Submit Review</button>
       <?php endif; ?>
     </form>
@@ -355,36 +432,30 @@ if (count($sellerReviews) > 0) {
 
 <div class="flex flex-col">
   <h1 class="text-2xl font-bold mb-4">Product Reviews</h1>
-  <?php if (count($sellerReviews) > 0): ?>
+  <?php if (count($sellerReviews) > 0) : ?>
     <p>Average Rating:
       <?= number_format($averageRating, 1) ?>
     </p>
     <div class="flex flex-col gap-4">
-      <?php foreach ($sellerReviews as $review): ?>
+      <?php foreach ($sellerReviews as $review) : ?>
         <div class="border border-gray-300 p-4">
           <p class="font-bold">
-            <?= $review['review'] ?>
+            <?= $review['description'] ?>
           </p>
           <p>
-            <?= $review['sterren'] ?>
+            <?= $review['stars'] ?>
           </p>
           <p>
-            <?= date('F j, Y', strtotime($review['date'])) ?>
+            <?= date('F j, Y', strtotime($review['createdAt'])) ?>
           </p>
         </div>
       <?php endforeach; ?>
     </div>
-  <?php else: ?>
+  <?php else : ?>
     <p>This product has no reviews yet.</p>
   <?php endif; ?>
 </div>
 
-
-
-
-
-
-
 <script>
-  productCountdown("<?php echo $productData['endDate']; ?>")
+  productCountdown("<?php echo $productData['enddate']; ?>")
 </script>

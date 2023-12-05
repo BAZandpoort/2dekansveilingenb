@@ -16,19 +16,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $sellerId = $_POST['seller'];
 
   // Check if user has already reviewed the seller
-  $insertReview = fetchSingle('SELECT * FROM review WHERE member = ? AND seller = ?', 
+  $insertReview = fetchSingle('SELECT * FROM reviews WHERE userid = ? AND sellerid = ?', 
   ["type" => "i", "value" => $userId], ["type" => "i", "value" => $sellerId]);
   if ($insertReview) {
     // User has already reviewed the seller 
     header('Location: /dashboard/products/review?error=leaveReview&seller=' . $sellerId);
   } else {
     // Insert review into database
-    $insertReview = insert('INSERT INTO review (member, review, sterren, seller, date) VALUES (?, ?, ?, ?, ?)', 
+    $insertReview = insert('INSERT INTO reviews (userid, stars, description, sellerid) VALUES (?, ?, ?, ?)', 
     ["type" => "i", "value" => $userId],
-    ["type" => "s", "value" => $review],
     ["type" => "i", "value" => $rating],
-    ["type" => "i", "value" => $sellerId],
-    ["type" => "s", "value" => date('Y-m-d')] 
+    ["type" => "s", "value" => $review],
+    ["type" => "i", "value" => $sellerId]
   );
   header('Location: /dashboard/products/review?success=leaveReview&seller=' . $sellerId);
   }

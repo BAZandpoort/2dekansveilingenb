@@ -71,7 +71,13 @@ function productCountdown(date) {
     if (timeDiff <= 0) {
       countdownWrapper.innerHTML = 'Auction ended';
       countdownWrapper.className = 'text-3xl font-semibold';
+      const wasInProgress = !radialProgress.classList.contains('hidden');
       radialProgress.classList.add('hidden');
+
+      if (wasInProgress) {
+        document.getElementById('bid-form').remove();
+        document.getElementById('reload-text').classList.remove('hidden');
+      }
       return;
     }
     

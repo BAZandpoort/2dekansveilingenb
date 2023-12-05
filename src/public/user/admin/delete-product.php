@@ -56,7 +56,7 @@ foreach ($products as $product) {
   echo '
   <div class="card card-side bg-base-100 shadow-sm max-h-48">
     <figure class="max-w-sm">
-      <img src="/public/images/' . $product['imageUrl'] . '" alt="Movie"/>
+      <img src="/public/images/' . $product['image'] . '" alt="Movie"/>
     </figure>
     <div class="card-body">
       <h2 class="card-title">' . $product['name'] . '</h2>

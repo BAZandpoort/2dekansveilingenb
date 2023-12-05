@@ -18,10 +18,6 @@ function register($formData) {
   $username = $formData['username'];
   $password = $formData['password'];
   $passwordConfirm = $formData['passwordConfirm'];
-  $straat = $formData['straat'];
-  $huisnummer = $formData['huisnummer'];
-  $postcode = $formData['postcode'];
-  $gemeente = $formData['gemeente'];
   
   $data = fetch('SELECT * FROM users WHERE email = ?', [
     'type' => 's',
@@ -49,7 +45,7 @@ function register($formData) {
   }
   
   $password = password_hash($password, PASSWORD_ARGON2ID);
-  $initialized = insertUser($username, $password, $email, $firstname, $lastname,  $straat, $huisnummer, $postcode, $gemeente);
+  $initialized = insertUser($username, $password, $email, $firstname, $lastname);
 
   if (!$initialized) {
     header('Location: /account/register?error=server');
@@ -60,7 +56,7 @@ function register($formData) {
   exit();
 }
 
-function insertUser($username, $password, $email, $firstname, $lastname, $straat, $huisnummer, $postcode, $gemeente) {
+function insertUser($username, $password, $email, $firstname, $lastname) {
   global $connection;
   $userData = insert(
     'INSERT INTO users (username, password, email, firstname, lastname) VALUES (?, ?, ?, ?, ?)',
@@ -74,22 +70,19 @@ function insertUser($username, $password, $email, $firstname, $lastname, $straat
   $userId = mysqli_insert_id($connection);
 
   $userProfileData = insert(
-    'INSERT INTO user_profile (userid, profilePictureUrl, about, theme, language) VALUES (?, ?, ?, ?, ?)',
+    'INSERT INTO user_profile (userid, profilepicture, about, theme, language) VALUES (?, ?, ?, ?, ?)',
     ['type' => 'i', 'value' => $userId],
-    ['type' => 's', 'value' => 'https://avatars.githubusercontent.com/u/64209400?v=4'],
+    ['type' => 's', 'value' => 'test.jpg'],
     ['type' => 's', 'value' => 'Hello!'],
     ['type' => 's', 'value' => 'light'],
     ['type' => 's', 'value' => 'text_en'],
   );
 
-  $userAddressData = insert(
-    'INSERT INTO adres (userid, $straat, $huisnummer, $postcode, $gemeente) VALUES (?, ?, ?, ?, ?)',
+  $userRoleMapping = insert(
+    'INSERT INTO user_role_mapping (userid, roleid) VALUES (?, ?)',
     ['type' => 'i', 'value' => $userId],
-    ['type' => 's', 'value' => $straat],
-    ['type' => 's', 'value' => $huisnummer],
-    ['type' => 's', 'value' => $postcode],
-    ['type' => 's', 'value' => $gemeente],
+    ['type' => 'i', 'value' => 1],
   );
 
-  return $userData && $userProfileData && $userAddressData;
+  return $userData && $userProfileData && $userRoleMapping;
 }

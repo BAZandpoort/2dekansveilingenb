@@ -1,9 +1,11 @@
 <?php
+define('DEBUG', false);
+
 // Database credentials
 define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'root');
+define('DB_USERNAME', 'root'); // cedricverlindensql1
 define('DB_PASSWORD', '');
-define('DB_NAME', '2dekansveilingen');
+define('DB_NAME', '2dekansveilingen'); // cedricverlindensql1
 
 // Import aliases
 define('ROOT', $_SERVER['DOCUMENT_ROOT']);
@@ -41,7 +43,7 @@ define('ERROR_MAPPING', [
 ]);
 
 // Success mapping
-define('SUCCES_MAPPING', [
+define('SUCCESS_MAPPING', [
   'register' => 'You have been succesfully registered',
   'accountUpdate' => 'Your account has been updated',
   'deleteProduct' => 'Product has been deleted',

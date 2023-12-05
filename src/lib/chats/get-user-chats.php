@@ -24,7 +24,7 @@ $sql = mysqli_query($connection, "SELECT *
 
 $output = "";
 
-if (mysqli_num_rows($sql) == 1)
+if (mysqli_num_rows($sql) == 0)
 {
     $output .= "No users available to chat"; 
 } elseif (mysqli_num_rows($sql) > 0)
@@ -53,7 +53,7 @@ if (mysqli_num_rows($sql) == 1)
 
         $output .= '<a href="/chats/chat?userid=' . $row['userid'] . '">
                         <div class="content">
-                            <img src="' . $row['profilePictureUrl'] . '">
+                            <img src="/public/images/' . $row['profilepicture'] . '">
                             <div class="details">
                             <span>' . $row['firstname'] . " " . $row['lastname'] .'</span>
                             <p>'. $you . $msg .'</p>
