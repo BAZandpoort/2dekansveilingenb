@@ -14,11 +14,13 @@ function authorized($user, $route) {
 
   if (!$user) {
     if ($route['auth'] !== []) {
+      http_response_code(401);
       header('Location: /');
       exit;
     }
   } else {
     if (!$hasAccess) {
+      http_response_code(401);
       header('Location: /');
       exit;
     }
