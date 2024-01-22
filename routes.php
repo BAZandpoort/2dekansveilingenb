@@ -250,6 +250,14 @@ $routes = [
     'container' => true,
     'auth' => ['member', 'admin'],
   ],
+  '/chatbot/chatbot' => [
+    'view' => 'chatbot/chatbot.php',
+    'title' => 'Chatbot',
+    'nav' => true,
+    'footer' => true,
+    'container' => true,
+    'auth' => ['member', 'admin'],
+  ],
   // Error routes
   '/404' => [
     'view' => 'errors/404.php',

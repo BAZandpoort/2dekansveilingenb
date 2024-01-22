@@ -1,3 +1,21 @@
+<style>
+.float{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:40px;
+	right:40px;
+	background-color:#0C9;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+}
+
+.my-float{
+	margin-top:22px;
+}
+</style>
 <?php
 date_default_timezone_set('Europe/Brussels');
 
@@ -28,6 +46,7 @@ $container = $route['container'] ? 'container mx-auto px-2 pt-4 pb-12 md:pt-12 m
 <html lang="en" class="bg-base-200" data-theme='<?php echo $theme; ?>'>
 
 <head>
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.3/dist/full.css" rel="stylesheet" type="text/css" />
@@ -44,7 +63,11 @@ $container = $route['container'] ? 'container mx-auto px-2 pt-4 pb-12 md:pt-12 m
 </head>
 
 <body>
+<a href="#" class="float">
+<i class='bx bxs-comment-dots'></i>
+</a>
   <div class="min-h-screen">
+  
     <?php DEBUG ? include COMPONENTS . '/debug.php' : null; ?>
     <?php $route['nav'] ? include COMPONENTS . '/nav.php' : null; ?>
     
