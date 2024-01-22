@@ -14,6 +14,23 @@ if (!isset($_SESSION['user'])) {
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/util/util.php';
 
+require_once('vendor/autoload.php');
+
+$stripe = new \Stripe\StripeClient("sk_test_MgvkTWK1jRG3olSRx9B7Mmxo");
+
+$product = $stripe->products->create([
+  'name' => 'Starter Subscription',
+  'description' => '$12/Month subscription',
+]);
+echo "Success! Here is your starter subscription product id: " . $product->id . "\n";
+
+$price = $stripe->prices->create([
+  'unit_amount' => 1200,
+  'currency' => 'usd',
+  'recurring' => ['interval' => 'month'],
+  'product' => $product['id'],
+]);
+echo "Success! Here is your starter subscription price id: " . $price->id . "\n";
 
 $productId = $_GET['productid'];
 

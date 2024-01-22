@@ -110,6 +110,31 @@ $routes = [
     'container' => true,
     'auth' => ['member', 'admin'],
   ],
+  '/catalog/checkout' => [
+    'view' => 'catalog/stripe_test/public/checkout.php',
+    'title' => 'Stripe checkout',
+    'nav' => false,
+    'footer' => false,
+    'container' => false,
+    'auth' => [],
+  ],
+  '/catalog/cancel' => [
+    'view' => 'catalog/stripe_test/public/cancel.html',
+    'title' => 'Stripe cancel',
+    'nav' => false,
+    'footer' => false,
+    'container' => false,
+    'auth' => [],
+  ],
+  '/catalog/success' => [
+    'view' => 'catalog/stripe_test/public/success.html',
+    'title' => 'Stripe success',
+    'nav' => false,
+    'footer' => false,
+    'container' => false,
+    'auth' => [],
+  ],
+
   // Member Dashboard routes
   '/dashboard/products/history' => [
     'view' => 'user/member/purchases.php',
