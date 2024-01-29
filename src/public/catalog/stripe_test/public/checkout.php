@@ -1,4 +1,17 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
+require_once LIB . '/util/util.php';
+require_once DATABASE . '/connect.php';
+session_start();
+
+$query = "SELECT *, COUNT(*) AS 'amount' FROM bids WHERE productid = ? AND bidder = ?";
+$bidData = fetch(
+  $query,
+  ["type" => "i", "value" => $_GET['productid']],
+  ["type" => "i", "value" => $_SESSION['user']['id']],
+);
+
+$productId = $_GET['productid'];
 
 require_once $_SERVER['DOCUMENT_ROOT']. '/vendor/autoload.php';
 require_once $_SERVER['DOCUMENT_ROOT']. '/secrets.php';
@@ -12,7 +25,7 @@ $stripe = new \Stripe\StripeClient($stripeSecretKey);
 
 $response = $stripe->prices->create([
   'currency' => 'eur',
-  'unit_amount' => 100,
+  'unit_amount' => ($bidData["price"]*100),
   'product_data' => ['name' => 'Scrap'],
 ]);
 
@@ -25,7 +38,7 @@ $checkout_session = \Stripe\Checkout\Session::create([
     'quantity' => 1,
   ]],
   'mode' => 'payment',
-  'success_url' => $YOUR_DOMAIN . '/catalog/success',
+  'success_url' => $YOUR_DOMAIN . '/catalog/delivery_order?productid=' . $productId . '',
   'cancel_url' => $YOUR_DOMAIN . '/catalog/cancel',
 ]);
 
