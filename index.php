@@ -1,15 +1,14 @@
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
 <style>
+  
 .float{
 	position:fixed;
 	width:60px;
 	height:60px;
 	bottom:40px;
 	right:40px;
-	background-color:#0C9;
-	color:#FFF;
-	border-radius:50px;
 	text-align:center;
-	box-shadow: 2px 2px 3px #999;
 }
 
 .my-float{
@@ -63,9 +62,16 @@ $container = $route['container'] ? 'container mx-auto px-2 pt-4 pb-12 md:pt-12 m
 </head>
 
 <body>
-<a href="#" class="float">
-<i class='bx bxs-comment-dots'></i>
-</a>
+<div class="float">
+<div class="dropdown dropdown-top dropdown-end">
+  <div tabindex="0" role="button" class="btn m-1">Click</div>
+  <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+    
+  </ul>
+</div>
+</div>
+
+
   <div class="min-h-screen">
   
     <?php DEBUG ? include COMPONENTS . '/debug.php' : null; ?>
