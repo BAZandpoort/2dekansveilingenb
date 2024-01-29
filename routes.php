@@ -119,7 +119,7 @@ $routes = [
     'auth' => [],
   ],
   '/catalog/cancel' => [
-    'view' => 'catalog/stripe_test/public/cancel.html',
+    'view' => 'catalog/stripe_test/public/cancel.php',
     'title' => 'Stripe cancel',
     'nav' => false,
     'footer' => false,
@@ -127,7 +127,7 @@ $routes = [
     'auth' => [],
   ],
   '/catalog/success' => [
-    'view' => 'catalog/stripe_test/public/success.html',
+    'view' => 'catalog/stripe_test/public/success.php',
     'title' => 'Stripe success',
     'nav' => false,
     'footer' => false,
