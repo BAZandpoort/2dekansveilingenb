@@ -10,6 +10,11 @@ $bidData = fetch(
   ["type" => "i", "value" => $_SESSION['user']['id']],
 );
 
+$productData = fetch(
+  "SELECT * FROM products WHERE id = ?",
+  ["type" => "i", "value" => $_GET['productid']]
+);
+
 $productId = $_GET['productid'];
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
@@ -24,15 +29,14 @@ $stripe = new \Stripe\StripeClient($stripeSecretKey);
 
 $response = $stripe->prices->create([
   'currency' => 'eur',
-  'unit_amount' => ($bidData["price"]*100),
-  'product_data' => ['name' => 'Scrap'],
+  'unit_amount' => $bidData['price'] * 100,
+  'product_data' => ['name' => $productData['name']],
 ]);
 
 $price_id = $response["id"];
 
 $checkout_session = \Stripe\Checkout\Session::create([
   'line_items' => [[
-    # Provide the exact Price ID (e.g. pr_1234) of the product you want to sell
     'price' => $price_id,
     'quantity' => 1,
   ]],
