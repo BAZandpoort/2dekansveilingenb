@@ -46,12 +46,8 @@ if (
     !isset($bidData["bidder"]) ||
     $bidData["bidder"] != $_SESSION['user']['id']
 ) {
-    // echo '<script>window.location="../"</script>';
     exit();
 }
-
-
-
 ?>
 
 <h1 class="text-center text-4xl font-bold mb-12">Delivery order</h1>
