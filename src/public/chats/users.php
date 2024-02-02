@@ -52,7 +52,6 @@ if (!isset($_SESSION['user'])) {
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
-    font-family: 'Poppins', sans-serif;
 }
 .box
 {

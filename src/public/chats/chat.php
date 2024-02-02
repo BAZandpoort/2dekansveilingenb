@@ -62,7 +62,6 @@ require_once DATABASE . '/connect.php';
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
-    font-family: 'Poppins', sans-serif;
 }
 
 .box
