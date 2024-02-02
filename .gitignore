@@ -13,4 +13,5 @@ node_modules/
 
 # Composer
 /vendor/*
+!/vendor/composer/
 !/vendor/autoload.php

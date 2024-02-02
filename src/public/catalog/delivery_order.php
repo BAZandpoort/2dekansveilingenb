@@ -14,7 +14,7 @@ if (!isset($_SESSION['user'])) {
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/util/util.php';
 
-require_once('vendor/autoload.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php');
 
 $stripe = new \Stripe\StripeClient("sk_test_MgvkTWK1jRG3olSRx9B7Mmxo");
 

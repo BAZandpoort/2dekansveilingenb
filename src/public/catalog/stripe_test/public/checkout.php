@@ -2,7 +2,6 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/util/util.php';
 require_once DATABASE . '/connect.php';
-session_start();
 
 $query = "SELECT *, COUNT(*) AS 'amount' FROM bids WHERE productid = ? AND bidder = ?";
 $bidData = fetch(
@@ -13,8 +12,8 @@ $bidData = fetch(
 
 $productId = $_GET['productid'];
 
-require_once $_SERVER['DOCUMENT_ROOT']. '/vendor/autoload.php';
-require_once $_SERVER['DOCUMENT_ROOT']. '/secrets.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/secrets.php';
 
 \Stripe\Stripe::setApiKey($stripeSecretKey);
 header('Content-Type: application/json');
