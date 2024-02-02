@@ -8,7 +8,7 @@ require_once LIB . '/util/util.php';
 
     $user_messages = $_POST['messageValue'];
 
-    $sql = "SELECT * FROM tblchatbot WHERE message LIKE ?";
+    $sql = "SELECT * FROM chatbot WHERE message LIKE ?";
     $data = fetch($sql, ['type' => 's', 'value' => $user_messages]);
      
 
