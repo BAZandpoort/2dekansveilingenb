@@ -1,5 +1,3 @@
-const searchBar = document.querySelector('.users .search input');
-
 async function fetchChats() {
   const usersList = document.querySelector('.users .users-list');
 
