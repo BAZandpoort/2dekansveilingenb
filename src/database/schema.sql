@@ -24,6 +24,17 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `chatbot`
+--
+CREATE TABLE `chatbot` (
+  `id` int(11) NOT NULL,
+  `message` text NOT NULL,
+  `response` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `advertisements`
 --
 
@@ -272,8 +283,14 @@ CREATE TABLE `user_role_mapping` (
 
 --
 -- Indexes for dumped tables
---
 
+
+--
+--
+-- Indexen voor tabel `chatbot`
+--
+ALTER TABLE `chatbot`
+  ADD PRIMARY KEY (`id`);
 --
 -- Indexes for table `advertisements`
 --
@@ -389,6 +406,12 @@ ALTER TABLE `user_role_mapping`
 -- AUTO_INCREMENT for dumped tables
 --
 
+--
+-- AUTO_INCREMENT voor een tabel `chatbot`
+--
+ALTER TABLE `chatbot`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+COMMIT;
 --
 -- AUTO_INCREMENT for table `advertisements`
 --
