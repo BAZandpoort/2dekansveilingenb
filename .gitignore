@@ -1,9 +1,17 @@
+# Node
 node_modules/
 
+# IDEA
 .idea/
 
+# Images
 /public/advertisements/*
 /public/images/*
 
 !/public/advertisements/*.txt
 !/public/images/*.txt
+
+# Composer
+/vendor/*
+!/vendor/composer/
+!/vendor/autoload.php

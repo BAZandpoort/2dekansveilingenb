@@ -14,6 +14,21 @@ if (!isset($_SESSION['user'])) {
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once LIB . '/util/util.php';
 
+require_once($_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php');
+
+$stripe = new \Stripe\StripeClient("sk_test_MgvkTWK1jRG3olSRx9B7Mmxo");
+
+$product = $stripe->products->create([
+  'name' => 'Starter Subscription',
+  'description' => '$12/Month subscription',
+]);
+
+$price = $stripe->prices->create([
+  'unit_amount' => 1200,
+  'currency' => 'usd',
+  'recurring' => ['interval' => 'month'],
+  'product' => $product['id'],
+]);
 
 $productId = $_GET['productid'];
 
@@ -31,12 +46,8 @@ if (
     !isset($bidData["bidder"]) ||
     $bidData["bidder"] != $_SESSION['user']['id']
 ) {
-    // echo '<script>window.location="../"</script>';
     exit();
 }
-
-
-
 ?>
 
 <h1 class="text-center text-4xl font-bold mb-12">Delivery order</h1>

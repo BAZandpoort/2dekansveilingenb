@@ -184,9 +184,9 @@ if (isset($notificationProductId) && $productId == $notificationProductId) {
             ';
           } else {
             echo '
-            <a href="/catalog/delivery_order?productid=' . $productId . '">
+            <a href="/catalog/checkout?productid=' . $productId . '">
               <button class="btn btn-outline btn-success">
-                Choose delivery method
+                Make payment
               </button>
             </a>
             ';
