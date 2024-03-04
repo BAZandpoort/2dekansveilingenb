@@ -17,8 +17,8 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "argon2": "^0.31.2",
-    "mysql2": "^3.9.1",
+    "argon2": "^0.40.1",
+    "mysql2": "^3.9.2",
     "boxicons": "^2.1.4"
   }
 }
